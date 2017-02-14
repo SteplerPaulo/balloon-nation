@@ -3,6 +3,7 @@ class ProductTransactionsController extends AppController {
 
 	var $name = 'ProductTransactions';
 	var $helpers = array('Access');
+	var $uses = array('ProductTransaction','Product');
 
 	function index() {
 		$this->ProductTransaction->recursive = 0;
@@ -79,13 +80,11 @@ class ProductTransactionsController extends AppController {
 	function admin_add() {
 		$this->layout = 'admin_default';
 		if (!empty($this->data)) {
-			
-			
-			
+		
 			//pr($this->data);exit;
 			
-			$this->ProductTransaction->create();
-			if ($this->ProductTransaction->saveAll($this->data)) {
+			$this->Product->create();
+			if ($this->Product->saveAll($this->data)) {
 				$response['status'] = 1;
 				$response['msg'] = 'Saving successful.';
 				$response['data'] = $this->data;
@@ -141,22 +140,19 @@ class ProductTransactionsController extends AppController {
 											'ProductTransaction.date >= '=>$this->data['last_date_posted'],
 											)
 										));
+		//pr($result);exit;								
+										
 		$data = array();
-		$data['TotalAdded'] = 0;
-		$data['TotalSubtracted'] = 0;
+		$data['TotalReturnedQty'] = 0;
+		$data['TotalDeliveredQty'] = 0;
 		foreach ($result as $key => $value) {
 		   $result[$key]['ProductTransaction']['formated_date'] = date('m/d/Y h:i:s A',strtotime($value['ProductTransaction']['date']));
 		  
-			$data['TotalAdded'] +=$value['ProductTransaction']['added'] ;
-			$data['TotalSubtracted']+=$value['ProductTransaction']['subtracted'];
+			$data['TotalReturnedQty'] +=$value['ProductTransaction']['returned_qty'] ;
+			$data['TotalDeliveredQty'] +=$value['ProductTransaction']['delivered_qty'] ;
 		}
 		
-		
-		$data['CurrentQuantity'] = $this->data['posted_quantity']+$data['TotalAdded']-$data['TotalSubtracted'];
-		$data['Data'] = $result;
-		
-							
-							
+		$data['Data'] = $result;			
 		//pr($data);exit;								
 		echo json_encode($data);
 		exit;

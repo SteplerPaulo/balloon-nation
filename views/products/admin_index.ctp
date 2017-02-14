@@ -7,11 +7,18 @@
 <?php echo $this->Html->addCrumb('Products',''); ?>
 <div ng-controller="AdminProductsController" ng-init="initializeController()">	
 	<div class="row">
-		<div class="col-lg-4 col-md-4 col-xs-4">
-			<label for="search">Search</label>
-			<input ng-model="q" id="search" class="form-control input-sm" placeholder="Filter text">
+		<div class="col-lg-3 col-md-3 col-xs-3">
+			<label for="costumer">Costumer</label>
+			<select class='form-control' ng-model='costumer'>
+				<option ng-repeat="d in costumers">{{d.Costumer.name}}</option>
+			</select>
+		
 		</div>
-		<div class="col-lg-2 col-md-2 col-xs-2 col-lg-offset-6 col-md-offset-6 col-xs-offset-6">
+		<div class="col-lg-3 col-md-3 col-xs-3">
+			<label for="search">Search</label>
+			<input ng-model="q" class="form-control input-sm" placeholder="Filter text">
+		</div>
+		<div class="col-lg-2 col-md-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-xs-offset-4">
 			<label for="search">Items per page</label>
 			<input type="number" min="1" max="100" class="form-control input-sm ng-pristine ng-valid ng-valid-number ng-valid-max ng-valid-min" ng-model="pageSize">
 		</div>
@@ -21,48 +28,51 @@
 			<table class="table table-striped table-hovered">
 				<thead>
 					<tr>
-						<th colspan="8">PRODUCTS</th>
+						<th colspan="6">PRODUCTS</th>
 						<th colspan="1"><a href = "<?php echo $this->base;?>/admin/products/add" class="btn btn-sm btn-warning pull-right">Add New Product</a></th>
 					</tr>
 					<tr>
 						<th>Item Code</th>
 						<th>Description</th>
 						<th>Category</th>
-						<th>Costumer</th>
-						<th class="text-center">Posted Qty</th>
-						<th class="text-center">Current Qty</th>
+						<th class="hide">Costumer</th>
 						<th class="text-center">Min</th>
-						<th class="text-center">Last Date Posted</th>
+						<th class="text-center">Current Qty</th>
+						<th class="text-center">Selling Price</th>
 						<th class="actions text-center">Action</th>
 					</tr>
 					<tr>
 					</tr>
 				</thead>
 				<tbody>
-					<tr pagination-id="ProductListTable" dir-paginate="d in products | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+					<tr ng-if="products.length" pagination-id="ProductListTable" dir-paginate="d in products | filter:q | filter:costumer | itemsPerPage: pageSize" current-page="currentPage">
 						<td>{{d.Product.item_code}}</td>
 						<td>{{d.Product.name}}</td>
 						<td>{{d.Category.name}}</td>
-						<td>{{d.Costumer.name}}</td>
-						<td class="text-center">{{d.Product.posted_quantity}}</td>
-						<td class="text-center">{{d.Product.current_quantity}}</td>
+						<td class="hide">{{d.Costumer.name}}</td>
 						<td class="text-center">{{d.Product.min}}</td>
-						<td class="text-center">{{d.Product.formated_last_date_posted}}</td>
+						<td class="text-center">{{d.Product.current_quantity}}</td>
+						<td class="text-center">{{d.ProductPricing[0].selling_price}}</td>
 						<td class="actions text-center">
-							<a ng-click="open(d,'lg')" data-toggle="tooltip" title="Product Transactions"><i class="fa fa-truck"></i></a>
+							<a ng-click="openTransaction(d,'lg')" title="Transactions"><i class="fa fa-truck"></i></a>
 							| 
-							<a href="<?php echo $this->base;?>/admin/products/edit/{{d.Product.slug}}" data-toggle="tooltip" title="Edit Product Details"><i class="fa fa-edit"></i></a>
+							<a  ng-click="openPricing(d,'sm')" title="Pricing"><i class="fa fa-money"></i></a>
 							| 
-							<a href="<?php echo $this->base;?>/admin/product/{{d.Product.slug}}/images/" data-toggle="tooltip" title="Product Images"><i class="fa fa-file-image-o"></i></a>
+							<a href="<?php echo $this->base;?>/admin/products/edit/{{d.Product.slug}}" title="Edit"><i class="fa fa-edit"></i></a>
+							| 
+							<a href="<?php echo $this->base;?>/admin/product/{{d.Product.slug}}/images/" title="Images"><i class="fa fa-file-image-o"></i></a>
 							|
 							<a href="<?php echo $this->base;?>/admin/products/delete/{{d.Product.id}}" onclick="return confirm('Are you sure you want to delete this product?');" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a>
 						
 						</td>
 					</tr>
+					<tr ng-show="(products | filter:q | filter:costumer).length == 0" pagination-id="ProductListTable" >
+						<td colspan="7">No Data Found</td>
+					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="9" class="text-center">
+						<td colspan="7" class="text-center">
 							<dir-pagination-controls pagination-id="ProductListTable"></dir-pagination-controls>
 						</td>
 					</tr>
@@ -96,77 +106,67 @@
 							<td>{{$ctrl.data.Costumer.name}}</td>
 						</tr>
 						<tr>
-							<th>Posted Quantity:</th>
-							<td>{{$ctrl.data.Product.posted_quantity}}</td>
+							<th>Minimun Quantity:</th>
+							<td>{{$ctrl.data.Product.min}}</td>
+						</tr>
+						<tr>
+							<th>Current Quantity:</th>
+							<td>{{$ctrl.CurrentQuantity}}</td>
 						</tr>
 					</table>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<table class="table table-condensed table-bordered">
+					<table class="table table-condensed">
 						<thead>	
 							<tr>
 								<th colspan="8" class="alert alert-success">TRANSACTIONS RECORD</th>
 							</tr>
 							<tr>
-								<th>Replenisher's Name</th>
-								<th class="text-center">Counted Qty</th>
-								<th class="text-center">Returns Qty</th>
-								<th class="text-center">Replenish Qty</th>
-								<th class="text-center">Sold <h6>( per sale report)</h6></th>
+								<th>Stock Clerk</th>
+								<th class="text-center"><h6>(In Stock)</h6>Counted Qty</th>
+								<th class="text-center"><h6>(Bad Items)</h6>Returned Qty </th>
+								<th class="text-center">Delivered Qty</th>
+								<th class="text-center">Selling Price</th>
 								<th class="text-center">Date</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="(key, tr) in $ctrl.transactions.Data">
 								<td>{{tr.ProductTransaction.name}}</td>
-								<td class="text-center">{{tr.ProductTransaction.added}}</td>
-								<td class="text-center">{{tr.ProductTransaction.subtracted}}</td>
-								<td class="text-center"></td>
-								<td class="text-center"></td>
+								<td class="text-center">{{tr.ProductTransaction.counted_qty}}</td>
+								<td class="text-center">{{tr.ProductTransaction.returned_qty}}</td>
+								<td class="text-center">{{tr.ProductTransaction.delivered_qty}}</td>
+								<td class="text-center">***</td>
 								<td class="text-center">{{tr.ProductTransaction.formated_date}}</td>
 							</tr>
 							<tr ng-if="!$ctrl.transactions.Data.length">	
-								<th colspan="8" class="alert alert-warning text-center">No Data Available</th>
+								<th colspan="8" class="text-center">No Transaction<hr></th>
 							</tr>
+							<tr ng-if="$ctrl.transactions.Data.length">
+								<th></th>
+								<th class="text-center"></th>
+								<th class="text-center">{{$ctrl.TotalReturnedQty}}</th>
+								<th class="text-center">{{$ctrl.TotalDeliveredQty}}</th>
+								<th class="text-center">***</th>
+								<td></td>
+								<td></td>
 							</tr>
-								<th rowspan="3">TOTAL:</th>
-								<th rowspan="3" class="text-center">0</th>
-								<th rowspan="3" class="text-center">0</th>
-								<th rowspan="3" class="text-center">{{$ctrl.TotalAdded}}</th>
-								<th rowspan="3" class="text-center">{{$ctrl.TotalSubtracted}}</th>
-								<td><h4>Current Quantity:<b> {{$ctrl.CurrentQuantity}}</b></h4></td>
-							</tr>
-							<tr>	
-								<td>Minimun Quantity:<b>{{$ctrl.data.Product.min}}</b></td>
-							</tr>
-							<tr>	
-								<td>Missing Quantity:<b></b></td>
-							</tr>
+							
 							<tr>	
 								<th colspan="8" class="alert alert-success">ADD NEW TRANSACTION</th>
 							</tr>
 							<tr ng-form="$ctrl.TransactionForm">
-								<td><input ng-model="$ctrl.name" ng-required="true" class="form-control input-sm" placeholder="Replenisher"></input></td>
-								<td><input min="0" type="number" ng-required="true" class="form-control input-sm" placeholder="Counted"></input></td>
-								<td><input min="0" type="number" ng-required="true" class="form-control input-sm" placeholder="Returns"></input></td>
-								
-								<td><input min="0" type="number" ng-change="$ctrl.toggleQty($ctrl.added,$ctrl.subtracted)" ng-model="$ctrl.added" ng-required="true" class="form-control input-sm" placeholder="Replenish"></input></td>
-								<td><input min="0" type="number" ng-change="$ctrl.toggleQty($ctrl.added,$ctrl.subtracted)" ng-model="$ctrl.subtracted" ng-required="true" class="form-control input-sm" placeholder="Sold"></input></td>
+								<td><input ng-model="$ctrl.name" ng-required="true" class="form-control input-sm" placeholder="S. Clerk"></input></td>
+								<td><input min="0" type="number" ng-change="$ctrl.toggleQty($ctrl.counted_qty,$ctrl.returned_qty,$ctrl.delivered_qty)" ng-model="$ctrl.counted_qty" ng-required="true" class="form-control input-sm" placeholder="Counted"></input></td>
+								<td><input min="0" type="number" ng-change="$ctrl.toggleQty($ctrl.counted_qty,$ctrl.returned_qty,$ctrl.delivered_qty)" ng-model="$ctrl.returned_qty" ng-required="true" class="form-control input-sm" placeholder="Returns"></input></td>
+								<td><input min="0" type="number" ng-change="$ctrl.toggleQty($ctrl.counted_qty,$ctrl.returned_qty,$ctrl.delivered_qty)" ng-model="$ctrl.delivered_qty" ng-required="true" class="form-control input-sm" placeholder="Deliver"></input></td>
+								<td><input ng-model="$ctrl.selling_price" class="form-control input-sm text-right" readonly="readonly" ></input></td>
 								<td><input type="datetime-local" ng-model="$ctrl.dateNow" class="form-control input-sm" ></input></td>
 							</tr>
-							
-							
 						</tbody>
 					</table>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">	
-					<i ng-if="!$ctrl.formula" ng-click="$ctrl.toggleFormula('on')" class="fa fa-toggle-off" data-toggle="tooltip" title="Show CURRENT QUANTITY Formula"></i>
-					<i ng-if="$ctrl.formula" ng-click="$ctrl.toggleFormula('off')" class="fa fa-toggle-on" data-toggle="tooltip" title="Hide CURRENT QUANTITY Formula"></i>
-					<h6 ng-if="$ctrl.formula" class="label label-info" style="color:darkred">CURRENT QUANTITY = Posted Quantity + Total Added Quantity - Total Subtracted Quantity</h6>
 				</div>
 			</div>
 		</div>
@@ -175,5 +175,41 @@
 			<button class="btn btn-warning" ng-click="$ctrl.close()">Close</button>
         </div>
     </script>
+	
+	
+	
+	<script type="text/ng-template" id="PricingModal.html">
+		<div></div>
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">{{$ctrl.data.Product.name}}</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+			<table class="table table-bordered table-condensed">
+				<thead>
+					<tr>
+						<th>Purchase Price</th>
+						<th>Selling Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-form="$ctrl.PricingForm">
+						<td>
+							<input ng-model="$ctrl.purchase_price" min="0" type="number" class="form-control" ng-required="true"></input>
+						</td>
+						<td>
+							<input ng-model="$ctrl.selling_price" min="0" type="number" class="form-control" ng-required="true"></input>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+        <div class="modal-footer">
+			<button class="btn btn-primary" ng-click="$ctrl.save()" ng-disabled="!$ctrl.PricingForm.$valid">Save</button>
+			<button class="btn btn-warning" ng-click="$ctrl.close()">Close</button>
+        </div>
+    </script>
+	
+	
+	
 </div>
 <?php echo $this->Html->script('controllers/admin_products',array('inline'=>false));?>

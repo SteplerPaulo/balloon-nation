@@ -16,6 +16,9 @@
 						<?php echo $this->Form->input('costumer_id',array('empty'=>'Select','class'=>'form-control','required'=>'required'));?>
 					</div>
 					<div class="col-lg-3">
+						<?php echo $this->Form->input('category_id',array('empty'=>'Select','class'=>'form-control','required'=>'required'));?>
+					</div>
+					<div class="col-lg-3">
 						<?php echo $this->Form->input('id',array('class'=>'form-control','type'=>'hidden'));?>
 					</div>
 				</div>
@@ -23,19 +26,11 @@
 					<div class="col-lg-3">
 						<?php echo $this->Form->input('item_code',array('class'=>'form-control','required'=>'required','autocomplete'=>'off'));?>
 					</div>
-					<div class="col-lg-6">
+					<div class="col-lg-7">
 						<?php echo $this->Form->input('name',array('label'=>'Item Description','class'=>'form-control','required'=>'required','autocomplete'=>'off'));?>
 					</div>
-					<div class="col-lg-3">
-						<?php echo $this->Form->input('category_id',array('empty'=>'Select','class'=>'form-control','required'=>'required'));?>
-					</div>
-				</div>
-				<div class="row">
 					<div class="col-lg-2">
-						<?php echo $this->Form->input('posted_quantity',array('label'=>'Quantity','class'=>'form-control text-right','required'=>'required','autocomplete'=>'off'));?>
-					</div>
-					<div class="col-lg-2">
-						<?php echo $this->Form->input('min',array('class'=>'form-control text-right','required'=>'required','autocomplete'=>'off'));?>
+						<?php echo $this->Form->input('min',array('label'=>'Minimun Quantity','class'=>'form-control text-right','required'=>'required','autocomplete'=>'off'));?>
 					</div>
 				</div>
 			</div>
