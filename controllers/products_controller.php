@@ -105,11 +105,12 @@ class ProductsController extends AppController {
 	
 	function all(){
 		$data = array();
-		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
+		//$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
 		//$products = $this->Product->find('all',array('order' =>array('Product.modified DESC')));
 		$products = $this->Product->find('all', array('contain' => array(
 			'Category',
 			'Costumer',
+			'ProductImage',
 			'ProductPricing' => array(
 				//'conditions' => array('ProductPricing.quantity !=' => '0'),
 				'order' => array('ProductPricing.created'=>'DESC'),

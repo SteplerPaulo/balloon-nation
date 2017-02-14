@@ -8,7 +8,8 @@ App.controller('ProductsController',function($scope,$rootScope,$http,$filter){
 		});
 			
 		$http.get(BASE_URL+"products/all").success(function(response) {
-			$scope.products = response;
+			$scope.products = response.Products;
+			console.log($scope.products);
 			
 			if (document.location.hostname == "localhost" || document.location.hostname == "192.168.1.10"){
 				if(window.location.pathname.split('/')[3]){
