@@ -105,8 +105,6 @@ class ProductsController extends AppController {
 	
 	function all(){
 		$data = array();
-		//$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
-		//$products = $this->Product->find('all',array('order' =>array('Product.modified DESC')));
 		$products = $this->Product->find('all', array('contain' => array(
 			'Category',
 			'Costumer',
@@ -159,19 +157,6 @@ class ProductsController extends AppController {
 		exit;
 	}
 	
-	function test() {
-		if(!$this->Access->check('User','admin')) die ("HTTP ERROR 401 (UNAUTHORIZED) <br/><br/>Call system administrator for your account verification");
-		
-		$this->layout = 'admin_default';
-		
-			
-	
-		
-		
-	}
-	
-	
-	
 	function admin_sales(){
 		$this->layout ="admin_default";	
 	}
@@ -214,8 +199,8 @@ class ProductsController extends AppController {
 		
 			//unset($products[$key]['ProductTransaction']);
 		}
-		pr($products);
-		exit;
+		//pr($products);
+		//exit;
 		
 		$data['Products'] = $products;
 		$this->Costumer->unbindModel( array('hasMany' => array('Product')));
@@ -223,8 +208,7 @@ class ProductsController extends AppController {
 		echo json_encode($data);
 		exit;
 	}
-	
-	
+
 	
 
 }

@@ -87,11 +87,15 @@
         </div>
         <div class="modal-body" id="modal-body">
 			<div class="row">
-				<div class="col-lg-5">
+				<div class="col-lg-6">
 					<table class="table table-condensed table-striped table-hovered">
 						<tr>
 							<th>Item Description :</th>
 							<td>{{$ctrl.data.Product.name}}</td>
+						</tr>
+						<tr>
+							<th>Costumer Name (Branch):</th>
+							<td>{{$ctrl.data.Costumer.name}}</td>
 						</tr>
 						<tr>
 							<th>Last Date Posted : </th>
@@ -99,11 +103,11 @@
 						</tr>
 					</table>
 				</div>
-				<div class="col-lg-5 col-lg-offset-1">
+				<div class="col-lg-4 col-lg-offset-2">
 					<table class="table table-condensed table-striped table-hovered">
 						<tr>
-							<th>Costumer Name (Branch):</th>
-							<td>{{$ctrl.data.Costumer.name}}</td>
+							<th>Selling Price : </th>
+							<td>{{$ctrl.selling_price}}</td>
 						</tr>
 						<tr>
 							<th>Minimun Quantity:</th>
@@ -128,7 +132,7 @@
 								<th class="text-center"><h6>(In Stock)</h6>Counted Qty</th>
 								<th class="text-center"><h6>(Bad Items)</h6>Returned Qty </th>
 								<th class="text-center">Delivered Qty</th>
-								<th class="text-center">Selling Price</th>
+								<th class="text-center">DR No.</th>
 								<th class="text-center">Date</th>
 							</tr>
 						</thead>
@@ -138,7 +142,7 @@
 								<td class="text-center">{{tr.ProductTransaction.counted_qty}}</td>
 								<td class="text-center">{{tr.ProductTransaction.returned_qty}}</td>
 								<td class="text-center">{{tr.ProductTransaction.delivered_qty}}</td>
-								<td class="text-center">***</td>
+								<td class="text-center">{{tr.ProductTransaction.dr_no}}</td>
 								<td class="text-center">{{tr.ProductTransaction.formated_date}}</td>
 							</tr>
 							<tr ng-if="!$ctrl.transactions.Data.length">	
@@ -149,7 +153,7 @@
 								<th class="text-center"></th>
 								<th class="text-center">{{$ctrl.TotalReturnedQty}}</th>
 								<th class="text-center">{{$ctrl.TotalDeliveredQty}}</th>
-								<th class="text-center">***</th>
+								<th class="text-center"></th>
 								<td></td>
 								<td></td>
 							</tr>
@@ -162,7 +166,7 @@
 								<td><input min="0" type="number" ng-change="$ctrl.toggleQty($ctrl.counted_qty,$ctrl.returned_qty,$ctrl.delivered_qty)" ng-model="$ctrl.counted_qty" ng-required="true" class="form-control input-sm" placeholder="Counted"></input></td>
 								<td><input min="0" type="number" ng-change="$ctrl.toggleQty($ctrl.counted_qty,$ctrl.returned_qty,$ctrl.delivered_qty)" ng-model="$ctrl.returned_qty" ng-required="true" class="form-control input-sm" placeholder="Returns"></input></td>
 								<td><input min="0" type="number" ng-change="$ctrl.toggleQty($ctrl.counted_qty,$ctrl.returned_qty,$ctrl.delivered_qty)" ng-model="$ctrl.delivered_qty" ng-required="true" class="form-control input-sm" placeholder="Deliver"></input></td>
-								<td><input ng-model="$ctrl.selling_price" class="form-control input-sm text-right" readonly="readonly" ></input></td>
+								<td><input ng-model="$ctrl.dr_no" class="form-control input-sm" ng-required="true" placeholder="DR No."></input></td>
 								<td><input type="datetime-local" ng-model="$ctrl.dateNow" class="form-control input-sm" ></input></td>
 							</tr>
 						</tbody>

@@ -7,7 +7,10 @@ App.controller('AdminProductsController',function($scope,$rootScope,$http,$filte
 			$scope.products = response.Products;
 			console.log($scope.products);
 			$scope.costumers = response.Costumers;
-			$scope.costumer = $scope.costumers[0].Costumer.name;
+			if($scope.costumer ==  undefined){
+				$scope.costumer = $scope.costumers[0].Costumer.name;
+			}
+			
 		});
 	}
 	
@@ -96,15 +99,27 @@ App.controller('TransactionModalCtrl', function ($rootScope,$uibModalInstance, P
 	
 	$ctrl.ProductPriceId = $ctrl.data.ProductPricing[0].id;
 	$ctrl.selling_price = $ctrl.data.ProductPricing[0].selling_price;
+	$ctrl.purchase_price = $ctrl.data.ProductPricing[0].purchase_price;
+	$ctrl.product_price_qty = $ctrl.data.ProductPricing[0].quantity;
+	console.log($ctrl.product_price_qty);
 
-	
-
-	
 	
 	$ctrl.toggleQty =  function(counted_qty,returned_qty,delivered_qty){
-		$ctrl.TotalReturnedQty = $ctrl.transactions.TotalReturnedQty+((returned_qty >= 0)?returned_qty:0);
-		$ctrl.TotalDeliveredQty = $ctrl.transactions.TotalDeliveredQty+((delivered_qty >= 0)?delivered_qty:0);
-	
+		//RETURN QTY
+		if(returned_qty >= 0){
+			$ctrl.TotalReturnedQty = $ctrl.transactions.TotalReturnedQty+returned_qty;
+		}else{
+			$ctrl.TotalReturnedQty = $ctrl.transactions.TotalReturnedQty;
+		}
+		
+		//DELIVERED QTY
+		if(delivered_qty >= 0){
+			$ctrl.TotalDeliveredQty = $ctrl.transactions.TotalDeliveredQty+delivered_qty;
+		}else{
+			$ctrl.TotalDeliveredQty = $ctrl.transactions.TotalDeliveredQty;
+		}
+		
+
 		$ctrl.CurrentQuantity = (((delivered_qty >= 0)?delivered_qty:0) + (((counted_qty >= 0)?counted_qty:parseInt($ctrl.data.Product.current_quantity))));
 	}
 	
@@ -116,6 +131,8 @@ App.controller('TransactionModalCtrl', function ($rootScope,$uibModalInstance, P
 						'counted_qty': $ctrl.counted_qty,
 						'returned_qty': $ctrl.returned_qty,
 						'delivered_qty': $ctrl.delivered_qty,
+						'purchase_price':$ctrl.purchase_price,
+						'dr_no':$ctrl.dr_no,
 						'date':$filter("date")($ctrl.dateNow, 'yyyy-MM-dd HH:mm:ss'),
 					}],
 					'Product':{
@@ -126,7 +143,7 @@ App.controller('TransactionModalCtrl', function ($rootScope,$uibModalInstance, P
 					},
 					'ProductPricing':[{
 						'id':$ctrl.ProductPriceId,
-						'quantity':$ctrl.TotalDeliveredQty,
+						'quantity':($ctrl.product_price_qty != 0)?$ctrl.TotalDeliveredQty:$ctrl.delivered_qty,
 					}]
 				};
 		
