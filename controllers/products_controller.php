@@ -43,6 +43,8 @@ class ProductsController extends AppController {
 		
 		$this->layout ="admin_default";	
 		if (!empty($this->data)) {
+			//pr($this->data);exit;
+			
 			$string = str_replace(' ', '-', strtolower(trim($this->data['Product']['name']))).'-'.$this->data['Product']['costumer_id']; 
 			$this->data['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
 		
@@ -122,6 +124,11 @@ class ProductsController extends AppController {
 
 		foreach ($products as $key => $value) {
 		   $products[$key]['Product']['formated_last_date_posted'] = date('m/d/Y h:i:s A',strtotime($value['Product']['last_date_posted']));
+		   $products[$key]['counted'] = 0;
+		   $products[$key]['returns'] = 0;
+		   $products[$key]['deliver'] = 0;
+		
+		
 		}
 		
 		$data['Products'] = $products;
@@ -191,7 +198,6 @@ class ProductsController extends AppController {
 				
 				
 			}
-			$products[$key]['Product']['delivered'] = $products[$key]['Product']['delivered']+$products[$key]['Product']['posted_quantity'];
 			$products[$key]['Product']['sales'] = $products[$key]['Product']['delivered']-($products[$key]['Product']['returned']+$products[$key]['Product']['current_quantity']);
 				
 		
@@ -208,7 +214,43 @@ class ProductsController extends AppController {
 		echo json_encode($data);
 		exit;
 	}
+	
+	function admin_sales_report(){
+		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
+		
+	
+		$products = $this->Product->find('all', array('contain' => array(
+			'Category',
+			'Costumer',
+			'ProductTransaction'=> array(
+				'conditions' => array('ProductTransaction.date >=' => '2017-02-08 14:15:04'),	
+			),
+			'ProductPricing' => array(
+				'conditions' => array('ProductPricing.quantity !=' => '0'),
+				'order' => array('ProductPricing.created'=>'DESC'),
+				'limit' => 1,
+			)
+		)));
+
+		foreach ($products as $key => $product) {
+			$products[$key]['Product']['delivered'] = 0;
+			$products[$key]['Product']['returned'] = 0;
+			foreach($product['ProductTransaction'] as $transaction){
+				$products[$key]['Product']['delivered'] += $transaction['delivered_qty'];
+				$products[$key]['Product']['returned'] += $transaction['returned_qty'];
+			}
+			$products[$key]['Product']['sales'] = $products[$key]['Product']['delivered']-($products[$key]['Product']['returned']+$products[$key]['Product']['current_quantity']);	
+		}
+		
+		$data = $products;
+		$this->set(compact('data'));
+		$this->layout='pdf';
+		$this->render();
+	}
+	
+	function admin_deliver(){
+		$this->layout = 'admin_default';
+	}
 
 	
-
 }

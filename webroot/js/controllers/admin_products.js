@@ -6,9 +6,9 @@ App.controller('AdminProductsController',function($scope,$rootScope,$http,$filte
 		$http.get(BASE_URL+"products/all").success(function(response) {
 			$scope.products = response.Products;
 			console.log($scope.products);
-			$scope.costumers = response.Costumers;
-			if($scope.costumer ==  undefined){
-				$scope.costumer = $scope.costumers[0].Costumer.name;
+			$rootScope.costumers = response.Costumers;
+			if($rootScope.costumer ==  undefined){
+				$rootScope.costumer = $rootScope.costumers[0].Costumer.name;
 			}
 			
 		});
@@ -55,8 +55,6 @@ App.controller('AdminProductsController',function($scope,$rootScope,$http,$filte
 	
 	
 	$rootScope.openPricing = function (data,size, parentSelector) {
-		
-			
 		var parentElem = parentSelector ? 
 			angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
 		var modalInstance = $uibModal.open({
@@ -75,7 +73,7 @@ App.controller('AdminProductsController',function($scope,$rootScope,$http,$filte
 			}
 		});
 	};
-	
+
 });
 
 
@@ -100,8 +98,8 @@ App.controller('TransactionModalCtrl', function ($rootScope,$uibModalInstance, P
 	$ctrl.ProductPriceId = $ctrl.data.ProductPricing[0].id;
 	$ctrl.selling_price = $ctrl.data.ProductPricing[0].selling_price;
 	$ctrl.purchase_price = $ctrl.data.ProductPricing[0].purchase_price;
-	$ctrl.product_price_qty = $ctrl.data.ProductPricing[0].quantity;
-	console.log($ctrl.product_price_qty);
+	$ctrl.price_is_new = $ctrl.data.ProductPricing[0].is_new;
+	console.log($ctrl.price_is_new);
 
 	
 	$ctrl.toggleQty =  function(counted_qty,returned_qty,delivered_qty){
@@ -138,12 +136,13 @@ App.controller('TransactionModalCtrl', function ($rootScope,$uibModalInstance, P
 					'Product':{
 						'id':$ctrl.data.Product.id,
 						'current_quantity':$ctrl.CurrentQuantity,
-						'posted_quantity':($ctrl.data.Product.isNew == true)?$ctrl.CurrentQuantity:$ctrl.PostedQuantity,
-						'isNew':false,
+						'posted_quantity':($ctrl.data.Product.is_new == true)?$ctrl.CurrentQuantity:$ctrl.PostedQuantity,
+						'is_new':false,
 					},
 					'ProductPricing':[{
 						'id':$ctrl.ProductPriceId,
-						'quantity':($ctrl.product_price_qty != 0)?$ctrl.TotalDeliveredQty:$ctrl.delivered_qty,
+						'quantity':($ctrl.price_is_new == true)?$ctrl.delivered_qty:$ctrl.TotalDeliveredQty,
+						'is_new':false,
 					}]
 				};
 		
@@ -206,31 +205,5 @@ App.controller('PricingModalCtrl', function ($rootScope,$uibModalInstance, data,
 		$rootScope.initializeController();
 		$uibModalInstance.close('');
 	};
-	
-	
-	/*
-	
-	//$ctrl.ProductPriceId = $ctrl.data.ProductPricing[0].id;
-	$ctrl.togglePurchasePrice =  function(purchase_price){
-		if(purchase_price == 0 || purchase_price == null){
-			$ctrl.purchase_price = parseFloat($ctrl.data.ProductPricing[0].purchase_price);
-			$ctrl.ProductPriceId = $ctrl.data.ProductPricing[0].id;
-		}else{
-			$ctrl.ProductPriceId = null;
-		}
-	}
-	
-	$ctrl.toggleSellingPrice =  function(selling_price){
-		if(selling_price == 0 || selling_price == null){
-			$ctrl.selling_price = parseFloat($ctrl.data.ProductPricing[0].selling_price);
-			$ctrl.ProductPriceId = $ctrl.data.ProductPricing[0].id;
-		}else{
-			$ctrl.ProductPriceId = null;
-		}
-	}
-	
-	console.log(data);
-	
-	*/	
-	
 });
+
