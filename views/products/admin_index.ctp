@@ -1,7 +1,5 @@
 <style>
-	i{
-		cursor:pointer;
-	}
+	i{cursor:pointer}
 </style>
 <?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
 <?php echo $this->Html->addCrumb('Products',''); ?>
@@ -10,6 +8,7 @@
 		<div class="col-lg-3 col-md-3 col-xs-3">
 			<label for="costumer">Costumer</label>
 			<select class='form-control' ng-model='costumer'>
+				<option value="">All</option>
 				<option ng-repeat="d in costumers">{{d.Costumer.name}}</option>
 			</select>
 		
@@ -29,7 +28,11 @@
 				<thead>
 					<tr>
 						<th colspan="6">PRODUCTS</th>
-						<th colspan="1"><a href = "<?php echo $this->base;?>/admin/products/add" class="btn btn-sm btn-warning pull-right">Add New Product</a></th>
+						<th colspan="1">
+							<div class="btn-group pull-right" role="group" >
+							  <a href="<?php echo $this->base;?>/admin/products/add" title="Add New Product" class="btn btn-sm btn-default"><i class="fa fa-plus"></i></a>
+							</div>
+						</th>
 					</tr>
 					<tr>
 						<th>Item Code</th>
@@ -55,8 +58,8 @@
 						<td class="text-center">{{d.ProductPricing[0].selling_price}}</td>
 						<td class="actions text-center">
 							<a ng-click="openTransaction(d,'lg')" title="Transactions"><i class="fa fa-truck"></i></a>
-							| 
-							<a  ng-click="openPricing(d,'sm')" title="Pricing"><i class="fa fa-money"></i></a>
+							|
+							<a  ng-click="openPricing(d,'sm')" title="Change price"><i class="fa fa-money"></i></a>
 							| 
 							<a href="<?php echo $this->base;?>/admin/products/edit/{{d.Product.slug}}" title="Edit"><i class="fa fa-edit"></i></a>
 							| 
@@ -212,8 +215,6 @@
 			<button class="btn btn-warning" ng-click="$ctrl.close()">Close</button>
         </div>
     </script>
-	
-	
-	
+		
 </div>
 <?php echo $this->Html->script('controllers/admin_products',array('inline'=>false));?>
