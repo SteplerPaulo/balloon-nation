@@ -9,9 +9,10 @@
     <meta name="author" content="">
 
     <title>Balloon-Nation-Admin</title>
+	<!--
 	<link href="<?php echo $this->base;?>/img/company logo/1.png" type="image/x-icon" rel="icon">
 	<link href="<?php echo $this->base;?>/img/company logo/1.png" type="image/x-icon" rel="shortcut icon">
-	
+	-->
 	<?php
 		//echo $this->Html->meta('icon');
 		echo $this->Html->css('bootstrap'); //Bootstrap Core CSS
