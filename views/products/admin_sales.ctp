@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-xs-3">
 			<label for="costumer">Costumer</label>
-			<select class='form-control' ng-model='costumer'>
+			<select class='form-control input-sm' ng-model='costumer'>
 				<option ng-repeat="d in costumers">{{d.Costumer.name}}</option>
 			</select>
 		
@@ -24,28 +24,29 @@
 			<table class="table table-striped table-bordered table-condensed">
 				<thead>
 					<tr>
-						<th colspan="7">MONTHLY REPORT</th>
+						<th colspan="9">REPORT</th>
 					</tr>
 					<tr>
-						<th rowspan="2">Item Code</th>
 						<th rowspan="2">Description</th>
-						<th colspan="4" class="text-center">Quantity</th>
+						<th colspan="3" class="text-center">Quantity</th>
+						<th colspan="2" class="text-center">Sale</th>
+						<th rowspan="2" class="text-center w10">Missing Quantity</th>
 						<th rowspan="2" class="actions text-center">Action</th>
 					</tr>
 					<tr>
 						
 						<th rowspan="2" class="hide">Costumer</th>
-						<th class="text-center">Delivered</th>
-						<th class="text-center">Returned</th>
-						<th class="text-center">Current</th>
-						<th class="text-center">Sale</th>
+						<th class="text-center w10">Delivered</th>
+						<th class="text-center w10">Returned</th>
+						<th class="text-center w10">Current</th>
+						<th class="text-center w10">System Count</th>
+						<th class="text-center w10">Actual</th>
 					</tr>
 					<tr>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-if="products.length" pagination-id="ProductListTable" dir-paginate="d in products | filter:q | filter:costumer | itemsPerPage: pageSize" current-page="currentPage">
-						<td>{{d.Product.item_code}}</td>
 						<td>{{d.Product.name}}</td>
 						<td class="hide">{{d.Costumer.name}}</td>
 						<td class="text-center">
@@ -56,18 +57,27 @@
 							<div ng-if="d.Product.returned">{{d.Product.returned}}</div>
 							<div ng-if="!d.Product.returned">0</div>	
 						</td>
-						<td class="text-center">{{d.Product.current_quantity}}</td>
-						<td class="text-center">{{d.Product.sales}}</td>
+						<td class="text-center">
+							{{d.Product.current_quantity}}
+						</td>
+						<td class="text-center">
+							{{d.Product.sales}}
+						</td>
+						<td class="text-center">
+							<input type="number" class="form-control input-sm"></input>
+						</td>
+						<td class="text-center">
+						</td>
 						<td class="actions text-center">
 						</td>
 					</tr>
 					<tr ng-show="(products | filter:q | filter:costumer).length == 0" pagination-id="ProductListTable" >
-						<td colspan="7">No Data Found</td>
+						<td colspan="9">No Data Found</td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="7" class="text-center">
+						<td colspan="9" class="text-center">
 							<dir-pagination-controls pagination-id="ProductListTable"></dir-pagination-controls>
 						</td>
 					</tr>
