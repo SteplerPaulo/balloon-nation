@@ -1,4 +1,0 @@
-ADDITIONAL DB TABLE:
-
-inquiries 
-inquiry files

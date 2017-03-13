@@ -1,5 +1,0 @@
-NOTE:
-
-Banner Image Size Must Be 950 width x 350 height
-Add fields on manufactures table 1. created 2. modified
-Add fields on products table 1. created 2. modified
