@@ -147,13 +147,14 @@
 												array('escape' => false)
 												);  ?>
                     </li>
-					<li>
-						<?php  echo $this->Html->link($this->Html->tag('i', '', array('class' =>'fa fa-question-circle')).'  &nbsp;'.
-												$this->Html->tag('span', 'Inquiries'),
-												array('admin' => true,'controller'=>'inquiries','action'=>'/'),
-												array('escape' => false));						
-						?>
-					</li>
+					<li class="">
+						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-truck')).' '.
+												$this->Html->tag('span', 'Deliveries'),
+												array('admin' => true,'controller'=>'deliveries','action'=>''),
+												array('escape' => false)
+												);  ?>
+                    </li>
+					
 					 <li>		
 						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-cubes')).' '.
 												$this->Html->tag('span', 'Products'),
@@ -181,6 +182,13 @@
 												array('admin' => true,'controller'=>'banners','action'=>'/'),
 												array('escape' => false)
 												);  ?>
+					</li>
+					<li>
+						<?php  echo $this->Html->link($this->Html->tag('i', '', array('class' =>'fa fa-question-circle')).'  &nbsp;'.
+												$this->Html->tag('span', 'Inquiries'),
+												array('admin' => true,'controller'=>'inquiries','action'=>'/'),
+												array('escape' => false));						
+						?>
 					</li>
 					<li>		
 						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-users')).' '.
