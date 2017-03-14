@@ -10,8 +10,8 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<label for="costumer">To</label>/Costumer
-					<select class='form-control' ng-model='costumer' ng-required="true" ng-change="changeCostumer(costumer)">
-						<option value="null">Select</option>
+					<select class='form-control input-sm' ng-model='costumer' ng-required="true" ng-change="changeCostumer(costumer)">
+						<option value="">-- Select --</option>
 						<option ng-repeat="d in costumers" address="{{d.Costumer.address}}">{{d.Costumer.name}}</option>
 					</select>
 				</div>
@@ -42,7 +42,7 @@
 								<th rowspan="2" class="text-center w5">
 									<input type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
 								</th>
-								<th rowspan="2" class="text-center">Description</th>
+								<th rowspan="2" class="text-center">Item Description</th>
 								<th colspan="2" class="text-center">System</th>
 								<th colspan="3" class="text-center">Actual Quantity</th>
 								<th colspan="2" class="text-center">Forecast Total</th>
