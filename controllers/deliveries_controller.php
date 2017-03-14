@@ -80,10 +80,6 @@ class DeliveriesController extends AppController {
 	function admin_add() {
 		$this->layout = 'admin_default';
 		//pr($this->data);exit;
-		
-		
-		
-		
 		if (!empty($this->data)) {
 			
 			$this->Delivery->create();
@@ -98,7 +94,7 @@ class DeliveriesController extends AppController {
 				echo json_encode($response);
 				exit();
 			} else {
-				$response['status'] = 1;
+				$response['status'] = 0;
 				$response['msg'] = 'Error saving.Pls try again';
 				$response['data'] = $this->data;
 				echo json_encode($response);
@@ -159,6 +155,9 @@ class DeliveriesController extends AppController {
 	function costumer_product($costumer = null){
 		
 		$data =  array();
+		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
+		$this->Product->hasMany['ProductPricing']['limit'] = 1;
+		$this->Product->hasMany['ProductPricing']['order'] = 'created DESC';
 		$products = $this->Product->find('all', array(
 			'conditions' => array('Costumer.name' => $costumer),
 			'contain' => array(
@@ -167,8 +166,6 @@ class DeliveriesController extends AppController {
 				'ProductImage',
 				'ProductPricing' => array(
 					//'conditions' => array('ProductPricing.quantity !=' => '0'),
-					'order' => array('ProductPricing.created'=>'DESC'),
-					'limit' => 1,
 					)
 			),
 		));
@@ -198,7 +195,6 @@ class DeliveriesController extends AppController {
 		echo json_encode($data);
 		exit;
 	}
-	
 	
 	function admin_report($dr_no = '004572'){
 		
