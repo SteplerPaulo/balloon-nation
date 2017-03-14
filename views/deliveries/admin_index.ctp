@@ -23,11 +23,12 @@
 			<table class="table table-striped table-hovered">
 				<thead>
 					<tr>
-						<th colspan="3">DELIVERIES</th>
+						<th colspan="4">DELIVERIES</th>
 						<th colspan="1"><a href="<?php echo $this->base;?>/admin/deliveries/create" class="btn btn-sm btn-warning pull-right">Create Delivery</a></th>
 					</tr>
 					<tr>
 						<th>Delivery Receipt No.</th>
+						<th class="text-center">Costumer</th>
 						<th class="text-center">Stock Clerk</th>
 						<th class="text-center">Date</th>
 						<th class="text-center">Action</th>
@@ -36,6 +37,7 @@
 				<tbody>
 					<tr pagination-id="ProductListTable" dir-paginate="d in deliveries | filter:q | filter:costumer | itemsPerPage: pageSize" current-page="currentPage">
 						<td>{{d.Delivery.delivery_receipt_no}}</td>
+						<td class="text-center">{{d.Costumer.name}}</td>
 						<td class="text-center">{{d.Delivery.stock_clerk}}</td>
 						<td class="text-center">{{d.Delivery.formated_date}}</td>
 						<td class="text-center"></td>
