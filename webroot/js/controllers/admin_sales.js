@@ -1,13 +1,17 @@
-App.controller('AdminProductsController',function($scope,$rootScope,$http,$filter,$uibModal, $log, $document){
-	$rootScope.initializeController = function(){
+App.controller('AdminSalesController',function($scope,$rootScope,$http,$filter,$uibModal, $log, $document){
+	$scope.initializeController = function(){
 		$scope.currentPage = 1; 
 		$scope.pageSize = 7;
 			
-		$http.get(BASE_URL+"products/sales_report").success(function(response) {
-			$scope.products = response.Products;
-			$scope.costumers = response.Costumers;
-			console.log($scope.products);
-			$scope.costumer = $scope.costumers[0].Costumer.name;
+		$http.get(BASE_URL+"costumers/all").success(function(response) {
+			$scope.costumers = response;
+			if($scope.costumer ==  undefined){
+				$scope.costumer = '';
+			}
+		});	
+			
+		$http.get(BASE_URL+"sales/all").success(function(response) {
+			$scope.sales = response;
 		});
 	}
 
