@@ -8,7 +8,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		$http.get(BASE_URL+"costumers/all").success(function(response) {
 			$scope.costumers = response;
 			if($scope.costumer ==  undefined){
-				$scope.costumer = 'null';
+				$scope.costumer = '';
 			}
 		});
 	}
@@ -99,12 +99,14 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		for (var i = 0; i < $scope.products.length; i++) {
 			
 			if(!$scope.products[i].is_disabled){
+				
 				dtls['Main']['DeliveryDetail'][i] = {};
 				dtls['Main']['DeliveryDetail'][i].product_id = $scope.products[i].Product.id;
 				dtls['Main']['DeliveryDetail'][i].in_stock = $scope.products[i].counted;
 				dtls['Main']['DeliveryDetail'][i].bad_item = $scope.products[i].bad_item;
 				dtls['Main']['DeliveryDetail'][i].deliver = $scope.products[i].deliver;
 				dtls['Main']['DeliveryDetail'][i].purchase_price = $scope.products[i].ProductPricing[0].purchase_price;
+				dtls['Main']['DeliveryDetail'][i].date = $filter("date")($scope.dateNow, 'yyyy-MM-dd');
 				
 				dtls['AssociatedProduct'][i] = {};
 				dtls['AssociatedProduct'][i]['Product'] = {};
@@ -122,29 +124,20 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 					
 			}			
 		}
-		//return;
-		
 		var data = {
 				'Main':dtls['Main'],
 				'AssociatedProduct':dtls['AssociatedProduct'],
 				'AssociatedProductPrice':dtls['AssociatedProductPrice'],
 		};
-	
-
-		console.log(data);
 		
-		
-		$.ajax({
+		$http({
 			method: 'POST',
-			url: BASE_URL+'admin/deliveries/add/',
-			dataType:'json',
-			data: $.param({data:data}),
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		}).then(function(response) {
-			//$scope.initializeController();
-			window.location.href = BASE_URL+"admin/deliveries/";
+			url: BASE_URL+'admin/deliveries/add',
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: $.param({data:data})
+		}).then(function(response){
+			window.location.href = BASE_URL+"admin/deliveries";
 		});
-		
 		
 	}
 	
