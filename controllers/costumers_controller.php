@@ -59,6 +59,7 @@ class CostumersController extends AppController {
 		$this->Session->setFlash(__('Costumer was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+	
 	function admin_index() {
 		$this->layout ="admin_default";	
 	}
