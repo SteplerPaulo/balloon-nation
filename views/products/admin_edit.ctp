@@ -13,10 +13,10 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-3">
-						<?php echo $this->Form->input('costumer_id',array('empty'=>'Select','class'=>'form-control','required'=>'required','disabled'=>'disabled'));?>
+						<?php echo $this->Form->input('costumer_id',array('empty'=>'-- Select --','class'=>'form-control','required'=>'required','disabled'=>'disabled'));?>
 					</div>
 					<div class="col-lg-3">
-						<?php echo $this->Form->input('category_id',array('empty'=>'Select','class'=>'form-control','required'=>'required'));?>
+						<?php echo $this->Form->input('category_id',array('empty'=>'-- Select --','class'=>'form-control','required'=>'required'));?>
 					</div>
 					<div class="col-lg-3">
 						<?php echo $this->Form->input('id',array('class'=>'form-control','type'=>'hidden'));?>
