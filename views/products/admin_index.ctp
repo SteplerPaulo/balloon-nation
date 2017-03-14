@@ -57,8 +57,6 @@
 						<td class="text-center">{{d.Product.current_quantity}}</td>
 						<td class="text-center">{{d.ProductPricing[0].selling_price}}</td>
 						<td class="actions text-center">
-							<a ng-click="openTransaction(d,'lg')" title="Transactions"><i class="fa fa-truck"></i></a>
-							|
 							<a  ng-click="openPricing(d,'sm')" title="Change price"><i class="fa fa-money"></i></a>
 							| 
 							<a href="<?php echo $this->base;?>/admin/products/edit/{{d.Product.slug}}" title="Edit"><i class="fa fa-edit"></i></a>
@@ -83,107 +81,6 @@
 			</table>
 		</div>
 	</div>
-	
-	<script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">Product Transactions</h3>
-        </div>
-        <div class="modal-body" id="modal-body">
-			<div class="row">
-				<div class="col-lg-6">
-					<table class="table table-condensed table-striped table-hovered">
-						<tr>
-							<th>Item Description :</th>
-							<td>{{$ctrl.data.Product.name}}</td>
-						</tr>
-						<tr>
-							<th>Costumer Name (Branch):</th>
-							<td>{{$ctrl.data.Costumer.name}}</td>
-						</tr>
-						<tr>
-							<th>Last Date Posted : </th>
-							<td>{{$ctrl.data.Product.formated_last_date_posted | date:"MMM. dd, y"}}</td>
-						</tr>
-					</table>
-				</div>
-				<div class="col-lg-4 col-lg-offset-2">
-					<table class="table table-condensed table-striped table-hovered">
-						<tr>
-							<th>Selling Price : </th>
-							<td>{{$ctrl.selling_price}}</td>
-						</tr>
-						<tr>
-							<th>Minimun Quantity:</th>
-							<td>{{$ctrl.data.Product.min}}</td>
-						</tr>
-						<tr>
-							<th>Current Quantity:</th>
-							<td>{{$ctrl.CurrentQuantity}}</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<table class="table table-condensed">
-						<thead>	
-							<tr>
-								<th colspan="8" class="alert alert-success">TRANSACTIONS RECORD</th>
-							</tr>
-							<tr>
-								<th>Stock Clerk</th>
-								<th class="text-center"><h6>(In Stock)</h6>Counted Qty</th>
-								<th class="text-center"><h6>(Bad Items)</h6>Returned Qty </th>
-								<th class="text-center">Delivered Qty</th>
-								<th class="text-center">DR No.</th>
-								<th class="text-center">Date</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="(key, tr) in $ctrl.transactions.Data">
-								<td>{{tr.ProductTransaction.name}}</td>
-								<td class="text-center">{{tr.ProductTransaction.counted_qty}}</td>
-								<td class="text-center">{{tr.ProductTransaction.returned_qty}}</td>
-								<td class="text-center">{{tr.ProductTransaction.delivered_qty}}</td>
-								<td class="text-center">{{tr.ProductTransaction.dr_no}}</td>
-								<td class="text-center">{{tr.ProductTransaction.formated_date}}</td>
-							</tr>
-							<tr ng-if="!$ctrl.transactions.Data.length">	
-								<th colspan="8" class="text-center">No Transaction<hr></th>
-							</tr>
-							<tr ng-if="$ctrl.transactions.Data.length">
-								<th></th>
-								<th class="text-center"></th>
-								<th class="text-center">{{$ctrl.TotalReturnedQty}}</th>
-								<th class="text-center">{{$ctrl.TotalDeliveredQty}}</th>
-								<th class="text-center"></th>
-								<td></td>
-								<td></td>
-							</tr>
-							
-							<tr>	
-								<th colspan="8" class="alert alert-success">ADD NEW TRANSACTION</th>
-							</tr>
-							<tr ng-form="$ctrl.TransactionForm">
-								<td><input ng-model="$ctrl.name" ng-required="true" class="form-control input-sm" placeholder="S. Clerk"></input></td>
-								<td><input min="0" type="number" ng-change="$ctrl.toggleQty($ctrl.counted_qty,$ctrl.returned_qty,$ctrl.delivered_qty)" ng-model="$ctrl.counted_qty" ng-required="true" class="form-control input-sm" placeholder="Counted"></input></td>
-								<td><input min="0" type="number" ng-change="$ctrl.toggleQty($ctrl.counted_qty,$ctrl.returned_qty,$ctrl.delivered_qty)" ng-model="$ctrl.returned_qty" ng-required="true" class="form-control input-sm" placeholder="Returns"></input></td>
-								<td><input min="0" type="number" ng-change="$ctrl.toggleQty($ctrl.counted_qty,$ctrl.returned_qty,$ctrl.delivered_qty)" ng-model="$ctrl.delivered_qty" ng-required="true" class="form-control input-sm" placeholder="Deliver"></input></td>
-								<td><input ng-model="$ctrl.dr_no" class="form-control input-sm" ng-required="true" placeholder="DR No."></input></td>
-								<td><input type="datetime-local" ng-model="$ctrl.dateNow" class="form-control input-sm" ></input></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-        <div class="modal-footer">
-			<button id="SaveButton" class="btn btn-primary" ng-click="$ctrl.save()" ng-disabled="!$ctrl.TransactionForm.$valid">Save</button>
-			<button class="btn btn-warning" ng-click="$ctrl.close()">Close</button>
-        </div>
-    </script>
-	
-	
 	
 	<script type="text/ng-template" id="PricingModal.html">
 		<div></div>
