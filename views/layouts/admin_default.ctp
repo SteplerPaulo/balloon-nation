@@ -1,18 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
+	<?php echo $this->Html->charset(); ?>
+	<title>
+		<?php __('Balloon-Nation-Admin:'); ?>
+		<?php echo $title_for_layout; ?>
+	</title>
+	
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+	<meta http-Equiv="Cache-Control" Content="no-cache" />
+    <meta http-Equiv="Pragma" Content="no-cache" />
+    <meta http-Equiv="Expires" Content="0" />
 
-    <title>Balloon-Nation-Admin</title>
-	<!--
-	<link href="<?php echo $this->base;?>/img/company logo/1.png" type="image/x-icon" rel="icon">
-	<link href="<?php echo $this->base;?>/img/company logo/1.png" type="image/x-icon" rel="shortcut icon">
-	-->
 	<?php
 		//echo $this->Html->meta('icon');
 		echo $this->Html->css('bootstrap'); //Bootstrap Core CSS
@@ -144,6 +147,13 @@
 						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-dashboard')).' '.
 												$this->Html->tag('span', 'Dashboard'),
 												array('admin' => true,'controller'=>'users','action'=>'dashboard'),
+												array('escape' => false)
+												);  ?>
+                    </li>
+					<li class="">
+						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-file')).' '.
+												$this->Html->tag('span', 'Sales'),
+												array('admin' => true,'controller'=>'sales','action'=>''),
 												array('escape' => false)
 												);  ?>
                     </li>
