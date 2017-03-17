@@ -45,18 +45,19 @@
 								<th rowspan="2" class="text-center">Item Description</th>
 								<th colspan="2" class="text-center">System</th>
 								<th colspan="3" class="text-center">Actual Quantity</th>
-								<th colspan="2" class="text-center">Forecast Total</th>
+								<th colspan="3" class="text-center">Forecast Total</th>
 								<th rowspan="2" class="text-center w5">Action</th>
 							</tr>
 							<tr>
 							
-								<th class="text-center w10">MOQ</th>
-								<th class="text-center w10">Current</th>
-								<th class="text-center w10">In Stock</th>
-								<th class="text-center w10">Bad Item</th>
-								<th class="text-center w10">Deliver</th>
+								<th class="text-center w8">MOQ</th>
+								<th class="text-center w8">Current</th>
+								<th class="text-center w8">In Stock</th>
+								<th class="text-center w8">Bad Item</th>
+								<th class="text-center w8">Deliver</th>
 								<th class="text-center w5">Returned</th>
 								<th class="text-center w5">Delivered</th>
+								<th class="text-center w8">Sold</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -81,11 +82,14 @@
 									{{products[i].UpdatedTotalDelivered}}
 								</td>
 								<td class="text-center">
+									{{products[i].estimated_sold_qty}}
+								</td>
+								<td class="text-center">
 									<a ng-click="undoChanges(i)" title="Undo changes"><i class="fa fa-undo" aria-hidden="true"></i></a>
 								</td>
 							</tr>
 							<tr ng-if="!products.length">
-								<td colspan="10">
+								<td colspan="11">
 									No data available. Please select costumer
 								</td>
 							</tr>
