@@ -2,6 +2,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	$scope.initializeController = function(){
 		$scope.currentPage = 1; 
 		$scope.pageSize = 7;
+		$scope.is_posted = false;
 
 		$http.get(BASE_URL+"sales/initial_data").success(function(response) {
 			$scope.costumers = response.Costumers;
@@ -34,7 +35,8 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 				data: $.param({data:data})
 			}).then(function(response){
-				$scope.data = response.data;
+				$scope.data = response.data.Result;
+				$scope.is_posted = response.data.is_posted;
 				console.log($scope.data);
 			});
 			
@@ -44,16 +46,18 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	};
 	
 	
-	$scope.changeActualSale = function (i,o){
+	$scope.changeSold = function (i,o){
 		//Compute missing quantity
-		if($scope.data[i][0].actual < $scope.data[i][0].system_count){
-			$scope.data[i][0].missing_qty = $scope.data[i][0].system_count - $scope.data[i][0].actual;
+		$scope.data[i].total_inventory = parseInt($scope.data[i].products.beginning_inventory)+parseInt($scope.data[i][0].total_delivered);
+		
+		if($scope.data[i][0].sold < $scope.data[i].total_inventory){
+			$scope.data[i][0].in_stock =  $scope.data[i].total_inventory - $scope.data[i][0].sold;
 			$scope.data[i][0].over_sold = 0;
-		}else if($scope.data[i][0].actual > $scope.data[i][0].system_count){
-			$scope.data[i][0].missing_qty = 0;
-			$scope.data[i][0].over_sold = $scope.data[i][0].actual - $scope.data[i][0].system_count;
+		}else if($scope.data[i][0].sold > $scope.data[i].total_inventory){
+			$scope.data[i][0].in_stock = 0;
+			$scope.data[i][0].over_sold = $scope.data[i][0].sold - $scope.data[i].total_inventory;
 		}else{
-			$scope.data[i][0].missing_qty = 0;
+			$scope.data[i][0].in_stock = 0;
 			$scope.data[i][0].over_sold = 0;
 		
 		}
@@ -78,16 +82,14 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 							'product_id':$scope.data[i].products.id,
 							'delivered':$scope.data[i][0].total_delivered,
 							'returned':$scope.data[i][0].total_returned,
-							'system_count_sale':$scope.data[i][0].system_count,
-							'actual_sale':$scope.data[i][0].actual,
-							'missing_qty':$scope.data[i][0].missing_qty,
-							'over_sold':$scope.data[i][0].over_sold,
+							'sold':$scope.data[i][0].sold,
+							'beginning_inventory':$scope.data[i].products.beginning_inventory,
 						};
 		}
 		
 			
-		console.log(data);	
-		return;
+		//console.log(data);	
+		//return;
 		$http({
 			method: 'POST',
 			url: BASE_URL+'admin/sales/add',

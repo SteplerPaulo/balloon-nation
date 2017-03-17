@@ -1,6 +1,6 @@
 <?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
 <?php echo $this->Html->addCrumb('Sales','/admin/sales'); ?>
-<?php echo $this->Html->addCrumb('Create Semi-Monthly Report'); ?>
+<?php echo $this->Html->addCrumb('Semi-Monthly Balancing Sheet'); ?>
 <div ng-controller="AdminSemiMonthlyReportController" ng-init="initializeController()">	
 	<div class="panel panel-success" ng-form="SalesReportForm">
 		<div class="panel-body">
@@ -22,49 +22,39 @@
 					</select>
 				</div>
 			</div><br/>
-			<div class="row">
+			<div class="row" ng-if="is_posted == false">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<table class="table table-striped table-bordered table-condensed">
+					<table class="table table-striped table-bordered table-condensed" >
 						<thead>
 							<tr>
-								<th rowspan="2">Item Description</th>
-								<th colspan="4" class="text-center">Quantity</th>
-								<th colspan="2" class="text-center">Sale</th>
-								<th colspan="2" class="text-center w8">Quantity</th>
-							</tr>
-							<tr>
-								<th class="text-center w8">Delivered</th>
-								<th class="text-center w8">Returned</th>
-								<th class="text-center w8">Current</th>
-								<th class="text-center w8">Ending Inv.</th>
-								<th class="text-center w8">System Count</th>
-								<th class="text-center w8">Actual</th>
-								<th rowspan="2" class="text-center w8">Missing</th>
-								<th rowspan="2" class="text-center w8">Over Sold</th>
-							</tr>
-							<tr>
+								<th >Item Description</th>
+								<th  class="text-center w8">Beginning Inventory</th>
+								<th  class="text-center w8">Delivered</th>
+								<th  class="text-center w8">Returned</th>
+								<th  class="text-center w8">Sold</th>
+								<th class="text-center w8"><h6>(Over Sold)</h6>+</th>
+								<th class="text-center w8"><h6>(Posible In Stock)</h6>-</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-if="data.length" ng-repeat="(i,d) in data">
 								<td>{{d.products.name}}</td>
+								<td class="text-center">{{d.products.beginning_inventory}}</td>
 								<td class="text-center">{{d[0].total_delivered}}</td>
 								<td class="text-center">{{d[0].total_returned}}</td>
-								<td class="text-center">{{d.products.current_quantity}}</td>
-								<td class="text-center">{{d[0].ending_inventory}}</td>
-								<td class="text-center">{{d[0].system_count}}</td>
 								<td class="text-center">
-									<input ng-required="true" type="number" class="form-control input-sm" ng-model="data[i][0].actual" ng-change="changeActualSale(i,data[i])"></input>
-								</td>
-								<td class="text-center">
-									<div ng-if="data[i][0].missing_qty">{{data[i][0].missing_qty}}</div>
-									<div ng-if="!data[i][0].missing_qty">0</div>
+									<input ng-required="true" type="number" class="form-control input-sm" ng-model="data[i][0].sold" ng-change="changeSold(i,d)"></input>
 								</td>
 								<td class="text-center">
 									<div ng-if="data[i][0].over_sold">{{data[i][0].over_sold}}</div>
 									<div ng-if="!data[i][0].over_sold">0</div>
 								</td>
+								<td class="text-center">
+									<div ng-if="data[i][0].in_stock">{{data[i][0].in_stock}}</div>
+									<div ng-if="!data[i][0].in_stock">0</div>
+								</td>
 							</tr>
+
 							<tr ng-if="!data.length">
 								<td colspan="9">No Data Available</td>
 							</tr>
@@ -72,13 +62,37 @@
 					</table>
 				</div>
 			</div>
+			
+			<div class="row" ng-if="is_posted == true">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<table class="table table-striped table-bordered table-condensed" >
+						<thead>
+							<tr>
+								<th>Item Description</th>
+								<th class="text-center w8">Beginning Inventory</th>
+								<th class="text-center w8">Delivered</th>
+								<th class="text-center w8">Returned</th>
+								<th class="text-center w8">Sold</th>
+								<th class="text-center w8"><h6>(Over Sold)</h6>+</th>
+								<th class="text-center w8"><h6>(Posible In Stock)</h6>-</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="9">POSTED</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		
 		</div>
 		<div class="panel-footer">
 			<div class="text-right">
 				<a href="<?php echo $this->base;?>/admin/sales" class="btn btn-default" type="cancel">Cancel</a>
-				<button ng-click="save()" class="btn btn-danger" ng-disabled="!SalesReportForm.$valid">Save</button>
+				<button ng-click="save()" class="btn btn-danger" ng-disabled="!SalesReportForm.$valid" ng-if="is_posted == false">Save</button>
 			</div>
 		</div>
 	</div>
 </div>
-<?php echo $this->Html->script('controllers/admin_semi_monthly',array('inline'=>false));?>
+<?php echo $this->Html->script('controllers/admin_balancing',array('inline'=>false));?>
