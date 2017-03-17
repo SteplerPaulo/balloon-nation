@@ -211,8 +211,10 @@ class SalesController extends AppController {
 	}
 	
 	function get_data(){
+		//pr($this->data);exit;
+		
 		$costumer_id = $this->data['costumer_id'];
-		$data = $this->Sale->get_data($costumer_id,'2017-03-01','2017-03-15');
+		$data = $this->Sale->get_data($costumer_id,$this->data['from'],$this->data['to']);
 		echo json_encode($data);
 		exit;
 	}
