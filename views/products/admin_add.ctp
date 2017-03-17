@@ -33,12 +33,16 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-2">
-						<label for="ProductPricing0PurchasePrice">Purchase Price</label>
-						<input name="data[ProductPricing][0][purchase_price]" type="number" min="0" class="form-control" required="required">
+						<label for="ProductPurchasePrice">Purchase Price</label>
+						<input name="data[Product][purchase_price]" type="number" min="0" class="form-control" required="required">
 					</div>
 					<div class="col-lg-2">
-						<label for="ProductPricing0SellingPrice">Selling Price</label>
-						<input name="data[ProductPricing][0][selling_price]" type="number" min="0" class="form-control" required="required">
+						<label for="ProductSellingPrice">Selling Price</label>
+						<input name="data[Product][selling_price]" type="number" min="0" class="form-control" required="required">
+					</div>
+					<div class="col-lg-2">
+						<?php echo $this->Form->label('Beginning Inventory');?>
+						<?php echo $this->Form->text('beginning_inventory',array('class'=>'form-control','required'=>'required','min'=>'0','type'=>'number'));?>	
 					</div>
 				</div>
 			</div>

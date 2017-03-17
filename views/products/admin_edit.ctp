@@ -31,7 +31,21 @@
 					</div>
 					<div class="col-lg-2">
 						<?php echo $this->Form->label('Minimun Quantity');?>
-						<?php echo $this->Form->text('min',array('class'=>'form-control','required'=>'required','autocomplete'=>'off','type'=>'number'));?>	
+						<?php echo $this->Form->text('min',array('class'=>'form-control','required'=>'required','min'=>'0','type'=>'number'));?>	
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2">
+						<?php echo $this->Form->label('Purchase Price');?>
+						<?php echo $this->Form->text('purchase_price',array('class'=>'form-control','required'=>'required','min'=>'0','type'=>'number'));?>	
+					</div>
+					<div class="col-lg-2">
+						<?php echo $this->Form->label('Selling Price');?>
+						<?php echo $this->Form->text('selling_price',array('class'=>'form-control','required'=>'required','min'=>'0','type'=>'number'));?>	
+					</div>
+					<div class="col-lg-2">
+						<?php echo $this->Form->label('Beginning Inventory');?>
+						<?php echo $this->Form->text('beginning_inventory',array('class'=>'form-control','required'=>'required','min'=>'0','type'=>'number'));?>	
 					</div>
 				</div>
 			</div>
