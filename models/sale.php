@@ -57,7 +57,11 @@ class Sale extends AppModel {
 				ON (
 				  `products`.`costumer_id` = `costumers`.`id`
 				) 
-			WHERE (`costumers`.`id` = '$costumer_id') 
+			WHERE (
+					`costumers`.`id` = '$costumer_id'
+					AND `deliveries`.`date` >= '$from' 
+					AND `deliveries`.`date` <= '$to' 
+					) 
 			GROUP BY `products`.`id`,
 			  `products`.`costumer_id` ;
 			"
