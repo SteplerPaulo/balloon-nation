@@ -49,6 +49,20 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 	};
 	
 	$scope.toggleQty = function(i,counted,bad_item,deliver){
+		console.log(counted);
+		if(counted != undefined && bad_item != undefined ){
+			$scope.products[i].estimated_sold_qty = ($scope.products[i].cache_current_quantity - ($scope.products[i].bad_item + $scope.products[i].counted)); 
+			console.log($scope.products[i].cache_current_quantity);
+			console.log($scope.products[i].bad_item);
+			console.log($scope.products[i].counted);
+			console.log($scope.products[i].estimated_sold_qty );
+		}else{
+			$scope.products[i].estimated_sold_qty = 0;
+		}
+			
+		
+		
+		
 		if(counted == undefined) counted=0;
 		if(bad_item == undefined) bad_item=0;
 		if(deliver == undefined) deliver=0;
@@ -68,7 +82,6 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			$scope.products[i].UpdatedTotalDelivered = $scope.products[i].TotalDelivered;
 		}
 		
-
 		$scope.products[i].Product.current_quantity = counted+deliver-bad_item;
 	}
 	
@@ -99,12 +112,19 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		for (var i = 0; i < $scope.products.length; i++) {
 			
 			if(!$scope.products[i].is_disabled){
+			
+				//if($scope.products[i].Product.is_new == true){//if new product
+				//	$scope.products[i].Product.posted_quantity = $scope.products[i].Product.current_quantity;
+				//}else if($scope.products[i].last_date_posted){//if new cut off
+				//	$scope.products[i].Product.posted_quantity= 
+				//}
 				
 				dtls['Main']['DeliveryDetail'][i] = {};
 				dtls['Main']['DeliveryDetail'][i].product_id = $scope.products[i].Product.id;
 				dtls['Main']['DeliveryDetail'][i].in_stock = $scope.products[i].counted;
 				dtls['Main']['DeliveryDetail'][i].bad_item = $scope.products[i].bad_item;
 				dtls['Main']['DeliveryDetail'][i].deliver = $scope.products[i].deliver;
+				dtls['Main']['DeliveryDetail'][i].estimated_sold_qty = $scope.products[i].estimated_sold_qty;
 				dtls['Main']['DeliveryDetail'][i].purchase_price = $scope.products[i].ProductPricing[0].purchase_price;
 				dtls['Main']['DeliveryDetail'][i].date = $filter("date")($scope.dateNow, 'yyyy-MM-dd');
 				
@@ -129,6 +149,8 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 				'AssociatedProduct':dtls['AssociatedProduct'],
 				'AssociatedProductPrice':dtls['AssociatedProductPrice'],
 		};
+		console.log(data);
+		//return;
 		
 		$http({
 			method: 'POST',
