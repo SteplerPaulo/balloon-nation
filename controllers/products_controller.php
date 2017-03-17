@@ -72,6 +72,7 @@ class ProductsController extends AppController {
 		}
 		
 		if (!empty($this->data)) {
+			
 			$string = str_replace(' ', '-', strtolower(trim($this->data['Product']['name']))).'-'.$this->data['Product']['costumer_id']; 
 			$this->data['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
 			
@@ -108,15 +109,9 @@ class ProductsController extends AppController {
 	function all(){
 		$data = array();
 		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
-		$this->Product->hasMany['ProductPricing']['limit'] = 1;
-		$this->Product->hasMany['ProductPricing']['order'] = 'created DESC';
 		$products = $this->Product->find('all', array('contain' => array(
 			'Category',
 			'Costumer',
-			'ProductImage',
-			'ProductPricing' => array(
-					'conditions' => array('ProductPricing.quantity !=' => '0'),
-			)
 		)));
 		
 		
