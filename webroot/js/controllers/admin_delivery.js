@@ -45,62 +45,16 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 				$scope.products[i].checkbox = false;
 			}
 		}
-		console.log($scope.products);
 	};
 	
-	$scope.toggleQty = function(i,counted,bad_item,deliver){
-		console.log(counted);
-		if(counted != undefined && bad_item != undefined ){
-			$scope.products[i].estimated_sold_qty = ($scope.products[i].cache_current_quantity - ($scope.products[i].bad_item + $scope.products[i].counted)); 
-			console.log($scope.products[i].cache_current_quantity);
-			console.log($scope.products[i].bad_item);
-			console.log($scope.products[i].counted);
-			console.log($scope.products[i].estimated_sold_qty );
-		}else{
-			$scope.products[i].estimated_sold_qty = 0;
-		}
-			
-		
-		
-		
-		if(counted == undefined) counted=0;
-		if(bad_item == undefined) bad_item=0;
-		if(deliver == undefined) deliver=0;
-		
-		
-		if(bad_item >= 0){
-			$scope.products[i].UpdatedTotalReturned = $scope.products[i].TotalReturned+bad_item;
-		}else{
-			$scope.products[i].UpdatedTotalReturned = $scope.products[i].TotalReturned;
-		}
-		
-		
-		
-		if(deliver >= 0){
-			$scope.products[i].UpdatedTotalDelivered = $scope.products[i].TotalDelivered+deliver;
-		}else{
-			$scope.products[i].UpdatedTotalDelivered = $scope.products[i].TotalDelivered;
-		}
-		
-		$scope.products[i].Product.current_quantity = counted+deliver-bad_item;
-	}
-	
-	$scope.undoChanges = function(i){
-		$scope.products[i].counted = undefined;
-		$scope.products[i].bad_item = undefined;
-		$scope.products[i].deliver = undefined;
-		$scope.products[i].UpdatedTotalReturned = $scope.products[i].TotalReturned;
-		$scope.products[i].UpdatedTotalDelivered = $scope.products[i].TotalDelivered;
-		$scope.products[i].Product.current_quantity = $scope.products[i].cache_current_quantity;
-	}
-	
+
+
 	$scope.save = function(){
 
 		
 		var dtls = [];
 			dtls['Main'] = {};
 			dtls['AssociatedProduct'] = {};
-			dtls['AssociatedProductPrice'] = {};
 			
 			dtls['Main']['DeliveryDetail'] = {};
 			dtls['Main']['Delivery'] = {'costumer_id':$scope.costumer_id,
@@ -112,45 +66,22 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		for (var i = 0; i < $scope.products.length; i++) {
 			
 			if(!$scope.products[i].is_disabled){
-			
-				//if($scope.products[i].Product.is_new == true){//if new product
-				//	$scope.products[i].Product.posted_quantity = $scope.products[i].Product.current_quantity;
-				//}else if($scope.products[i].last_date_posted){//if new cut off
-				//	$scope.products[i].Product.posted_quantity= 
-				//}
-				
 				dtls['Main']['DeliveryDetail'][i] = {};
 				dtls['Main']['DeliveryDetail'][i].product_id = $scope.products[i].Product.id;
-				dtls['Main']['DeliveryDetail'][i].in_stock = $scope.products[i].counted;
 				dtls['Main']['DeliveryDetail'][i].bad_item = $scope.products[i].bad_item;
 				dtls['Main']['DeliveryDetail'][i].deliver = $scope.products[i].deliver;
-				dtls['Main']['DeliveryDetail'][i].estimated_sold_qty = $scope.products[i].estimated_sold_qty;
-				dtls['Main']['DeliveryDetail'][i].purchase_price = $scope.products[i].ProductPricing[0].purchase_price;
-				dtls['Main']['DeliveryDetail'][i].date = $filter("date")($scope.dateNow, 'yyyy-MM-dd');
-				
-				dtls['AssociatedProduct'][i] = {};
-				dtls['AssociatedProduct'][i]['Product'] = {};
-				dtls['AssociatedProduct'][i]['Product'].id = $scope.products[i].Product.id;
-				dtls['AssociatedProduct'][i]['Product'].current_quantity = $scope.products[i].Product.current_quantity;
-				dtls['AssociatedProduct'][i]['Product'].posted_quantity = ($scope.products[i].Product.is_new == true)?$scope.products[i].Product.current_quantity:$scope.products[i].Product.posted_quantity;
-				dtls['AssociatedProduct'][i]['Product'].is_new = false;
-				
-				
-				dtls['AssociatedProductPrice'][i] = {};
-				dtls['AssociatedProductPrice'][i]['ProductPricing'] = {};	
-				dtls['AssociatedProductPrice'][i]['ProductPricing'].id = $scope.products[i].ProductPricing[0].id;
-				dtls['AssociatedProductPrice'][i]['ProductPricing'].quantity = ($scope.products[i].ProductPricing[0].is_new == true)?$scope.products[i].deliver:$scope.products[i].UpdatedTotalDelivered,
-				dtls['AssociatedProductPrice'][i]['ProductPricing'].is_new = false;
-					
+				dtls['Main']['DeliveryDetail'][i].purchase_price = $scope.products[i].Product.purchase_price;
+				dtls['Main']['DeliveryDetail'][i].selling_price = $scope.products[i].Product.selling_price;
+				dtls['Main']['DeliveryDetail'][i].date = $filter("date")($scope.dateNow, 'yyyy-MM-dd');	
 			}			
 		}
 		var data = {
 				'Main':dtls['Main'],
 				'AssociatedProduct':dtls['AssociatedProduct'],
-				'AssociatedProductPrice':dtls['AssociatedProductPrice'],
 		};
-		console.log(data);
+		//	console.log(data);
 		//return;
+
 		
 		$http({
 			method: 'POST',
