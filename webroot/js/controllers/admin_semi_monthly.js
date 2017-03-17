@@ -23,8 +23,8 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 			
 			var data = {
 				'costumer_id':costumer.Costumer.id,
-				'from':$filter('date')(inclusive_month, "yyyy-MM")+'-'+inclusive_date.InclusiveDate.from,
-				'to':$filter('date')(inclusive_month, "yyyy-MM")+'-'+inclusive_date.InclusiveDate.to,
+				'from':$filter('date')(inclusive_month, "yyyy-MM")+'-'+inclusive_date.InclusiveDate.from+' '+'00:00:00',
+				'to':$filter('date')(inclusive_month, "yyyy-MM")+'-'+inclusive_date.InclusiveDate.to+' '+'23:59:59',
 			};
 			
 
@@ -46,7 +46,18 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	
 	$scope.changeActualSale = function (i,o){
 		//Compute missing quantity
-		$scope.data[i][0].missing_qty = $scope.data[i][0].system_count - $scope.data[i][0].actual;
+		if($scope.data[i][0].actual < $scope.data[i][0].system_count){
+			$scope.data[i][0].missing_qty = $scope.data[i][0].system_count - $scope.data[i][0].actual;
+			$scope.data[i][0].over_sold = 0;
+		}else if($scope.data[i][0].actual > $scope.data[i][0].system_count){
+			$scope.data[i][0].missing_qty = 0;
+			$scope.data[i][0].over_sold = $scope.data[i][0].actual - $scope.data[i][0].system_count;
+		}else{
+			$scope.data[i][0].missing_qty = 0;
+			$scope.data[i][0].over_sold = 0;
+		
+		}
+		
 	}
 	
 	
@@ -59,25 +70,24 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 						'from_date':$filter('date')($scope.inclusive_month, "yyyy-MM")+'-'+$scope.inclusive_date.InclusiveDate.from,
 						'to_date':$filter('date')($scope.inclusive_month, "yyyy-MM")+'-'+$scope.inclusive_date.InclusiveDate.to,
 					}};
+			data['SaleDetail'] = [];
 			
 		for (var i = 0; i < $scope.data.length; i++) {
-			console.log($scope.data[i]);
-			data['SaleDetail'] = [{
+			//console.log($scope.data[i]);
+			data['SaleDetail'][i] = {
 							'product_id':$scope.data[i].products.id,
 							'delivered':$scope.data[i][0].total_delivered,
 							'returned':$scope.data[i][0].total_returned,
 							'system_count_sale':$scope.data[i][0].system_count,
 							'actual_sale':$scope.data[i][0].actual,
 							'missing_qty':$scope.data[i][0].missing_qty,
-						}];
-		
-					
-					
+							'over_sold':$scope.data[i][0].over_sold,
+						};
 		}
 		
 			
-		//console.log(data);	
-		//return;
+		console.log(data);	
+		return;
 		$http({
 			method: 'POST',
 			url: BASE_URL+'admin/sales/add',

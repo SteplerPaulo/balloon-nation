@@ -28,17 +28,19 @@
 						<thead>
 							<tr>
 								<th rowspan="2">Item Description</th>
-								<th colspan="3" class="text-center">Quantity</th>
+								<th colspan="4" class="text-center">Quantity</th>
 								<th colspan="2" class="text-center">Sale</th>
-								<th rowspan="2" class="text-center w8">Missing Quantity</th>
-								<th rowspan="2" class="actions text-center w5">Action</th>
+								<th colspan="2" class="text-center w8">Quantity</th>
 							</tr>
 							<tr>
 								<th class="text-center w8">Delivered</th>
 								<th class="text-center w8">Returned</th>
 								<th class="text-center w8">Current</th>
+								<th class="text-center w8">Ending Inv.</th>
 								<th class="text-center w8">System Count</th>
 								<th class="text-center w8">Actual</th>
+								<th rowspan="2" class="text-center w8">Missing</th>
+								<th rowspan="2" class="text-center w8">Over Sold</th>
 							</tr>
 							<tr>
 							</tr>
@@ -49,15 +51,22 @@
 								<td class="text-center">{{d[0].total_delivered}}</td>
 								<td class="text-center">{{d[0].total_returned}}</td>
 								<td class="text-center">{{d.products.current_quantity}}</td>
+								<td class="text-center">{{d[0].ending_inventory}}</td>
 								<td class="text-center">{{d[0].system_count}}</td>
 								<td class="text-center">
 									<input ng-required="true" type="number" class="form-control input-sm" ng-model="data[i][0].actual" ng-change="changeActualSale(i,data[i])"></input>
 								</td>
-								<td class="text-center">{{data[i][0].missing_qty}}</td>
-								<td class="actions text-center"></td>
+								<td class="text-center">
+									<div ng-if="data[i][0].missing_qty">{{data[i][0].missing_qty}}</div>
+									<div ng-if="!data[i][0].missing_qty">0</div>
+								</td>
+								<td class="text-center">
+									<div ng-if="data[i][0].over_sold">{{data[i][0].over_sold}}</div>
+									<div ng-if="!data[i][0].over_sold">0</div>
+								</td>
 							</tr>
 							<tr ng-if="!data.length">
-								<td colspan="8">No Data Available</td>
+								<td colspan="9">No Data Available</td>
 							</tr>
 						</tbody>
 					</table>
