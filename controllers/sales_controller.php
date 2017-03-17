@@ -74,9 +74,14 @@ class SalesController extends AppController {
 	}
 
 	function admin_add() {
-		
-		//pr($this->data);exit;
 		if (!empty($this->data)) {
+			
+			$this->Sale->deleteAll(array(
+				'Sale.costumer_id' => $this->data['Sale']['costumer_id'], 
+				'Sale.from_date' => $this->data['Sale']['from_date'],
+				'Sale.to_date' => $this->data['Sale']['to_date']
+			));
+			
 			$this->Sale->create();
 			if ($this->Sale->saveAll($this->data)) {
 				$response['status'] = 1;
@@ -126,7 +131,7 @@ class SalesController extends AppController {
 	}
 
 	
-	function admin_create() {
+	function admin_balancing() {
 		$this->layout = 'admin_default';
 	}
 
@@ -135,68 +140,18 @@ class SalesController extends AppController {
 		echo json_encode($data);
 		exit;
 	}
-	
-	function sales_report(){
-		pr($this->data['from']);
-		pr($this->data['to']);
-		//exit;
-		
-		$data = array();
-		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
-		
-	
-		$products = $this->Product->find('all', array(
-			'conditions' => array('Costumer.name' => $this->data['costumer']
-			
-						),
-			'contain' => array(
-				'Category',
-				'Costumer',
-				'DeliveryDetail'=> array(
-					'conditions' => array(
-									'DeliveryDetail.date' => $this->data['from'],
-									//'DeliveryDetail.date <=' => $this->data['to'],
-								
-					)),
-				'ProductPricing' => array(
-					'conditions' => array('ProductPricing.quantity !=' => '0'),
-					'order' => array('ProductPricing.created'=>'DESC'),
-					'limit' => 1,
-			)
-		)));
-		pr($products);exit;
 
-		foreach ($products as $key => $product) {
-			$products[$key]['Product']['delivered'] = 0;
-			$products[$key]['Product']['returned'] = 0;
-			foreach($product['DeliveryDetail'] as $dlvry){
-				$products[$key]['Product']['delivered'] += $dlvry['deliver'];
-				$products[$key]['Product']['returned'] += $dlvry['bad_item'];
-				
-				
-			}
-			if(!empty($product['DeliveryDetail'])){
-				$products[$key]['Product']['sales'] = $products[$key]['Product']['delivered']-($products[$key]['Product']['returned']+$products[$key]['Product']['current_quantity']);
-			}else{
-				$products[$key]['Product']['sales'] = 0;
-			}
-			
-				
+	function admin_report($id = null){
 		
-			//unset($products[$key]['ProductTransaction']);
-		}
-		//pr($products);
-		//exit;
+		$data = $this->Sale->find('first',array(
+								'recursive'=>2,
+								'conditions'=> array(
+									'Sale.id' => $id,
+							)
+					));
 		
-		$data['Products'] = $products;
-		$this->Costumer->unbindModel( array('hasMany' => array('Product')));
-		$data['Costumers'] = $this->Costumer->find('all');
-		echo json_encode($data);
-		exit;
-	}
-	
-	function admin_report(){
-		
+		//pr($data);exit;
+		$this->set(compact('data'));
 		$this->layout='pdf';
 		$this->render();
 	}
@@ -212,12 +167,85 @@ class SalesController extends AppController {
 	
 	function get_data(){
 		//pr($this->data);exit;
-		
 		$costumer_id = $this->data['costumer_id'];
-		$data = $this->Sale->get_data($costumer_id,$this->data['from'],$this->data['to']);
+		$from_date = $this->data['from'];
+		$to_date = $this->data['to'];
+	
+		$data =array();
+		$data['Result'] = $this->Sale->find('first',array(
+								'recursive'=>2,
+								'conditions'=> array(
+									'Sale.costumer_id' => $costumer_id,
+									'Sale.from_date >=' => $from_date,
+									'Sale.to_date <=' => $to_date,
+							)
+					));
+			
+		if(empty($data['Result']) || $data['Result']['Sale']['is_posted'] != 1){
+			$data['Result'] = $this->Sale->get_data($costumer_id,$from_date,$to_date);
+			$data['is_posted'] = false;
+		}else{
+			$data['is_posted'] = true;
+		}
+			
+		
+		
 		echo json_encode($data);
 		exit;
 	}
 	
+	
+	function admin_posting($id = null){
+		$this->layout = 'admin_default';
+		$this->set(compact('id'));
+	}
+	
+	function posting_data($id = null){
+		$data = $this->Sale->find('first',array(
+								'recursive'=>2,
+								'conditions'=> array(
+									'Sale.id' => $id,
+							)
+					));
+					
+		foreach ($data['SaleDetail'] as $key => $value) {
+			if($value['sold'] > ($value['Product']['beginning_inventory']+$value['delivered'])){
+				$data['SaleDetail'][$key]['over_sold'] = $value['sold'] - ($value['Product']['beginning_inventory']+$value['delivered']);
+				$data['SaleDetail'][$key]['in_stock'] = 0;
+		
+			}else if($value['sold'] < ($value['Product']['beginning_inventory']+$value['delivered'])){
+				$data['SaleDetail'][$key]['over_sold'] = 0;
+				$data['SaleDetail'][$key]['in_stock'] = ($value['Product']['beginning_inventory']+$value['delivered'])-$value['sold'];
+		
+			}else{
+				$data['SaleDetail'][$key]['over_sold'] = 0;
+				$data['SaleDetail'][$key]['in_stock'] = 0;
+			}
+		
+		}	
+				
+		echo json_encode($data);
+		exit;
+	}
+	
+	function posting_saving(){
+		if (!empty($this->data)) {
+			//pr($this->data);exit;
+		
+			$this->Sale->create();
+			if ($this->Sale->saveAll($this->data['Sale'])) {
+				$this->Product->saveAll($this->data['Product']);
+				$response['status'] = 1;
+				$response['msg'] = 'Saving successful.';
+				echo json_encode($response);
+				exit();
+			} else {
+				$response['status'] = 0;
+				$response['msg'] = 'Error saving.Pls try again';
+				echo json_encode($response);
+				exit();
+			}
+		}
+	}
 	
 }

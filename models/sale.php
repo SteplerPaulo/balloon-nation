@@ -17,7 +17,7 @@ class Sale extends AppModel {
 		'SaleDetail' => array(
 			'className' => 'SaleDetail',
 			'foreignKey' => 'sale_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -32,15 +32,13 @@ class Sale extends AppModel {
 	public function get_data($costumer_id=null,$from=null,$to=null){
 		return $this->query(
 			"SELECT 
-			  `delivery_details`.`in_stock`,
 			  SUM(`delivery_details`.`bad_item`) AS total_returned,
 			  SUM(`delivery_details`.`deliver`) AS total_delivered,
-			 (SUM(`delivery_details`.`deliver`) - (SUM(`delivery_details`.`bad_item`) + `products`.`current_quantity`)) AS system_count,
 			  `delivery_details`.`purchase_price`,
 			  `products`.`id`,
 			  `products`.`name`,
+			  `products`.`beginning_inventory`,
 			  `products`.`item_code`,
-			  `products`.`current_quantity`,
 			  `costumers`.`id`,
 			  `costumers`.`name`
 			FROM

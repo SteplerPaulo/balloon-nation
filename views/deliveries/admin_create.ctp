@@ -43,21 +43,13 @@
 									<input type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
 								</th>
 								<th rowspan="2" class="text-center">Item Description</th>
-								<th colspan="2" class="text-center">System</th>
-								<th colspan="3" class="text-center">Actual Quantity</th>
-								<th colspan="3" class="text-center">Forecast Total</th>
+								<th rowspan="2" class="text-center w8">MOQ</th>
+								<th colspan="2" class="text-center">Quantity</th>
 								<th rowspan="2" class="text-center w5">Action</th>
 							</tr>
 							<tr>
-							
-								<th class="text-center w8">MOQ</th>
-								<th class="text-center w8">Current</th>
-								<th class="text-center w8">In Stock</th>
-								<th class="text-center w8">Bad Item</th>
 								<th class="text-center w8">Deliver</th>
-								<th class="text-center w5">Returned</th>
-								<th class="text-center w5">Delivered</th>
-								<th class="text-center w8">Sold</th>
+								<th class="text-center w8">Bad Item</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -65,31 +57,18 @@
 								<td class="text-center"><input type="checkbox" ng-model="products[i].checkbox" ng-change="check(i,products[i].checkbox)"></td>
 								<td>{{o.Product.name}}</td>
 								<td class="text-center">{{o.Product.min}}</td>
-								<td class="text-center" ng-class="(o.Product.current_quantity < o.Product.min)?'bg-warning':''">{{o.Product.current_quantity}}</td>
 								<td class="text-center">
-									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].counted" ng-change="toggleQty(i,products[i].counted,products[i].bad_item,products[i].deliver)" type="number" min="0" class="form-control input-sm"></input>
+									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].deliver" type="number" min="0" class="form-control input-sm"></input>
 								</td>
 								<td class="text-center">
-									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].bad_item" ng-change="toggleQty(i,products[i].counted,products[i].bad_item,products[i].deliver)" type="number" min="0" class="form-control input-sm"></input>
-								</td>
-								<td class="text-center">
-									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].deliver" ng-change="toggleQty(i,products[i].counted,products[i].bad_item,products[i].deliver)" type="number" min="0" class="form-control input-sm"></input>
-								</td>
-								<td class="text-center">
-									{{products[i].UpdatedTotalReturned}}
-								</td>
-								<td class="text-center">
-									{{products[i].UpdatedTotalDelivered}}
-								</td>
-								<td class="text-center">
-									{{products[i].estimated_sold_qty}}
+									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].bad_item" type="number" min="0" class="form-control input-sm"></input>
 								</td>
 								<td class="text-center">
 									<a ng-click="undoChanges(i)" title="Undo changes"><i class="fa fa-undo" aria-hidden="true"></i></a>
 								</td>
 							</tr>
 							<tr ng-if="!products.length">
-								<td colspan="11">
+								<td colspan="9">
 									No data available. Please select costumer
 								</td>
 							</tr>

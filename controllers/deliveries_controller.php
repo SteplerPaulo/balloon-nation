@@ -3,7 +3,7 @@ class DeliveriesController extends AppController {
 
 	var $name = 'Deliveries';
 	var $helpers = array('Access');
-	var $uses = array('Delivery','Costumer','Product','ProductPricing','DeliveryDetail');
+	var $uses = array('Delivery','Costumer','Product','DeliveryDetail');
 
 	function index() {
 		$this->Delivery->recursive = 0;
@@ -84,10 +84,6 @@ class DeliveriesController extends AppController {
 			
 			$this->Delivery->create();
 			if ($this->Delivery->saveAll($this->data['Main'])) {
-			
-				$this->Product->saveAll($this->data['AssociatedProduct']);
-				$this->ProductPricing->saveAll($this->data['AssociatedProductPrice']);
-				
 				$response['status'] = 1;
 				$response['msg'] = 'Saving successful.';
 				$response['data'] = $this->data;
@@ -156,17 +152,11 @@ class DeliveriesController extends AppController {
 		
 		$data =  array();
 		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
-		$this->Product->hasMany['ProductPricing']['limit'] = 1;
-		$this->Product->hasMany['ProductPricing']['order'] = 'created DESC';
 		$products = $this->Product->find('all', array(
 			'conditions' => array('Costumer.name' => $costumer),
 			'contain' => array(
 				'Category',
 				'Costumer',
-				'ProductImage',
-				'ProductPricing' => array(
-					//'conditions' => array('ProductPricing.quantity !=' => '0'),
-					)
 			),
 		));
 		
@@ -176,15 +166,6 @@ class DeliveriesController extends AppController {
 			//$products[$key]['deliver'] = 0;
 			$products[$key]['is_disabled'] = true;
 			$products[$key]['checkbox'] = false;
-			$products[$key]['cache_current_quantity'] = $value['Product']['current_quantity'];
-
-			$products[$key]['TotalReturned'] = 0;
-			$products[$key]['TotalDelivered'] = 0;
-			foreach ($products[$key]['DeliveryDetail'] as $i => $dlvr) {
-				$products[$key]['UpdatedTotalReturned'] = $products[$key]['TotalReturned'] +=$dlvr['bad_item'] ;
-				$products[$key]['UpdatedTotalDelivered'] = $products[$key]['TotalDelivered'] +=$dlvr['deliver'] ;
-			}
-
 		}
 		
 		$data['Products'] = $products;
