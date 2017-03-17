@@ -27,7 +27,7 @@
 			<table class="table table-striped table-hovered">
 				<thead>
 					<tr>
-						<th colspan="6">PRODUCTS</th>
+						<th colspan="5">PRODUCTS</th>
 						<th colspan="1">
 							<div class="btn-group pull-right" role="group" >
 							  <a href="<?php echo $this->base;?>/admin/products/add" title="Add New Product" class="btn btn-sm btn-default"><i class="fa fa-plus"></i></a>
@@ -40,7 +40,6 @@
 						<th>Category</th>
 						<th class="hide">Costumer</th>
 						<th class="text-center">Min</th>
-						<th class="text-center">Current Qty</th>
 						<th class="text-center">Selling Price</th>
 						<th class="actions text-center">Action</th>
 					</tr>
@@ -54,11 +53,8 @@
 						<td>{{d.Category.name}}</td>
 						<td class="hide">{{d.Costumer.name}}</td>
 						<td class="text-center">{{d.Product.min}}</td>
-						<td class="text-center">{{d.Product.current_quantity}}</td>
-						<td class="text-center">{{d.ProductPricing[0].selling_price}}</td>
+						<td class="text-center">{{d.Product.selling_price}}</td>
 						<td class="actions text-center">
-							<a  ng-click="openPricing(d,'sm')" title="Change price"><i class="fa fa-money"></i></a>
-							| 
 							<a href="<?php echo $this->base;?>/admin/products/edit/{{d.Product.slug}}" title="Edit"><i class="fa fa-edit"></i></a>
 							| 
 							<a href="<?php echo $this->base;?>/admin/product/{{d.Product.slug}}/images/" title="Images"><i class="fa fa-file-image-o"></i></a>
@@ -68,12 +64,12 @@
 						</td>
 					</tr>
 					<tr ng-show="(products | filter:q | filter:costumer).length == 0" pagination-id="ProductListTable" >
-						<td colspan="7">No Data Found</td>
+						<td colspan="6">No Data Found</td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="7" class="text-center">
+						<td colspan="6" class="text-center">
 							<dir-pagination-controls pagination-id="ProductListTable"></dir-pagination-controls>
 						</td>
 					</tr>
@@ -81,37 +77,5 @@
 			</table>
 		</div>
 	</div>
-	
-	<script type="text/ng-template" id="PricingModal.html">
-		<div></div>
-        <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">{{$ctrl.data.Product.name}}</h3>
-        </div>
-        <div class="modal-body" id="modal-body">
-			<table class="table table-bordered table-condensed">
-				<thead>
-					<tr>
-						<th>Purchase Price</th>
-						<th>Selling Price</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-form="$ctrl.PricingForm">
-						<td>
-							<input ng-model="$ctrl.purchase_price" min="0" type="number" class="form-control" ng-required="true"></input>
-						</td>
-						<td>
-							<input ng-model="$ctrl.selling_price" min="0" type="number" class="form-control" ng-required="true"></input>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-        <div class="modal-footer">
-			<button class="btn btn-primary" ng-click="$ctrl.save()" ng-disabled="!$ctrl.PricingForm.$valid">Save</button>
-			<button class="btn btn-warning" ng-click="$ctrl.close()">Close</button>
-        </div>
-    </script>
-		
 </div>
 <?php echo $this->Html->script('controllers/admin_products',array('inline'=>false));?>
