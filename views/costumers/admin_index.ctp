@@ -1,5 +1,5 @@
 <?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
-<?php echo $this->Html->addCrumb('Costumer',''); ?>
+<?php echo $this->Html->addCrumb('Customer',''); ?>
 <div ng-controller="AdminCostumersController" ng-init="initializeController()">	
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-xs-4">
@@ -16,8 +16,8 @@
 			<table class="table table-striped table-hovered">
 				<thead>
 					<tr>
-						<th colspan="3">COSTUMERS</th>
-						<th colspan="1"><a href = "<?php echo $this->base;?>/admin/costumers/add" class="btn btn-sm btn-warning pull-right">Add New Costumer</a></th>
+						<th colspan="3">CUSTOMERS</th>
+						<th colspan="1"><a href = "<?php echo $this->base;?>/admin/costumers/add" class="btn btn-sm btn-warning pull-right">Add New Customer</a></th>
 					</tr>
 					<tr>
 						<th>Name</th>
