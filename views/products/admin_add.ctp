@@ -34,11 +34,11 @@
 				<div class="row">
 					<div class="col-lg-2">
 						<label for="ProductPurchasePrice">Purchase Price</label>
-						<input name="data[Product][purchase_price]" type="number" min="0" class="form-control" required="required">
+						<input name="data[Product][purchase_price]" type="number" min="0" step="0.01" class="form-control" required="required">
 					</div>
 					<div class="col-lg-2">
 						<label for="ProductSellingPrice">Selling Price</label>
-						<input name="data[Product][selling_price]" type="number" min="0" class="form-control" required="required">
+						<input name="data[Product][selling_price]" type="number" min="0" step="0.01" class="form-control" required="required">
 					</div>
 					<div class="col-lg-2">
 						<?php echo $this->Form->label('Beginning Inventory');?>
