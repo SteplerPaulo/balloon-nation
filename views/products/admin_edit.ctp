@@ -14,6 +14,7 @@
 				<div class="row">
 					<div class="col-lg-3">
 						<?php echo $this->Form->input('costumer_id',array('empty'=>'-- Select --','class'=>'form-control','required'=>'required','disabled'=>'disabled'));?>
+						<?php echo $this->Form->input('costumer_id',array('label'=>false,'class'=>'form-control hide','required'=>'required'));?>
 					</div>
 					<div class="col-lg-3">
 						<?php echo $this->Form->input('category_id',array('empty'=>'-- Select --','class'=>'form-control','required'=>'required'));?>
@@ -37,11 +38,11 @@
 				<div class="row">
 					<div class="col-lg-2">
 						<?php echo $this->Form->label('Purchase Price');?>
-						<?php echo $this->Form->text('purchase_price',array('class'=>'form-control','required'=>'required','min'=>'0','type'=>'number'));?>	
+						<?php echo $this->Form->text('purchase_price',array('class'=>'form-control','required'=>'required','min'=>'0','step'=>'0.01','type'=>'number'));?>	
 					</div>
 					<div class="col-lg-2">
 						<?php echo $this->Form->label('Selling Price');?>
-						<?php echo $this->Form->text('selling_price',array('class'=>'form-control','required'=>'required','min'=>'0','type'=>'number'));?>	
+						<?php echo $this->Form->text('selling_price',array('class'=>'form-control','required'=>'required','min'=>'0','step'=>'0.01','type'=>'number'));?>	
 					</div>
 					<div class="col-lg-2">
 						<?php echo $this->Form->label('Beginning Inventory');?>
