@@ -96,6 +96,9 @@ class CostumersController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
+			$string = str_replace(' ', '-', strtolower(trim($this->data['Costumer']['name']))); 
+			$this->data['Costumer']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
+			
 			if ($this->Costumer->save($this->data)) {
 				$this->Session->setFlash(__('The costumer has been saved', true));
 				$this->redirect(array('action' => 'index'));
