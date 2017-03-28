@@ -12,9 +12,9 @@ class Product extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Costumer' => array(
-			'className' => 'Costumer',
-			'foreignKey' => 'costumer_id',
+		'Customer' => array(
+			'className' => 'Customer',
+			'foreignKey' => 'customer_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
