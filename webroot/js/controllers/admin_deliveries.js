@@ -3,10 +3,10 @@ App.controller('AdminDeliveriesController',function($scope,$rootScope,$http,$fil
 		$scope.currentPage = 1; 
 		$scope.pageSize = 7;
 		
-		$http.get(BASE_URL+"costumers/all").success(function(response) {
-			$rootScope.costumers = response;
-			if($rootScope.costumer ==  undefined){
-				$rootScope.costumer = '';
+		$http.get(BASE_URL+"customers/all").success(function(response) {
+			$rootScope.customers = response;
+			if($rootScope.customer ==  undefined){
+				$rootScope.customer = '';
 			}
 		});
 		

@@ -6,9 +6,9 @@ App.controller('AdminProductsController',function($scope,$rootScope,$http,$filte
 		$http.get(BASE_URL+"products/all").success(function(response) {
 			$scope.products = response.Products;
 			console.log($scope.products);
-			$rootScope.costumers = response.Costumers;
-			if($rootScope.costumer ==  undefined){
-				$rootScope.costumer = $rootScope.costumers[0].Costumer.name;
+			$rootScope.customers = response.Customers;
+			if($rootScope.customer ==  undefined){
+				$rootScope.customer = $rootScope.customers[0].Customer.name;
 			}
 			
 		});

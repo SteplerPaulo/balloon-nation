@@ -5,7 +5,7 @@ App.controller('AdminSalePostingController',function($scope,$rootScope,$http,$fi
 		
 		$scope.SaleID =  $("#SalePostingPanel").attr('sale-id');
 		$http.get(BASE_URL+"sales/posting_data/"+$scope.SaleID).success(function(response) {
-			$scope.Costumer = response.Costumer;
+			$scope.Customer = response.Customer;
 			$scope.Sale = response.Sale;
 			$scope.SaleDetail = response.SaleDetail;
 		

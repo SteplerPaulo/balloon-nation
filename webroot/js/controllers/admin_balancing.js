@@ -5,9 +5,9 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		$scope.is_posted = false;
 
 		$http.get(BASE_URL+"sales/initial_data").success(function(response) {
-			$scope.costumers = response.Costumers;
-			if($scope.costumer ==  undefined){
-				$scope.costumer = '';
+			$scope.customers = response.Customers;
+			if($scope.customer ==  undefined){
+				$scope.customer = '';
 			}
 			$scope.inclusive_dates = response.InclusiveDates;
 			
@@ -17,13 +17,13 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		});
 	}
 
-	$scope.changeFilter = function (costumer, inclusive_month,inclusive_date) {
-		if(	costumer != undefined && inclusive_month != undefined && inclusive_date != undefined &&
-			costumer != '' && inclusive_month != '' && inclusive_date != ''
+	$scope.changeFilter = function (customer, inclusive_month,inclusive_date) {
+		if(	customer != undefined && inclusive_month != undefined && inclusive_date != undefined &&
+			customer != '' && inclusive_month != '' && inclusive_date != ''
 		){
 			
 			var data = {
-				'costumer_id':costumer.Costumer.id,
+				'customer_id':customer.Customer.id,
 				'from':$filter('date')(inclusive_month, "yyyy-MM")+'-'+inclusive_date.InclusiveDate.from+' '+'00:00:00',
 				'to':$filter('date')(inclusive_month, "yyyy-MM")+'-'+inclusive_date.InclusiveDate.to+' '+'23:59:59',
 			};
@@ -66,11 +66,11 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	
 	
 	$scope.save = function (){
-		//console.log($scope.costumer);
+		//console.log($scope.customer);
 		//console.log($scope.inclusive_date);
 		
 		var data = {'Sale':{
-						'costumer_id':$scope.costumer.Costumer.id,
+						'customer_id':$scope.customer.Customer.id,
 						'from_date':$filter('date')($scope.inclusive_month, "yyyy-MM")+'-'+$scope.inclusive_date.InclusiveDate.from,
 						'to_date':$filter('date')($scope.inclusive_month, "yyyy-MM")+'-'+$scope.inclusive_date.InclusiveDate.to,
 					}};

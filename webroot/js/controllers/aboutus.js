@@ -6,7 +6,7 @@ App.controller('AboutUsController',function($scope,$rootScope,$http,$filter){
 		$scope.VisionMission = false; 
 		$scope.Accreditation = false; 
 		$scope.Suppliers = false; 
-		$scope.Costumers = false; 
+		$scope.Customers = false; 
 	}
 	
 	$scope.viewDefault = function (){
@@ -14,7 +14,7 @@ App.controller('AboutUsController',function($scope,$rootScope,$http,$filter){
 		$scope.VisionMission = false; 
 		$scope.Accreditation = false; 
 		$scope.Suppliers = false; 
-		$scope.Costumers = false; 
+		$scope.Customers = false; 
 	}
 	
 	$scope.viewVisionMission = function (){
@@ -22,7 +22,7 @@ App.controller('AboutUsController',function($scope,$rootScope,$http,$filter){
 		$scope.VisionMission = true; 
 		$scope.Accreditation = false; 
 		$scope.Suppliers = false; 
-		$scope.Costumers = false; 
+		$scope.Customers = false; 
 		window.scrollBy(0, -$(document).height() - $(window).height());
 	}
 	
@@ -31,7 +31,7 @@ App.controller('AboutUsController',function($scope,$rootScope,$http,$filter){
 		$scope.VisionMission = false; 
 		$scope.Accreditation = true; 
 		$scope.Suppliers = false; 
-		$scope.Costumers = false; 
+		$scope.Customers = false; 
 		window.scrollBy(0, -$(document).height() - $(window).height());
 	}
 	
@@ -40,16 +40,16 @@ App.controller('AboutUsController',function($scope,$rootScope,$http,$filter){
 		$scope.VisionMission = false; 
 		$scope.Accreditation = false; 
 		$scope.Suppliers = true; 
-		$scope.Costumers = false; 
+		$scope.Customers = false; 
 		window.scrollBy(0, -$(document).height() - $(window).height());
 	}
 	
-	$scope.viewCostumers = function (){
+	$scope.viewCustomers = function (){
 		$scope.Default = false; 
 		$scope.VisionMission = false; 
 		$scope.Accreditation = false; 
 		$scope.Suppliers = false; 
-		$scope.Costumers = true; 
+		$scope.Customers = true; 
 		window.scrollBy(0, -$(document).height() - $(window).height());
 	}
 	

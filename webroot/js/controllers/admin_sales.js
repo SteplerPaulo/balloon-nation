@@ -3,10 +3,10 @@ App.controller('AdminSalesController',function($scope,$rootScope,$http,$filter,$
 		$scope.currentPage = 1; 
 		$scope.pageSize = 7;
 			
-		$http.get(BASE_URL+"costumers/all").success(function(response) {
-			$scope.costumers = response;
-			if($scope.costumer ==  undefined){
-				$scope.costumer = '';
+		$http.get(BASE_URL+"customers/all").success(function(response) {
+			$scope.customers = response;
+			if($scope.customer ==  undefined){
+				$scope.customer = '';
 			}
 		});	
 			

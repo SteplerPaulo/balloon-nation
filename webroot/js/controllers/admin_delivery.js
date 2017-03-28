@@ -5,20 +5,20 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		$scope.dateNow = new Date($filter("date")(Date.now(), 'yyyy-MM-dd HH:mm:ss'));
 		$scope.check_all = false;
 		
-		$http.get(BASE_URL+"costumers/all").success(function(response) {
-			$scope.costumers = response;
-			if($scope.costumer ==  undefined){
-				$scope.costumer = '';
+		$http.get(BASE_URL+"customers/all").success(function(response) {
+			$scope.customers = response;
+			if($scope.customer ==  undefined){
+				$scope.customer = '';
 			}
 		});
 	}
 	
 	
-	$scope.changeCostumer = function (costumer) {
-		$http.get(BASE_URL+"deliveries/costumer_product/"+costumer).success(function(response) {
+	$scope.changeCustomer = function (customer) {
+		$http.get(BASE_URL+"deliveries/customer_product/"+customer).success(function(response) {
 			$scope.products = response.Products;
-			$scope.costumer_address = response.Costumer.address;
-			$scope.costumer_id = response.Costumer.id;
+			$scope.customer_address = response.Customer.address;
+			$scope.customer_id = response.Customer.id;
 			console.log($scope.products);
 		});		
 	};
@@ -57,7 +57,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			dtls['AssociatedProduct'] = {};
 			
 			dtls['Main']['DeliveryDetail'] = {};
-			dtls['Main']['Delivery'] = {'costumer_id':$scope.costumer_id,
+			dtls['Main']['Delivery'] = {'customer_id':$scope.customer_id,
 										'delivery_receipt_no':$scope.dr_no,
 										'date': $filter("date")($scope.dateNow, 'yyyy-MM-dd HH:mm:ss'),
 										'stock_clerk': $scope.stock_clerk
