@@ -11,8 +11,8 @@ App.controller('HomeController',function($scope,$rootScope,$http,$filter){
 			
 		});
 		
-		$http.get(BASE_URL+"products/all").success(function(response) {
-			$scope.products = response.Products;
+		$http.get(BASE_URL+"products/main_products").success(function(response) {
+			$scope.products = response;
 		});
 		
 		$http.get(BASE_URL+"banners/active").success(function(response) {

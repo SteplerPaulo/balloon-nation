@@ -7,8 +7,8 @@ App.controller('ProductsController',function($scope,$rootScope,$http,$filter){
 			$scope.categories = response;
 		});
 			
-		$http.get(BASE_URL+"products/all").success(function(response) {
-			$scope.products = response.Products;
+		$http.get(BASE_URL+"products/main_products").success(function(response) {
+			$scope.products = response;
 			console.log($scope.products);
 			
 			if (document.location.hostname == "localhost" || document.location.hostname == "192.168.1.10"){

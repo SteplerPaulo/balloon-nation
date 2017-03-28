@@ -8,7 +8,7 @@ class ProductsController extends AppController {
 	function beforeFilter(){ 
 		parent::beforeFilter();
 		$this->Auth->userModel = 'User'; 
-		$this->Auth->allow(array('index','all','view','by_filter'));	
+		$this->Auth->allow(array('index','all','view','by_filter','main_products'));	
     } 
 
 	function index() {
@@ -122,8 +122,6 @@ class ProductsController extends AppController {
 		   $products[$key]['counted'] = 0;
 		   $products[$key]['returns'] = 0;
 		   $products[$key]['deliver'] = 0;
-		
-		
 		}
 		
 		$data['Products'] = $products;
@@ -134,6 +132,23 @@ class ProductsController extends AppController {
 		echo json_encode($data);
 		exit;
 	}
+	
+	function main_products(){
+		$data = $this->Product->find('all',array(
+			'conditions' => array(
+				'Product.costumer_id'=>1,
+			),
+			'contain' => array(
+				'Category',
+				'Costumer',
+				'ProductImage',
+			)
+		));
+		echo json_encode($data);
+		exit;
+	}
+
+	
 
 	function admin_slug(){
 		$products = $this->Product->find('all');
@@ -157,6 +172,42 @@ class ProductsController extends AppController {
 		$result = $this->Product->find('first',array('recursive'=>3,'conditions'=>array('Product.slug'=>$slug)));
 		echo json_encode($result);
 		exit;
+	}
+	
+	function copy_items(){
+		die('Contact System Administrator');
+		
+		$products = $this->Product->find('all',array('conditions'=>array('Product.costumer_id'=>4)));
+		$costumers = $this->Costumer->find('all',array('conditions'=>array('Costumer.id !='=>4)));
+		$data = array();
+		$i = 0;
+		foreach($costumers as $c){
+			$customer_id = $c['Costumer']['id'];
+			if($customer_id != 4){
+				foreach($products as $p){
+					$string = str_replace(' ', '-', strtolower(trim($p['Product']['name']))).'-'.$customer_id; 
+					$data[$i]['Product']=array(
+						'category_id'=>$p['Product']['category_id'],
+						'costumer_id'=>$customer_id,
+						'name'=>$p['Product']['name'],
+						'item_code'=>$p['Product']['item_code'],
+						'last_date_posted'=>date("Y-m-d H:i:s"),
+						'purchase_price'=>$p['Product']['purchase_price'],
+						'selling_price'=>$p['Product']['selling_price'],
+						'slug'=>preg_replace('/[^A-Za-z0-9\-]/', '-', $string),
+					);
+					$i++;
+				}
+			}
+		}
+		
+		$this->Product->create();
+		if ($this->Product->saveAll($data)) {
+			die('SUCCESS');
+		} else {
+			die('ERROR');
+		}
+		
 	}
 	
 }
