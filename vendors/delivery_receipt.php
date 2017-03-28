@@ -42,10 +42,10 @@ class DeliveryReceipt extends Formsheet{
 	
 	
 		$this->GRID['font_size']=8;
-		$this->leftText(5.5,7.2, $data['Costumer']['name'],'','');
+		$this->leftText(5.5,7.2, $data['Customer']['name'],'','');
 		$this->leftText(20.2,7.2,date('F d, Y h:i:s A',strtotime($data['Delivery']['date'])),'','');
 		
-		$this->leftText(5,7.9,$data['Costumer']['address'],'','');
+		$this->leftText(5,7.9,$data['Customer']['address'],'','');
 		$this->leftText(20.2,7.9,'Consignment','','');
 
 		$this->leftText(6,8.7,'****','','');

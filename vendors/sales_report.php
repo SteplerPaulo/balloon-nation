@@ -35,8 +35,8 @@ class SalesReport extends Formsheet{
 		
 		$y+=1.8;
 		$this->GRID['font_size']=10;
-		$this->leftText(0,$y,'Costumer:','','b');
-		$this->leftText(4,$y,$data['Costumer']['name'],'','');
+		$this->leftText(0,$y,'Customer:','','b');
+		$this->leftText(4,$y,$data['Customer']['name'],'','');
 		$this->leftText(20,$y,'Date:','','b');
 		$this->leftText(22,$y++,date("M d", strtotime($data['Sale']['from_date'])).' - '.date("d, Y", strtotime($data['Sale']['to_date'])),'','');
 		$this->leftText(0,$y,'Posted:','','b');
