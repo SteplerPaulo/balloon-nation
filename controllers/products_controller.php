@@ -3,7 +3,7 @@ class ProductsController extends AppController {
 
 	var $name = 'Products';
 	var $helpers = array('Access');
-	var $uses = array('Product','Costumer');
+	var $uses = array('Product','Customer');
 	
 	function beforeFilter(){ 
 		parent::beforeFilter();
@@ -45,7 +45,7 @@ class ProductsController extends AppController {
 		if (!empty($this->data)) {
 			//pr($this->data);exit;
 			
-			$string = str_replace(' ', '-', strtolower(trim($this->data['Product']['name']))).'-'.$this->data['Product']['costumer_id']; 
+			$string = str_replace(' ', '-', strtolower(trim($this->data['Product']['name']))).'-'.$this->data['Product']['customer_id']; 
 			$this->data['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
 		
 			$this->Product->create();
@@ -58,8 +58,8 @@ class ProductsController extends AppController {
 		}
 		
 		$categories = $this->Product->Category->find('list',array('conditions' =>array('Category.parent_id' => 1),'order'=>'Category.name'));
-		$costumers = $this->Product->Costumer->find('list');
-		$this->set(compact('categories','costumers'));
+		$customers = $this->Product->Customer->find('list');
+		$this->set(compact('categories','customers'));
 	}
 
 	function admin_edit($slug = null) {
@@ -73,7 +73,7 @@ class ProductsController extends AppController {
 		
 		if (!empty($this->data)) {
 			
-			$string = str_replace(' ', '-', strtolower(trim($this->data['Product']['name']))).'-'.$this->data['Product']['costumer_id']; 
+			$string = str_replace(' ', '-', strtolower(trim($this->data['Product']['name']))).'-'.$this->data['Product']['customer_id']; 
 			$this->data['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
 			
 			if ($this->Product->save($this->data)) {
@@ -87,8 +87,8 @@ class ProductsController extends AppController {
 			$this->data = $this->Product->findBySlug($slug);
 		}
 		$categories = $this->Product->Category->find('list',array('recursive' => -1,'conditions' =>array('Category.parent_id' => 1)));
-		$costumers = $this->Product->Costumer->find('list');
-		$this->set(compact('categories','costumers'));
+		$customers = $this->Product->Customer->find('list');
+		$this->set(compact('categories','customers'));
 	}
 
 	function admin_delete($id = null) {
@@ -111,7 +111,7 @@ class ProductsController extends AppController {
 		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
 		$products = $this->Product->find('all', array('contain' => array(
 			'Category',
-			'Costumer',
+			'Customer',
 		)));
 		
 		
@@ -125,8 +125,8 @@ class ProductsController extends AppController {
 		}
 		
 		$data['Products'] = $products;
-		$this->Costumer->unbindModel( array('hasMany' => array('Product')));
-		$data['Costumers'] = $this->Costumer->find('all');
+		$this->Customer->unbindModel( array('hasMany' => array('Product')));
+		$data['Customers'] = $this->Customer->find('all');
 	
 		 
 		echo json_encode($data);
@@ -136,11 +136,11 @@ class ProductsController extends AppController {
 	function main_products(){
 		$data = $this->Product->find('all',array(
 			'conditions' => array(
-				'Product.costumer_id'=>1,
+				'Product.customer_id'=>1,
 			),
 			'contain' => array(
 				'Category',
-				'Costumer',
+				'Customer',
 				'ProductImage',
 			)
 		));
@@ -177,18 +177,18 @@ class ProductsController extends AppController {
 	function copy_items(){
 		die('Contact System Administrator');
 		
-		$products = $this->Product->find('all',array('conditions'=>array('Product.costumer_id'=>4)));
-		$costumers = $this->Costumer->find('all',array('conditions'=>array('Costumer.id !='=>4)));
+		$products = $this->Product->find('all',array('conditions'=>array('Product.customer_id'=>4)));
+		$customers = $this->Customer->find('all',array('conditions'=>array('Customer.id !='=>4)));
 		$data = array();
 		$i = 0;
-		foreach($costumers as $c){
-			$customer_id = $c['Costumer']['id'];
+		foreach($customers as $c){
+			$customer_id = $c['Customer']['id'];
 			if($customer_id != 4){
 				foreach($products as $p){
 					$string = str_replace(' ', '-', strtolower(trim($p['Product']['name']))).'-'.$customer_id; 
 					$data[$i]['Product']=array(
 						'category_id'=>$p['Product']['category_id'],
-						'costumer_id'=>$customer_id,
+						'customer_id'=>$customer_id,
 						'name'=>$p['Product']['name'],
 						'item_code'=>$p['Product']['item_code'],
 						'last_date_posted'=>date("Y-m-d H:i:s"),

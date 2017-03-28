@@ -3,7 +3,7 @@ class SalesController extends AppController {
 
 	var $name = 'Sales';
 	var $helpers = array('Access');
-	var $uses = array('Sale','Product','Costumer','InclusiveDate');
+	var $uses = array('Sale','Product','Customer','InclusiveDate');
 
 	function index() {
 		$this->Sale->recursive = 0;
@@ -77,7 +77,7 @@ class SalesController extends AppController {
 		if (!empty($this->data)) {
 			
 			$this->Sale->deleteAll(array(
-				'Sale.costumer_id' => $this->data['Sale']['costumer_id'], 
+				'Sale.customer_id' => $this->data['Sale']['customer_id'], 
 				'Sale.from_date' => $this->data['Sale']['from_date'],
 				'Sale.to_date' => $this->data['Sale']['to_date']
 			));
@@ -158,8 +158,8 @@ class SalesController extends AppController {
 	
 	function initial_data(){
 		$data = array();
-		$this->Costumer->unbindModel( array('hasMany' => array('Product')));
-		$data['Costumers'] = $this->Costumer->find('all',array('order' =>array('Costumer.modified DESC')));
+		$this->Customer->unbindModel( array('hasMany' => array('Product')));
+		$data['Customers'] = $this->Customer->find('all',array('order' =>array('Customer.modified DESC')));
 		$data['InclusiveDates'] = $this->InclusiveDate->find('all',array('conditions'=>array('InclusiveDate.group'=>'semi-monthly')));
 		echo json_encode($data);
 		exit;
@@ -167,7 +167,7 @@ class SalesController extends AppController {
 	
 	function get_data(){
 		//pr($this->data);exit;
-		$costumer_id = $this->data['costumer_id'];
+		$customer_id = $this->data['customer_id'];
 		$from_date = $this->data['from'];
 		$to_date = $this->data['to'];
 	
@@ -175,14 +175,14 @@ class SalesController extends AppController {
 		$data['Result'] = $this->Sale->find('first',array(
 								'recursive'=>2,
 								'conditions'=> array(
-									'Sale.costumer_id' => $costumer_id,
+									'Sale.customer_id' => $customer_id,
 									'Sale.from_date >=' => $from_date,
 									'Sale.to_date <=' => $to_date,
 							)
 					));
 			
 		if(empty($data['Result']) || $data['Result']['Sale']['is_posted'] != 1){
-			$data['Result'] = $this->Sale->get_data($costumer_id,$from_date,$to_date);
+			$data['Result'] = $this->Sale->get_data($customer_id,$from_date,$to_date);
 			$data['is_posted'] = false;
 		}else{
 			$data['is_posted'] = true;

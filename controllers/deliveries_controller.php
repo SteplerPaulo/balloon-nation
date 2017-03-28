@@ -3,7 +3,7 @@ class DeliveriesController extends AppController {
 
 	var $name = 'Deliveries';
 	var $helpers = array('Access');
-	var $uses = array('Delivery','Costumer','Product','DeliveryDetail');
+	var $uses = array('Delivery','Customer','Product','DeliveryDetail');
 
 	function index() {
 		$this->Delivery->recursive = 0;
@@ -28,8 +28,8 @@ class DeliveriesController extends AppController {
 				$this->Session->setFlash(__('The delivery could not be saved. Please, try again.', true));
 			}
 		}
-		$costumers = $this->Delivery->Costumer->find('list');
-		$this->set(compact('costumers'));
+		$customers = $this->Delivery->Customer->find('list');
+		$this->set(compact('customers'));
 	}
 
 	function edit($id = null) {
@@ -48,8 +48,8 @@ class DeliveriesController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Delivery->read(null, $id);
 		}
-		$costumers = $this->Delivery->Costumer->find('list');
-		$this->set(compact('costumers'));
+		$customers = $this->Delivery->Customer->find('list');
+		$this->set(compact('customers'));
 	}
 
 	function delete($id = null) {
@@ -115,8 +115,8 @@ class DeliveriesController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Delivery->read(null, $id);
 		}
-		$costumers = $this->Delivery->Costumer->find('list');
-		$this->set(compact('costumers'));
+		$customers = $this->Delivery->Customer->find('list');
+		$this->set(compact('customers'));
 	}
 
 	function admin_delete($id = null) {
@@ -148,15 +148,15 @@ class DeliveriesController extends AppController {
 		$this->layout ="admin_default";	
 	}
 	
-	function costumer_product($costumer = null){
+	function customer_product($customer = null){
 		
 		$data =  array();
 		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
 		$products = $this->Product->find('all', array(
-			'conditions' => array('Costumer.name' => $costumer),
+			'conditions' => array('Customer.name' => $customer),
 			'contain' => array(
 				'Category',
-				'Costumer',
+				'Customer',
 			),
 		));
 		
@@ -169,9 +169,9 @@ class DeliveriesController extends AppController {
 		}
 		
 		$data['Products'] = $products;
-		$this->Costumer->unbindModel( array('hasMany' => array('Product')));
-		$costumer = $this->Costumer->find('first',array('conditions'=>array('Costumer.name'=>$costumer)));
-		$data['Costumer'] = $costumer['Costumer'];
+		$this->Customer->unbindModel( array('hasMany' => array('Product')));
+		$customer = $this->Customer->find('first',array('conditions'=>array('Customer.name'=>$customer)));
+		$data['Customer'] = $customer['Customer'];
 		
 		echo json_encode($data);
 		exit;
