@@ -1,6 +1,6 @@
 <?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
 <?php echo $this->Html->addCrumb('Customer',''); ?>
-<div ng-controller="AdminCostumersController" ng-init="initializeController()">	
+<div ng-controller="AdminCustomersController" ng-init="initializeController()">	
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-xs-4">
 			<label for="search">Search</label>
@@ -17,7 +17,7 @@
 				<thead>
 					<tr>
 						<th colspan="3">CUSTOMERS</th>
-						<th colspan="1"><a href = "<?php echo $this->base;?>/admin/costumers/add" class="btn btn-sm btn-warning pull-right">Add New Customer</a></th>
+						<th colspan="1"><a href = "<?php echo $this->base;?>/admin/customers/add" class="btn btn-sm btn-warning pull-right">Add New Customer</a></th>
 					</tr>
 					<tr>
 						<th>Name</th>
@@ -27,19 +27,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr pagination-id="CostumerListTable" dir-paginate="d in costumers | filter:q | itemsPerPage: pageSize" current-page="currentPage">
-						<td>{{d.Costumer.name}}</td>
-						<td>{{d.Costumer.address}}</td>
-						<td>{{d.Costumer.slug}}</td>
+					<tr pagination-id="CustomerListTable" dir-paginate="d in customers | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+						<td>{{d.Customer.name}}</td>
+						<td>{{d.Customer.address}}</td>
+						<td>{{d.Customer.slug}}</td>
 						<td class="actions text-center">
-							<a href="<?php echo $this->base;?>/admin/costumers/edit/{{d.Costumer.slug}}" data-toggle="tooltip" title="Edit Product Details"><i class="fa fa-edit"></i></a>
+							<a href="<?php echo $this->base;?>/admin/customers/edit/{{d.Customer.slug}}" data-toggle="tooltip" title="Edit Product Details"><i class="fa fa-edit"></i></a>
 						</td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
 						<td colspan="4" class="text-center">
-							<dir-pagination-controls pagination-id="CostumerListTable"></dir-pagination-controls>
+							<dir-pagination-controls pagination-id="CustomerListTable"></dir-pagination-controls>
 						</td>
 					</tr>
 				</tfoot>
@@ -47,4 +47,4 @@
 		</div>
 	</div>
 </div>
-<?php echo $this->Html->script('controllers/admin_costumers',array('inline'=>false));?>
+<?php echo $this->Html->script('controllers/admin_customers',array('inline'=>false));?>

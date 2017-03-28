@@ -4,7 +4,7 @@
 		<legend><?php __('Edit Delivery'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('costumer_id');
+		echo $this->Form->input('customer_id');
 		echo $this->Form->input('delivery_receipt_no');
 		echo $this->Form->input('date');
 		echo $this->Form->input('stock_clerk');
@@ -18,7 +18,7 @@
 
 		<li><?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $this->Form->value('Delivery.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $this->Form->value('Delivery.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List Deliveries', true), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Costumers', true), array('controller' => 'costumers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Costumer', true), array('controller' => 'costumers', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Customers', true), array('controller' => 'customers', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Customer', true), array('controller' => 'customers', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

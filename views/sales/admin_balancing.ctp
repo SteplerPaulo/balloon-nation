@@ -6,18 +6,18 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-lg-3">
-					<label for="costumer">Customer</label>
-					<select ng-model="costumer" ng-options="d.Costumer.name for d in costumers" class="form-control input-sm" ng-required="true" ng-change="changeFilter(costumer,inclusive_month,inclusive_date)">
+					<label for="customer">Customer</label>
+					<select ng-model="customer" ng-options="d.Customer.name for d in customers" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,inclusive_month,inclusive_date)">
 						<option value="">-- Select --</option>
 					</select>
 				</div>
 				<div class="col-lg-3">
 					<label>Month</label>
-					<input type="month" ng-model="inclusive_month" class="form-control input-sm" ng-required="true" ng-change="changeFilter(costumer,inclusive_month,inclusive_date)">
+					<input type="month" ng-model="inclusive_month" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,inclusive_month,inclusive_date)">
 				</div>
 				<div class="col-lg-2">
 					<label for="date">Inclusive Dates</label>
-					<select ng-model="inclusive_date" ng-options="d.InclusiveDate.name for d in inclusive_dates" class="form-control input-sm" ng-required="true" ng-change="changeFilter(costumer,inclusive_month,inclusive_date)">
+					<select ng-model="inclusive_date" ng-options="d.InclusiveDate.name for d in inclusive_dates" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,inclusive_month,inclusive_date)">
 						<option value="">-- Select --</option>
 					</select>
 				</div>

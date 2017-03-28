@@ -3,10 +3,10 @@
 <div ng-controller="AdminDeliveriesController" ng-init="initializeController()">	
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-xs-3">
-			<label for="costumer">Costumer</label>
-			<select class='form-control' ng-model='costumer'>
+			<label for="customer">Customer</label>
+			<select class='form-control' ng-model='customer'>
 				<option value="">All</option>
-				<option ng-repeat="d in costumers">{{d.Costumer.name}}</option>
+				<option ng-repeat="d in customers">{{d.Customer.name}}</option>
 			</select>
 		</div>
 		<div class="col-lg-3 col-md-3 col-xs-3">
@@ -28,16 +28,16 @@
 					</tr>
 					<tr>
 						<th>Delivery Receipt No.</th>
-						<th class="text-center">Costumer</th>
+						<th class="text-center">Customer</th>
 						<th class="text-center">Stock Clerk</th>
 						<th class="text-center">Date</th>
 						<th class="text-center">Action</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr pagination-id="ProductListTable" dir-paginate="d in deliveries | filter:q | filter:costumer | itemsPerPage: pageSize" current-page="currentPage">
+					<tr pagination-id="ProductListTable" dir-paginate="d in deliveries | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
 						<td>{{d.Delivery.delivery_receipt_no}}</td>
-						<td class="text-center">{{d.Costumer.name}}</td>
+						<td class="text-center">{{d.Customer.name}}</td>
 						<td class="text-center">{{d.Delivery.stock_clerk}}</td>
 						<td class="text-center">{{d.Delivery.formated_date}}</td>
 						<td class="text-center">

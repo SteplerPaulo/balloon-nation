@@ -182,7 +182,7 @@
 					<li>		
 						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-user-plus')).' '.
 												$this->Html->tag('span', 'Customers'),
-												array('admin' => true,'controller'=>'costumers','action'=>'/'),
+												array('admin' => true,'controller'=>'customers','action'=>'/'),
 												array('escape' => false)
 												);  ?>
 					</li>

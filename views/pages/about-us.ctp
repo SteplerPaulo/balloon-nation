@@ -168,7 +168,7 @@
 		
 	</section>
 	
-	<section class="col-lg-6 col-md-6 col-sm-6" ng-if="Costumers">	
+	<section class="col-lg-6 col-md-6 col-sm-6" ng-if="Customers">	
 		<div class="row">
 			<div class="col-lg-12 ">
 				<span class="pull-right">
@@ -263,14 +263,14 @@
 				</a>
 			</div>
 			<div class="col-sm-6 portfolio-item">
-				<a ng-click="viewCostumers()"  class="portfolio-link">
+				<a ng-click="viewCustomers()"  class="portfolio-link">
 					<div class="caption">
 						<div class="caption-content">
 							<i class="fa fa-search-plus fa-3x"></i>
 						</div>
 					</div>
-					<i class="fa fa-users" aria-hidden="true"></i> Our Loyal & Beloved Costumers
-					<img src="<?php echo $this->base;?>/img/about-us/costumer.jpg" class="img-responsive img-thumbnail" alt="">
+					<i class="fa fa-users" aria-hidden="true"></i> Our Loyal & Beloved Customers
+					<img src="<?php echo $this->base;?>/img/about-us/customer.jpg" class="img-responsive img-thumbnail" alt="">
 				</a>
 			</div>
 		</div>

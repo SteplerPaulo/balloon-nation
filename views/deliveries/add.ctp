@@ -3,7 +3,7 @@
 	<fieldset>
 		<legend><?php __('Add Delivery'); ?></legend>
 	<?php
-		echo $this->Form->input('costumer_id');
+		echo $this->Form->input('customer_id');
 		echo $this->Form->input('delivery_receipt_no');
 		echo $this->Form->input('date');
 		echo $this->Form->input('stock_clerk');
@@ -16,7 +16,7 @@
 	<ul>
 
 		<li><?php echo $this->Html->link(__('List Deliveries', true), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Costumers', true), array('controller' => 'costumers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Costumer', true), array('controller' => 'costumers', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Customers', true), array('controller' => 'customers', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Customer', true), array('controller' => 'customers', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

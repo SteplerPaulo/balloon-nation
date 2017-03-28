@@ -1,5 +1,5 @@
-<div class="costumers index">
-	<h2><?php __('Costumers');?></h2>
+<div class="customers index">
+	<h2><?php __('Customers');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
@@ -11,22 +11,22 @@
 	</tr>
 	<?php
 	$i = 0;
-	foreach ($costumers as $costumer):
+	foreach ($customers as $customer):
 		$class = null;
 		if ($i++ % 2 == 0) {
 			$class = ' class="altrow"';
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $costumer['Costumer']['id']; ?>&nbsp;</td>
-		<td><?php echo $costumer['Costumer']['name']; ?>&nbsp;</td>
-		<td><?php echo $costumer['Costumer']['address']; ?>&nbsp;</td>
-		<td><?php echo $costumer['Costumer']['created']; ?>&nbsp;</td>
-		<td><?php echo $costumer['Costumer']['modified']; ?>&nbsp;</td>
+		<td><?php echo $customer['Customer']['id']; ?>&nbsp;</td>
+		<td><?php echo $customer['Customer']['name']; ?>&nbsp;</td>
+		<td><?php echo $customer['Customer']['address']; ?>&nbsp;</td>
+		<td><?php echo $customer['Customer']['created']; ?>&nbsp;</td>
+		<td><?php echo $customer['Customer']['modified']; ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $costumer['Costumer']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $costumer['Costumer']['id'])); ?>
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $costumer['Costumer']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $costumer['Costumer']['id'])); ?>
+			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $customer['Customer']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $customer['Customer']['id'])); ?>
+			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $customer['Customer']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $customer['Customer']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -48,7 +48,7 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Costumer', true), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('New Customer', true), array('action' => 'add')); ?></li>
 		<li><?php echo $this->Html->link(__('List Products', true), array('controller' => 'products', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Product', true), array('controller' => 'products', 'action' => 'add')); ?> </li>
 	</ul>

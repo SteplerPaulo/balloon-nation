@@ -6,10 +6,10 @@
 <div ng-controller="AdminProductsController" ng-init="initializeController()">	
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-xs-3">
-			<label for="costumer">Costumer</label>
-			<select class='form-control' ng-model='costumer'>
+			<label for="customer">Customer</label>
+			<select class='form-control' ng-model='customer'>
 				<option value="">All</option>
-				<option ng-repeat="d in costumers">{{d.Costumer.name}}</option>
+				<option ng-repeat="d in customers">{{d.Customer.name}}</option>
 			</select>
 		
 		</div>
@@ -38,7 +38,7 @@
 						<th>Item Code</th>
 						<th>Description</th>
 						<th>Category</th>
-						<th class="">Costumer</th>
+						<th class="">Customer</th>
 						<th class="text-center">Min</th>
 						<th class="text-center">Selling Price</th>
 						<th class="actions text-center">Action</th>
@@ -47,11 +47,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-if="products.length" pagination-id="ProductListTable" dir-paginate="d in products | filter:q | filter:costumer | itemsPerPage: pageSize" current-page="currentPage">
+					<tr ng-if="products.length" pagination-id="ProductListTable" dir-paginate="d in products | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
 						<td>{{d.Product.item_code}}</td>
 						<td>{{d.Product.name}}</td>
 						<td>{{d.Category.name}}</td>
-						<td class="">{{d.Costumer.name}}</td>
+						<td class="">{{d.Customer.name}}</td>
 						<td class="text-center">{{d.Product.min}}</td>
 						<td class="text-center">{{d.Product.selling_price}}</td>
 						<td class="actions text-center">
@@ -63,7 +63,7 @@
 						
 						</td>
 					</tr>
-					<tr ng-show="(products | filter:q | filter:costumer).length == 0" pagination-id="ProductListTable" >
+					<tr ng-show="(products | filter:q | filter:customer).length == 0" pagination-id="ProductListTable" >
 						<td colspan="7">No Data Found</td>
 					</tr>
 				</tbody>

@@ -9,15 +9,15 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-lg-3">
-					<label for="costumer">To</label>/Costumer
-					<select class='form-control input-sm' ng-model='costumer' ng-required="true" ng-change="changeCostumer(costumer)">
+					<label for="customer">To</label>/Customer
+					<select class='form-control input-sm' ng-model='customer' ng-required="true" ng-change="changeCustomer(customer)">
 						<option value="">-- Select --</option>
-						<option ng-repeat="d in costumers" address="{{d.Costumer.address}}">{{d.Costumer.name}}</option>
+						<option ng-repeat="d in customers" address="{{d.Customer.address}}">{{d.Customer.name}}</option>
 					</select>
 				</div>
 				<div class="col-lg-5">
 					<label>Address</label>
-					<input ng-model="costumer_address" class="form-control input-sm" readonly="readonly"></input>
+					<input ng-model="customer_address" class="form-control input-sm" readonly="readonly"></input>
 				</div>
 			</div><br/>
 			<div class="row">
@@ -69,7 +69,7 @@
 							</tr>
 							<tr ng-if="!products.length">
 								<td colspan="9">
-									No data available. Please select costumer
+									No data available. Please select customer
 								</td>
 							</tr>
 						</tbody>

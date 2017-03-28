@@ -3,7 +3,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('costumer_id');?></th>
+			<th><?php echo $this->Paginator->sort('customer_id');?></th>
 			<th><?php echo $this->Paginator->sort('delivery_receipt_no');?></th>
 			<th><?php echo $this->Paginator->sort('date');?></th>
 			<th><?php echo $this->Paginator->sort('stock_clerk');?></th>
@@ -22,7 +22,7 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $delivery['Delivery']['id']; ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($delivery['Costumer']['name'], array('controller' => 'costumers', 'action' => 'view', $delivery['Costumer']['id'])); ?>
+			<?php echo $this->Html->link($delivery['Customer']['name'], array('controller' => 'customers', 'action' => 'view', $delivery['Customer']['id'])); ?>
 		</td>
 		<td><?php echo $delivery['Delivery']['delivery_receipt_no']; ?>&nbsp;</td>
 		<td><?php echo $delivery['Delivery']['date']; ?>&nbsp;</td>
@@ -55,7 +55,7 @@
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Delivery', true), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Costumers', true), array('controller' => 'costumers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Costumer', true), array('controller' => 'costumers', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Customers', true), array('controller' => 'customers', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Customer', true), array('controller' => 'customers', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

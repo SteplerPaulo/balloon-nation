@@ -1,5 +1,5 @@
 <?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
-<?php echo $this->Html->addCrumb('Customer','/admin/costumers/'); ?>
+<?php echo $this->Html->addCrumb('Customer','/admin/customers/'); ?>
 <?php echo $this->Html->addCrumb('Add'); ?>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
@@ -9,7 +9,7 @@
 					<h4>ADD CUSTOMER</h4>
 				</h3>
 			</div>
-			<?php echo $this->Form->create('Costumer');?>
+			<?php echo $this->Form->create('Customer');?>
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-12">
@@ -24,7 +24,7 @@
 			</div>
 			<div class="panel-footer">	
 				<div class="text-right">
-					<a href="<?php echo $this->base;?>/admin/costumers" class="btn btn-default" type="cancel">Cancel</a>
+					<a href="<?php echo $this->base;?>/admin/customers" class="btn btn-default" type="cancel">Cancel</a>
 					<button class="btn btn-danger" type="submit">Save</button>
 				</div>
 			</div>

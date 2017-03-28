@@ -3,10 +3,10 @@
 <div ng-controller="AdminSalesController" ng-init="initializeController()">	
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-xs-3">
-			<label for="costumer">Customer</label>
-			<select class='form-control input-sm' ng-model='costumer'>
+			<label for="customer">Customer</label>
+			<select class='form-control input-sm' ng-model='customer'>
 				<option value="">All</option>
-				<option ng-repeat="d in costumers">{{d.Costumer.name}}</option>
+				<option ng-repeat="d in customers">{{d.Customer.name}}</option>
 			</select>
 		
 		</div>
@@ -34,8 +34,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-if="sales.length" pagination-id="SaleListTable" dir-paginate="d in sales | filter:costumer | itemsPerPage: pageSize" current-page="currentPage">
-						<td>{{d.Costumer.name}}</td>
+					<tr ng-if="sales.length" pagination-id="SaleListTable" dir-paginate="d in sales | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
+						<td>{{d.Customer.name}}</td>
 						<td class="text-center">{{d.Sale.from_date}}</td>
 						<td class="text-center">{{d.Sale.to_date}}</td>
 						<td class="actions text-center">
@@ -44,7 +44,7 @@
 							<a target="_blank" href="<?php echo $this->base;?>/admin/sales/report/{{d.Sale.id}}" title="Print"><i class="fa fa-print"></i></a>
 						</td>
 					</tr>
-					<tr ng-show="(sales | filter:q | filter:costumer).length == 0" pagination-id="ProductListTable" >
+					<tr ng-show="(sales | filter:q | filter:customer).length == 0" pagination-id="ProductListTable" >
 						<td colspan="4">No Data Found</td>
 					</tr>
 				</tbody>
