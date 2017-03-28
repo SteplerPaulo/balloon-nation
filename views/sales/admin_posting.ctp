@@ -6,7 +6,7 @@
 		<div class="panel-body" id="SalePostingPanel" sale-id="<?php echo $id;?>">
 			<div class="row" ng-if="SaleID">
 				<div class="col-lg-9">
-					<label>Costumer Name:</label>
+					<label>Customer:</label>
 					{{ Costumer.name}}
 				</div>
 				<div class="col-lg-3">
@@ -16,7 +16,7 @@
 			</div>
 			<div class="row"  ng-if="!SaleID">
 				<div class="col-lg-3">
-					<label for="costumer">Costumer</label>
+					<label for="costumer">Customer</label>
 					<select ng-model="costumer" ng-options="d.Costumer.name for d in costumers" class="form-control input-sm" ng-required="true" ng-change="changeFilter(costumer,inclusive_month,inclusive_date)">
 						<option value="">-- Select --</option>
 					</select>

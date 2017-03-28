@@ -3,7 +3,7 @@
 <div ng-controller="AdminSalesController" ng-init="initializeController()">	
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-xs-3">
-			<label for="costumer">Costumer</label>
+			<label for="costumer">Customer</label>
 			<select class='form-control input-sm' ng-model='costumer'>
 				<option value="">All</option>
 				<option ng-repeat="d in costumers">{{d.Costumer.name}}</option>
@@ -24,7 +24,7 @@
 						<th colspan="1"><a href="<?php echo $this->base;?>/admin/sales/balancing" class="btn btn-sm btn-warning pull-right">Semi-monthly Balancing</a></th>
 					</tr>
 					<tr>
-						<th rowspan="2">Cotumer Name</th>
+						<th rowspan="2">Customer</th>
 						<th colspan="2" class="text-center">Inclusive Date</th>
 						<th rowspan="2" class="text-center w5">Action</th>
 					</tr>

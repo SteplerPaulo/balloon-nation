@@ -6,7 +6,7 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-lg-3">
-					<label for="costumer">Costumer</label>
+					<label for="costumer">Customer</label>
 					<select ng-model="costumer" ng-options="d.Costumer.name for d in costumers" class="form-control input-sm" ng-required="true" ng-change="changeFilter(costumer,inclusive_month,inclusive_date)">
 						<option value="">-- Select --</option>
 					</select>
