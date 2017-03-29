@@ -13,7 +13,7 @@
 				</div>
 				<label>To</label>
 				<div class="like-input-box">
-					<p>South East Star Enterprises (SESEPHIL)</p>
+					<p>Balloon Nation</p>
 					<?php if(!empty($product['ProductImage'])):?>
 					<ul>
 						<li>
