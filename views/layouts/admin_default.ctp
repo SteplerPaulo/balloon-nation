@@ -21,8 +21,8 @@
 		echo $this->Html->css('bootstrap'); //Bootstrap Core CSS
 		echo $this->Html->css('sesephil-admin'); //Custom CSS
 		echo $this->Html->css('template\font-awesome-4.4.0\css\font-awesome'); //Custom Fonts
-		echo $this->Html->css('plugins\morris'); //Custom Fonts
-		echo $this->Html->css('plugins/summernote');
+		//echo $this->Html->css('plugins\morris'); //Custom Fonts
+		//echo $this->Html->css('plugins/summernote');
 	?>
 	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -230,7 +230,7 @@
 		echo $this->Html->script(array('template/angular-sanitize'));
 		echo $this->Html->script(array('angularUtils/directives/dirPagination'));
 		echo $this->Html->script(array('angularUtils/directives/ui-bootstrap-tpls-2.3.0.min'));
-		echo $this->Html->script('plugins/summernote');
+		//echo $this->Html->script('plugins/summernote');
 	?>
 	<script type="text/javascript">(function(){window.App = angular.module('App',['angularUtils.directives.dirPagination','ngSanitize','ui.bootstrap'])})();</script>
 	<script>
