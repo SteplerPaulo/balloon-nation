@@ -15,6 +15,7 @@
 					<div class="col-lg-3">
 						<?php echo $this->Form->input('customer_id',array('empty'=>'-- Select --','class'=>'form-control','required'=>'required','disabled'=>'disabled'));?>
 						<?php echo $this->Form->input('customer_id',array('label'=>false,'class'=>'form-control hide','required'=>'required'));?>
+						<?php echo $this->Form->input('Customer.name',array('label'=>false,'class'=>'form-control hide','required'=>'required'));?>
 					</div>
 					<div class="col-lg-3">
 						<?php echo $this->Form->input('category_id',array('empty'=>'-- Select --','class'=>'form-control','required'=>'required'));?>

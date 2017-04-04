@@ -72,13 +72,12 @@ class ProductsController extends AppController {
 		}
 		
 		if (!empty($this->data)) {
-			
 			$string = str_replace(' ', '-', strtolower(trim($this->data['Product']['name']))).'-'.$this->data['Product']['customer_id']; 
 			$this->data['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
 			
 			if ($this->Product->save($this->data)) {
 				$this->Session->setFlash(__('The product has been saved', true));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'index/'.$this->data['Customer']['name']));
 			} else {
 				$this->Session->setFlash(__('The product could not be saved. Please, try again.', true));
 			}
@@ -114,20 +113,18 @@ class ProductsController extends AppController {
 			'Customer',
 		)));
 		
-		
-	
-
+		/*
 		foreach ($products as $key => $value) {
 		   $products[$key]['Product']['formated_last_date_posted'] = date('m/d/Y h:i:s A',strtotime($value['Product']['last_date_posted']));
 		   $products[$key]['counted'] = 0;
 		   $products[$key]['returns'] = 0;
 		   $products[$key]['deliver'] = 0;
 		}
+		*/
 		
 		$data['Products'] = $products;
 		$this->Customer->unbindModel( array('hasMany' => array('Product')));
 		$data['Customers'] = $this->Customer->find('all');
-	
 		 
 		echo json_encode($data);
 		exit;

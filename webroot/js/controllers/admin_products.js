@@ -3,15 +3,26 @@ App.controller('AdminProductsController',function($scope,$rootScope,$http,$filte
 		$scope.currentPage = 1; 
 		$scope.pageSize = 7;
 			
+		if (document.location.hostname == "localhost"){
+			if(window.location.pathname.split('/')[5]){
+				$rootScope.customer = decodeURI(window.location.pathname.split('/')[5]);
+			}
+		}else{
+			if(window.location.pathname.split('/')[2]){
+				$rootScope.customer = decodeURI(window.location.pathname.split('/')[4]);
+			}
+		}
+		
 		$http.get(BASE_URL+"products/all").success(function(response) {
 			$scope.products = response.Products;
-			console.log($scope.products);
+			
 			$rootScope.customers = response.Customers;
-			if($rootScope.customer ==  undefined){
+			if($rootScope.customer ==  undefined || $rootScope.customer ==  'undefined'){
 				$rootScope.customer = $rootScope.customers[0].Customer.name;
 			}
 			
 		});
+
 	}
 });
 
