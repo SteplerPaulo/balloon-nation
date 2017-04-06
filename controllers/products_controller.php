@@ -171,6 +171,19 @@ class ProductsController extends AppController {
 		exit;
 	}
 	
+	
+	function by_itemcode($item_code = null){
+		$result = $this->Product->find('first',array('recursive'=>-1,
+													'conditions'=>array(
+														'Product.item_code'=>$item_code,
+														'Product.customer_id'=>1,
+										)
+									));
+		echo json_encode($result);
+		exit;
+	}
+	
+	
 	function copy_items(){
 		die('Contact System Administrator');
 		
