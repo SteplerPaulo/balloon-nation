@@ -18,6 +18,11 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
+						<?php	echo $this->Form->input('compcode',array('class'=>'form-control','required'=>'required','autocomplete'=>'off'));?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
 						<?php	echo $this->Form->input('address',array('class'=>'form-control','required'=>'required'));?>
 					</div>
 				</div>

@@ -16,10 +16,11 @@
 			<table class="table table-striped table-hovered">
 				<thead>
 					<tr>
-						<th colspan="3">CUSTOMERS</th>
+						<th colspan="4">CUSTOMERS</th>
 						<th colspan="1"><a href = "<?php echo $this->base;?>/admin/customers/add" class="btn btn-sm btn-warning pull-right">Add New Customer</a></th>
 					</tr>
 					<tr>
+						<th>Compcode</th>
 						<th>Name</th>
 						<th>Address</th>
 						<th>Slug</th>
@@ -28,6 +29,7 @@
 				</thead>
 				<tbody>
 					<tr pagination-id="CustomerListTable" dir-paginate="d in customers | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+						<td>{{d.Customer.compcode}}</td>
 						<td>{{d.Customer.name}}</td>
 						<td>{{d.Customer.address}}</td>
 						<td>{{d.Customer.slug}}</td>
@@ -38,7 +40,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="4" class="text-center">
+						<td colspan="5" class="text-center">
 							<dir-pagination-controls pagination-id="CustomerListTable"></dir-pagination-controls>
 						</td>
 					</tr>
