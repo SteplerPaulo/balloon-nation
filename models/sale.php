@@ -61,7 +61,8 @@ class Sale extends AppModel {
 					AND `deliveries`.`date` <= '$to' 
 					) 
 			GROUP BY `products`.`id`,
-			  `products`.`customer_id` ;
+			  `products`.`customer_id` 
+			ORDER BY `products`.`name`;
 			"
 		);
 	}

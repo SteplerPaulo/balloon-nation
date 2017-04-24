@@ -153,11 +153,14 @@ class DeliveriesController extends AppController {
 		$data =  array();
 		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
 		$products = $this->Product->find('all', array(
-			'conditions' => array('Customer.name' => $customer),
-			'contain' => array(
-				'Category',
-				'Customer',
-			),
+			'conditions' => array(
+					'Customer.name' => $customer
+				),
+				'contain' => array(
+					'Category',
+					'Customer',
+				),
+				'order'=>'Product.name ASC'
 		));
 		
 		foreach ($products as $key => $value) {

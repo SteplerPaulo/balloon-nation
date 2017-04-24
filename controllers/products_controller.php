@@ -108,10 +108,13 @@ class ProductsController extends AppController {
 	function all(){
 		$data = array();
 		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
-		$products = $this->Product->find('all', array('contain' => array(
-			'Category',
-			'Customer',
-		)));
+		$products = $this->Product->find('all', array(
+			'contain' => array(
+				'Category',
+				'Customer',
+			),
+			'order'=>'Product.name ASC'
+		));
 		
 		/*
 		foreach ($products as $key => $value) {
@@ -194,6 +197,7 @@ class ProductsController extends AppController {
 		foreach($customers as $c){
 			$customer_id = $c['Customer']['id'];
 			if($customer_id != 4){
+			//if($customer_id == 23 || $customer_id == 24 || $customer_id == 25 || $customer_id == 26){
 				foreach($products as $p){
 					$string = str_replace(' ', '-', strtolower(trim($p['Product']['name']))).'-'.$customer_id; 
 					$data[$i]['Product']=array(
