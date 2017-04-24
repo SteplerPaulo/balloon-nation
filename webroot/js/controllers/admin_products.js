@@ -1,7 +1,7 @@
 App.controller('AdminProductsController',function($scope,$rootScope,$http,$filter,$uibModal, $log, $document){
 	$rootScope.initializeController = function(){
 		$scope.currentPage = 1; 
-		$scope.pageSize = 7;
+		$scope.pageSize = 35;
 			
 		if (document.location.hostname == "localhost"){
 			if(window.location.pathname.split('/')[5]){

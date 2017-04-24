@@ -1,7 +1,7 @@
 App.controller('AdminSalePostingController',function($scope,$rootScope,$http,$filter,$uibModal, $log, $document){
 	$scope.initializeController = function(){
 		$scope.currentPage = 1; 
-		$scope.pageSize = 7;
+		$scope.pageSize = 35;
 		
 		$scope.SaleID =  $("#SalePostingPanel").attr('sale-id');
 		$http.get(BASE_URL+"sales/posting_data/"+$scope.SaleID).success(function(response) {

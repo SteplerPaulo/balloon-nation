@@ -1,7 +1,7 @@
 App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$http,$filter,$uibModal, $log, $document){
 	$scope.initializeController = function(){
 		$scope.currentPage = 1; 
-		$scope.pageSize = 7;
+		$scope.pageSize = 35;
 		$scope.is_posted = false;
 
 		$http.get(BASE_URL+"sales/initial_data").success(function(response) {

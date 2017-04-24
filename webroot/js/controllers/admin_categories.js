@@ -2,7 +2,7 @@ App.controller('AdminCategoriesController',function($scope,$rootScope,$http,$fil
 	
 	$scope.initializeController = function(){
 		$scope.currentPage = 1; 
-		$scope.pageSize = 7;
+		$scope.pageSize = 35;
 		
 		
 		$http.get(BASE_URL+"categories/main_children").success(function(response) {

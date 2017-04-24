@@ -2,7 +2,7 @@ App.controller('AdminInquiriesController',function($scope,$rootScope,$http,$filt
 	
 	$scope.initializeController = function(){
 		$scope.currentPage = 1; 
-		$scope.pageSize = 7;
+		$scope.pageSize = 35;
 		
 		
 		$http.get(BASE_URL+"inquiries/all").success(function(response) {
