@@ -26,8 +26,10 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 	$scope.check = function (i,is_checked) {
 		if(is_checked){
 			$scope.products[i].is_disabled = false;
+			$scope.products[i].bad_item = 0;
 		}else{
 			$scope.products[i].is_disabled = true;
+			$scope.products[i].bad_item = '';
 			$scope.check_all = false;
 		}
 		console.log($scope.products);
@@ -38,11 +40,13 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			for (var i = 0; i < $scope.products.length; i++) {
 				$scope.products[i].is_disabled = false;
 				$scope.products[i].checkbox = true;
+				$scope.products[i].bad_item = 0;
 			}
 		}else{
 			for (var i = 0; i < $scope.products.length; i++) {
 				$scope.products[i].is_disabled = true;
 				$scope.products[i].checkbox = false;
+				$scope.products[i].bad_item = '';
 			}
 		}
 	};
