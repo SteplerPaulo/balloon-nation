@@ -19,7 +19,7 @@
 					<label>Address</label>
 					<input ng-model="customer_address" class="form-control input-sm" readonly="readonly"></input>
 				</div>
-			</div><br/>
+			</div>
 			<div class="row">
 				<div class="col-lg-2">
 					<label>DR No.</label>
@@ -38,6 +38,17 @@
 				<div class="col-lg-12">
 					<table class="table table-bordered table-condensed">
 						<thead>
+							<tr >
+								<th colspan="3">
+									<div class="btn-group pull-right">
+									  <button type="button" ng-class="(view_all_items?'active':'')" class="btn btn-sm btn-default" ng-model="view_all_items" ng-click="btnGrp(true,false)">View All Items</button>
+									  <button type="button" ng-class="(selected_item_only?'active':'')"class="btn btn-sm btn-default" ng-model="selected_item_only" ng-click="btnGrp(false,true)">Selected Item Only</button>
+									</div>
+								</td>
+								<td colspan="2">
+									<input ng-model="item_code" ng-change="checkItem(item_code)" placeholder="Item Code" class="form-control input-sm"></input>
+								</td>
+							</tr>
 							<tr>
 								<th rowspan="2" class="text-center w5">
 									<input type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
@@ -45,7 +56,6 @@
 								<th rowspan="2" class="text-center">Item Description</th>
 								<th rowspan="2" class="text-center w8">MOQ</th>
 								<th colspan="2" class="text-center">Quantity</th>
-								<th rowspan="2" class="text-center w5">Action</th>
 							</tr>
 							<tr>
 								<th class="text-center w8">Deliver</th>
@@ -53,22 +63,19 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-if="products.length" ng-repeat="(i, o) in products">
+							<tr ng-hide="products[i].is_disabled && selected_item_only" ng-if="products.length" ng-repeat="(i, o) in products">
 								<td class="text-center"><input type="checkbox" ng-model="products[i].checkbox" ng-change="check(i,products[i].checkbox)"></td>
-								<td>{{o.Product.name}}</td>
+								<td>{{o.Product.name}} -- <i>{{o.Product.item_code}}</i></td>
 								<td class="text-center">{{o.Product.min}}</td>
 								<td class="text-center">
-									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].deliver" type="number" min="0" class="form-control input-sm"></input>
+									<input ng-required="!products[i].is_disabled && selected_item_only" ng-disabled="products[i].is_disabled" ng-model="products[i].deliver" type="number" min="0" class="form-control input-sm"></input>
 								</td>
 								<td class="text-center">
-									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].bad_item" type="number" min="0" class="form-control input-sm"></input>
-								</td>
-								<td class="text-center">
-									<a ng-click="undoChanges(i)" title="Undo changes"><i class="fa fa-undo" aria-hidden="true"></i></a>
+									<input ng-required="!products[i].is_disabled && selected_item_only" ng-disabled="products[i].is_disabled" ng-model="products[i].bad_item" type="number" min="0" class="form-control input-sm"></input>
 								</td>
 							</tr>
 							<tr ng-if="!products.length">
-								<td colspan="9">
+								<td colspan="5">
 									No data available. Please select customer
 								</td>
 							</tr>

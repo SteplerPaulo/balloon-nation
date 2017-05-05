@@ -4,6 +4,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		$scope.pageSize = 7;
 		$scope.dateNow = new Date($filter("date")(Date.now(), 'yyyy-MM-dd HH:mm:ss'));
 		$scope.check_all = false;
+		$scope.view_all_items = true;
 		
 		$http.get(BASE_URL+"customers/all").success(function(response) {
 			$scope.customers = response;
@@ -19,7 +20,6 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			$scope.products = response.Products;
 			$scope.customer_address = response.Customer.address;
 			$scope.customer_id = response.Customer.id;
-			console.log($scope.products);
 		});		
 	};
 	
@@ -32,7 +32,6 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			$scope.products[i].bad_item = '';
 			$scope.check_all = false;
 		}
-		console.log($scope.products);
 	};
 	
 	$scope.checkAll = function (is_checked) {
@@ -51,8 +50,23 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		}
 	};
 	
-
-
+	
+	$scope.checkItem = function(item_code){
+		
+		for (var i = 0; i < $scope.products.length; i++) {
+			if(item_code == $scope.products[i].Product.item_code){
+				$scope.products[i].is_disabled = false;
+				$scope.products[i].checkbox = true;
+				$scope.products[i].bad_item = 0;
+				return;
+			}
+		}
+	}
+	$scope.btnGrp = function(view_all_items,selected_item_only){
+		$scope.view_all_items =  view_all_items;
+		$scope.selected_item_only =  selected_item_only;
+	}
+	
 	$scope.save = function(){
 
 		
