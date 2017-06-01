@@ -35,7 +35,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr pagination-id="ProductListTable" dir-paginate="d in deliveries | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
+					<tr pagination-id="DeliveriesListTable" dir-paginate="d in deliveries | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
 						<td>{{d.Delivery.delivery_receipt_no}}</td>
 						<td class="text-center">{{d.Customer.name}}</td>
 						<td class="text-center">{{d.Delivery.stock_clerk}}</td>
@@ -45,6 +45,13 @@
 						</td>
 					</tr>
 				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="7" class="text-center">
+							<dir-pagination-controls pagination-id="DeliveriesListTable"></dir-pagination-controls>
+						</td>
+					</tr>
+				</tfoot>
 			</div>
 		</div>
 	</div>
