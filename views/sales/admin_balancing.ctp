@@ -28,30 +28,34 @@
 						<thead>
 							<tr>
 								<th >Item Description</th>
-								<th  class="text-center w8">Beginning Inventory</th>
-								<th  class="text-center w8">Delivered</th>
-								<th  class="text-center w8">Returned</th>
-								<th  class="text-center w8">Sold</th>
-								<th class="text-center w8"><h6>(Over Sold)</h6>+</th>
-								<th class="text-center w8"><h6>(Posible In Stock)</h6>-</th>
+								<th class="text-center w8">
+									Beginning Inventory
+								</th>
+								<th class="text-center w8">Delivered</th>
+								<th class="text-center w8">Returned</th>
+								<th class="text-center w8">Inventory</th>
+								<th class="text-center w8">Sold</th>
+								<th class="text-center w8">Ending Inventory</th>
+								<th class="text-center w8">Over Sold</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-if="data.length" ng-repeat="(i,d) in data">
-								<td>{{d.products.name}}</td>
-								<td class="text-center">{{d.products.beginning_inventory}}</td>
-								<td class="text-center">{{d[0].total_delivered}}</td>
-								<td class="text-center">{{d[0].total_returned}}</td>
+								<td>{{d.Product.name}}</td>
+								<td class="text-center">{{d.Product.beginning_inventory}}</td>
+								<td class="text-center">{{d.delivered}}</td>
+								<td class="text-center">{{d.returned}}</td>
+								<td class="text-center">{{d.total_inventory}}</td>
 								<td class="text-center">
-									<input ng-required="true" type="number" class="form-control input-sm" ng-model="data[i][0].sold" ng-change="changeSold(i,d)"></input>
+									<input ng-required="true" type="number" class="form-control input-sm" ng-model="data[i].sold" ng-change="changeSold(i,d)"></input>
 								</td>
 								<td class="text-center">
-									<div ng-if="data[i][0].over_sold">{{data[i][0].over_sold}}</div>
-									<div ng-if="!data[i][0].over_sold">0</div>
+									<div ng-if="data[i].ending_inventory">{{data[i].ending_inventory}}</div>
+									<div ng-if="!data[i].ending_inventory">0</div>
 								</td>
 								<td class="text-center">
-									<div ng-if="data[i][0].in_stock">{{data[i][0].in_stock}}</div>
-									<div ng-if="!data[i][0].in_stock">0</div>
+									<div ng-if="data[i].over_sold">{{data[i].over_sold}}</div>
+									<div ng-if="!data[i].over_sold">0</div>
 								</td>
 							</tr>
 

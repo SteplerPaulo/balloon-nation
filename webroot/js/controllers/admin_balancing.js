@@ -27,8 +27,6 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 				'from':$filter('date')(inclusive_month, "yyyy-MM")+'-'+inclusive_date.InclusiveDate.from+' '+'00:00:00',
 				'to':$filter('date')(inclusive_month, "yyyy-MM")+'-'+inclusive_date.InclusiveDate.to+' '+'23:59:59',
 			};
-			
-
 			$http({
 				method: 'POST',
 				url: BASE_URL+'sales/get_data',
@@ -37,9 +35,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 			}).then(function(response){
 				$scope.data = response.data.Result;
 				$scope.is_posted = response.data.is_posted;
-				console.log($scope.data);
 			});
-			
 			
 		}
 		
@@ -48,20 +44,16 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	
 	$scope.changeSold = function (i,o){
 		//Compute missing quantity
-		$scope.data[i].total_inventory = parseInt($scope.data[i].products.beginning_inventory)+parseInt($scope.data[i][0].total_delivered);
-		
-		if($scope.data[i][0].sold < $scope.data[i].total_inventory){
-			$scope.data[i][0].in_stock =  $scope.data[i].total_inventory - $scope.data[i][0].sold;
-			$scope.data[i][0].over_sold = 0;
-		}else if($scope.data[i][0].sold > $scope.data[i].total_inventory){
-			$scope.data[i][0].in_stock = 0;
-			$scope.data[i][0].over_sold = $scope.data[i][0].sold - $scope.data[i].total_inventory;
+		if($scope.data[i].sold < $scope.data[i].total_inventory){
+			$scope.data[i].ending_inventory =  $scope.data[i].total_inventory - $scope.data[i].sold;
+			$scope.data[i].over_sold = 0;
+		}else if($scope.data[i].sold > $scope.data[i].total_inventory){
+			$scope.data[i].ending_inventory = 0;
+			$scope.data[i].over_sold = $scope.data[i].sold - $scope.data[i].total_inventory;
 		}else{
-			$scope.data[i][0].in_stock = 0;
-			$scope.data[i][0].over_sold = 0;
-		
+			$scope.data[i].ending_inventory = 0;
+			$scope.data[i].over_sold = 0;
 		}
-		
 	}
 	
 	
@@ -79,11 +71,12 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		for (var i = 0; i < $scope.data.length; i++) {
 			//console.log($scope.data[i]);
 			data['SaleDetail'][i] = {
-							'product_id':$scope.data[i].products.id,
-							'delivered':$scope.data[i][0].total_delivered,
-							'returned':$scope.data[i][0].total_returned,
-							'sold':$scope.data[i][0].sold,
-							'beginning_inventory':$scope.data[i].products.beginning_inventory,
+							'product_id':$scope.data[i].Product.id,
+							'delivered':$scope.data[i].delivered,
+							'returned':$scope.data[i].returned,
+							'sold':$scope.data[i].sold,
+							'beginning_inventory':$scope.data[i].Product.beginning_inventory,
+							'ending_inventory':$scope.data[i].ending_inventory,
 						};
 		}
 		
