@@ -32,15 +32,11 @@ class Sale extends AppModel {
 	public function get_data($customer_id=null,$from=null,$to=null){
 		return $this->query(
 			"SELECT 
+			  `products`.`id`,
 			  SUM(`delivery_details`.`bad_item`) AS total_returned,
 			  SUM(`delivery_details`.`deliver`) AS total_delivered,
-			  `delivery_details`.`purchase_price`,
-			  `products`.`id`,
-			  `products`.`name`,
-			  `products`.`beginning_inventory`,
-			  `products`.`item_code`,
-			  `customers`.`id`,
-			  `customers`.`name`
+			  `delivery_details`.`purchase_price`
+			  
 			FROM
 			  `deliveries` 
 			  INNER JOIN `delivery_details` 
