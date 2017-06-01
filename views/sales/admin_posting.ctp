@@ -37,18 +37,15 @@
 					<table class="table table-striped table-bordered table-condensed">
 						<thead>
 							<tr>
-								<th rowspan="2">Item Description</th>
-								<th rowspan="2" class="text-center w8"><h6>(Current)</h6> Beginning Inventory</th>
-								<th rowspan="2" class="text-center w8">Delivered</th>
-								<th rowspan="2" class="text-center w8">Returned</th>
-								<th rowspan="2" class="text-center w8">Sold</th>
-								<th colspan="2" class="text-center w8">Notation</th>
-								<th rowspan="2" class="text-center w8"> <h6>(Next Cut Off)</h6>Beginning Inventory</th>
-								<th rowspan="2" class="text-center w8">Missing Qty</th>
-							</tr>
-							<tr>
-								<th class="text-center w8"><h6>(Over Sold)</h6>+</th>
-								<th class="text-center w8"><h6>(Posible In Stock)</h6>-</th>
+								<th>Item Description</th>
+								<th class="text-center w8">Beginning Inventory</th>
+								<th class="text-center w8">Delivered</th>
+								<th class="text-center w8">Returned</th>
+								<th class="text-center w8">Sold</th>
+								<th class="text-center w8">Over Sold</th>
+								<th class="text-center w8">Ending Inventory</th>
+								<th class="text-center w8">Actual Inventory</th>
+								<th class="text-center w8">Missing Qty</th>
 							</tr>
 						</thead>
 						<tbody>	
@@ -60,8 +57,8 @@
 								<td class="text-center">{{d.sold}}</td>
 								<td class="text-center">{{d.over_sold}} </td>
 								<td class="text-center">{{d.in_stock}}</td>
-								<td class="text-center"><input ng-disabled="Sale.is_posted == 1" type="number" class="form-control input-sm" ng-init="SaleDetail[i].beginning_inventory=d.in_stock" ng-model="SaleDetail[i].beginning_inventory" ng-required="true"></input></td>
-								<td class="text-center"><input ng-disabled="Sale.is_posted == 1" type="number" class="form-control input-sm" ng-init="SaleDetail[i].missing_qty=0" ng-model="SaleDetail[i].missing_qty" ng-required="true"></input></td>
+								<td class="text-center"><input ng-disabled="Sale.is_posted == 1" type="number" class="form-control input-sm" ng-init="SaleDetail[i].beginning_inventory=d.in_stock" ng-model="SaleDetail[i].beginning_inventory" ng-required="true" ng-change="changeActualInventory(i,d)"></input></td>
+								<td class="text-center"><input ng-disabled="Sale.is_posted == 1" type="number" class="form-control input-sm" ng-init="SaleDetail[i].missing_qty=0" ng-model="SaleDetail[i].missing_qty" ng-required="true" readonly="readonly"></input></td>
 							</tr>
 							<tr ng-if="!SaleDetail.length">
 								<td colspan="9">No Data Available</td>
