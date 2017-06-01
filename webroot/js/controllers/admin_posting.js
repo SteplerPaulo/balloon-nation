@@ -12,6 +12,11 @@ App.controller('AdminSalePostingController',function($scope,$rootScope,$http,$fi
 		});
 	}
 
+	$scope.changeActualInventory = function(i,o){
+		console.log(o);
+		$scope.SaleDetail[i].missing_qty = o.in_stock - $scope.SaleDetail[i].beginning_inventory;
+		
+	}
 
 	$scope.post = function (){
 	
