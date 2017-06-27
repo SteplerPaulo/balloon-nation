@@ -3,6 +3,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		$scope.currentPage = 1; 
 		$scope.pageSize = 35;
 		$scope.is_posted = false;
+		$scope.view_all_items = true;
 
 		$http.get(BASE_URL+"sales/initial_data").success(function(response) {
 			$scope.customers = response.Customers;
@@ -41,6 +42,51 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		
 	};
 	
+	
+	$scope.check = function (i,is_checked) {
+		if(is_checked){
+			$scope.data[i].is_disabled = false;
+			$scope.data[i].bad_item = 0;
+		}else{
+			$scope.data[i].is_disabled = true;
+			$scope.data[i].bad_item = '';
+			$scope.check_all = false;
+		}
+	};
+	
+	$scope.checkAll = function (is_checked) {
+		if(is_checked){
+			for (var i = 0; i < $scope.data.length; i++) {
+				$scope.data[i].is_disabled = false;
+				$scope.data[i].checkbox = true;
+				$scope.data[i].bad_item = 0;
+			}
+		}else{
+			for (var i = 0; i < $scope.data.length; i++) {
+				$scope.data[i].is_disabled = true;
+				$scope.data[i].checkbox = false;
+				$scope.data[i].bad_item = '';
+			}
+		}
+	};
+	
+	
+	$scope.checkItem = function(item_code){
+		
+		for (var i = 0; i < $scope.data.length; i++) {
+			if(item_code == $scope.data[i].Product.item_code){
+				$scope.data[i].is_disabled = false;
+				$scope.data[i].checkbox = true;
+				$scope.data[i].bad_item = 0;
+				return;
+			}
+		}
+	}
+	
+	$scope.btnGrp = function(view_all_items,selected_item_only){
+		$scope.view_all_items =  view_all_items;
+		$scope.selected_item_only =  selected_item_only;
+	}
 	
 	$scope.changeSold = function (i,o){
 		//Compute missing quantity
@@ -94,8 +140,6 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		
 		
 	}
-	
-	
 });
 
 
