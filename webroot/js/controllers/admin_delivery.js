@@ -62,6 +62,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			}
 		}
 	}
+	
 	$scope.btnGrp = function(view_all_items,selected_item_only){
 		$scope.view_all_items =  view_all_items;
 		$scope.selected_item_only =  selected_item_only;
