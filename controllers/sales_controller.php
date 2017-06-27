@@ -160,7 +160,7 @@ class SalesController extends AppController {
 	function initial_data(){
 		$data = array();
 		$this->Customer->unbindModel( array('hasMany' => array('Product')));
-		$data['Customers'] = $this->Customer->find('all',array('order' =>array('Customer.modified')));
+		$data['Customers'] = $this->Customer->find('all',array('order' =>array('Customer.name')));
 		$data['InclusiveDates'] = $this->InclusiveDate->find('all',array('conditions'=>array('InclusiveDate.group'=>'semi-monthly')));
 		echo json_encode($data);
 		exit;
@@ -197,8 +197,9 @@ class SalesController extends AppController {
 					//$products[$k]['sold'] = 0;
 					$products[$k]['returned'] = 0;
 					$products[$k]['delivered'] = 0;
+					$products[$k]['sold'] = 0.00;
 					$products[$k]['purchase_price'] = 0.00;	
-					$products[$k]['total_inventory'] = $prdct['Product']['beginning_inventory'];	
+					$products[$k]['total_inventory'] = $prdct['Product']['beginning_inventory'];
 					foreach($saleDetails as $sale_dtls){
 						if($prdct['Product']['id'] == $sale_dtls['products']['id']){
 							$products[$k]['Product'] = $prdct['Product'];
@@ -213,6 +214,7 @@ class SalesController extends AppController {
 		}else{
 			$data['is_posted'] = true;
 		}
+		
 		
 	
 		
