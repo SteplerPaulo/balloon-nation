@@ -200,6 +200,8 @@ class SalesController extends AppController {
 					$products[$k]['sold'] = 0.00;
 					$products[$k]['purchase_price'] = 0.00;	
 					$products[$k]['total_inventory'] = $prdct['Product']['beginning_inventory'];
+					$products[$k]['is_disabled'] = true;
+					$products[$k]['checkbox'] = false;
 					foreach($saleDetails as $sale_dtls){
 						if($prdct['Product']['id'] == $sale_dtls['products']['id']){
 							$products[$k]['Product'] = $prdct['Product'];
