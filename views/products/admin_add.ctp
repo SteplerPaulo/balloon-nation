@@ -21,7 +21,7 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-2">
-						<?php echo $this->Form->input('item_code',array('class'=>'form-control','required'=>'required','autocomplete'=>'off','ng-model'=>'item_code','ng-blur'=>'getItemCodeData(item_code)'));?>
+						<?php echo $this->Form->input('item_code',array('label'=>'SKU','class'=>'form-control','required'=>'required','autocomplete'=>'off','ng-model'=>'item_code','ng-blur'=>'getItemCodeData(item_code)'));?>
 					</div>
 					<div class="col-lg-8">
 						<?php echo $this->Form->input('name',array('label'=>'Description','class'=>'form-control','required'=>'required','autocomplete'=>'off','ng-model'=>'product_name'));?>
