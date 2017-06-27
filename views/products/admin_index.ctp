@@ -27,7 +27,8 @@
 			<table class="table table-striped table-hovered">
 				<thead>
 					<tr>
-						<th colspan="6">PRODUCTS</th>
+						<th ng-if="customer == ''" colspan="6">PRODUCTS</th>
+						<th ng-if="customer != ''" colspan="5">PRODUCTS</th>
 						<th colspan="1">
 							<div class="btn-group pull-right" role="group" >
 							  <a href="<?php echo $this->base;?>/admin/products/add" title="Add New Product" class="btn btn-sm btn-default"><i class="fa fa-plus"></i></a>
@@ -35,10 +36,10 @@
 						</th>
 					</tr>
 					<tr>
-						<th>Item Code</th>
+						<th>SKU</th>
 						<th>Description</th>
 						<th>Category</th>
-						<th class="">Customer</th>
+						<th class="text-center" ng-if="customer == ''">Customer</th>
 						<th class="text-center">Min</th>
 						<th class="text-center">Selling Price</th>
 						<th class="actions text-center">Action</th>
@@ -49,9 +50,9 @@
 				<tbody>
 					<tr ng-if="products.length" pagination-id="ProductListTable" dir-paginate="d in products | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
 						<td>{{d.Product.item_code}}</td>
-						<td>{{d.Product.name}}</td>
+						<td class="capitalize">{{d.Product.name}}</td>
 						<td>{{d.Category.name}}</td>
-						<td class="">{{d.Customer.name}}</td>
+						<td class="text-center" ng-if="customer == ''">{{d.Customer.name}}</td>
 						<td class="text-center">{{d.Product.min}}</td>
 						<td class="text-center">{{d.Product.selling_price}}</td>
 						<td class="actions text-center">
@@ -69,7 +70,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="7" class="text-center">
+						<td colspan="7" class="text-center" >
 							<dir-pagination-controls pagination-id="ProductListTable"></dir-pagination-controls>
 						</td>
 					</tr>
