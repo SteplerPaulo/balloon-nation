@@ -53,7 +53,7 @@
 								<th rowspan="2" class="text-center w5">
 									<input type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
 								</th>
-								<th rowspan="2" class="text-center">Item Description</th>
+								<th rowspan="2">Items</th>
 								<th rowspan="2" class="text-center w8">MOQ</th>
 								<th colspan="2" class="text-center">Quantity</th>
 							</tr>
@@ -65,7 +65,7 @@
 						<tbody>
 							<tr ng-hide="products[i].is_disabled && selected_item_only" ng-if="products.length" ng-repeat="(i, o) in products">
 								<td class="text-center"><input type="checkbox" ng-model="products[i].checkbox" ng-change="check(i,products[i].checkbox)"></td>
-								<td>{{o.Product.name}} -- <i>{{o.Product.item_code}}</i></td>
+								<td class="capitalize">{{o.Product.name}} <sup>SKU - {{o.Product.item_code}}</sup></td>
 								<td class="text-center">{{o.Product.min}}</td>
 								<td class="text-center">
 									<input ng-required="!products[i].is_disabled && selected_item_only" ng-disabled="products[i].is_disabled" ng-model="products[i].deliver" type="number" min="0" class="form-control input-sm"></input>
