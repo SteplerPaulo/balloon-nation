@@ -126,7 +126,7 @@ class CustomersController extends AppController {
 	}
 	
 	function all(){
-		$products = $this->Customer->find('all',array('order' =>array('Customer.modified')));
+		$products = $this->Customer->find('all',array('order' =>array('Customer.name')));
 		echo json_encode($products);
 		exit;
 	}
