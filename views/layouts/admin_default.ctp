@@ -153,7 +153,7 @@
 					<li class="">
 						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-file')).' '.
 												$this->Html->tag('span', 'Sales'),
-												array('admin' => true,'controller'=>'sales','action'=>''),
+												array('admin' => true,'controller'=>'sales','action'=>'/'),
 												array('escape' => false)
 												);  ?>
                     </li>
