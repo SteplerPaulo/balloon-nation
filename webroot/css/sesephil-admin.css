@@ -286,3 +286,7 @@ ul.alert-dropdown {
     background-color: #d58512;
     border-radius: 10px;
 }
+
+.capitalize{
+	text-transform: capitalize;
+}
