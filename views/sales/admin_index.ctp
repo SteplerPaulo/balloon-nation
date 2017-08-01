@@ -20,28 +20,22 @@
 			<table class="table table-striped table-condensed">
 				<thead>
 					<tr>
-						<th colspan="3">CUT-OFF SALES REPORTS</th>
-						<th colspan="1"><a href="<?php echo $this->base;?>/admin/sales/balancing" class="btn btn-sm btn-warning pull-right">Semi-monthly Balancing</a></th>
+						<th colspan="2">MONTHLY SALES REPORTS</th>
+						<th colspan="1"><a href="<?php echo $this->base;?>/admin/sales/journal_entry" class="btn btn-sm btn-warning pull-right">Sales Journal Entry</a></th>
 					</tr>
 					<tr>
-						<th rowspan="2">Customer</th>
-						<th colspan="2" class="text-center">Inclusive Date</th>
-						<th rowspan="2" class="text-center w5">Action</th>
-					</tr>
-					<tr>
-						<th class="text-center">From</th>
-						<th class="text-center">To</th>
+						<th>Customer</th>
+						<th class="text-center">Date</th>
+						<th class="text-center w5">Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-if="sales.length" pagination-id="SaleListTable" dir-paginate="d in sales | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
 						<td>{{d.Customer.name}}</td>
-						<td class="text-center">{{d.Sale.from_date}}</td>
-						<td class="text-center">{{d.Sale.to_date}}</td>
+						<td class="text-center">{{d.Sale.from_date | date: "MMMM yyyy"}}</td>
 						<td class="actions text-center">
-							<a target="_blank" href="<?php echo $this->base;?>/admin/sales/posting/{{d.Sale.id}}" title="Posting"><i class="fa fa-gavel"></i></a>
-							| 
-							<a target="_blank" href="<?php echo $this->base;?>/admin/sales/report/{{d.Sale.id}}" title="Print"><i class="fa fa-print"></i></a>
+							<a ng-if="d.Sale.is_posted == 0" href="<?php echo $this->base;?>/admin/sales/posting/{{d.Sale.id}}" title="Posting"><i class="fa fa-gavel"></i></a>
+							<a ng-if="d.Sale.is_posted == 1" target="_blank" href="<?php echo $this->base;?>/admin/sales/report/{{d.Sale.id}}" title="Print"><i class="fa fa-print"></i></a>
 						</td>
 					</tr>
 					<tr ng-show="(sales | filter:q | filter:customer).length == 0" pagination-id="ProductListTable" >

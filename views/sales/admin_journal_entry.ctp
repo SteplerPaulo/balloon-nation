@@ -1,25 +1,19 @@
 <?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
 <?php echo $this->Html->addCrumb('Sales','/admin/sales'); ?>
-<?php echo $this->Html->addCrumb('Semi-Monthly Balancing Sheet'); ?>
+<?php echo $this->Html->addCrumb('Journal Entry'); ?>
 <div ng-controller="AdminSemiMonthlyReportController" ng-init="initializeController()">	
 	<div class="panel panel-success" ng-form="SalesReportForm">
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-lg-3">
 					<label for="customer">Customer</label>
-					<select ng-model="customer" ng-options="d.Customer.name for d in customers" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,inclusive_month,inclusive_date)">
+					<select ng-model="customer" ng-options="d.Customer.name for d in customers" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,month_of)">
 						<option value="">-- Select --</option>
 					</select>
 				</div>
 				<div class="col-lg-3">
 					<label>Month</label>
-					<input type="month" ng-model="inclusive_month" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,inclusive_month,inclusive_date)">
-				</div>
-				<div class="col-lg-2">
-					<label for="date">Inclusive Dates</label>
-					<select ng-model="inclusive_date" ng-options="d.InclusiveDate.name for d in inclusive_dates" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,inclusive_month,inclusive_date)">
-						<option value="">-- Select --</option>
-					</select>
+					<input type="month" ng-model="month_of" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,month_of)">
 				</div>
 			</div>
 			<br/>
@@ -55,7 +49,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-hide="data[i].is_disabled && selected_item_only" ng-if="data.length" ng-repeat="(i,d) in data">
+							<tr ng-hide="data[i].is_readonly && selected_item_only" ng-if="data.length" ng-repeat="(i,d) in data">
 								<td class="text-center"><input type="checkbox" ng-model="data[i].checkbox" ng-change="check(i,data[i].checkbox)"></td>	
 								<td class="capitalize">{{d.Product.name}} <sup>SKU - {{d.Product.item_code}}</sup></td>
 								<td class="text-center">{{d.Product.beginning_inventory}}</td>
@@ -63,11 +57,10 @@
 								<td class="text-center">{{d.returned}}</td>
 								<td class="text-center">{{d.total_inventory}}</td>
 								<td class="text-center">
-									<input ng-required="!data[i].is_disabled && selected_item_only" ng-disabled="data[i].is_disabled" type="number" class="form-control input-sm" ng-model="data[i].sold" ng-change="changeSold(i,d)"></input>
+									<input ng-required="!data[i].is_readonly && selected_item_only" ng-disabled="data[i].is_readonly" type="number" class="form-control input-sm" ng-model="data[i].sold" ng-change="changeSold(i,d)"></input>
 								</td>
 								<td class="text-center">
-									<div ng-if="data[i].ending_inventory">{{data[i].ending_inventory}}</div>
-									<div ng-if="!data[i].ending_inventory">0</div>
+									<div ng-model="data[i].ending_inventory" >{{data[i].ending_inventory}}</div>
 								</td>
 								<td class="text-center">
 									<div ng-if="data[i].over_sold">{{data[i].over_sold}}</div>
@@ -115,4 +108,4 @@
 		</div>
 	</div>
 </div>	
-<?php echo $this->Html->script('controllers/admin_balancing',array('inline'=>false));?>
+<?php echo $this->Html->script('controllers/admin_journal_entry',array('inline'=>false));?>

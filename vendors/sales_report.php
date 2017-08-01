@@ -49,14 +49,14 @@ class SalesReport extends Formsheet{
 			'base_x'=> 0.25,
 			'base_y'=> 1.8,
 			'width'=> 8,
-			'height'=> 8,
+			'height'=> 8.8,
 			'cols'=> 40,
-			'rows'=> 40,	
+			'rows'=> 44,	
 		);	
 		$this->section($metrics);
 		$this->GRID['font_size']=9;
 		$this->drawBox(0,0,$metrics['cols'],$metrics['rows']);
-		$this->drawMultipleLines(3,39,1,'h');
+		$this->drawMultipleLines(3,43,1,'h');
 		$this->drawLine(2,'h');
 		$this->drawLine(1,'h',array(13,15));
 		$this->drawLine(13,'v',array(0,$metrics['rows']-1));
@@ -76,9 +76,9 @@ class SalesReport extends Formsheet{
 		$this->centerText(16,1.8,'Returned',3,'');
 		$this->centerText(19,1.8,'Sold',3,'');
 		
-		$this->centerText(22,0.8,'Notation',6,'b');
-		$this->centerText(22,1.8,'+',3,'');
-		$this->centerText(25,1.8,'-',3,'');
+		
+		$this->centerText(22,1.8,'Inventory',3,'');
+		$this->centerText(25,1.8,'Oversold',3,'');
 		
 		
 		$this->centerText(28,0.9,'Purchase',3,'b');
@@ -99,14 +99,14 @@ class SalesReport extends Formsheet{
 			$this->centerText(16,$y,$itm['returned'],3,'');
 			$this->centerText(19,$y,$itm['sold'],3,'');
 			if($itm['delivered'] > $itm['sold']){
-				$this->centerText(22,$y,'0',3,'');
-				$this->centerText(25,$y,$itm['delivered']-$itm['sold'],3,'');
+				$this->centerText(25,$y,'0',3,'');
+				$this->centerText(22,$y,$itm['delivered']-$itm['sold'],3,'');
 			}else if($itm['delivered'] < $itm['sold']){
-				$this->centerText(22,$y,$itm['sold'] - $itm['delivered'],3,'');
-				$this->centerText(25,$y,'0',3,'');
-			}else{
+				$this->centerText(25,$y,$itm['sold'] - $itm['delivered'],3,'');
 				$this->centerText(22,$y,'0',3,'');
+			}else{
 				$this->centerText(25,$y,'0',3,'');
+				$this->centerText(22,$y,'0',3,'');
 			}
 			
 			$cost = $itm['Product']['purchase_price']*$itm['sold'];
@@ -123,7 +123,7 @@ class SalesReport extends Formsheet{
 		//$y++;
 		$this->GRID['font_size']=12;
 		//$this->centerText(0,$y,'********** END OF REPORT **********',40,'');
-		$y = 39.8;
+		$y = 43.8;
 		$this->GRID['font_size']=8;
 		$this->leftText(0.2,$y,'TOTAL','','b');
 		$this->rightText(36.9,$y,number_format($total_cost,2),'','b');

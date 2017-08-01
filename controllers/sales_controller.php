@@ -75,8 +75,6 @@ class SalesController extends AppController {
 
 	function admin_add() {
 		if (!empty($this->data)) {
-			//pr($this->data);exit;
-			
 			$this->Sale->deleteAll(array(
 				'Sale.customer_id' => $this->data['Sale']['customer_id'], 
 				'Sale.from_date' => $this->data['Sale']['from_date'],
@@ -132,7 +130,7 @@ class SalesController extends AppController {
 	}
 
 	
-	function admin_balancing() {
+	function admin_journal_entry() {
 		$this->layout = 'admin_default';
 	}
 
@@ -161,7 +159,6 @@ class SalesController extends AppController {
 		$data = array();
 		$this->Customer->unbindModel( array('hasMany' => array('Product')));
 		$data['Customers'] = $this->Customer->find('all',array('order' =>array('Customer.name')));
-		$data['InclusiveDates'] = $this->InclusiveDate->find('all',array('conditions'=>array('InclusiveDate.group'=>'semi-monthly')));
 		echo json_encode($data);
 		exit;
 	}
@@ -169,8 +166,8 @@ class SalesController extends AppController {
 	function get_data(){
 		//pr($this->data);exit;
 		$customer_id = $this->data['customer_id'];
-		$from_date = $this->data['from'];
-		$to_date = $this->data['to'];
+		$from_date = $this->data['from_date'];
+		$to_date = $this->data['to_date'];
 		$data =array();
 		
 		//GET SALE (USE FOR CHECKING SALE STATUS)
@@ -187,7 +184,7 @@ class SalesController extends AppController {
 				$data['is_posted'] =  false;
 				//GET SALE DETAILS 
 				$saleDetails = $this->Sale->get_data($customer_id,$from_date,$to_date);
-				
+			
 				//GET PRODUCTS
 				$this->Product->unbindModel( array('hasMany' => array('ProductImage','Deliviries','DeliveryDetail'),'belongsTo'=>array('Customer','Category')));
 				$products = $this->Product->find('all',array('conditions'=>array('Product.customer_id'=>$customer_id),'order'=>'Product.name ASC'));
@@ -197,22 +194,25 @@ class SalesController extends AppController {
 					//$products[$k]['sold'] = 0;
 					$products[$k]['returned'] = 0;
 					$products[$k]['delivered'] = 0;
+					$products[$k]['ending_inventory'] = 0;
 					$products[$k]['sold'] = 0.00;
 					$products[$k]['purchase_price'] = 0.00;	
 					$products[$k]['total_inventory'] = $prdct['Product']['beginning_inventory'];
-					$products[$k]['is_disabled'] = true;
+					$products[$k]['is_readonly'] = true;
 					$products[$k]['checkbox'] = false;
 					foreach($saleDetails as $sale_dtls){
 						if($prdct['Product']['id'] == $sale_dtls['products']['id']){
 							$products[$k]['Product'] = $prdct['Product'];
 							$products[$k]['returned'] = $sale_dtls[0]['total_returned'];
-							$products[$k]['delivered'] = $sale_dtls[0]['total_delivered'];
+							$products[$k]['delivered'] = ($sale_dtls[0]['total_delivered'] != null)?$sale_dtls[0]['total_delivered']:0;
 							$products[$k]['purchase_price'] = $sale_dtls['delivery_details']['purchase_price'];
 							$products[$k]['total_inventory'] = ($prdct['Product']['beginning_inventory']+$sale_dtls[0]['total_delivered'])-$sale_dtls[0]['total_returned'];
+							$products[$k]['ending_inventory'] = ($prdct['Product']['beginning_inventory']+$sale_dtls[0]['total_delivered'])-$sale_dtls[0]['total_returned'];
 						}
 					}				
 				}
 				$data['Result'] = $products;
+				//pr($data);exit;
 		}else{
 			$data['is_posted'] = true;
 		}
@@ -237,7 +237,8 @@ class SalesController extends AppController {
 									'Sale.id' => $id,
 							)
 					));
-					
+		//echo json_encode($data);
+		//exit;	
 		foreach ($data['SaleDetail'] as $key => $value) {
 			if($value['sold'] > ($value['Product']['beginning_inventory']+$value['delivered'])){
 				$data['SaleDetail'][$key]['over_sold'] = $value['sold'] - ($value['Product']['beginning_inventory']+$value['delivered']);
@@ -251,9 +252,8 @@ class SalesController extends AppController {
 				$data['SaleDetail'][$key]['over_sold'] = 0;
 				$data['SaleDetail'][$key]['in_stock'] = 0;
 			}
-		
+			$data['SaleDetail'][$key]['missing_qty'] = 0;
 		}	
-				
 		echo json_encode($data);
 		exit;
 	}

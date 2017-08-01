@@ -7,11 +7,11 @@
 			<div class="row" ng-if="SaleID">
 				<div class="col-lg-9">
 					<label>Customer:</label>
-					{{ Customer.name}}
+					{{ data.Customer.name}}
 				</div>
 				<div class="col-lg-3">
-					<label>Inclusive Date:</label>
-					{{ Sale.from_date |date:'MMMM dd'}} - {{ Sale.to_date |date:'dd, yyyy'}} 
+					<label>Date:</label>
+					{{ data.Sale.from_date |date:'MMMM yyyy'}} 
 				</div>
 			</div>
 			<div class="row"  ng-if="!SaleID">
@@ -49,18 +49,18 @@
 							</tr>
 						</thead>
 						<tbody>	
-							<tr ng-repeat="(i,d) in SaleDetail">
+							<tr ng-repeat="(i,d) in data.SaleDetail">
 								<td>{{d.Product.name}}</td>
-								<td class="text-center">{{d.Product.beginning_inventory}}</td>
+								<td class="text-center">{{d.beginning_inventory}}</td>
 								<td class="text-center">{{d.delivered}}</td>
 								<td class="text-center">{{d.returned}}</td>
 								<td class="text-center">{{d.sold}}</td>
 								<td class="text-center">{{d.over_sold}} </td>
 								<td class="text-center">{{d.in_stock}}</td>
-								<td class="text-center"><input ng-disabled="Sale.is_posted == 1" type="number" class="form-control input-sm" ng-init="SaleDetail[i].beginning_inventory=d.in_stock" ng-model="SaleDetail[i].beginning_inventory" ng-required="true" ng-change="changeActualInventory(i,d)"></input></td>
-								<td class="text-center"><input ng-disabled="Sale.is_posted == 1" type="number" class="form-control input-sm" ng-init="SaleDetail[i].missing_qty=0" ng-model="SaleDetail[i].missing_qty" ng-required="true" readonly="readonly"></input></td>
+								<td class="text-center"><input ng-disabled="data.Sale.is_posted == 1" type="number" class="form-control input-sm" ng-init="data.SaleDetail[i].actual_inventory=d.in_stock" ng-model="data.SaleDetail[i].actual_inventory" ng-required="true" ng-change="changeActualInventory(i,d)"></input></td>
+								<td class="text-center"><input  type="number" class="form-control input-sm" ng-init="SaleDetail[i].missing_qty=0" ng-model="data.SaleDetail[i].missing_qty" ng-required="true" readonly="readonly"></input></td>
 							</tr>
-							<tr ng-if="!SaleDetail.length">
+							<tr ng-if="!data.SaleDetail.length">
 								<td colspan="9">No Data Available</td>
 							</tr>
 							
@@ -70,11 +70,11 @@
 			</div>
 		</div>
 		<div class="panel-footer">
-			<div class="text-right" ng-if="Sale.is_posted == 1">
+			<div class="text-right" ng-if="data.Sale.is_posted == 1">
 				<a href="<?php echo $this->base;?>/admin/sales" class="btn btn-default" type="cancel">Back</a>
-				<button class="btn btn-danger" ng-disabled="Sale.is_posted">Posted</button>
+				<button class="btn btn-danger" ng-disabled="data.Sale.is_posted">Posted</button>
 			</div>
-			<div class="text-right" ng-if="Sale.is_posted == 0">
+			<div class="text-right" ng-if="data.Sale.is_posted == 0">
 				<a href="<?php echo $this->base;?>/admin/sales" class="btn btn-default" type="cancel">Cancel</a>
 				<button ng-click="post()" class="btn btn-danger" ng-disabled="!SalesReportForm.$valid ">Post</button>
 			</div>

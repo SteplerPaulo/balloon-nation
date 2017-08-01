@@ -5,32 +5,31 @@ App.controller('AdminSalePostingController',function($scope,$rootScope,$http,$fi
 		
 		$scope.SaleID =  $("#SalePostingPanel").attr('sale-id');
 		$http.get(BASE_URL+"sales/posting_data/"+$scope.SaleID).success(function(response) {
-			$scope.Customer = response.Customer;
-			$scope.Sale = response.Sale;
-			$scope.SaleDetail = response.SaleDetail;
+			$scope.data = response;
+			console.log($scope.data);
 		
 		});
 	}
 
 	$scope.changeActualInventory = function(i,o){
-		console.log(o);
-		$scope.SaleDetail[i].missing_qty = o.in_stock - $scope.SaleDetail[i].beginning_inventory;
+		
+		$scope.data.SaleDetail[i].missing_qty = o.in_stock - $scope.data.SaleDetail[i].actual_inventory;
 		
 	}
 
 	$scope.post = function (){
 	
 		var data = {'Sale':{
-						'id':$scope.Sale.id,
+						'id':$scope.data.Sale.id,
 						'is_posted':1,
 					}};
 			data['Product'] = [];
 			
-		for (var i = 0; i < $scope.SaleDetail.length; i++) {
+		for (var i = 0; i < $scope.data.SaleDetail.length; i++) {
 			data['Product'][i] = {
-							'id':$scope.SaleDetail[i].product_id,
-							'beginning_inventory':$scope.SaleDetail[i].beginning_inventory,
-							'missing_qty':$scope.SaleDetail[i].missing_qty,
+							'id':$scope.data.SaleDetail[i].product_id,
+							'beginning_inventory':$scope.data.SaleDetail[i].actual_inventory,
+							'missing_qty':$scope.data.SaleDetail[i].missing_qty,
 						};
 						
 		}

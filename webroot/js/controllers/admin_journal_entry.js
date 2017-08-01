@@ -10,24 +10,21 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 			if($scope.customer ==  undefined){
 				$scope.customer = '';
 			}
-			$scope.inclusive_dates = response.InclusiveDates;
-			
-			if($scope.inclusive_date ==  undefined){
-				$scope.inclusive_date = '';
-			}
 		});
 	}
 
-	$scope.changeFilter = function (customer, inclusive_month,inclusive_date) {
-		if(	customer != undefined && inclusive_month != undefined && inclusive_date != undefined &&
-			customer != '' && inclusive_month != '' && inclusive_date != ''
+	$scope.changeFilter = function (customer, month) {
+		if(	customer != undefined && month != undefined &&
+			customer != '' && month != ''
 		){
-			
 			var data = {
 				'customer_id':customer.Customer.id,
-				'from':$filter('date')(inclusive_month, "yyyy-MM")+'-'+inclusive_date.InclusiveDate.from+' '+'00:00:00',
-				'to':$filter('date')(inclusive_month, "yyyy-MM")+'-'+inclusive_date.InclusiveDate.to+' '+'23:59:59',
+				'from_date':$filter('date')(month, "yyyy-MM")+'-01 00:00:00',
+				'to_date':$filter('date')(month, "yyyy-MM")+'-31 00:00:00',
 			};
+			
+			console.log(data);
+			
 			$http({
 				method: 'POST',
 				url: BASE_URL+'sales/get_data',
@@ -45,11 +42,14 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	
 	$scope.check = function (i,is_checked) {
 		if(is_checked){
-			$scope.data[i].is_disabled = false;
+			$scope.data[i].is_readonly = false;
 			$scope.data[i].bad_item = 0;
+			$scope.data[i].ending_inventory = $scope.data[i].ending_inventory-$scope.data[i].sold;
 		}else{
-			$scope.data[i].is_disabled = true;
+			$scope.data[i].is_readonly = true;
 			$scope.data[i].bad_item = '';
+			$scope.data[i].ending_inventory = $scope.data[i].ending_inventory+$scope.data[i].sold;
+			
 			$scope.check_all = false;
 		}
 	};
@@ -57,13 +57,13 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	$scope.checkAll = function (is_checked) {
 		if(is_checked){
 			for (var i = 0; i < $scope.data.length; i++) {
-				$scope.data[i].is_disabled = false;
+				$scope.data[i].is_readonly = false;
 				$scope.data[i].checkbox = true;
 				$scope.data[i].bad_item = 0;
 			}
 		}else{
 			for (var i = 0; i < $scope.data.length; i++) {
-				$scope.data[i].is_disabled = true;
+				$scope.data[i].is_readonly = true;
 				$scope.data[i].checkbox = false;
 				$scope.data[i].bad_item = '';
 			}
@@ -75,7 +75,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		
 		for (var i = 0; i < $scope.data.length; i++) {
 			if(item_code == $scope.data[i].Product.item_code){
-				$scope.data[i].is_disabled = false;
+				$scope.data[i].is_readonly = false;
 				$scope.data[i].checkbox = true;
 				$scope.data[i].bad_item = 0;
 				return;
@@ -109,8 +109,8 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		
 		var data = {'Sale':{
 						'customer_id':$scope.customer.Customer.id,
-						'from_date':$filter('date')($scope.inclusive_month, "yyyy-MM")+'-'+$scope.inclusive_date.InclusiveDate.from,
-						'to_date':$filter('date')($scope.inclusive_month, "yyyy-MM")+'-'+$scope.inclusive_date.InclusiveDate.to,
+						'from_date':$filter('date')($scope.month_of, "yyyy-MM")+'-01 00:00:00',
+						'to_date':$filter('date')($scope.month_of, "yyyy-MM")+'-31 00:00:00',
 					}};
 			data['SaleDetail'] = [];
 			
