@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Conces creationDateTime="2017-04-01T00:00:00" documentStructureVersion="1.0">
+  <documentReference>
+    <reference>Contract Number</reference>
+    <id>217738</id>
+  </documentReference>
+  <concesId>217738_170401</concesId>
+  <buyer>
+    <gln>4806517278804</gln>
+    <nameAndAddress>:name::address::contact:</nameAndAddress>
+  </buyer>
+  <seller>
+    <gln>4807999014041</gln>
+    <nameAndAddress>:name:CHUA  CAMILLE ALYSSA PULPULAAN:address:187B D. TUAZON ST MAHARLIKA QUEZON CITY QC - PHILIPPINES:contact:TRACY HOKIA</nameAndAddress>
+    <additionalPartyId>
+      <additionalPartyIdValue>20013</additionalPartyIdValue>
+      <additionalPartyIdType type="BUYER_ASSIGNED"/>
+    </additionalPartyId>
+  </seller>
+  <cutOffDate>2017-03-31</cutOffDate>
+  <additionalInformation>:comType::apBNum:AP651303:invNum:CON00217738:invDt:2017-04-01:invRelDt:2017-04-01:dtPay:2017-04-01:glCoNum:101:stNum:137 PACO</additionalInformation>
+  <concesLineItem number="1">
+    <tradeItemId>
+      <gtin>0000006373399</gtin>
+      <additionalTradeItemId>
+        <additionalTradeItemIdValue>637339</additionalTradeItemIdValue>
+        <additionalTradeItemIdType type="BUYER_ASSIGNED"/>
+      </additionalTradeItemId>
+    </tradeItemId>
+    <description>BALLOON REP M/P BALOONS11INC10</description>
+    <quantitySold>1.00</quantitySold>
+    <unitPrice>38.84</unitPrice>
+    <allowance>0.0</allowance>
+    <amountPayable>38.84</amountPayable>
+  </concesLineItem>
+  <concesLineItem number="2">
+    <tradeItemId>
+      <gtin>0000006373474</gtin>
+      <additionalTradeItemId>
+        <additionalTradeItemIdValue>637347</additionalTradeItemIdValue>
+        <additionalTradeItemIdType type="BUYER_ASSIGNED"/>
+      </additionalTradeItemId>
+    </tradeItemId>
+    <description>BALLOON REP M/P BALOONS 5INC12</description>
+    <quantitySold>4.00</quantitySold>
+    <unitPrice>92.96</unitPrice>
+    <allowance>0.0</allowance>
+    <amountPayable>92.96</amountPayable>
+  </concesLineItem>
+  <concesLineItem number="3">
+    <tradeItemId>
+      <gtin>0000006373566</gtin>
+      <additionalTradeItemId>
+        <additionalTradeItemIdValue>637356</additionalTradeItemIdValue>
+        <additionalTradeItemIdType type="BUYER_ASSIGNED"/>
+      </additionalTradeItemId>
+    </tradeItemId>
+    <description>BALLOON REP PRNTD BALLNS ASSTD</description>
+    <quantitySold>3.00</quantitySold>
+    <unitPrice>116.52</unitPrice>
+    <allowance>0.0</allowance>
+    <amountPayable>116.52</amountPayable>
+  </concesLineItem>
+  <concesLineItem number="4">
+    <tradeItemId>
+      <gtin>0000006373603</gtin>
+      <additionalTradeItemId>
+        <additionalTradeItemIdValue>637360</additionalTradeItemIdValue>
+        <additionalTradeItemIdType type="BUYER_ASSIGNED"/>
+      </additionalTradeItemId>
+    </tradeItemId>
+    <description>BALLOON REP BALLOON CAPS/STICK</description>
+    <quantitySold>1.00</quantitySold>
+    <unitPrice>23.24</unitPrice>
+    <allowance>0.0</allowance>
+    <amountPayable>23.24</amountPayable>
+  </concesLineItem>
+  <concesLineItem number="5">
+    <tradeItemId>
+      <gtin>0000006373696</gtin>
+      <additionalTradeItemId>
+        <additionalTradeItemIdValue>637369</additionalTradeItemIdValue>
+        <additionalTradeItemIdType type="BUYER_ASSIGNED"/>
+      </additionalTradeItemId>
+    </tradeItemId>
+    <description>BALLOON REP RELIGHTNING CANDLE</description>
+    <quantitySold>1.00</quantitySold>
+    <unitPrice>19.34</unitPrice>
+    <allowance>0.0</allowance>
+    <amountPayable>19.34</amountPayable>
+  </concesLineItem>
+  <concesLineItem number="6">
+    <tradeItemId>
+      <gtin>0000006373726</gtin>
+      <additionalTradeItemId>
+        <additionalTradeItemIdValue>637372</additionalTradeItemIdValue>
+        <additionalTradeItemIdType type="BUYER_ASSIGNED"/>
+      </additionalTradeItemId>
+    </tradeItemId>
+    <description>BALLOON REP BALLOON PUMP</description>
+    <quantitySold>2.00</quantitySold>
+    <unitPrice>168.68</unitPrice>
+    <allowance>0.0</allowance>
+    <amountPayable>168.68</amountPayable>
+  </concesLineItem>
+  <concesLineItem number="7">
+    <tradeItemId>
+      <gtin>0000006373849</gtin>
+      <additionalTradeItemId>
+        <additionalTradeItemIdValue>637384</additionalTradeItemIdValue>
+        <additionalTradeItemIdType type="BUYER_ASSIGNED"/>
+      </additionalTradeItemId>
+    </tradeItemId>
+    <description>BALLOON REP LETTER BALLOONS</description>
+    <quantitySold>5.00</quantitySold>
+    <unitPrice>129.2</unitPrice>
+    <allowance>0.0</allowance>
+    <amountPayable>129.2</amountPayable>
+  </concesLineItem>
+</Conces>
