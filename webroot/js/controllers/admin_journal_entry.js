@@ -1,9 +1,11 @@
-App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$http,$filter,$uibModal, $log, $document){
+App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$http,$filter,$uibModal, $log, $document,x2js){
+
 	$scope.initializeController = function(){
 		$scope.currentPage = 1; 
 		$scope.pageSize = 35;
 		$scope.is_posted = false;
 		$scope.view_all_items = true;
+		
 
 		$http.get(BASE_URL+"sales/initial_data").success(function(response) {
 			$scope.customers = response.Customers;
@@ -13,17 +15,54 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		});
 	}
 
+	$scope.importXML = function (importedFile){
+		//XML TO JSON
+		var x2js = new X2JS();
+		var xmlText = importedFile;
+		$scope.fileData = x2js.xml_str2json( xmlText );	
+		console.log($scope.fileData);
+
+
+		//Document Info
+		$scope.info = $scope.fileData.Conces;
+		$scope.documentNo = $scope.info.concesId;
+
+		//Document Additional Info
+		var additionalInfo = $scope.fileData.Conces.additionalInformation;
+		var splittedInfo = additionalInfo.split(":");
+		var stNumIndex = splittedInfo.indexOf("stNum");
+		var storeInfo = splittedInfo[stNumIndex+1];
+		
+		$scope.storeNo = storeInfo.split(" ")[0];
+		$scope.storeName = storeInfo.split(" ")[1];
+		
+		$scope.docFilterValidation();
+		
+
+	}
+
+	$scope.docFilterValidation = function () {
+		console.log($scope.customer.Customer.compcode);
+		if($scope.storeNo  != $scope.customer.Customer.compcode){
+			alert('Document store no. is diferrent from costumer compcode');
+		}
+	}
+	
+
 	$scope.changeFilter = function (customer, month) {
+	
+		$scope.docFilterValidation();		
+
 		if(	customer != undefined && month != undefined &&
 			customer != '' && month != ''
 		){
 			var data = {
 				'customer_id':customer.Customer.id,
+				'customer_compcode':customer.Customer.compcode,
 				'from_date':$filter('date')(month, "yyyy-MM")+'-01 00:00:00',
 				'to_date':$filter('date')(month, "yyyy-MM")+'-31 00:00:00',
 			};
 			
-			console.log(data);
 			
 			$http({
 				method: 'POST',
@@ -33,12 +72,13 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 			}).then(function(response){
 				$scope.data = response.data.Result;
 				$scope.is_posted = response.data.is_posted;
+				
 			});
+		
 			
 		}
 		
 	};
-	
 	
 	$scope.check = function (i,is_checked) {
 		if(is_checked){
@@ -102,7 +142,6 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		}
 	}
 	
-	
 	$scope.save = function (){
 		//console.log($scope.customer);
 		//console.log($scope.inclusive_date);
@@ -137,9 +176,60 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		}).then(function(response){
 			window.location.href = BASE_URL+"admin/sales";
 		});
-		
-		
 	}
-});
+	
+	
+}).directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsText(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);
+
+
+/*
+.directive('fileInput', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attributes) {
+            element.bind('change', function () {
+                $parse(attributes.fileInput)
+                .assign(scope,element[0].files)
+                scope.$apply()
+            });
+        }
+    };
+}]).directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                scope.$apply(function () {
+                    scope.fileread = changeEvent.target.files[0];
+                    // or all selected files:
+                    // scope.fileread = changeEvent.target.files;
+                });
+            });
+        }
+    }
+}]);
+
+
+*/
+
 
 
