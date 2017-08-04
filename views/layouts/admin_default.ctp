@@ -230,9 +230,11 @@
 		echo $this->Html->script(array('template/angular-sanitize'));
 		echo $this->Html->script(array('angularUtils/directives/dirPagination'));
 		echo $this->Html->script(array('angularUtils/directives/ui-bootstrap-tpls-2.3.0.min'));
+		echo $this->Html->script(array('bower_components/x2js/xml2json'));
+		echo $this->Html->script(array('bower_components/angular-x2js/src/x2js'));
 		//echo $this->Html->script('plugins/summernote');
 	?>
-	<script type="text/javascript">(function(){window.App = angular.module('App',['angularUtils.directives.dirPagination','ngSanitize','ui.bootstrap'])})();</script>
+	<script type="text/javascript">(function(){window.App = angular.module('App',['cb.x2js','angularUtils.directives.dirPagination','ngSanitize','ui.bootstrap'])})();</script>
 	<script>
 		$(function () {
 		  $('[data-toggle="tooltip"]').tooltip();
