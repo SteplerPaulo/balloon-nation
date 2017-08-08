@@ -164,11 +164,15 @@ class SalesController extends AppController {
 	}
 	
 	function get_data(){
-		//pr($this->data);exit;
+	
+		
 		$customer_id = $this->data['customer_id'];
 		$from_date = $this->data['from_date'];
 		$to_date = $this->data['to_date'];
-		$data =array();
+		$doc_line_items = $this->data['doc_line_items'];
+		
+		$data = array();
+		$data['selected_items'] = 0;
 		
 		//GET SALE (USE FOR CHECKING SALE STATUS)
 		$sale = $this->Sale->find('first',array(
@@ -188,13 +192,13 @@ class SalesController extends AppController {
 				//GET PRODUCTS
 				$this->Product->unbindModel( array('hasMany' => array('ProductImage','Deliviries','DeliveryDetail'),'belongsTo'=>array('Customer','Category')));
 				$products = $this->Product->find('all',array('conditions'=>array('Product.customer_id'=>$customer_id),'order'=>'Product.name ASC'));
-										
+												
 				//INJECT SALE DETAILS ON PRODUCTS ARRAY				
 				foreach($products as $k => $prdct){
 					//$products[$k]['sold'] = 0;
 					$products[$k]['returned'] = 0;
 					$products[$k]['delivered'] = 0;
-					$products[$k]['ending_inventory'] = 0;
+					$products[$k]['ending_inventory'] = $prdct['Product']['beginning_inventory'];
 					$products[$k]['sold'] = 0.00;
 					$products[$k]['purchase_price'] = 0.00;	
 					$products[$k]['total_inventory'] = $prdct['Product']['beginning_inventory'];
@@ -209,7 +213,20 @@ class SalesController extends AppController {
 							$products[$k]['total_inventory'] = ($prdct['Product']['beginning_inventory']+$sale_dtls[0]['total_delivered'])-$sale_dtls[0]['total_returned'];
 							$products[$k]['ending_inventory'] = ($prdct['Product']['beginning_inventory']+$sale_dtls[0]['total_delivered'])-$sale_dtls[0]['total_returned'];
 						}
-					}				
+					}	
+					//Insert Doc Data
+					if(!empty($doc_line_items)){
+						foreach($doc_line_items as $lineItem){
+							if((int)$prdct['Product']['item_code'] == (int)$lineItem['tradeItemId']['gtin']){
+								//pr((int)$lineItem['tradeItemId']['gtin'].' = '.(int)$products[$k]['Product']['item_code']);
+								$products[$k]['sold'] = (float)$lineItem['quantitySold'];
+								$products[$k]['ending_inventory'] = $products[$k]['ending_inventory']-(float)$lineItem['quantitySold'];
+								$products[$k]['is_readonly'] = false;
+								$products[$k]['checkbox'] = true;
+								$data['selected_items']++;
+							}
+						}
+					}
 				}
 				$data['Result'] = $products;
 				//pr($data);exit;
