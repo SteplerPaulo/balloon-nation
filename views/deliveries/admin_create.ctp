@@ -42,7 +42,7 @@
 								<th colspan="3">
 									<div class="btn-group pull-right">
 									  <button type="button" ng-class="(view_all_items?'active':'')" class="btn btn-sm btn-default" ng-model="view_all_items" ng-click="btnGrp(true,false)">View All Items</button>
-									  <button type="button" ng-class="(selected_item_only?'active':'')"class="btn btn-sm btn-default" ng-model="selected_item_only" ng-click="btnGrp(false,true)">Selected Item Only</button>
+									  <button type="button" ng-class="(selected_item_only?'active':'')"class="btn btn-sm btn-default" ng-model="selected_item_only" ng-click="btnGrp(false,true)">Selected Item ({{selected_item_count}})</button>
 									</div>
 								</td>
 								<td colspan="2">

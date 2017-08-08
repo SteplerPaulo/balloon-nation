@@ -5,6 +5,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		$scope.dateNow = new Date($filter("date")(Date.now(), 'yyyy-MM-dd HH:mm:ss'));
 		$scope.check_all = false;
 		$scope.view_all_items = true;
+		$scope.selected_item_count = 0;
 		
 		$http.get(BASE_URL+"customers/all").success(function(response) {
 			$scope.customers = response;
@@ -27,25 +28,30 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		if(is_checked){
 			$scope.products[i].is_disabled = false;
 			$scope.products[i].bad_item = 0;
+			$scope.selected_item_count++;
 		}else{
 			$scope.products[i].is_disabled = true;
 			$scope.products[i].bad_item = '';
 			$scope.check_all = false;
+			$scope.selected_item_count--;
 		}
 	};
 	
 	$scope.checkAll = function (is_checked) {
 		if(is_checked){
+			$scope.selected_item_count = 0;
 			for (var i = 0; i < $scope.products.length; i++) {
 				$scope.products[i].is_disabled = false;
 				$scope.products[i].checkbox = true;
 				$scope.products[i].bad_item = 0;
+				$scope.selected_item_count++;
 			}
 		}else{
 			for (var i = 0; i < $scope.products.length; i++) {
 				$scope.products[i].is_disabled = true;
 				$scope.products[i].checkbox = false;
 				$scope.products[i].bad_item = '';
+				$scope.selected_item_count--;
 			}
 		}
 	};
