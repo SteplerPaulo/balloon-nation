@@ -164,12 +164,9 @@ class SalesController extends AppController {
 	}
 	
 	function get_data(){
-	
-		
 		$customer_id = $this->data['customer_id'];
 		$from_date = $this->data['from_date'];
 		$to_date = $this->data['to_date'];
-		$doc_line_items = $this->data['doc_line_items'];
 		
 		$data = array();
 		$data['selected_items'] = 0;
@@ -204,6 +201,7 @@ class SalesController extends AppController {
 					$products[$k]['total_inventory'] = $prdct['Product']['beginning_inventory'];
 					$products[$k]['is_readonly'] = true;
 					$products[$k]['checkbox'] = false;
+					$products[$k]['doc_init'] = false;
 					foreach($saleDetails as $sale_dtls){
 						if($prdct['Product']['id'] == $sale_dtls['products']['id']){
 							$products[$k]['Product'] = $prdct['Product'];
@@ -215,15 +213,22 @@ class SalesController extends AppController {
 						}
 					}	
 					//Insert Doc Data
-					if(!empty($doc_line_items)){
-						foreach($doc_line_items as $lineItem){
-							if((int)$prdct['Product']['item_code'] == (int)$lineItem['tradeItemId']['gtin']){
-								//pr((int)$lineItem['tradeItemId']['gtin'].' = '.(int)$products[$k]['Product']['item_code']);
-								$products[$k]['sold'] = (float)$lineItem['quantitySold'];
-								$products[$k]['ending_inventory'] = $products[$k]['ending_inventory']-(float)$lineItem['quantitySold'];
-								$products[$k]['is_readonly'] = false;
-								$products[$k]['checkbox'] = true;
-								$data['selected_items']++;
+					if(isset($this->data['doc_data'])){
+						foreach($this->data['doc_data'] as $dd){
+							foreach($dd['SoldItems'] as $lineItem){
+								if((int)$prdct['Product']['item_code'] == (int)$lineItem['tradeItemId']['gtin']){
+									//pr((int)$lineItem['tradeItemId']['gtin'].' = '.(int)$products[$k]['Product']['item_code']);
+									$products[$k]['sold'] +=(float)$lineItem['quantitySold'];
+									$products[$k]['ending_inventory'] -= (float)$lineItem['quantitySold'];
+									$products[$k]['is_readonly'] = false;
+									$products[$k]['checkbox'] = true;
+									
+									if($products[$k]['doc_init'] == false){
+										$data['selected_items']++;
+										$data['SelectedItemValidation'] = $data['selected_items'];
+									}
+									$products[$k]['doc_init'] = true;
+								}
 							}
 						}
 					}

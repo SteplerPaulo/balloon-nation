@@ -16,30 +16,42 @@
 					<input type="month" ng-model="month_of" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,month_of)">
 				</div>
 				<div class="col-lg-6">
-					<label>Select XML Sales Report File to Import:</label>
+					<label>Import XML Sales Report</label>
 					<div class="input-group">
-						<input type="file" fileread="vm.uploadme" class="form-control input-sm" ng-model="file">
+						<input type="file" fileread="vm.uploadme" multiple="multiple" class="form-control input-sm" ng-model="file">
 						<span class="input-group-btn">
 							<button class="btn btn-primary btn-sm" ng-model="importXML" ng-click="importXML(vm.uploadme)">Import</button>
 						</span>
-					</div>
-					
+					</div><!--{{vm.uploadme}}-->
+				</div>
+			</div><br/>
+			<div class="row">
+				<div class="col-lg-12">
+					<label>Imported Document:</label>
+					<span ng-if="!vm.uploadme.length">N.A</span>
+					<span style="margin-right:5px;" ng-repeat="doc in fileData">
+						<a ng-class="(customer.Customer.compcode == doc.StoreNo)?'label label-success':'label label-danger'">
+							# {{doc.DocNo}} {{doc.StoreName}}
+						</a>
+						<input class="hide" ng-model="DocFilter" ng-required="true" ng-value="(customer.Customer.compcode == doc.StoreNo)?'1':''"></input>
+					</span>
+					<span ng-repeat="doc in fileData">
+						<div ng-if="(customer.Customer.compcode != doc.StoreNo)" class="alert alert-warning">
+							Problem on imported files found. Please import files related to the selected customer only
+						</div>
+					</span>
 				</div>
 			</div>
-			
 			<br/>
 			<div class="row" ng-if="is_posted == false">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<table class="table table-striped table-bordered table-condensed" >
+					<table class="table table-bordered table-condensed" >
 						<thead>
-							<tr >
+							<tr>
 								<th colspan="7">
-									<label>Sales Report Document No:</label>
-									<h5 style="display:inline-block" ng-if="documentNo.length">{{documentNo}}</h5>
-									<h5 style="display:inline-block" ng-if="!documentNo.length">N.A</h5>
 									<div class="btn-group pull-right">
-									  <button type="button" ng-class="(view_all_items?'active':'')" class="btn btn-sm btn-default" ng-model="view_all_items" ng-click="btnGrp(true,false)">View All Items</button>
-									  <button type="button" ng-class="(selected_item_only?'active':'')"class="btn btn-sm btn-default" ng-model="selected_item_only" ng-click="btnGrp(false,true)">Selected Item Only</button>
+										<button type="button" ng-class="(view_all_items?'active':'')" class="btn btn-sm btn-default" ng-model="view_all_items" ng-click="btnGrp(true,false)">View All Items</button>
+										<button type="button" ng-class="(selected_item_only?'active':'')"class="btn btn-sm btn-default" ng-model="selected_item_only" ng-click="btnGrp(false,true)">Selected Item ({{selected_item_count}})</button>
 									</div>
 								</td>
 								<td colspan="2">
