@@ -1,8 +1,6 @@
 App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$http,$filter,$uibModal, $log, $document,x2js){
 
 	$scope.initializeController = function(){
-		$scope.currentPage = 1; 
-		$scope.pageSize = 35;
 		$scope.is_posted = false;
 		$scope.view_all_items = true;
 		$scope.concesLineItem = null;
@@ -20,6 +18,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	$scope.importXML = function (importedFile){
 		var file_count = importedFile.length;
 		$scope.fileData = {};
+		$scope.hasProblem = false;
 		$.each(importedFile, function(i, j){
 			var reader = new FileReader();
             reader.onload = function(e) {
@@ -39,7 +38,8 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 				};
 				
 				if(file_count == i+1) $scope.changeFilter($scope.customer,$scope.month_of);
-							
+				if(storeInfo.split(" ")[0] != $scope.customer.Customer.compcode) $scope.hasProblem = true;
+			
 			}
 			reader.readAsText(importedFile[i]);
 		});

@@ -33,16 +33,12 @@
 						<a ng-class="(customer.Customer.compcode == doc.StoreNo)?'label label-success':'label label-danger'">
 							# {{doc.DocNo}} {{doc.StoreName}}
 						</a>
-						<input class="hide" ng-model="DocFilter" ng-required="true" ng-value="(customer.Customer.compcode == doc.StoreNo)?'1':''"></input>
 					</span>
-					<span ng-repeat="doc in fileData">
-						<div ng-if="(customer.Customer.compcode != doc.StoreNo)" class="alert alert-warning">
-							Problem on imported files found. Please import files related to the selected customer only
-						</div>
-					</span>
+					<div ng-if="hasProblem" class="alert alert-warning">
+						Problem on imported files found. Please import files related to the selected customer only
+					</div>
 				</div>
 			</div>
-			<br/>
 			<div class="row" ng-if="is_posted == false">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<table class="table table-bordered table-condensed" >
@@ -129,7 +125,7 @@
 		<div class="panel-footer">
 			<div class="text-right">
 				<a href="<?php echo $this->base;?>/admin/sales" class="btn btn-default" type="cancel">Cancel</a>
-				<button ng-click="save()" class="btn btn-danger" ng-disabled="!SalesReportForm.$valid" ng-if="is_posted == false">Save</button>
+				<button ng-click="save()" class="btn btn-danger" ng-disabled="!SalesReportForm.$valid || hasProblem || !selected_item_count" ng-if="is_posted == false">Save</button>
 			</div>
 		</div>
 	</div>
