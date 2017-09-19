@@ -133,7 +133,7 @@ class DeliveriesController extends AppController {
 	}
 
 	function all(){
-		$data = $this->Delivery->find('all');
+		$data = $this->Delivery->find('all',array('order'=>'date DESC'));
 		
 		
 		foreach ($data as $key => $value) {
