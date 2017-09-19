@@ -75,6 +75,9 @@ class SalesController extends AppController {
 
 	function admin_add() {
 		if (!empty($this->data)) {
+			//pr($this->data);exit;
+			
+			
 			$this->Sale->deleteAll(array(
 				'Sale.customer_id' => $this->data['Sale']['customer_id'], 
 				'Sale.from_date' => $this->data['Sale']['from_date'],
@@ -197,6 +200,7 @@ class SalesController extends AppController {
 					$products[$k]['delivered'] = 0;
 					$products[$k]['ending_inventory'] = $prdct['Product']['beginning_inventory'];
 					$products[$k]['sold'] = 0.00;
+					$products[$k]['over_sold'] = 0.00;
 					$products[$k]['purchase_price'] = 0.00;	
 					$products[$k]['total_inventory'] = $prdct['Product']['beginning_inventory'];
 					$products[$k]['is_readonly'] = true;
@@ -219,7 +223,11 @@ class SalesController extends AppController {
 								if((int)$prdct['Product']['item_code'] == (int)$lineItem['tradeItemId']['gtin']){
 									//pr((int)$lineItem['tradeItemId']['gtin'].' = '.(int)$products[$k]['Product']['item_code']);
 									$products[$k]['sold'] +=(float)$lineItem['quantitySold'];
+									
 									$products[$k]['ending_inventory'] -= (float)$lineItem['quantitySold'];
+									
+								
+								
 									$products[$k]['is_readonly'] = false;
 									$products[$k]['checkbox'] = true;
 									
@@ -231,6 +239,11 @@ class SalesController extends AppController {
 								}
 							}
 						}
+						if($products[$k]['ending_inventory'] < 0){
+							$products[$k]['over_sold'] = abs($products[$k]['ending_inventory']);
+							$products[$k]['ending_inventory'] = 0;
+						}
+						
 					}
 				}
 				$data['Result'] = $products;

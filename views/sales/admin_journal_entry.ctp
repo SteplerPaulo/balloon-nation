@@ -85,8 +85,7 @@
 									<div ng-model="data[i].ending_inventory" >{{data[i].ending_inventory}}</div>
 								</td>
 								<td class="text-center">
-									<div ng-if="data[i].over_sold">{{data[i].over_sold}}</div>
-									<div ng-if="!data[i].over_sold">0</div>
+									<div>{{d.over_sold}}</div>
 								</td>
 							</tr>
 

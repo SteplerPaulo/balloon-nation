@@ -63,6 +63,8 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 				$scope.data = response.data.Result;
 				$scope.is_posted = response.data.is_posted;
 				$scope.selected_item_count = response.data.selected_items;
+				
+				//console.log(data);
 			});
 		}
 	};
@@ -130,6 +132,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 			$scope.data[i].ending_inventory = 0;
 			$scope.data[i].over_sold = 0;
 		}
+		console.log($scope.data[i]);
 	}
 	
 	$scope.save = function (){
@@ -148,6 +151,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 							'sold':$scope.data[i].sold,
 							'beginning_inventory':$scope.data[i].Product.beginning_inventory,
 							'ending_inventory':$scope.data[i].ending_inventory,
+							'over_sold':$scope.data[i].over_sold,
 						};
 		}
 		

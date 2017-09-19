@@ -6,7 +6,6 @@ App.controller('AdminSalePostingController',function($scope,$rootScope,$http,$fi
 		$scope.SaleID =  $("#SalePostingPanel").attr('sale-id');
 		$http.get(BASE_URL+"sales/posting_data/"+$scope.SaleID).success(function(response) {
 			$scope.data = response;
-			console.log($scope.data);
 		
 		});
 	}
@@ -22,6 +21,7 @@ App.controller('AdminSalePostingController',function($scope,$rootScope,$http,$fi
 		var data = {'Sale':{
 						'id':$scope.data.Sale.id,
 						'is_posted':1,
+						'SaleDetail':$scope.data.SaleDetail,
 					}};
 			data['Product'] = [];
 			
