@@ -41,7 +41,7 @@
 						<td class="text-center">{{d.Delivery.stock_clerk}}</td>
 						<td class="text-center">{{d.Delivery.formated_date}}</td>
 						<td class="text-center">
-							<a href="<?php echo $this->base;?>/admin/deliveries/report/{{d.Delivery.delivery_receipt_no}}" title="Print" target="_blank"><i class="fa fa-print"></i></a>
+							<a href="<?php echo $this->base;?>/admin/deliveries/report/{{d.Delivery.id}}" title="Print" target="_blank"><i class="fa fa-print"></i></a>
 						</td>
 					</tr>
 				</tbody>

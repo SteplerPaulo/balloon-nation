@@ -180,12 +180,12 @@ class DeliveriesController extends AppController {
 		exit;
 	}
 	
-	function admin_report($dr_no = '004572'){
+	function admin_report($id = null){
 		
 		$data = $this->Delivery->find('first',array(
 									'recursive'=>2,
 									'conditions'=>array(
-										'Delivery.delivery_receipt_no'=>$dr_no
+										'Delivery.id'=>$id
 								)));
 		
 		$this->set(compact('data'));
