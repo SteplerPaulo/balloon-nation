@@ -6,6 +6,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		$scope.check_all = false;
 		$scope.view_all_items = true;
 		$scope.selected_item_count = 0;
+		$scope.preventDoubleClick = false;
 		
 		$http.get(BASE_URL+"customers/all").success(function(response) {
 			$scope.customers = response;
@@ -75,7 +76,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 	}
 	
 	$scope.save = function(){
-
+		$scope.preventDoubleClick = true;
 		
 		var dtls = [];
 			dtls['Main'] = {};

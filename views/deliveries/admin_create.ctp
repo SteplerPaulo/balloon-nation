@@ -87,7 +87,7 @@
 		<div class="panel-footer">	
 			<div class="text-right">
 				<a href="<?php echo $this->base;?>/admin/deliveries" class="btn btn-default" type="cancel">Cancel</a>
-				<button ng-click="save()" class="btn btn-danger" ng-disabled="!DeliveryForm.$valid">Save</button>
+				<button ng-click="save()" class="btn btn-danger" ng-disabled="!DeliveryForm.$valid || preventDoubleClick">Save</button>
 			</div>
 		</div>
 	</div>
