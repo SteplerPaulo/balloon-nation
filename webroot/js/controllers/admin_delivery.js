@@ -7,6 +7,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		$scope.view_all_items = true;
 		$scope.selected_item_count = 0;
 		$scope.preventDoubleClick = false;
+		$scope.existingDRNo = false;
 		
 		$http.get(BASE_URL+"customers/all").success(function(response) {
 			$scope.customers = response;
@@ -65,6 +66,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 				$scope.products[i].is_disabled = false;
 				$scope.products[i].checkbox = true;
 				$scope.products[i].bad_item = 0;
+				$scope.selected_item_count++;
 				return;
 			}
 		}
@@ -118,6 +120,22 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			window.location.href = BASE_URL+"admin/deliveries";
 		});
 		
+	}
+	
+	$scope.checkDuplicate = function(dr_no){
+		$http({
+			method: 'POST',
+			url: BASE_URL+'deliveries/check_duplicate',
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: $.param({data:dr_no})
+		}).then(function(result){
+			console.log(result.data);
+			if(result.data.length){
+				$scope.existingDRNo = true;
+				return;
+			}
+			$scope.existingDRNo = false;
+		});
 	}
 	
 });

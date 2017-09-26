@@ -193,4 +193,10 @@ class DeliveriesController extends AppController {
 		$this->render();
 	
 	}
+
+	function check_duplicate(){
+		$result = $this->Delivery->find('all',array('conditions'=>array('delivery_receipt_no'=>$this->data)));
+		echo json_encode($result);
+		exit;
+	}
 }

@@ -23,7 +23,7 @@
 			<div class="row">
 				<div class="col-lg-2">
 					<label>DR No.</label>
-					<input ng-model="dr_no" ng-required="true" class="form-control input-sm"></input>
+					<input ng-model="dr_no" ng-required="true" class="form-control input-sm" ng-change='checkDuplicate(dr_no)' ng-class="(existingDRNo?'alert-danger':'')"></input>
 				</div>
 				<div class="col-lg-3">
 					<label>Stock Clerk</label>
@@ -42,7 +42,7 @@
 								<th colspan="3">
 									<div class="btn-group pull-right">
 									  <button type="button" ng-class="(view_all_items?'active':'')" class="btn btn-sm btn-default" ng-model="view_all_items" ng-click="btnGrp(true,false)">View All Items</button>
-									  <button type="button" ng-class="(selected_item_only?'active':'')"class="btn btn-sm btn-default" ng-model="selected_item_only" ng-click="btnGrp(false,true)">Selected Item ({{selected_item_count}})</button>
+									  <button type="button" ng-class="(selected_item_only?'active':'')" class="btn btn-sm btn-default" ng-model="selected_item_only" ng-click="btnGrp(false,true)">Selected Item ({{selected_item_count}})</button>
 									</div>
 								</td>
 								<td colspan="2">
@@ -68,10 +68,10 @@
 								<td class="capitalize">{{o.Product.name}} <sup>SKU - {{o.Product.item_code}}</sup></td>
 								<td class="text-center">{{o.Product.min}}</td>
 								<td class="text-center">
-									<input ng-required="!products[i].is_disabled && selected_item_only" ng-disabled="products[i].is_disabled" ng-model="products[i].deliver" type="number" min="0" class="form-control input-sm"></input>
+									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].deliver" type="number" min="0" class="form-control input-sm"></input>
 								</td>
 								<td class="text-center">
-									<input ng-required="!products[i].is_disabled && selected_item_only" ng-disabled="products[i].is_disabled" ng-model="products[i].bad_item" type="number" min="0" class="form-control input-sm"></input>
+									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].bad_item" type="number" min="0" class="form-control input-sm"></input>
 								</td>
 							</tr>
 							<tr ng-if="!products.length">
@@ -84,10 +84,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="panel-footer">	
+		<div class="panel-footer">
 			<div class="text-right">
 				<a href="<?php echo $this->base;?>/admin/deliveries" class="btn btn-default" type="cancel">Cancel</a>
-				<button ng-click="save()" class="btn btn-danger" ng-disabled="!DeliveryForm.$valid || preventDoubleClick">Save</button>
+				<button ng-click="save()" class="btn btn-danger" ng-disabled="!DeliveryForm.$valid || preventDoubleClick || existingDRNo">Save</button>
 			</div>
 		</div>
 	</div>
