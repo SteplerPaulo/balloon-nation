@@ -219,18 +219,22 @@ class SalesController extends AppController {
 					//Insert Doc Data
 					if(isset($this->data['doc_data'])){
 						foreach($this->data['doc_data'] as $dd){
+							
+							//FIXED THE BUGS FROM DOC DATA (Bugs happen when data has got one line item only)
+							if(!isset($dd['SoldItems'][0])){
+								$dummy = $dd['SoldItems'];
+								unset($dd['SoldItems']);
+								$dd['SoldItems'][0] = $dummy;
+							}
+							
 							foreach($dd['SoldItems'] as $lineItem){
 								if((int)$prdct['Product']['item_code'] == (int)$lineItem['tradeItemId']['gtin']){
 									//pr((int)$lineItem['tradeItemId']['gtin'].' = '.(int)$products[$k]['Product']['item_code']);
+									
 									$products[$k]['sold'] +=(float)$lineItem['quantitySold'];
-									
 									$products[$k]['ending_inventory'] -= (float)$lineItem['quantitySold'];
-									
-								
-								
 									$products[$k]['is_readonly'] = false;
 									$products[$k]['checkbox'] = true;
-									
 									if($products[$k]['doc_init'] == false){
 										$data['selected_items']++;
 										$data['SelectedItemValidation'] = $data['selected_items'];
@@ -239,6 +243,7 @@ class SalesController extends AppController {
 								}
 							}
 						}
+						
 						if($products[$k]['ending_inventory'] < 0){
 							$products[$k]['over_sold'] = abs($products[$k]['ending_inventory']);
 							$products[$k]['ending_inventory'] = 0;
@@ -247,14 +252,9 @@ class SalesController extends AppController {
 					}
 				}
 				$data['Result'] = $products;
-				//pr($data);exit;
 		}else{
 			$data['is_posted'] = true;
 		}
-		
-		
-	
-		
 		echo json_encode($data);
 		exit;
 	}
