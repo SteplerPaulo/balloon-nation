@@ -86,7 +86,7 @@ class SalesReport extends Formsheet{
 		$this->centerText(21,1.8,'Inventory',3,'');
 		
 		$this->centerText(24,0.9,'Actual',3,'');
-		$this->centerText(24,1.8,'Inventory',3,'');
+		$this->centerText(24,1.8,'Count',3,'');
 		
 		
 		$this->centerText(27,0.9,'Over',2,'');
@@ -115,7 +115,8 @@ class SalesReport extends Formsheet{
 			$this->centerText(15,$y,$itm['returned'],3,'');
 			$this->centerText(18,$y,$itm['sold'],3,'');
 			$this->centerText(21,$y,$itm['ending_inventory'],3,'');
-			$this->centerText(24,$y,$itm['Product']['beginning_inventory'],3,'');
+			//$this->centerText(24,$y,$itm['Product']['beginning_inventory'],3,'');
+			$this->centerText(24,$y,$itm['actual_inventory'],3,'');
 			$this->centerText(27,$y,$itm['over_sold'],2,'');
 			$this->centerText(29,$y,$itm['missing_qty'],2,'');
 	
