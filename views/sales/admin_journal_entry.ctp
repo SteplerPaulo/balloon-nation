@@ -124,7 +124,7 @@
 		<div class="panel-footer">
 			<div class="text-right">
 				<a href="<?php echo $this->base;?>/admin/sales" class="btn btn-default" type="cancel">Cancel</a>
-				<button ng-click="save()" class="btn btn-danger" ng-disabled="!SalesReportForm.$valid || hasProblem || !selected_item_count" ng-if="is_posted == false">Save</button>
+				<button ng-click="save()" class="btn btn-danger" ng-disabled="!SalesReportForm.$valid || hasProblem || !selected_item_count || preventDoubleClick" ng-if="is_posted == false">Save</button>
 			</div>
 		</div>
 	</div>

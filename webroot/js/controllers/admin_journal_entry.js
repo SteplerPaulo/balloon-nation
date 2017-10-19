@@ -6,6 +6,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		$scope.concesLineItem = null;
 		$scope.selected_item_count = 0;
 		$scope.fileData = {};
+		$scope.preventDoubleClick = false;
 		
 		$http.get(BASE_URL+"sales/initial_data").success(function(response) {
 			$scope.customers = response.Customers;
@@ -136,6 +137,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	}
 	
 	$scope.save = function (){
+		$scope.preventDoubleClick = true;
 		var data = {'Sale':{
 						'customer_id':$scope.customer.Customer.id,
 						'from_date':$filter('date')($scope.month_of, "yyyy-MM")+'-01 00:00:00',
