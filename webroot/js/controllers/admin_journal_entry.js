@@ -48,13 +48,17 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	
 	$scope.changeFilter = function (customer, month) {
 		if(	customer != undefined && month != undefined && customer != '' && month != ''){
+			var lastDay = new Date($filter('date')(month, "yyyy"), parseInt($filter('date')(month, "MM")), 0);
+			console.log(lastDay);
+			
 			var data = {
 				'customer_id':customer.Customer.id,
 				'customer_compcode':customer.Customer.compcode,
 				'from_date':$filter('date')(month, "yyyy-MM")+'-01 00:00:00',
-				'to_date':$filter('date')(month, "yyyy-MM")+'-31 00:00:00',
+				'to_date':$filter('date')(month, "yyyy-MM")+'-'+$filter('date')(lastDay, "dd")+' 00:00:00',
 				'doc_data':$scope.fileData,
 			};
+			
 			$http({
 				method: 'POST',
 				url: BASE_URL+'sales/get_data',
@@ -64,8 +68,6 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 				$scope.data = response.data.Result;
 				$scope.is_posted = response.data.is_posted;
 				$scope.selected_item_count = response.data.selected_items;
-				
-				//console.log(data);
 			});
 		}
 	};
@@ -138,12 +140,17 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	
 	$scope.save = function (){
 		$scope.preventDoubleClick = true;
+		
+		var lastDay = new Date($filter('date')($scope.month_of, "yyyy"), parseInt($filter('date')($scope.month_of, "MM")), 0);
+			
 		var data = {'Sale':{
 						'customer_id':$scope.customer.Customer.id,
 						'from_date':$filter('date')($scope.month_of, "yyyy-MM")+'-01 00:00:00',
-						'to_date':$filter('date')($scope.month_of, "yyyy-MM")+'-31 00:00:00',
+						'to_date':$filter('date')($scope.month_of, "yyyy-MM")+'-'+$filter('date')(lastDay, "dd")+' 00:00:00',
 					}};
 			data['SaleDetail'] = [];
+			
+		
 			
 		for (var i = 0; i < $scope.data.length; i++) {
 			data['SaleDetail'][i] = {
