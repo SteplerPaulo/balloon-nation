@@ -50,8 +50,8 @@
 						</thead>
 						<tbody>	
 							<tr ng-repeat="(i,d) in data.SaleDetail">
-								<td>{{d.Product.name}}</td>
-								<td class="text-center">{{d.beginning_inventory}}</td>
+								<td>{{d.Product.id}} - {{d.Product.name}}</td>
+								<td class="text-center">{{d.Product.beginning_inventory}}</td>
 								<td class="text-center">{{d.delivered}}</td>
 								<td class="text-center">{{d.returned}}</td>
 								<td class="text-center">{{d.sold}}</td>
@@ -76,7 +76,7 @@
 			</div>
 			<div class="text-right" ng-if="data.Sale.is_posted == 0">
 				<a href="<?php echo $this->base;?>/admin/sales" class="btn btn-default" type="cancel">Cancel</a>
-				<button ng-click="post()" class="btn btn-danger" ng-disabled="!SalesReportForm.$valid ">Post</button>
+				<button ng-click="post()" class="btn btn-danger" ng-disabled="!SalesReportForm.$valid || preventDoubleClick">Post</button>
 			</div>
 		</div>
 	</div>
