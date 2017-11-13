@@ -109,10 +109,13 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	
 	$scope.checkItem = function(item_code){
 		for (var i = 0; i < $scope.data.length; i++) {
-			if(item_code == $scope.data[i].Product.item_code){
+			console.log($scope.data[i].Product.item_code);
+			if(item_code == $scope.data[i].Product.item_code && $scope.data[i].checkbox == false){
+				console.log(item_code+' - '+$scope.data[i].Product.item_code);
 				$scope.data[i].is_readonly = false;
 				$scope.data[i].checkbox = true;
 				$scope.data[i].bad_item = 0;
+				$scope.selected_item_count++;
 				return;
 			}
 		}
