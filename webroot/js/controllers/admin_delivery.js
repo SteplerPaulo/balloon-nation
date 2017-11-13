@@ -62,7 +62,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 	$scope.checkItem = function(item_code){
 		
 		for (var i = 0; i < $scope.products.length; i++) {
-			if(item_code == $scope.products[i].Product.item_code){
+			if(item_code == $scope.products[i].Product.item_code && $scope.products[i].checkbox == false){
 				$scope.products[i].is_disabled = false;
 				$scope.products[i].checkbox = true;
 				$scope.products[i].bad_item = 0;
