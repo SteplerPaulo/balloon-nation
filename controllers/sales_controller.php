@@ -266,14 +266,23 @@ class SalesController extends AppController {
 	}
 	
 	function posting_data($id = null){
-		$data = $this->Sale->find('first',array(
-								'recursive'=>2,
-								'conditions'=> array(
-									'Sale.id' => $id,
-							)
-					));
-		//echo json_encode($data);
-		//exit;	
+		
+		$this->Sale->Behaviors->attach('Containable');					
+		$data = $this->Sale->find('first', array(
+			'conditions'=> array('Sale.id' => $id),
+			'fields'=> array('id','from_date', 'to_date','is_posted'),
+			'contain'=>array(
+				'Customer' => array(
+					'fields' => array('id', 'name'),
+				),
+				'SaleDetail' => array(
+					'Product' => array(
+						'fields' => array('id', 'name','beginning_inventory')
+					),
+				)
+			)
+		));		
+		
 		foreach ($data['SaleDetail'] as $key => $value) {
 			if($value['sold'] > ($value['Product']['beginning_inventory']+$value['delivered'])){
 				$data['SaleDetail'][$key]['over_sold'] = $value['sold'] - ($value['Product']['beginning_inventory']+$value['delivered']);
@@ -287,6 +296,8 @@ class SalesController extends AppController {
 				$data['SaleDetail'][$key]['over_sold'] = 0;
 				$data['SaleDetail'][$key]['in_stock'] = 0;
 			}
+			$data['SaleDetail'][$key]['ending_inventory'] = $data['SaleDetail'][$key]['in_stock'];//RESET ENDING INVENTORY IF SALE HAS BEEN UNPOSTED
+			$data['SaleDetail'][$key]['beginning_inventory'] = $value['Product']['beginning_inventory'];//RESET BEGINNING INVENTORY IF SALE HAS BEEN UNPOSTED
 			$data['SaleDetail'][$key]['missing_qty'] = 0;
 		}	
 		echo json_encode($data);
@@ -294,9 +305,12 @@ class SalesController extends AppController {
 	}
 	
 	function posting_saving(){
-		if (!empty($this->data)) {
-			//pr($this->data);exit;
 		
+		if (!empty($this->data)) {
+			
+		
+			//pr($this->data);exit;
+			
 			$this->Sale->create();
 			if ($this->Sale->saveAll($this->data['Sale'])) {
 				$this->Product->saveAll($this->data['Product']);
@@ -311,6 +325,11 @@ class SalesController extends AppController {
 				exit();
 			}
 		}
+	}
+	
+	function update_product_inventory(){
+		pr($this->data['Product']);
+		exit;
 	}
 	
 	function select(){
@@ -388,5 +407,41 @@ class SalesController extends AppController {
 		//exit;
 		//var_dump($xml);
 
+	}
+
+	function correct_last_date_of_the_month(){
+		
+		$data = $this->Sale->find('all',array(
+									'recursive'=>-1,
+									'conditions'=>array('Sale.to_date'=>'0000-00-00'),
+									'fields'=>array('id','from_date','to_date')
+								));
+								
+		foreach($data as $k=>$d){
+			$fromDate = $d['Sale']['from_date'];
+			
+			$data[$k]['Sale']['to_date'] = date("Y-m-t", strtotime($fromDate));
+			//pr($fromDate .' to '. $toDate);
+			
+			
+			
+		}	
+
+		if ($this->Sale->saveAll($data)) {
+			$response['status'] = 1;
+			$response['msg'] = 'Saving successful.';
+			echo json_encode($response);
+			exit();
+		} else {
+			$response['status'] = 0;
+			$response['msg'] = 'Error saving.Pls try again';
+			echo json_encode($response);
+			exit();
+		}		
+								
+		pr($data);exit;
+		
+		
+		
 	}
 }
