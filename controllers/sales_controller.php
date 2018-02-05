@@ -138,7 +138,10 @@ class SalesController extends AppController {
 	}
 
 	function all(){
-		$data = $this->Sale->find('all');
+		$data = $this->Sale->find('all',array(
+									'order'=>array('Sale.id'=>'DESC'),
+									//'conditions'=>array('Sale.from_date LIKE'=>'%2017%')
+									));
 		echo json_encode($data);
 		exit;
 	}

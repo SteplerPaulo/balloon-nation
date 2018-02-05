@@ -133,8 +133,8 @@ class DeliveriesController extends AppController {
 	}
 
 	function all(){
+		$data = array();
 		$data = $this->Delivery->find('all',array('order'=>'date DESC'));
-		
 		
 		foreach ($data as $key => $value) {
 		   $data[$key]['Delivery']['formated_date'] = date('F d, Y h:i:s A',strtotime($value['Delivery']['date']));

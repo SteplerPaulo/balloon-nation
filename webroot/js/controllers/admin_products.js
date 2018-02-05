@@ -2,6 +2,7 @@ App.controller('AdminProductsController',function($scope,$rootScope,$http,$filte
 	$rootScope.initializeController = function(){
 		$scope.currentPage = 1; 
 		$scope.pageSize = 35;
+		$scope.loading = true;
 			
 		if (document.location.hostname == "localhost"){
 			if(window.location.pathname.split('/')[5]){
@@ -20,7 +21,7 @@ App.controller('AdminProductsController',function($scope,$rootScope,$http,$filte
 			if($rootScope.customer ==  undefined || $rootScope.customer ==  'undefined'){
 				$rootScope.customer = $rootScope.customers[0].Customer.name;
 			}
-			
+			$scope.loading = false;
 		});
 
 	}

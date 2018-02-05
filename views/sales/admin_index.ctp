@@ -8,7 +8,6 @@
 				<option value="">All</option>
 				<option ng-repeat="d in customers">{{d.Customer.name}}</option>
 			</select>
-		
 		</div>
 		<div class="col-lg-2 col-md-2 col-xs-2 col-lg-offset-7 col-md-offset-7 col-xs-offset-7">
 			<label for="search">Items per page</label>
@@ -38,8 +37,19 @@
 							<a ng-if="d.Sale.is_posted == 1" target="_blank" href="<?php echo $this->base;?>/admin/sales/report/{{d.Sale.id}}" title="Print"><i class="fa fa-print"></i></a>
 						</td>
 					</tr>
+					<tr ng-show="loading">
+						<td colspan="4">
+							<center>
+								<img class="loading"src="/balloon-nation/img/loading2.gif"></img>
+							</center>
+						</td>
+					</tr>
 					<tr ng-show="(sales | filter:q | filter:customer).length == 0" pagination-id="ProductListTable" >
-						<td colspan="4">No Data Found</td>
+						<td colspan="4">
+							<center>
+								<img class="loading"src="/balloon-nation/img/no-record-found.png"></img>
+							</center>
+						</td>
 					</tr>
 				</tbody>
 				<tfoot>

@@ -44,6 +44,20 @@
 							<a href="<?php echo $this->base;?>/admin/deliveries/report/{{d.Delivery.id}}" title="Print" target="_blank"><i class="fa fa-print"></i></a>
 						</td>
 					</tr>
+					<tr ng-show="loading">
+						<td colspan="5">
+							<center>
+								<img class="loading"src="/balloon-nation/img/loading2.gif"></img>
+							</center>
+						</td>
+					</tr>
+					<tr ng-show="(deliveries | filter:q | filter:customer).length == 0" pagination-id="DeliveriesListTable" >
+						<td colspan="5">
+							<center>
+								<img class="loading"src="/balloon-nation/img/no-record-found.png"></img>
+							</center>
+						</td>
+					</tr>
 				</tbody>
 				<tfoot>
 					<tr>

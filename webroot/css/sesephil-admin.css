@@ -290,3 +290,6 @@ ul.alert-dropdown {
 .capitalize{
 	text-transform: capitalize;
 }
+.loading{
+	height: 200px;
+}

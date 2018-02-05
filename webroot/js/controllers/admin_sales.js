@@ -2,6 +2,7 @@ App.controller('AdminSalesController',function($scope,$rootScope,$http,$filter,$
 	$scope.initializeController = function(){
 		$scope.currentPage = 1; 
 		$scope.pageSize = 35;
+		$scope.loading = true;
 			
 		$http.get(BASE_URL+"customers/all").success(function(response) {
 			$scope.customers = response;
@@ -12,6 +13,7 @@ App.controller('AdminSalesController',function($scope,$rootScope,$http,$filter,$
 			
 		$http.get(BASE_URL+"sales/all").success(function(response) {
 			$scope.sales = response;
+			$scope.loading = false;
 		});
 	}
 

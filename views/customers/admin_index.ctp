@@ -37,6 +37,20 @@
 							<a href="<?php echo $this->base;?>/admin/customers/edit/{{d.Customer.slug}}" data-toggle="tooltip" title="Edit Product Details"><i class="fa fa-edit"></i></a>
 						</td>
 					</tr>
+					<tr ng-show="loading">
+						<td colspan="5">
+							<center>
+								<img class="loading"src="/balloon-nation/img/loading2.gif"></img>
+							</center>
+						</td>
+					</tr>
+					<tr ng-show="(customers | filter:q).length == 0" pagination-id="CustomerListTable" >
+						<td colspan="5">
+							<center>
+								<img class="loading"src="/balloon-nation/img/no-record-found.png"></img>
+							</center>
+						</td>
+					</tr>
 				</tbody>
 				<tfoot>
 					<tr>

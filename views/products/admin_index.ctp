@@ -64,8 +64,19 @@
 						
 						</td>
 					</tr>
+					<tr ng-show="loading">
+						<td colspan="7">
+							<center>
+								<img class="loading"src="/balloon-nation/img/loading2.gif"></img>
+							</center>
+						</td>
+					</tr>
 					<tr ng-show="(products | filter:q | filter:customer).length == 0" pagination-id="ProductListTable" >
-						<td colspan="7">No Data Found</td>
+						<td colspan="7">
+							<center>
+								<img class="loading"src="/balloon-nation/img/no-record-found.png"></img>
+							</center>
+						</td>
 					</tr>
 				</tbody>
 				<tfoot>

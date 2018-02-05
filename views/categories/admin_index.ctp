@@ -27,7 +27,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr pagination-id="ProductListTable" dir-paginate="d in categories | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+					<tr pagination-id="CategoryListTable" dir-paginate="d in categories | filter:q | itemsPerPage: pageSize" current-page="currentPage">
 						<td>{{d.Category.name}}</td>
 						<td>{{d.Category.slug}}</td>
 						<td class="actions text-center">
@@ -35,11 +35,25 @@
 							<a href="<?php echo $this->base;?>/admin/categories/delete/{{d.Category.id}}" onclick="return confirm('Are you sure you want to delete this category?');" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a>
 						</td>
 					</tr>
+					<tr ng-show="loading">
+						<td colspan="3">
+							<center>
+								<img class="loading"src="/balloon-nation/img/loading2.gif"></img>
+							</center>
+						</td>
+					</tr>
+					<tr ng-show="(categories | filter:q).length == 0" pagination-id="CategoryListTable" >
+						<td colspan="3">
+							<center>
+								<img class="loading"src="/balloon-nation/img/no-record-found.png"></img>
+							</center>
+						</td>
+					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
 						<td colspan="3" class="text-center">
-							<dir-pagination-controls pagination-id="ProductListTable"></dir-pagination-controls>
+							<dir-pagination-controls pagination-id="CategoryListTable"></dir-pagination-controls>
 						</td>
 					</tr>
 				</tfoot>
