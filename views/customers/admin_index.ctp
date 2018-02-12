@@ -34,7 +34,10 @@
 						<td>{{d.Customer.address}}</td>
 						<td>{{d.Customer.slug}}</td>
 						<td class="actions text-center">
-							<a href="<?php echo $this->base;?>/admin/customers/edit/{{d.Customer.slug}}" data-toggle="tooltip" title="Edit Product Details"><i class="fa fa-edit"></i></a>
+							<a href="<?php echo $this->base;?>/admin/customers/edit/{{d.Customer.slug}}" data-toggle="tooltip" title="Edit Customer Details"><i class="fa fa-edit"></i></a>
+							<a ng-if="!d.Product.length" href="<?php echo $this->base;?>/admin/customers/clone/{{d.Customer.slug}}" data-toggle="tooltip" title="Clone Main Products">
+								<i class="fa fa-clone"></i>
+							</a>
 						</td>
 					</tr>
 					<tr ng-show="loading">

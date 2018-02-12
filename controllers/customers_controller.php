@@ -3,6 +3,7 @@ class CustomersController extends AppController {
 
 	var $name = 'Customers';
 	var $helpers = array('Access');
+	var $uses = array('Customer','Product');
 
 	function index() {
 		$this->Customer->recursive = 0;
@@ -126,9 +127,61 @@ class CustomersController extends AppController {
 	}
 	
 	function all(){
-		$products = $this->Customer->find('all',array('order' =>array('Customer.name')));
-		echo json_encode($products);
+		$customers = $this->Customer->find('all',array('order' =>array('Customer.id'=>'DESC')));
+		//pr($customers);exit;
+		echo json_encode($customers);
 		exit;
+	}
+	
+	function admin_clone(){
+		$this->layout ="admin_default";	
+	}
+	
+	function clone_data($slug = null){
+		$data =  array();
+		
+		$data['New'] = $this->Customer->findBySlug($slug);
+		if(empty($data['New']['Product'])){
+			$this->Product->unbindModel( array('hasMany' => array('ProductImage','DeliveryDetail')));
+			$this->Product->unbindModel( array('belongsTo' => array('Customer','Category')));
+			$data['BalloonationProducts'] = $this->Product->find('all',array(
+															'conditions'=>array('Product.customer_id'=>1),
+															'order'=>array('Product.name'),
+															'fields'=>array('name','item_code','purchase_price',
+																			'selling_price','min','beginning_inventory',
+																			'category_id','description','initial_inventory'
+																			)
+														));
+														
+			//SET PRODUCTS' CUSTOMER ID	AND SLUGS										
+			foreach($data['BalloonationProducts'] as $k => $d){
+				//CUSTOMER ID
+				$data['BalloonationProducts'][$k]['Product']['customer_id'] = $data['New']['Customer']['id'];
+				//SLUG
+				$string = str_replace(' ', '-', strtolower(trim($d['Product']['name']))).'-'.$data['New']['Customer']['id']; 
+				$data['BalloonationProducts'][$k]['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
+			}
+											
+			echo json_encode($data);
+			exit;
+		}else{
+			die('Error: Customer Product was already initialized');
+		}
+	}
+	
+	function save_clone_data(){
+		$this->Product->create();
+		if ($this->Product->saveAll($this->data)) {
+			$response['status'] = 1;
+			$response['msg'] = 'Saving successful.';
+			echo json_encode($response);
+			exit();
+		} else {
+			$response['status'] = 0;
+			$response['msg'] = 'Error saving.Pls try again';
+			echo json_encode($response);
+			exit();
+		}
 	}
 
 
