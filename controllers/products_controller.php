@@ -47,6 +47,8 @@ class ProductsController extends AppController {
 			
 			$string = str_replace(' ', '-', strtolower(trim($this->data['Product']['name']))).'-'.$this->data['Product']['customer_id']; 
 			$this->data['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
+			
+			$this->data['Product']['initial_inventory'] = $this->data['Product']['beginning_inventory'];
 		
 			$this->Product->create();
 			if ($this->Product->saveAll($this->data)) {
@@ -74,6 +76,8 @@ class ProductsController extends AppController {
 		if (!empty($this->data)) {
 			$string = str_replace(' ', '-', strtolower(trim($this->data['Product']['name']))).'-'.$this->data['Product']['customer_id']; 
 			$this->data['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
+			
+			$this->data['Product']['initial_inventory'] = $this->data['Product']['beginning_inventory'];
 			
 			if ($this->Product->save($this->data)) {
 				$this->Session->setFlash(__('The product has been saved', true));
