@@ -9,7 +9,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		$scope.preventDoubleClick = false;
 		$scope.existingDRNo = false;
 		
-		$http.get(BASE_URL+"customers/all").success(function(response) {
+		$http.get(BASE_URL+"deliveries/customers").success(function(response) {
 			$scope.customers = response;
 			if($scope.customer ==  undefined){
 				$scope.customer = '';
