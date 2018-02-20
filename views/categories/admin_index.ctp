@@ -23,14 +23,14 @@
 					<tr>
 						<th>Name</th>
 						<th>Slug</th>
-						<th class="actions text-center">Action</th>
+						<th class="actions text-right">Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr pagination-id="CategoryListTable" dir-paginate="d in categories | filter:q | itemsPerPage: pageSize" current-page="currentPage">
 						<td>{{d.Category.name}}</td>
 						<td>{{d.Category.slug}}</td>
-						<td class="actions text-center">
+						<td class="actions text-right">
 							<a href="<?php echo $this->base;?>/admin/categories/edit/{{d.Category.slug}}" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a> |
 							<a href="<?php echo $this->base;?>/admin/categories/delete/{{d.Category.id}}" onclick="return confirm('Are you sure you want to delete this category?');" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a>
 						</td>
@@ -44,9 +44,7 @@
 					</tr>
 					<tr ng-show="(categories | filter:q).length == 0" pagination-id="CategoryListTable" >
 						<td colspan="3">
-							<center>
-								<img class="loading"src="/balloon-nation/img/no-record-found.png"></img>
-							</center>
+							<center><img class="loading" src="{{src}}"></img></center>
 						</td>
 					</tr>
 				</tbody>

@@ -47,11 +47,9 @@
 							</center>
 						</td>
 					</tr>
-					<tr ng-show="(customers | filter:q).length == 0" pagination-id="CustomerListTable" >
+					<tr ng-show="(customers | filter:q).length == 0 && !loading" pagination-id="CustomerListTable" >
 						<td colspan="5">
-							<center>
-								<img class="loading"src="/balloon-nation/img/no-record-found.png"></img>
-							</center>
+							<center><img class="loading" src="{{src}}"></img></center>
 						</td>
 					</tr>
 				</tbody>
