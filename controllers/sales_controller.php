@@ -138,8 +138,10 @@ class SalesController extends AppController {
 	}
 
 	function all(){
+		$this->Sale->unbindModel( array('hasMany' => array('SaleDetail')));
+		
 		$data = $this->Sale->find('all',array(
-									'order'=>array('Sale.id'=>'DESC'),
+									'order'=>array('Sale.from_date'=>'DESC'),
 									//'conditions'=>array('Sale.from_date LIKE'=>'%2017%')
 									));
 		echo json_encode($data);
@@ -446,5 +448,11 @@ class SalesController extends AppController {
 		
 		
 		
+	}
+
+	function customers(){
+		$customers = $this->Customer->find('all',array('order' =>array('Customer.id'=>'ASC')));
+		echo json_encode($customers);
+		exit;
 	}
 }
