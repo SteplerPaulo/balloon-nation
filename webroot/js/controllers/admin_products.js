@@ -1,7 +1,7 @@
 App.controller('AdminProductsController',function($scope,$rootScope,$http,$filter,$uibModal, $log, $document){
 	$rootScope.initializeController = function(){
 		$scope.currentPage = 1; 
-		$scope.pageSize = 5;
+		$scope.pageSize = 10;
 		$scope.loading = true;
 		$scope.src = '';
 			
