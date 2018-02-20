@@ -109,7 +109,7 @@ class ProductsController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 	
-	function all(){
+	function all(){//Obsolete on admin product index, created a new function for faster rendering
 		$data = array();
 		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
 		$products = $this->Product->find('all', array(
@@ -119,20 +119,9 @@ class ProductsController extends AppController {
 			),
 			'order'=>'Product.name ASC'
 		));
-		
-		/*
-		foreach ($products as $key => $value) {
-		   $products[$key]['Product']['formated_last_date_posted'] = date('m/d/Y h:i:s A',strtotime($value['Product']['last_date_posted']));
-		   $products[$key]['counted'] = 0;
-		   $products[$key]['returns'] = 0;
-		   $products[$key]['deliver'] = 0;
-		}
-		*/
-		
 		$data['Products'] = $products;
 		$this->Customer->unbindModel( array('hasMany' => array('Product')));
 		$data['Customers'] = $this->Customer->find('all');
-		 
 		echo json_encode($data);
 		exit;
 	}
@@ -151,8 +140,6 @@ class ProductsController extends AppController {
 		echo json_encode($data);
 		exit;
 	}
-
-	
 
 	function admin_slug(){
 		$products = $this->Product->find('all');
@@ -178,7 +165,6 @@ class ProductsController extends AppController {
 		exit;
 	}
 	
-	
 	function by_itemcode($item_code = null){
 		$result = $this->Product->find('first',array('recursive'=>-1,
 													'conditions'=>array(
@@ -189,7 +175,6 @@ class ProductsController extends AppController {
 		echo json_encode($result);
 		exit;
 	}
-	
 	
 	function copy_items(){
 		die('Contact System Administrator');
@@ -227,5 +212,27 @@ class ProductsController extends AppController {
 		}
 		
 	}
-	
+
+	/**CREATED FUNCTION FOR SLOW RENDERING PRODUCT LIST**/
+	function admin_init($customer = 'Balloon Nation'){
+		$data = array();
+		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
+		$data = $this->Product->find('all', array(
+			'contain' => array(
+				'Category',
+				'Customer',
+			),
+			'conditions'=>array('Customer.name'=>$customer),
+			'order'=>'Product.name ASC'
+		));
+		echo json_encode($data);
+		exit;
+	}
+	function customers(){
+		$this->Customer->unbindModel( array('hasMany' => array('Product')));
+		$data = $this->Customer->find('all');
+		echo json_encode($data);
+		exit;
+	}
+	/**END**/
 }
