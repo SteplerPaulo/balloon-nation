@@ -71,9 +71,7 @@
 					</tr>
 					<tr ng-show="(products | filter:q | filter:customer).length == 0 && !loading" pagination-id="ProductListTable" >
 						<td colspan="7">
-							<center>
-								<img class="loading" src="{{src}}"></img>
-							</center>
+							<center><img class="loading" src="{{src}}"></img></center>
 						</td>
 					</tr>
 				</tbody>
