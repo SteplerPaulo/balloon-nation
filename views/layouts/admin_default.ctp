@@ -160,7 +160,7 @@
 					<li class="">
 						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-truck')).' '.
 												$this->Html->tag('span', 'Deliveries'),
-												array('admin' => true,'controller'=>'deliveries','action'=>''),
+												array('admin' => true,'controller'=>'deliveries','action'=>'/'),
 												array('escape' => false)
 												);  ?>
                     </li>
