@@ -7,10 +7,9 @@
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-xs-3">
 			<label for="customer">Customer</label>
-			<select class='form-control' ng-model='customer' ng-change="changeCustomer()">
+			<select class='form-control input-sm' ng-model='customer' ng-change="changeCustomer()">
 				<option ng-repeat="d in customers">{{d.Customer.name}}</option>
 			</select>
-		
 		</div>
 		<div class="col-lg-3 col-md-3 col-xs-3">
 			<label for="search">Search</label>
@@ -23,7 +22,7 @@
 	</div><br/>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<table class="table table-striped table-hovered">
+			<table class="table tablle-condensed table-striped table-hovered">
 				<thead>
 					<tr>
 						<th colspan="6">PRODUCTS</th>
@@ -47,7 +46,7 @@
 				</thead>
 				<tbody>
 					<tr ng-if="products.length" pagination-id="ProductListTable" dir-paginate="d in products | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
-						<td><h6>{{d.Customer.name}}</h6></td>
+						<td><span class="small">{{d.Customer.name}}</span></td>
 						<td>{{d.Product.item_code}}</td>
 						<td class="capitalize">{{d.Product.name}}</td>
 						<td>{{d.Category.name}}</td>
