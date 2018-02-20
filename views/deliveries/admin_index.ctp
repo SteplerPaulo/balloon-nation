@@ -53,9 +53,7 @@
 					</tr>
 					<tr ng-show="(deliveries | filter:q | filter:customer).length == 0" pagination-id="DeliveriesListTable" >
 						<td colspan="5">
-							<center>
-								<img class="loading"src="/balloon-nation/img/no-record-found.png"></img>
-							</center>
+							<center><img class="loading" src="{{src}}"></img></center>
 						</td>
 					</tr>
 				</tbody>

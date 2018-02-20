@@ -134,6 +134,7 @@ class DeliveriesController extends AppController {
 
 	function all(){
 		$data = array();
+		$this->Delivery->unbindModel( array('hasMany' => array('DeliveryDetail')));
 		$data = $this->Delivery->find('all',array('order'=>'date DESC'));
 		
 		foreach ($data as $key => $value) {
@@ -197,6 +198,12 @@ class DeliveriesController extends AppController {
 	function check_duplicate(){
 		$result = $this->Delivery->find('all',array('conditions'=>array('delivery_receipt_no'=>$this->data)));
 		echo json_encode($result);
+		exit;
+	}
+	
+	function customers(){
+		$customers = $this->Customer->find('all',array('order' =>array('Customer.id'=>'ASC')));
+		echo json_encode($customers);
 		exit;
 	}
 }
