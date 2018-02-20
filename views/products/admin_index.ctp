@@ -22,7 +22,7 @@
 	</div><br/>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<table class="table tablle-condensed table-striped table-hovered">
+			<table class="table table-condensed table-striped table-hovered">
 				<thead>
 					<tr>
 						<th colspan="6">PRODUCTS</th>
