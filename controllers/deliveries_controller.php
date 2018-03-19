@@ -206,4 +206,5 @@ class DeliveriesController extends AppController {
 		echo json_encode($customers);
 		exit;
 	}
+	
 }
