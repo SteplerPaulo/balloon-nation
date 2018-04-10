@@ -46,7 +46,7 @@
 									</div>
 								</td>
 								<td colspan="2">
-									<input ng-model="item_code" ng-change="checkItem(item_code)" placeholder="Item Code" class="form-control input-sm"></input>
+									<input id="ItemCode" ng-model="item_code" ng-change="checkItem(item_code)" placeholder="Item Code" class="form-control input-sm"></input>
 								</td>
 							</tr>
 							<tr>
