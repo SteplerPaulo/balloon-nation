@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	var $uses =  array('User','Document');
+	var $uses =  array('User','Document','Delivery','Sale','Customer');
 	var $helpers = array('Access');
 	
 	function beforeFilter(){ 
@@ -507,5 +507,34 @@ class UsersController extends AppController {
 			}
 		}	
 		
+	}
+
+	function dashboard_updates(){
+		$data = array();
+		
+		$data['ForDelivery'] = $this->Delivery->find('all',array(
+								'recursive'=>0,
+								'conditions'=>array('Delivery.date LIKE'=>
+												'%2018-02-16%'
+												//'%'.date("Y-m-d").'%'
+								)
+							));
+						
+		$data['ForPosting'] = $this->Sale->find('all',array(
+								'recursive'=>0,
+								'conditions'=>array('Sale.is_posted'=>'0'
+								)
+							));
+						
+		$data['ForCloning'] = $this->Customer->find('all',array(
+								'recursive'=>0,
+								'conditions'=>array('Customer.is_posted'=>'0'
+								)
+							));
+						
+		//pr($data['ForPosting']);exit;
+		
+		echo json_encode($data);
+		exit;
 	}
 }
