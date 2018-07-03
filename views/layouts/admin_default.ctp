@@ -113,8 +113,6 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo ucfirst($access->getmy('username'))?><b class="caret"></b></a>
                     <ul class="dropdown-menu">
-
-						
 						 <li >
 							<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).' '.
 										$this->Html->tag('span', 'Profile'),
@@ -129,7 +127,6 @@
 										array('escape' => false)
 										);  ?>
 						</li>
-						<li class="divider"></li>
 						<li>
 							<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-power-off fa-fw')).' '.
 									$this->Html->tag('span', 'Logout'),
