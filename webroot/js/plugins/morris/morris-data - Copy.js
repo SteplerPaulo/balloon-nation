@@ -196,45 +196,27 @@ $(function() {
     Morris.Bar({
         element: 'morris-bar-chart',
         data: [{
-            month: 'Jan',
-            deliveries: 136
+            device: 'iPhone',
+            geekbench: 136
         }, {
-            month: 'Feb',
-            deliveries: 137
+            device: 'iPhone 3G',
+            geekbench: 137
         }, {
-            month: 'Mar',
-            deliveries: 275
+            device: 'iPhone 3GS',
+            geekbench: 275
         }, {
-            month: 'Apr',
-            deliveries: 380
+            device: 'iPhone 4',
+            geekbench: 380
         }, {
-            month: 'May',
-            deliveries: 655
+            device: 'iPhone 4S',
+            geekbench: 655
         }, {
-            month: 'Jun',
-            deliveries: 653
-        }, {
-            month: 'Jul',
-            deliveries: 123
-        }, {
-            month: 'Aug',
-            deliveries: 567
-        }, {
-            month: 'Sep',
-            deliveries: 234
-        }, {
-            month: 'Oct',
-            deliveries: 655
-        }, {
-            month: 'Nov',
-            deliveries: 621
-        }, {
-            month: 'Dec',
-            deliveries: 1571
+            device: 'iPhone 5',
+            geekbench: 1571
         }],
-        xkey: 'month',
-        ykeys: ['deliveries'],
-        labels: ['Deliveries'],
+        xkey: 'device',
+        ykeys: ['geekbench'],
+        labels: ['Geekbench'],
         barRatio: 0.4,
         xLabelAngle: 35,
         hideHover: 'auto',
