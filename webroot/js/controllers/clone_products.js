@@ -18,7 +18,7 @@ App.controller('CloneProductController',function($scope,$rootScope,$http,$filter
 			}
 		}
 			
-	 	$http.get(BASE_URL+"customers/clone_data/"+$scope.customer_slug).success(function(response) {
+	 	$http.get(BASE_URL+"customers/test/"+$scope.customer_slug).success(function(response) {
 			$scope.customer_id = response.New.Customer.id;
 			$scope.customer = response.New.Customer.name;
 			$scope.data = response.BalloonationProducts;
@@ -32,7 +32,6 @@ App.controller('CloneProductController',function($scope,$rootScope,$http,$filter
 	
 	$scope.save = function(){
 		
-		console.log($scope.data);
 		$http({
 			method: 'POST',
 			url: BASE_URL+'/customers/save_clone_data',

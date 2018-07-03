@@ -1,6 +1,6 @@
 <?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
 <?php echo $this->Html->addCrumb('Customer','/admin/customers'); ?>
-<?php echo $this->Html->addCrumb('Clone Main Products',''); ?>
+<?php echo $this->Html->addCrumb('Clone Products',''); ?>
 <div ng-controller="CloneProductController" ng-init="initializeController()">	
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-xs-4">
@@ -16,7 +16,7 @@
 			<table class="table table-striped table-hovered">
 				<thead>
 					<tr>
-						<th colspan="3">Clone Products</th>
+						<th colspan="4">Clone Products</th>
 						<th colspan="3">
 							<input ng-model="q" class="form-control input-sm" placeholder="Search">
 						</th>
@@ -28,10 +28,11 @@
 						<th class="text-center w10">Purchase Price</th>
 						<th class="text-center w10">Selling Price</th>
 						<th class="text-center w10">Beginning Inventory</th>
+						<th class="text-center w5">Status</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="(i,d) in data | filter:q">
+					<tr ng-repeat="(i,d) in data | filter:q" ng-if="(data[i].Product.status)!='existing'" >
 						<td>{{d.Product.item_code}}</td>
 						<td class="text-right">{{d.Product.name}}</td>
 						<td>
@@ -44,6 +45,7 @@
 							<input type="number" min="0" step="0.01" class="form-control input-sm" string-to-number required="required" ng-model='data[i].Product.selling_price'>
 						</td>
 						<td><input type="number" class="form-control input-sm" string-to-number ng-model='data[i].Product.beginning_inventory' ng-change="change(i)"></td>
+						<td class="text-center">{{data[i].Product.status}}</td>
 						<td class="hide"><input class="form-control input-sm" ng-model='data[i].Product.initial_inventory'></td>
 					</tr>
 					<tr ng-show="loading">
@@ -56,7 +58,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="6" class="text-right">
+						<td colspan="7" class="text-right">
 							<a href="<?php echo $this->base;?>/admin/customers" class="btn btn-default" type="cancel">Cancel</a>
 							<button class="btn btn-danger" type="button" ng-click="save()">Save</button>
 						</td>

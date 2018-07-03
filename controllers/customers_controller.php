@@ -136,7 +136,7 @@ class CustomersController extends AppController {
 		$this->layout ="admin_default";	
 	}
 	
-	function clone_data($slug = null){
+	function clone_data($slug = null){// GET ALL DATA FROM BALLOONATION MAIN INVENTORY
 		$data =  array();
 		
 		$data['New'] = $this->Customer->findBySlug($slug);
@@ -169,6 +169,8 @@ class CustomersController extends AppController {
 	}
 	
 	function save_clone_data(){
+		//pr($this->data);exit;
+		
 		$this->Product->create();
 		if ($this->Product->saveAll($this->data)) {
 			$response['status'] = 1;
@@ -181,6 +183,60 @@ class CustomersController extends AppController {
 			echo json_encode($response);
 			exit();
 		}
+	}
+	
+	function test($slug = null){// TEST - USE FOR CLONING ONLY THE NEW ADDITIONAL DATA FROM BALLOONATION MAIN INVENTORY
+		$data =  array();
+		
+		$data['New'] = $this->Customer->findBySlug($slug);
+		
+		//pr($data['New']['Customer']['id']);
+		
+		$this->Product->unbindModel( array('hasMany' => array('ProductImage','DeliveryDetail')));
+		$this->Product->unbindModel( array('belongsTo' => array('Customer','Category')));
+		$data['BalloonationProducts'] = $this->Product->find('all',array(
+														'conditions'=>array(
+																		'Product.customer_id' => 1),
+														'order'=>array('Product.name'),
+														'fields'=>array('name','item_code','purchase_price',
+																		'selling_price','min','beginning_inventory',
+																		'category_id','description','initial_inventory',
+																		'customer_id'
+																		)
+													));
+													
+													
+		//pr($data['BalloonationProducts']);
+		//exit;	
+		
+													
+		//SET PRODUCTS' CUSTOMER ID	AND SLUGS										
+		foreach($data['BalloonationProducts'] as $k => $d){
+			$data['BalloonationProducts'][$k]['Product']['status'] = 'new';
+			
+			foreach($data['New']['Product'] as $ck => $cp){
+				if($d['Product']['name'] == $cp['name']){
+					//pr($cp);
+					$data['BalloonationProducts'][$k]['Product']['status'] = 'existing';
+					$data['BalloonationProducts'][$k]['Product']['min'] = $cp['min'];
+					$data['BalloonationProducts'][$k]['Product']['purchase_price'] = $cp['purchase_price'];
+					$data['BalloonationProducts'][$k]['Product']['selling_price'] = $cp['selling_price'];
+					$data['BalloonationProducts'][$k]['Product']['initial_inventory'] = $cp['initial_inventory'];
+					$data['BalloonationProducts'][$k]['Product']['beginning_inventory'] = $cp['beginning_inventory'];
+					break;
+				}
+			}
+			
+			//CUSTOMER ID
+			$data['BalloonationProducts'][$k]['Product']['customer_id'] = $data['New']['Customer']['id'];
+			//SLUG
+			$string = str_replace(' ', '-', strtolower(trim($d['Product']['name']))).'-'.$data['New']['Customer']['id']; 
+			$data['BalloonationProducts'][$k]['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
+		}
+			
+		echo json_encode($data);
+		exit;
+		
 	}
 
 
