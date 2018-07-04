@@ -136,7 +136,9 @@ class CustomersController extends AppController {
 		$this->layout ="admin_default";	
 	}
 	
-	function clone_data($slug = null){// GET ALL DATA FROM BALLOONATION MAIN INVENTORY
+	//THIS METHOD IS OBSOLETE, this can only be use when the customer got no associated product yet 
+	//(per mam tracy we need to create new method that can add new products on a customer even with an existing associated product on it)
+ 	function clone_data($slug = null){// GET ALL DATA FROM BALLOONATION MAIN INVENTORY
 		$data =  array();
 		
 		$data['New'] = $this->Customer->findBySlug($slug);
@@ -185,12 +187,14 @@ class CustomersController extends AppController {
 		}
 	}
 	
+	//THIS METHOD 
 	function test($slug = null){// TEST - USE FOR CLONING ONLY THE NEW ADDITIONAL DATA FROM BALLOONATION MAIN INVENTORY
 		$data =  array();
 		
-		$data['New'] = $this->Customer->findBySlug($slug);
+		$data['Cust'] = $this->Customer->findBySlug($slug);
 		
-		//pr($data['New']['Customer']['id']);
+		//pr($data['Cust']['Product']);
+		//exit;
 		
 		$this->Product->unbindModel( array('hasMany' => array('ProductImage','DeliveryDetail')));
 		$this->Product->unbindModel( array('belongsTo' => array('Customer','Category')));
@@ -204,36 +208,29 @@ class CustomersController extends AppController {
 																		'customer_id'
 																		)
 													));
+
 													
-													
-		//pr($data['BalloonationProducts']);
-		//exit;	
-		
-													
-		//SET PRODUCTS' CUSTOMER ID	AND SLUGS										
+		//SET PRODUCTS' CUSTOMER ID	AND SLUGS & REMOVE EXISTING CUSTOMER PRODUCT ON THE LIST									
 		foreach($data['BalloonationProducts'] as $k => $d){
 			$data['BalloonationProducts'][$k]['Product']['status'] = 'new';
 			
-			foreach($data['New']['Product'] as $ck => $cp){
+			foreach($data['Cust']['Product'] as $ck => $cp){
 				if($d['Product']['name'] == $cp['name']){
-					//pr($cp);
-					$data['BalloonationProducts'][$k]['Product']['status'] = 'existing';
-					$data['BalloonationProducts'][$k]['Product']['min'] = $cp['min'];
-					$data['BalloonationProducts'][$k]['Product']['purchase_price'] = $cp['purchase_price'];
-					$data['BalloonationProducts'][$k]['Product']['selling_price'] = $cp['selling_price'];
-					$data['BalloonationProducts'][$k]['Product']['initial_inventory'] = $cp['initial_inventory'];
-					$data['BalloonationProducts'][$k]['Product']['beginning_inventory'] = $cp['beginning_inventory'];
+					//remove existing products
+					unset($data['BalloonationProducts'][$k]);
 					break;
+				}else{
+					//CUSTOMER ID
+					$data['BalloonationProducts'][$k]['Product']['customer_id'] = $data['Cust']['Customer']['id'];
+					//SLUG
+					$string = str_replace(' ', '-', strtolower(trim($d['Product']['name']))).'-'.$data['Cust']['Customer']['id']; 
+					$data['BalloonationProducts'][$k]['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
+		
 				}
 			}
-			
-			//CUSTOMER ID
-			$data['BalloonationProducts'][$k]['Product']['customer_id'] = $data['New']['Customer']['id'];
-			//SLUG
-			$string = str_replace(' ', '-', strtolower(trim($d['Product']['name']))).'-'.$data['New']['Customer']['id']; 
-			$data['BalloonationProducts'][$k]['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
 		}
-			
+		
+		$data['BalloonationProducts'] = array_values($data['BalloonationProducts']);
 		echo json_encode($data);
 		exit;
 		

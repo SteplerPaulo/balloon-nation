@@ -48,6 +48,9 @@
 						<td class="text-center">{{data[i].Product.status}}</td>
 						<td class="hide"><input class="form-control input-sm" ng-model='data[i].Product.initial_inventory'></td>
 					</tr>
+					<tr ng-repeat="(i,d) in data | filter:q" ng-if="(data[i].Product.status)!='existing'" >
+					
+					</tr>
 					<tr ng-show="loading">
 						<td colspan="7">
 							<center>

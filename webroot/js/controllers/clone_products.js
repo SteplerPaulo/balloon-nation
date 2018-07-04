@@ -38,10 +38,12 @@ App.controller('CloneProductController',function($scope,$rootScope,$http,$filter
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: $.param({data:$scope.data})
 		}).then(function(response){
+			console.log(response);
 			if(response.status){
-				window.location.href = BASE_URL+"admin/customers";
+				
+				//window.location.href = BASE_URL+"admin/customers";
 			}else{
-				alert('Error: Customer product cloning can not be save. Pls. contact system administrator.');
+				//alert('Error: Customer product cloning can not be save. Pls. contact system administrator.');
 			}
 		});
 		
