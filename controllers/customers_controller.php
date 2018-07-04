@@ -191,9 +191,9 @@ class CustomersController extends AppController {
 	function test($slug = null){// TEST - USE FOR CLONING ONLY THE NEW ADDITIONAL DATA FROM BALLOONATION MAIN INVENTORY
 		$data =  array();
 		
-		$data['Cust'] = $this->Customer->findBySlug($slug);
+		$data['Customer'] = $this->Customer->findBySlug($slug);
 		
-		//pr($data['Cust']['Product']);
+		//pr($data['Customer']['Product']);
 		//exit;
 		
 		$this->Product->unbindModel( array('hasMany' => array('ProductImage','DeliveryDetail')));
@@ -214,16 +214,15 @@ class CustomersController extends AppController {
 		foreach($data['BalloonationProducts'] as $k => $d){
 			$data['BalloonationProducts'][$k]['Product']['status'] = 'new';
 			
-			foreach($data['Cust']['Product'] as $ck => $cp){
-				if($d['Product']['name'] == $cp['name']){
-					//remove existing products
+			foreach($data['Customer']['Product'] as $ck => $cp){
+				if($d['Product']['name'] == $cp['name']){//filtered customer existing product & remove it on the list
 					unset($data['BalloonationProducts'][$k]);
 					break;
 				}else{
-					//CUSTOMER ID
-					$data['BalloonationProducts'][$k]['Product']['customer_id'] = $data['Cust']['Customer']['id'];
-					//SLUG
-					$string = str_replace(' ', '-', strtolower(trim($d['Product']['name']))).'-'.$data['Cust']['Customer']['id']; 
+					//set customer id
+					$data['BalloonationProducts'][$k]['Product']['customer_id'] = $data['Customer']['Customer']['id'];
+					//slug
+					$string = str_replace(' ', '-', strtolower(trim($d['Product']['name']))).'-'.$data['Customer']['Customer']['id']; 
 					$data['BalloonationProducts'][$k]['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
 		
 				}

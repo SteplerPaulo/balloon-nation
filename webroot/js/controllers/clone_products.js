@@ -19,9 +19,10 @@ App.controller('CloneProductController',function($scope,$rootScope,$http,$filter
 		}
 			
 	 	$http.get(BASE_URL+"customers/test/"+$scope.customer_slug).success(function(response) {
-			$scope.customer_id = response.New.Customer.id;
-			$scope.customer = response.New.Customer.name;
+			$scope.customer_id = response.Customer.Customer.id;
+			$scope.customer = response.Customer.Customer.name;
 			$scope.data = response.BalloonationProducts;
+			console.log($scope.data);
 			$scope.loading = false;
 		});
 	}
@@ -40,7 +41,6 @@ App.controller('CloneProductController',function($scope,$rootScope,$http,$filter
 		}).then(function(response){
 			console.log(response);
 			if(response.status){
-				
 				window.location.href = BASE_URL+"admin/customers";
 			}else{
 				alert('Error: Customer product cloning can not be save. Pls. contact system administrator.');

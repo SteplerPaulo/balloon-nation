@@ -32,7 +32,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="(i,d) in data | filter:q" ng-if="(data[i].Product.status)!='existing'" >
+					<tr ng-repeat="(i,d) in data | filter:q" ng-if="data.length">
 						<td>{{d.Product.item_code}}</td>
 						<td class="text-right">{{d.Product.name}}</td>
 						<td>
@@ -48,8 +48,10 @@
 						<td class="text-center">{{data[i].Product.status}}</td>
 						<td class="hide"><input class="form-control input-sm" ng-model='data[i].Product.initial_inventory'></td>
 					</tr>
-					<tr ng-repeat="(i,d) in data | filter:q" ng-if="(data[i].Product.status)!='existing'" >
-					
+					<tr ng-if="!data.length">
+						<td colspan="7">
+							No New Product
+						</td>
 					</tr>
 					<tr ng-show="loading">
 						<td colspan="7">
@@ -63,7 +65,7 @@
 					<tr>
 						<td colspan="7" class="text-right">
 							<a href="<?php echo $this->base;?>/admin/customers" class="btn btn-default" type="cancel">Cancel</a>
-							<button class="btn btn-danger" type="button" ng-click="save()">Save</button>
+							<button class="btn btn-danger" type="button" ng-disabled="!data.length" ng-click="save()">Save</button>
 						</td>
 					</tr>
 				</tfoot>
