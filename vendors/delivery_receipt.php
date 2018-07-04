@@ -24,7 +24,7 @@ class DeliveryReceipt extends Formsheet{
 			'rows'=> 3,	
 		);	
 		$this->section($metrics);
-		//$this->DrawImage(0,0,8.5,6.375,'../webroot/img/dr.jpg');
+		$this->DrawImage(0,0,8.5,6.375,'../webroot/img/dr.jpg');
 		
 	}
 	
@@ -55,12 +55,38 @@ class DeliveryReceipt extends Formsheet{
 		$y=10.8;
 		foreach($data['DeliveryDetail'] as $k => $items){
 			if($k < 14){
-				$this->centerText(3,$y,$items['deliver'],2,'');
+				
+				if($items['deliver'] && $items['bad_item']){
+					$this->rightText(3.75,$y,$items['deliver'].' |','','');
+					$this->SetTextColor(255,0,0);
+					$this->leftText(3.75,$y,' -'.$items['bad_item'],'','');
+					$this->SetTextColor(0,0,0);
+				}else if($items['deliver']){
+					$this->centerText(3,$y,$items['deliver'],2,'');
+				}else if($items['bad_item']){
+					$this->SetTextColor(255,0,0);
+					$this->centerText(3,$y,'-'.$items['bad_item'],2,'');
+					$this->SetTextColor(0,0,0);
+				}
+				
 				$this->centerText(5,$y,'Pcs.',2,'');
 				$this->leftText(7.2,$y++,$items['Product']['name'],2,'');
 			}else{
 				if($k == 14) $y=10.8;
-				$this->centerText(15,$y,$items['deliver'],2,'');
+				
+				if($items['deliver'] && $items['bad_item']){
+					$this->rightText(14.75,$y,$items['deliver'].' |','','');
+					$this->SetTextColor(255,0,0);
+					$this->leftText(14.75,$y,' -'.$items['bad_item'],'','');
+					$this->SetTextColor(0,0,0);
+					
+				}else if($items['deliver']){
+					$this->centerText(15,$y,$items['deliver'],2,'');
+				}else if($items['bad_item']){
+					$this->SetTextColor(255,0,0);
+					$this->centerText(15,$y,'-'.$items['bad_item'],2,'');
+					$this->SetTextColor(0,0,0);
+				}
 				$this->centerText(17,$y,'Pcs.',2,'');
 				$this->leftText(19.2,$y++,$items['Product']['name'],2,'');
 			}
