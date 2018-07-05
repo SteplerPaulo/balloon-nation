@@ -3,7 +3,7 @@ class CustomersController extends AppController {
 
 	var $name = 'Customers';
 	var $helpers = array('Access');
-	var $uses = array('Customer','Product');
+	var $uses = array('Customer','Product','Delivery');
 
 	function index() {
 		$this->Customer->recursive = 0;
@@ -232,6 +232,32 @@ class CustomersController extends AppController {
 		$data['BalloonationProducts'] = array_values($data['BalloonationProducts']);
 		echo json_encode($data);
 		exit;
+		
+	}
+	
+	function complete_list_of_double_entry(){
+		$data = $this->Customer->complete_list_of_double_entry();
+		$this->set(compact('data'));
+		$this->layout='pdf';
+		$this->render();
+		
+	}
+	
+	function double_entry_list(){
+		$data = $this->Customer->double_entry_list();
+		
+		$this->set(compact('data'));
+		$this->layout='pdf';
+		$this->render();
+		
+	}
+	
+	function deleted_deliveries(){
+		$data = $this->Customer->deleted_deliveries();
+		
+		$this->set(compact('data'));
+		$this->layout='pdf';
+		$this->render();
 		
 	}
 
