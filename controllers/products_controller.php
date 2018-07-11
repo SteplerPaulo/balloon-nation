@@ -60,7 +60,7 @@ class ProductsController extends AppController {
 		}
 		
 		$categories = $this->Product->Category->find('list',array('conditions' =>array('Category.parent_id' => 1),'order'=>'Category.name'));
-		$customers = $this->Product->Customer->find('list');
+		$customers = $this->Product->Customer->find('list',array('conditions'=>array('Customer.id'=>1)));
 		$this->set(compact('categories','customers'));
 	}
 
@@ -228,6 +228,7 @@ class ProductsController extends AppController {
 		echo json_encode($data);
 		exit;
 	}
+	
 	function customers(){
 		$this->Customer->unbindModel( array('hasMany' => array('Product')));
 		$data = $this->Customer->find('all');
