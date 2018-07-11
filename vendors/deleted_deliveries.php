@@ -54,8 +54,10 @@ class DeletedDeliveries extends Formsheet{
 		$this->drawLine(1,'v',array(1,$metrics['rows']-1));
 		$this->drawLine(6,'v');
 		$this->drawLine(7,'v',array(1,$metrics['rows']-1));
+		
 		$this->drawLine(12,'v');
-		$this->drawLine(15,'v');
+		$this->drawLine(14,'v');
+		$this->drawLine(16,'v');
 		$this->drawLine(18,'v');
 	
 		$y=1;
@@ -67,8 +69,10 @@ class DeletedDeliveries extends Formsheet{
 		$this->centerText(6,1.8,'P.ID',1,'b');
 		$this->centerText(7,1.8,'DESCRIPTION',5,'b');
 		
-		$this->centerText(12,1.2,'Delivered',3,'b');
-		$this->centerText(15,1.2,'Bad Item',3,'b');
+		
+		$this->centerText(12,1.2,'D.Dtls ID',2,'b');
+		$this->centerText(14,1.2,'Delivered',2,'b');
+		$this->centerText(16,1.2,'Bad Item',2,'b');
 		$this->centerText(18,1.2,'Date',3,'b');
 		
 		$y=2.8;
@@ -80,8 +84,9 @@ class DeletedDeliveries extends Formsheet{
 			
 			$this->centerText(6,$y,$d['product']['id'],1,'');
 			$this->centerText(7,$y,$d['product']['name'],5,'');
-			$this->centerText(12,$y,$d['delivery_details']['deliver'],3,'');
-			$this->centerText(15,$y,$d['delivery_details']['bad_item'],3,'');
+			$this->centerText(12,$y,$d['delivery_details']['id'],2,'');
+			$this->centerText(14,$y,$d['delivery_details']['deliver'],2,'');
+			$this->centerText(16,$y,$d['delivery_details']['bad_item'],2,'');
 			$this->centerText(18,$y,date("M d, Y", strtotime($d['delivery_details']['date'])),3,'');
 			$y++;
 			
