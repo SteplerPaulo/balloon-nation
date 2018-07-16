@@ -56,7 +56,8 @@
 							</tr>
 							<tr>
 								<th rowspan="2" class="text-center w5">
-									<input type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
+									<!--<input type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
+									-->
 								</th>
 								<th >Item Description</th>
 								<th class="text-center w8">
