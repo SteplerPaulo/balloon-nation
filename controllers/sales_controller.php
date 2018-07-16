@@ -207,7 +207,7 @@ class SalesController extends AppController {
 					$products[$k]['sold'] = 0.00;
 					$products[$k]['over_sold'] = 0.00;
 					$products[$k]['purchase_price'] = 0.00;	
-					$products[$k]['total_inventory'] = $prdct['Product']['beginning_inventory'];
+					$products[$k]['total_inventory'] = (float)$prdct['Product']['beginning_inventory'];
 					$products[$k]['is_readonly'] = true;
 					$products[$k]['checkbox'] = false;
 					$products[$k]['doc_init'] = false;
@@ -217,7 +217,7 @@ class SalesController extends AppController {
 							$products[$k]['returned'] = $sale_dtls[0]['total_returned'];
 							$products[$k]['delivered'] = ($sale_dtls[0]['total_delivered'] != null)?$sale_dtls[0]['total_delivered']:0;
 							$products[$k]['purchase_price'] = $sale_dtls['delivery_details']['purchase_price'];
-							$products[$k]['total_inventory'] = ($prdct['Product']['beginning_inventory']+$sale_dtls[0]['total_delivered'])-$sale_dtls[0]['total_returned'];
+							$products[$k]['total_inventory'] = (float)($prdct['Product']['beginning_inventory']+$sale_dtls[0]['total_delivered'])-$sale_dtls[0]['total_returned'];
 							$products[$k]['ending_inventory'] = ($prdct['Product']['beginning_inventory']+$sale_dtls[0]['total_delivered'])-$sale_dtls[0]['total_returned'];
 						}
 					}	
