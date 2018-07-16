@@ -24,7 +24,7 @@ class DeliveryReceipt extends Formsheet{
 			'rows'=> 3,	
 		);	
 		$this->section($metrics);
-		$this->DrawImage(0,0,8.5,6.375,'../webroot/img/dr.jpg');
+		//$this->DrawImage(0,0,8.5,6.375,'../webroot/img/dr.jpg');
 		
 	}
 	
