@@ -76,7 +76,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		if(is_checked){
 			$scope.data[i].is_readonly = false;
 			$scope.data[i].bad_item = 0;
-			$scope.data[i].ending_inventory = $scope.data[i].ending_inventory-$scope.data[i].sold;
+			$scope.data[i].ending_inventory = $scope.data[i].total_inventory-$scope.data[i].sold;
 			
 			$scope.selected_item_count++;
 		}else{
@@ -131,13 +131,16 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		if($scope.data[i].sold < $scope.data[i].total_inventory){
 			$scope.data[i].ending_inventory =  $scope.data[i].total_inventory - $scope.data[i].sold;
 			$scope.data[i].over_sold = 0;
+			return;
 		}else if($scope.data[i].sold > $scope.data[i].total_inventory){
 			$scope.data[i].ending_inventory = 0;
 			$scope.data[i].over_sold = $scope.data[i].sold - $scope.data[i].total_inventory;
-		}else{
-			$scope.data[i].ending_inventory = 0;
-			$scope.data[i].over_sold = 0;
+			return;
 		}
+		$scope.data[i].ending_inventory = 0;
+		$scope.data[i].over_sold = 0;
+		
+		
 		console.log($scope.data[i]);
 	}
 	
