@@ -43,7 +43,7 @@ class SalesReport extends Formsheet{
 		//$this->leftText(3,$y,($data['Sale']['is_posted'] == 1)?'True':'False','','');
 	}
 	
-	function dtls($data){
+	function dtls($data,$page){
 		$this->showLines = !true;
 		$metrics = array(
 			'base_x'=> 0.25,
@@ -58,28 +58,28 @@ class SalesReport extends Formsheet{
 		$this->drawBox(0,0,$metrics['cols'],$metrics['rows']);
 		$this->drawMultipleLines(3,43,1,'h');
 		$this->drawLine(2,'h');
-		$this->drawLine(9,'v',array(0,$metrics['rows']-1));
-		$this->drawLine(12,'v',array(0,$metrics['rows']-1));
+		$this->drawLine(13,'v',array(0,$metrics['rows']-1));
 		$this->drawLine(15,'v',array(0,$metrics['rows']-1));
-		$this->drawLine(18,'v',array(0,$metrics['rows']-1));
+		$this->drawLine(17,'v',array(0,$metrics['rows']-1));
+		$this->drawLine(19,'v',array(0,$metrics['rows']-1));
 		$this->drawLine(21,'v',array(0,$metrics['rows']-1));
 		$this->drawLine(24,'v',array(0,$metrics['rows']-1));
 		$this->drawLine(27,'v',array(0,$metrics['rows']-1));
 		$this->drawLine(29,'v',array(0,$metrics['rows']-1));
 		$this->drawLine(31,'v',array(0,$metrics['rows']-1));
-		$this->drawLine(34,'v');
+		$this->drawLine(34,'v',array(0,$metrics['rows']-1));
 		$this->drawLine(37,'v');
 		$this->drawLine(40,'v');
 		$y=1;
 		$this->centerText(0,1.2,'Item Description',10,'b');
 		
 		
-		$this->centerText(9,0.9,'Beginning',3,'');
-		$this->centerText(9,1.8,'Inventory',3,'');
+		$this->centerText(13,0.9,'Beg.',2,'');
+		$this->centerText(13,1.8,'Inv.',2,'');
 		
-		$this->centerText(12,1.8,'Delivered',3,'');
-		$this->centerText(15,1.8,'Returned',3,'');
-		$this->centerText(18,1.8,'Sold',3,'');
+		$this->centerText(15,1.8,'Del.',2,'');
+		$this->centerText(17,1.8,'Ret.',2,'');
+		$this->centerText(19,1.8,'Sold',2,'');
 		
 		
 		$this->centerText(21,0.9,'Ending',3,'');
@@ -108,17 +108,18 @@ class SalesReport extends Formsheet{
 		$this->GRID['font_size']=8;
 		$total_cost = 0;
 		$total_profit = 0;
-		foreach($data['SaleDetail'] as $itm){
+		foreach($data as $itm){
+			//($itm['']!=0)?$itm['']:'--'
 			$this->leftText(0.2,$y,$itm['Product']['name'],'','');
-			$this->centerText(9,$y,$itm['beginning_inventory'],3,'');
-			$this->centerText(12,$y,$itm['delivered'],3,'');
-			$this->centerText(15,$y,$itm['returned'],3,'');
-			$this->centerText(18,$y,$itm['sold'],3,'');
+			$this->centerText(13,$y,$itm['beginning_inventory'],2,'');
+			$this->centerText(15,$y,($itm['delivered']!=0)?$itm['delivered']:'--',2,'');
+			$this->centerText(17,$y,($itm['returned']!=0)?$itm['returned']:'--',2,'');
+			$this->centerText(19,$y,($itm['sold']!=0)?$itm['sold']:'--',2,'');
 			$this->centerText(21,$y,$itm['ending_inventory'],3,'');
 			//$this->centerText(24,$y,$itm['Product']['beginning_inventory'],3,'');
 			$this->centerText(24,$y,$itm['actual_inventory'],3,'');
-			$this->centerText(27,$y,$itm['over_sold'],2,'');
-			$this->centerText(29,$y,$itm['missing_qty'],2,'');
+			$this->centerText(27,$y,($itm['over_sold']!=0)?$itm['over_sold']:'--',2,'');
+			$this->centerText(29,$y,($itm['missing_qty']!=0)?$itm['missing_qty']:'--',2,'');
 	
 			
 			$cost = $itm['Product']['purchase_price']*$itm['sold'];
@@ -137,9 +138,10 @@ class SalesReport extends Formsheet{
 		//$this->centerText(0,$y,'********** END OF REPORT **********',40,'');
 		$y = 43.8;
 		$this->GRID['font_size']=8;
-		$this->leftText(0.2,$y,'TOTAL','','b');
+		$this->rightText(36.7,$y,'PAGE '.$page.' TOTAL','','b');
 		$this->rightText(39.9,$y,number_format($total_cost,2),'','b');
-		$this->rightText(42.9,$y,number_format($total_profit,2),'','b');
+		$this->rightText(42.9,$y++,number_format($total_profit,2),'','b');
+		$this->leftText(0,$y,'Page '.$page,'','b');
 	}
 
 }
