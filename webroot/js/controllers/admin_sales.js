@@ -1,23 +1,16 @@
 App.controller('AdminSalesController',function($scope,$rootScope,$http,$filter,$uibModal, $log, $document){
 	$scope.initializeController = function(){
-		$scope.currentPage = 1; 
-		$scope.pageSize = 10;
 		$scope.loading = true;
 		$scope.src = '';
+		$scope.customer_id = window.location.pathname.split('/')[5];
+		$scope.customer_name = decodeURI(window.location.pathname.split('/')[6]);
 			
-		$http.get(BASE_URL+"sales/customers").success(function(response) {
-			$scope.customers = response;
-			if($scope.customer ==  undefined){
-				$scope.customer = '';
-			}
-		});	
-			
-		$http.get(BASE_URL+"sales/all").success(function(response) {
+		$http.get(BASE_URL+"sales/customer_sales/"+$scope.customer_id).success(function(response) {
+			console.log(response);
 			$scope.sales = response;
 			$scope.loading = false;
 			if(!$scope.loading) $scope.src = '/balloon-nation/img/no-record-found.png';
 		});
 	}
-
 });
 

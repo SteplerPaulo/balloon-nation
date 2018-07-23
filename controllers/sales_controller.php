@@ -147,6 +147,22 @@ class SalesController extends AppController {
 		echo json_encode($data);
 		exit;
 	}
+	
+	function customer_sales($customer_id = null){
+		$this->Sale->unbindModel( array('hasMany' => array('SaleDetail')));
+		
+		$data = $this->Sale->find('all',array(
+									'order'=>array('Sale.from_date'=>'DESC'),
+									'conditions'=>array('Sale.customer_id'=>$customer_id)
+									//'conditions'=>array('Sale.from_date LIKE'=>'%2017%')
+									));
+		echo json_encode($data);
+		exit;
+	}
+	
+	function admin_customer(){
+		$this->layout = 'admin_default';
+	}
 
 	function admin_report($id = null){
 		
