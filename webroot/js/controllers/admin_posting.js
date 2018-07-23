@@ -7,6 +7,7 @@ App.controller('AdminSalePostingController',function($scope,$rootScope,$http,$fi
 		$scope.SaleID =  $("#SalePostingPanel").attr('sale-id');
 		$http.get(BASE_URL+"sales/posting_data/"+$scope.SaleID).success(function(response) {
 			$scope.data = response;
+			console.log(response);
 		
 		});
 	}
@@ -44,7 +45,7 @@ App.controller('AdminSalePostingController',function($scope,$rootScope,$http,$fi
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: $.param({data:data})
 		}).then(function(response){
-			window.location.href = BASE_URL+"admin/sales";
+			window.location.href = BASE_URL+"admin/sales/index/"+$scope.data.Customer.id+'/'+$scope.data.Customer.name;
 		});
 		
 		
