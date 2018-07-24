@@ -469,7 +469,7 @@ class SalesController extends AppController {
 
 	function customers(){
 		$this->Customer->unbindModel( array('hasMany' => array('Product')));
-		$customers = $this->Customer->find('all',array('order' =>array('Customer.id'=>'ASC')));
+		$customers = $this->Customer->find('all',array('order' =>array('Customer.name'=>'ASC')));
 		echo json_encode($customers);
 		exit;
 	}

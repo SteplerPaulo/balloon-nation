@@ -231,7 +231,7 @@ class ProductsController extends AppController {
 	
 	function customers(){
 		$this->Customer->unbindModel( array('hasMany' => array('Product')));
-		$data = $this->Customer->find('all');
+		$data = $this->Customer->find('all',array('order' =>array('Customer.name'=>'ASC')));
 		echo json_encode($data);
 		exit;
 	}
