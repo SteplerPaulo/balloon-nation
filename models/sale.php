@@ -62,6 +62,23 @@ class Sale extends AppModel {
 			"
 		);
 	}
-
+	
+	public function unpost($customer_id = 2){
+		$query = array();
+		$query['ResetProduct'] =  $this->query("
+					UPDATE 
+					  products 
+					SET
+					  beginning_inventory = initial_inventory,
+					  missing_qty = 0
+					WHERE customer_id = $customer_id 
+					ORDER BY NAME"
+				);
+				
+		$query['UnpostSale'] =  $this->query("UPDATE sales SET is_posted= 0 WHERE customer_id = $customer_id");
+	
+		return $query;
+	}
+	
 
 }

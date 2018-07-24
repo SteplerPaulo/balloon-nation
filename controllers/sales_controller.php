@@ -467,8 +467,25 @@ class SalesController extends AppController {
 	}
 
 	function customers(){
+		$this->Customer->unbindModel( array('hasMany' => array('Product')));
 		$customers = $this->Customer->find('all',array('order' =>array('Customer.id'=>'ASC')));
 		echo json_encode($customers);
 		exit;
+	}
+	
+	//UNPOSTING
+	function admin_unposting(){
+		$this->layout = 'admin_default';
+	}
+	
+	function unpost_customer_sales(){
+		//pr();exit;
+		if(!empty($this->data)){
+			
+			$result =  $this->Sale->unpost($this->data['Customer']['id']);
+			echo json_encode($result);
+		}
+		
+		
 	}
 }
