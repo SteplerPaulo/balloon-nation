@@ -280,7 +280,7 @@ class SalesController extends AppController {
 		exit;
 	}
 	
-	
+	//POSTING
 	function admin_posting($id = null){
 		$this->layout = 'admin_default';
 		$this->set(compact('id'));
@@ -298,25 +298,30 @@ class SalesController extends AppController {
 				),
 				'SaleDetail' => array(
 					'Product' => array(
-						'fields' => array('id', 'name','beginning_inventory')
+						'fields' => array('id', 'name','beginning_inventory','missing_qty')
 					),
 				)
 			)
 		));		
 		
 		foreach ($data['SaleDetail'] as $key => $value) {
-			if($value['sold'] > ($value['Product']['beginning_inventory']+$value['delivered'])){
-				$data['SaleDetail'][$key]['over_sold'] = $value['sold'] - ($value['Product']['beginning_inventory']+$value['delivered']);
+			
+			$out = $value['sold']+$value['returned'];
+			$in = $value['Product']['beginning_inventory']+$value['delivered'];
+			
+			
+			if($out > $in){
+				$data['SaleDetail'][$key]['over_sold'] = $out - $in;
 				$data['SaleDetail'][$key]['in_stock'] = 0;
 		
-			}else if($value['sold'] < ($value['Product']['beginning_inventory']+$value['delivered'])){
+			}else if($out < $in){
 				$data['SaleDetail'][$key]['over_sold'] = 0;
-				$data['SaleDetail'][$key]['in_stock'] = ($value['Product']['beginning_inventory']+$value['delivered'])-$value['sold'];
-		
+				$data['SaleDetail'][$key]['in_stock'] = $in - $out;
 			}else{
 				$data['SaleDetail'][$key]['over_sold'] = 0;
 				$data['SaleDetail'][$key]['in_stock'] = 0;
 			}
+			
 			$data['SaleDetail'][$key]['ending_inventory'] = $data['SaleDetail'][$key]['in_stock'];//RESET ENDING INVENTORY IF SALE HAS BEEN UNPOSTED
 			$data['SaleDetail'][$key]['beginning_inventory'] = $value['Product']['beginning_inventory'];//RESET BEGINNING INVENTORY IF SALE HAS BEEN UNPOSTED
 			$data['SaleDetail'][$key]['missing_qty'] = 0;
@@ -330,7 +335,7 @@ class SalesController extends AppController {
 		if (!empty($this->data)) {
 			
 		
-			//pr($this->data);exit;
+		//	pr($this->data);exit;
 			
 			$this->Sale->create();
 			if ($this->Sale->saveAll($this->data['Sale'])) {
@@ -347,6 +352,7 @@ class SalesController extends AppController {
 			}
 		}
 	}
+	//END
 	
 	function update_product_inventory(){
 		pr($this->data['Product']);
@@ -361,11 +367,6 @@ class SalesController extends AppController {
 	function upload(){
 		$this->layout = 'admin_default';
 		
-
-
-
-		
-	
 		$target_dir = WWW_ROOT ."/xml/sales report/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	

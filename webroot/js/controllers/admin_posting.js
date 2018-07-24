@@ -14,7 +14,7 @@ App.controller('AdminSalePostingController',function($scope,$rootScope,$http,$fi
 
 	$scope.changeActualInventory = function(i,o){
 		
-		$scope.data.SaleDetail[i].missing_qty = o.in_stock - $scope.data.SaleDetail[i].actual_inventory;
+		$scope.data.SaleDetail[i].missing_qty = o.ending_inventory - $scope.data.SaleDetail[i].actual_inventory;
 		
 	}
 

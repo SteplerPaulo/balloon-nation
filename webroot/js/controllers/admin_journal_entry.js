@@ -176,7 +176,8 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: $.param({data:data})
 		}).then(function(response){
-			window.location.href = BASE_URL+"admin/sales";
+			console.log($scope.customer);
+			window.location.href = BASE_URL+"admin/sales/index/"+$scope.customer.Customer.id+'/'+$scope.customer.Customer.name;
 		});
 	}
 	

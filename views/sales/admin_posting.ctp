@@ -56,8 +56,8 @@
 								<td class="text-center">{{d.returned !=0 ? d.returned : '--'}}</td>
 								<td class="text-center">{{d.sold !=0 ? d.sold : '--'}}</td>
 								<td class="text-center">{{d.over_sold !=0 ? d.over_sold : '--'}}</td>
-								<td class="text-center">{{d.in_stock}}</td>
-								<td class="text-center"><input ng-disabled="data.Sale.is_posted == 1" type="number" class="form-control input-sm" ng-init="data.SaleDetail[i].actual_inventory=d.in_stock" ng-model="data.SaleDetail[i].actual_inventory" ng-required="true" ng-change="changeActualInventory(i,d)"></input></td>
+								<td class="text-center">{{d.ending_inventory}}</td>
+								<td class="text-center"><input ng-disabled="data.Sale.is_posted == 1" type="number" class="form-control input-sm" ng-init="data.SaleDetail[i].actual_inventory=d.ending_inventory" ng-model="data.SaleDetail[i].actual_inventory" ng-required="true" ng-change="changeActualInventory(i,d)"></input></td>
 								<td class="text-center"><input  type="number" class="form-control input-sm" ng-init="SaleDetail[i].missing_qty=0" ng-model="data.SaleDetail[i].missing_qty" ng-required="true" readonly="readonly"></input></td>
 							</tr>
 							<tr ng-if="!data.SaleDetail.length">
