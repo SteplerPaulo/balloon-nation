@@ -18,25 +18,25 @@
 						<?php echo $this->Form->input('Customer.name',array('label'=>false,'class'=>'form-control hide','required'=>'required'));?>
 					</div>
 					<div class="col-lg-3">
-						<?php echo $this->Form->input('category_id',array('empty'=>'-- Select --','class'=>'form-control','required'=>'required'));?>
-					</div>
-					<div class="col-lg-3">
 						<?php echo $this->Form->input('id',array('class'=>'form-control','type'=>'hidden'));?>
 					</div>
-				</div>
+				</div><br/>
 				<div class="row">
-					<div class="col-lg-3">
+					<div class="col-lg-2">
 						<?php echo $this->Form->input('item_code',array('label'=>'SKU','class'=>'form-control','required'=>'required'));?>
 					</div>
 					<div class="col-lg-7">
 						<?php echo $this->Form->input('name',array('label'=>'Item Description','class'=>'form-control','required'=>'required','autocomplete'=>'off'));?>
 					</div>
+					<div class="col-lg-3">
+						<?php echo $this->Form->input('category_id',array('empty'=>'-- Select --','class'=>'form-control','required'=>'required'));?>
+					</div>
+				</div><br/>
+				<div class="row">
 					<div class="col-lg-2">
 						<?php echo $this->Form->label('Minimun Quantity');?>
 						<?php echo $this->Form->text('min',array('class'=>'form-control','required'=>'required','min'=>'0','type'=>'number'));?>	
 					</div>
-				</div>
-				<div class="row">
 					<div class="col-lg-2">
 						<?php echo $this->Form->label('Purchase Price');?>
 						<?php echo $this->Form->text('purchase_price',array('class'=>'form-control','required'=>'required','min'=>'0','step'=>'0.01','type'=>'number'));?>	
