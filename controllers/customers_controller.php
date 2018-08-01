@@ -76,6 +76,8 @@ class CustomersController extends AppController {
 	function admin_add() {
 		$this->layout ="admin_default";	
 		if (!empty($this->data)) {
+			
+			pr($this->data);exit;
 			$string = str_replace(' ', '-', strtolower(trim($this->data['Customer']['name']))); 
 			$this->data['Customer']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
 		
@@ -208,25 +210,35 @@ class CustomersController extends AppController {
 																		'customer_id'
 																		)
 													));
+		//pr($data['Customer']['Product']);exit;
 
 													
 		//SET PRODUCTS' CUSTOMER ID	AND SLUGS & REMOVE EXISTING CUSTOMER PRODUCT ON THE LIST									
 		foreach($data['BalloonationProducts'] as $k => $d){
 			$data['BalloonationProducts'][$k]['Product']['status'] = 'new';
 			
-			foreach($data['Customer']['Product'] as $ck => $cp){
-				if($d['Product']['name'] == $cp['name']){//filtered customer existing product & remove it on the list
-					unset($data['BalloonationProducts'][$k]);
-					break;
-				}else{
-					//set customer id
-					$data['BalloonationProducts'][$k]['Product']['customer_id'] = $data['Customer']['Customer']['id'];
-					//slug
-					$string = str_replace(' ', '-', strtolower(trim($d['Product']['name']))).'-'.$data['Customer']['Customer']['id']; 
-					$data['BalloonationProducts'][$k]['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
-		
+			if(!empty($data['Customer']['Product'])){
+				foreach($data['Customer']['Product'] as $ck => $cp){
+					if($d['Product']['name'] == $cp['name']){//filtered customer existing product & remove it on the list
+						unset($data['BalloonationProducts'][$k]);
+						break;
+					}else{
+						//set customer id
+						$data['BalloonationProducts'][$k]['Product']['customer_id'] = $data['Customer']['Customer']['id'];
+						//slug
+						$string = str_replace(' ', '-', strtolower(trim($d['Product']['name']))).'-'.$data['Customer']['Customer']['id']; 
+						$data['BalloonationProducts'][$k]['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
+					}
 				}
+			}else{
+				//set customer id
+				$data['BalloonationProducts'][$k]['Product']['customer_id'] = $data['Customer']['Customer']['id'];
+				//slug
+				$string = str_replace(' ', '-', strtolower(trim($d['Product']['name']))).'-'.$data['Customer']['Customer']['id']; 
+				$data['BalloonationProducts'][$k]['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
+		
 			}
+			
 		}
 		
 		$data['BalloonationProducts'] = array_values($data['BalloonationProducts']);
