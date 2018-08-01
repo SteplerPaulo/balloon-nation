@@ -166,7 +166,12 @@ class ProductsController extends AppController {
 	}
 	
 	function by_itemcode($item_code = null){
-		$result = $this->Product->find('first',array('recursive'=>-1,
+		
+		
+		$this->Product->unbindModel(array('hasMany' => array('ProductImage','DeliveryDetail')));
+		$this->Product->unbindModel(array('belongsTo' => array('Category','Customer')));
+		
+		$result = $this->Product->find('first',array(
 													'conditions'=>array(
 														'Product.item_code'=>$item_code,
 														'Product.customer_id'=>1,
