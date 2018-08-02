@@ -5,6 +5,7 @@ App.controller('CloneProductController',function($scope,$rootScope,$http,$filter
 		$scope.pageSize = 45;
 		$scope.loading = true;
 		$scope.customer = null;
+		$scope.preventDoubleClick = false;
 			
 		//console.log(decodeURI(window.location.pathname.split('/')[5]));	
 			
@@ -32,6 +33,7 @@ App.controller('CloneProductController',function($scope,$rootScope,$http,$filter
 	}
 	
 	$scope.save = function(){
+		$scope.preventDoubleClick = true;
 		
 		$http({
 			method: 'POST',

@@ -65,7 +65,7 @@
 					<tr>
 						<td colspan="7" class="text-right">
 							<a href="<?php echo $this->base;?>/admin/customers" class="btn btn-default" type="cancel">Cancel</a>
-							<button class="btn btn-danger" type="button" ng-disabled="!data.length" ng-click="save()">Save</button>
+							<button class="btn btn-danger" type="button" ng-disabled="!data.length || preventDoubleClick" ng-click="save()">Save</button>
 						</td>
 					</tr>
 				</tfoot>
