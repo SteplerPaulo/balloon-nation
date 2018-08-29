@@ -9,17 +9,20 @@ App.controller('CloneProductController',function($scope,$rootScope,$http,$filter
 			
 		//console.log(decodeURI(window.location.pathname.split('/')[5]));	
 			
-		if (document.location.hostname == "localhost"){
+		if (document.location.hostname == "localhost" || document.location.hostname == "192.168.254.130"){
 			if(window.location.pathname.split('/')[5]){
 				$scope.customer_slug = decodeURI(window.location.pathname.split('/')[5]);
 			}
 		}else{
 			if(window.location.pathname.split('/')[2]){
 				$scope.customer_slug = decodeURI(window.location.pathname.split('/')[4]);
+				//console.log(decodeURI(window.location.pathname.split('/')[4]);
 			}
 		}
-			
-	 	$http.get(BASE_URL+"customers/test/"+$scope.customer_slug).success(function(response) {
+		console.log($scope.customer_slug);
+	 	
+		$http.get(BASE_URL+"customers/test/"+$scope.customer_slug).success(function(response) {
+			console.log(response);
 			$scope.customer_id = response.Customer.Customer.id;
 			$scope.customer = response.Customer.Customer.name;
 			$scope.data = response.BalloonationProducts;
