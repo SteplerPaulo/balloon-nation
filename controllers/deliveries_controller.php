@@ -202,7 +202,7 @@ class DeliveriesController extends AppController {
 	}
 	
 	function customers(){
-		$customers = $this->Customer->find('all',array('order' =>array('Customer.id'=>'ASC')));
+		$customers = $this->Customer->find('all',array('order' =>array('Customer.name'=>'ASC')));
 		echo json_encode($customers);
 		exit;
 	}
