@@ -12,30 +12,33 @@
 					</select>
 				</div>
 				<div class="col-lg-3">
-					<label>Month</label>
-					<input type="month" ng-model="month_of" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,month_of)">
+					<label>Month </label>
+					<input ng-disabled="!customer" type="month" ng-model="month_of" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,month_of)">
 				</div>
 				<div class="col-lg-6">
 					<label>Import XML Sales Report</label>
 					<div class="input-group">
-						<input type="file" fileread="vm.uploadme" multiple="multiple" class="form-control input-sm" ng-model="file">
+						<input ng-disabled="!customer || !month_of" type="file" fileread="vm.uploadme" multiple="multiple" class="form-control input-sm" ng-model="file">
 						<span class="input-group-btn">
-							<button class="btn btn-primary btn-sm" ng-model="importXML" ng-click="importXML(vm.uploadme)">Import</button>
+							<button ng-disabled="!customer || !month_of || !vm.uploadme" class="btn btn-primary btn-sm" ng-model="importXML" ng-click="importXML(vm.uploadme)">Import</button>
 						</span>
 					</div><!--{{vm.uploadme}}-->
 				</div>
 			</div><br/>
 			<div class="row">
 				<div class="col-lg-12">
-					<label>Imported Document:</label>
-					<span ng-if="!vm.uploadme.length">N.A</span>
+					<label>Imported Document Info:</label>
+					<span ng-if="!vm.uploadme.length"></span>
 					<span style="margin-right:5px;" ng-repeat="doc in fileData">
-						<a ng-class="(customer.Customer.compcode == doc.StoreNo)?'label label-success':'label label-danger'">
-							# {{doc.DocNo}} {{doc.StoreName}}
+						<a ng-class="(customer.Customer.compcode == doc.StoreNo && doc.CutOffDate == selectedMonth )?'label label-success':'label label-danger'">
+							{{doc.StoreName}} {{doc.CutOffDate}}
 						</a>
 					</span>
-					<div ng-if="hasProblem" class="alert alert-warning">
-						Problem on imported files found. Please import files related to the selected customer only
+					<div ng-if="wrongCustomer" class="alert alert-danger">
+						Problem found on imported files. Please import only the correct files for your selected customer.
+					</div>
+					<div ng-if="wrongMonth" class="alert alert-danger">
+						Problem found on imported files. Please import only the correct files for your selected month.
 					</div>
 				</div>
 			</div>
@@ -125,7 +128,7 @@
 		<div class="panel-footer">
 			<div class="text-right">
 				<a href="<?php echo $this->base;?>/admin/sales" class="btn btn-default" type="cancel">Cancel</a>
-				<button ng-click="save()" class="btn btn-danger" ng-disabled="!SalesReportForm.$valid || hasProblem || !selected_item_count || preventDoubleClick" ng-if="is_posted == false">Save</button>
+				<button ng-click="save()" class="btn btn-danger" ng-disabled="!SalesReportForm.$valid || wrongCustomer || wrongMonth || !selected_item_count || preventDoubleClick" ng-if="is_posted == false">Save</button>
 			</div>
 		</div>
 	</div>
