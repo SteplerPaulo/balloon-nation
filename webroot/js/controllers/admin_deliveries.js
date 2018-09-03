@@ -1,7 +1,7 @@
 App.controller('AdminDeliveriesController',function($scope,$rootScope,$http,$filter,$uibModal, $log, $document){
 	$rootScope.initializeController = function(){
 		$scope.currentPage = 1; 
-		$scope.pageSize = 7;
+		$scope.pageSize = 12;
 		$scope.loading = true;
 		$scope.src = '';
 		
