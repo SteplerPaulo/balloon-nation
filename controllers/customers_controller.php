@@ -77,7 +77,7 @@ class CustomersController extends AppController {
 		$this->layout ="admin_default";	
 		if (!empty($this->data)) {
 			
-			pr($this->data);exit;
+			//pr($this->data);exit;
 			$string = str_replace(' ', '-', strtolower(trim($this->data['Customer']['name']))); 
 			$this->data['Customer']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
 		
