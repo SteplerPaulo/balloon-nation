@@ -23,15 +23,15 @@
 			<div class="row">
 				<div class="col-lg-2">
 					<label>DR No.</label>
-					<input ng-model="dr_no" ng-required="true" class="form-control input-sm" ng-change='checkDuplicate(dr_no)' ng-class="(existingDRNo?'alert-danger':'')"></input>
+					<input ng-disabled="!customer" ng-model="dr_no" ng-required="true" class="form-control input-sm" ng-change='checkDuplicate(dr_no)' ng-class="(existingDRNo?'alert-danger':'')"></input>
 				</div>
 				<div class="col-lg-3">
 					<label>Stock Clerk</label>
-					<input ng-model="stock_clerk" ng-required="true" class="form-control input-sm"></input>
+					<input ng-disabled="!customer || !dr_no" ng-model="stock_clerk" ng-required="true" class="form-control input-sm"></input>
 				</div>
 				<div class="col-lg-3">
 					<label>Date</label>
-					<input ng-model="dateNow" ng-required="true" type="datetime-local" class="form-control input-sm" ></input>
+					<input ng-disabled="!customer || !dr_no || !stock_clerk" ng-model="dateNow" ng-required="true" type="datetime-local" class="form-control input-sm" ></input>
 				</div>
 			</div><br/>
 			<div class="row">

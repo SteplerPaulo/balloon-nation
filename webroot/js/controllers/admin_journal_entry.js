@@ -8,6 +8,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		$scope.fileData = {};
 		$scope.preventDoubleClick = false;
 		
+		
 		$http.get(BASE_URL+"sales/initial_data").success(function(response) {
 			$scope.customers = response.Customers;
 			if($scope.customer ==  undefined){
@@ -16,37 +17,8 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		});
 	}
 	
-	$scope.importXML = function (importedFile){
-		var file_count = importedFile.length;
-		$scope.fileData = {};
-		$scope.hasProblem = false;
-		$.each(importedFile, function(i, j){
-			var reader = new FileReader();
-            reader.onload = function(e) {
-				var x2js = new X2JS();
-				var xmlText = reader.result;
-				var json = x2js.xml_str2json(xmlText);
-				
-				var splittedInfo = json.Conces.additionalInformation.split(":");
-				var stNumIndex = splittedInfo.indexOf("stNum");
-				var storeInfo = splittedInfo[stNumIndex+1];
-				
-				$scope.fileData['File'+(i+1)] = {
-					'DocNo':json.Conces.concesId,
-					'StoreNo':storeInfo.split(" ")[0],
-					'StoreName':storeInfo.split(" ")[1],
-					'SoldItems':json.Conces.concesLineItem
-				};
-				
-				if(file_count == i+1) $scope.changeFilter($scope.customer,$scope.month_of);
-				if(storeInfo.split(" ")[0] != $scope.customer.Customer.compcode) $scope.hasProblem = true;
-			
-			}
-			reader.readAsText(importedFile[i]);
-		});
-	}
-	
 	$scope.changeFilter = function (customer, month) {
+		
 		if(	customer != undefined && month != undefined && customer != '' && month != ''){
 			var lastDay = new Date($filter('date')(month, "yyyy"), parseInt($filter('date')(month, "MM")), 0);
 			console.log(lastDay);
@@ -70,7 +42,52 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 				$scope.selected_item_count = response.data.selected_items;
 			});
 		}
+	
 	};
+	
+	$scope.importXML = function (importedFile){
+	
+		
+		var file_count = importedFile.length;
+		$scope.fileData = {};
+		$scope.wrongCustomer = false;
+		$scope.wrongMonth = false;
+		
+		$scope.selectedMonth = $filter('date')($scope.month_of, "yyyy-MM");
+		//console.log($scope.selectedMonth);
+		
+		
+		$.each(importedFile, function(i, j){
+			var reader = new FileReader();
+            reader.onload = function(e) {
+				var x2js = new X2JS();
+				var xmlText = reader.result;
+				var json = x2js.xml_str2json(xmlText);
+				
+				var cutOffDate = $filter('date')(json.Conces.cutOffDate, "yyyy-MM");
+	
+				var splittedInfo = json.Conces.additionalInformation.split(":");
+				var stNumIndex = splittedInfo.indexOf("stNum");
+				var storeInfo = splittedInfo[stNumIndex+1];				
+				
+				$scope.fileData['File'+(i+1)] = {
+					'DocNo':json.Conces.concesId,
+					'StoreNo':storeInfo.split(" ")[0],
+					'StoreName':storeInfo.split(" ")[1],
+					'SoldItems':json.Conces.concesLineItem,
+					'CutOffDate': cutOffDate
+				};
+				
+				if(file_count == i+1) $scope.changeFilter($scope.customer,$scope.month_of);
+				if(storeInfo.split(" ")[0] != $scope.customer.Customer.compcode) $scope.wrongCustomer = true;
+				if($scope.selectedMonth != cutOffDate){
+					$scope.wrongMonth = true;
+				}
+			
+			}
+			reader.readAsText(importedFile[i]);
+		});
+	}
 	
 	$scope.check = function (i,is_checked) {
 		if(is_checked){
@@ -189,7 +206,6 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
         },
         link: function (scope, element, attributes) {
             element.bind("change", function (changeEvent) {
-				//console.log(changeEvent.target.files);
 				scope.$apply(function () {
 				     scope.fileread = changeEvent.target.files;
                });
@@ -197,37 +213,6 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
         }
     }
 }]);
-
-
-/*
-.directive('fileInput', ['$parse', function ($parse) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attributes) {
-            element.bind('change', function () {
-                $parse(attributes.fileInput)
-                .assign(scope,element[0].files)
-                scope.$apply()
-            });
-        }
-    };
-}]).directive("fileread", [function () {
-    return {
-        scope: {
-            fileread: "="
-        },
-        link: function (scope, element, attributes) {
-            element.bind("change", function (changeEvent) {
-                scope.$apply(function () {
-                    scope.fileread = changeEvent.target.files[0];
-                    // or all selected files:
-                    // scope.fileread = changeEvent.target.files;
-                });
-            });
-        }
-    }
-}]);
-*/
 
 
 
