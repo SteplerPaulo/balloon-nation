@@ -28,7 +28,7 @@
 					</tr>
 					<tr>
 						<th>Delivery Receipt No.</th>
-						<th class="text-center">Customer</th>
+						<th class="">Customer</th>
 						<th class="text-center">Stock Clerk</th>
 						<th class="text-center">Date</th>
 						<th class="text-center">Action</th>
@@ -37,7 +37,7 @@
 				<tbody>
 					<tr pagination-id="DeliveriesListTable" dir-paginate="d in deliveries | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
 						<td>{{d.Delivery.delivery_receipt_no}}</td>
-						<td class="text-center">{{d.Customer.name}}</td>
+						<td class="">{{d.Customer.name}}</td>
 						<td class="text-center">{{d.Delivery.stock_clerk}}</td>
 						<td class="text-center">{{d.Delivery.formated_date}}</td>
 						<td class="text-center">

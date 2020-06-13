@@ -47,7 +47,6 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	
 	$scope.importXML = function (importedFile){
 	
-		
 		var file_count = importedFile.length;
 		$scope.fileData = {};
 		$scope.wrongCustomer = false;

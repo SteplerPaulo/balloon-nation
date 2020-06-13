@@ -1,5 +1,6 @@
+<!--
 <a style="cursor:pointer" title="Disabled " data-toggle="tooltip"><image class="circling-balloon" src="<?php echo $this->base;?>/img/gif/circling-balloon.gif"></image></a>
-	
+	-->
 <?php echo $this->Html->addCrumb('Home Page'); ?>
 <style>
 	.image_container {
@@ -77,7 +78,7 @@
 							</p>
 						</div>
 						<p class="contact-now">
-							<a href="<?php echo $this->base;?>/inquiries/send/{{d.Product.slug}}" target="_blank" class="btn btn-danger btn-sm"><i class="fa fa-envelope-o"></i> Contact Now</a>
+							<a href="<?php echo $this->base;?>/inquiries/send/{{d.Product.slug}}" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-envelope-o"></i> Contact Now</a>
 						</p>
 					</div>
 				</div>
@@ -94,8 +95,11 @@
 							<a href="<?php echo $this->base;?>/product-category/{{d.Category.slug}}"  >{{d.Category.name}}</a>
 						</td>
 					</tr>
+					<tr><td></td></tr>
 				</tbody>
 			</table>
+			<img class="img img-responsive" src="<?php echo $this->base;?>/img/logo2.png"></img>
+		
 		</section>
 	</div><br/><br/>
 </div>

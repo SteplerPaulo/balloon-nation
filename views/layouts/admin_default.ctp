@@ -3,18 +3,27 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php __('Balloon-Nation-Admin:'); ?>
+		<?php __('Balloon Republic - Admin:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
+	<link href="<?php echo $this->base;?>/img/logo2.png" type="image/x-icon" rel="icon">
+	<link href="<?php echo $this->base;?>/img/logo2.png" type="image/x-icon" rel="shortcut icon">
 	
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Paulo Biscocho">
 	<meta http-Equiv="Cache-Control" Content="no-cache" />
     <meta http-Equiv="Pragma" Content="no-cache" />
     <meta http-Equiv="Expires" Content="0" />
+	<meta property="og:title" content="Balloon Republic Event & Party Needs">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="<?php echo $this->base;?>/">
+	<meta property="og:site_name" content="Balloon Republic">
+	<meta property="og:description" content="Balloon Republic Event & Party Needs">
+	<meta property="og:image" content="<?php echo $this->base;?>/img/logo.png">
+
 
 	<?php
 		//echo $this->Html->meta('icon');
@@ -46,7 +55,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">Balloon Nation Admin</a>
+                <a class="navbar-brand">Balloon Republic - Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">

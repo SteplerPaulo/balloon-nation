@@ -77,7 +77,7 @@
 						<tbody>
 							<tr ng-hide="data[i].is_readonly && selected_item_only" ng-if="data.length" ng-repeat="(i,d) in data">
 								<td class="text-center"><input type="checkbox" ng-model="data[i].checkbox" ng-change="check(i,data[i].checkbox)"></td>	
-								<td class="capitalize">{{d.Product.name}} <sup>SKU - {{d.Product.item_code}}</sup></td>
+								<td class="capitalize">{{d.Product.name}} <!--<sup>SKU - {{d.Product.item_code}}</sup>--></td>
 								<td class="text-center">{{d.Product.beginning_inventory}}</td>
 								<td class="text-center">{{d.delivered}}</td>
 								<td class="text-center">{{d.returned}}</td>

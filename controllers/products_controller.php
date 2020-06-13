@@ -241,4 +241,9 @@ class ProductsController extends AppController {
 		exit;
 	}
 	/**END**/
+	
+	function report_card(){
+		$this->layout='pdf';
+		$this->render();
+	}
 }

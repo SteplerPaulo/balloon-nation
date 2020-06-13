@@ -47,7 +47,7 @@
 							</dl>
 						</div>
 						<p class="contact-now">
-							<a href="<?php echo $this->base;?>/inquiries/send/{{d.Product.slug}}" target="_blank" class="btn btn-danger btn-sm"><i class="fa fa-envelope-o"></i> Contact Now</a>
+							<a href="<?php echo $this->base;?>/inquiries/send/{{d.Product.slug}}" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-envelope-o"></i> Contact Now</a>
 						</p>
 					</div>
 				</div>

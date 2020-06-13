@@ -75,8 +75,6 @@ class SalesController extends AppController {
 
 	function admin_add() {
 		if (!empty($this->data)) {
-			//pr($this->data);exit;
-			
 			
 			$this->Sale->deleteAll(array(
 				'Sale.customer_id' => $this->data['Sale']['customer_id'], 
@@ -488,5 +486,11 @@ class SalesController extends AppController {
 		}
 		
 		
+	}
+	
+	function beda_reportcard(){
+		//$this->set(compact('data'));
+		$this->layout='pdf';
+		$this->render();
 	}
 }

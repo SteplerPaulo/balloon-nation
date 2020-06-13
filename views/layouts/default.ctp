@@ -22,7 +22,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php __('Balloon-Nation:'); ?>
+		<?php __('Balloon Republic:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 
@@ -31,9 +31,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
-	<link href="<?php echo $this->base;?>/img/company logo/1.png" type="image/x-icon" rel="icon">
-	<link href="<?php echo $this->base;?>/img/company logo/1.png" type="image/x-icon" rel="shortcut icon">
+    <meta name="author" content="Paulo Biscocho">
+	<meta property="og:title" content="Balloon Republic Event & Party Needs">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="<?php echo $this->base;?>/">
+	<meta property="og:site_name" content="Balloon Republic">
+	<meta property="og:description" content="Balloon Republic Event & Party Needs">
+	<meta property="og:image" content="<?php echo $this->base;?>/img/logo.png">
+	
+	<link href="<?php echo $this->base;?>/img/logo2.png" type="image/x-icon" rel="icon">
+	<link href="<?php echo $this->base;?>/img/logo2.png" type="image/x-icon" rel="shortcut icon">
+	
 	<?php
 		//echo $this->Html->meta('icon');
 		echo $this->Html->css('bootstrap'); //Bootstrap Core CSS
@@ -63,11 +71,10 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<?php  echo $this->Html->link($this->Html->tag('i', '', array('class' => '')).' '.
-									$this->Html->tag('span', 'Balloon Nation'),
-									array('admin' => false,'controller'=>'pages','action'=>'/'),
-									array('escape' => false,'class'=>'navbar-brand company-name')
-									);  ?>
+					<a href="/balloon-nation/pages" class="navbar-brand company-name">
+						<img height="50px" class="" src="<?php echo $this->base;?>/img/name.png"></img>
+		
+					</a>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -112,14 +119,14 @@
 	<div id="footer">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4  text-muted">Powered By <a href="javascript:void(0)">PHAiC Technology</a></div>	
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4  text-muted">&#169;	<a href="javascript:void(0)">Balloon Republic 2020.</a></div>	
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-muted text-center ">	
 					Follow us on
-					<a href="javascript:void(0)" title="Balloon Nation Facebook Page" data-toggle="tooltip" ><i class="fa fa-facebook-official"></i></a> 
-					<a href="javascript:void(0)" title="Balloon Nation LinkedIn" data-toggle="tooltip" ><i class="fa fa-linkedin-square"></i></a> 
-					<a href="javascript:void(0)" title="Balloon Nation Youtube Channel" data-toggle="tooltip" ><i class="fa fa-youtube-square"></i></a>
-					<a href="javascript:void(0)" title="Balloon Nation Instagram" data-toggle="tooltip" ><i class="fa fa-instagram"></i></a>
-					<a href="javascript:void(0)" title="Balloon Nation Twitter" data-toggle="tooltip" ><i class="fa fa-twitter-square"></i></a> 
+					<a href="javascript:void(0)" title="Visit our FB Page" data-toggle="tooltip" ><i class="fa fa-facebook-official"></i></a> 
+					<a href="javascript:void(0)" title="Add as on LinkedIn" data-toggle="tooltip" ><i class="fa fa-linkedin-square"></i></a> 
+					<a href="javascript:void(0)" title="Subscribe our Youtube Channel" data-toggle="tooltip" ><i class="fa fa-youtube-square"></i></a>
+					<a href="javascript:void(0)" title="Follow us on IG" data-toggle="tooltip" ><i class="fa fa-instagram"></i></a>
+					<a href="javascript:void(0)" title="Twit with us on Twitter" data-toggle="tooltip" ><i class="fa fa-twitter-square"></i></a> 
 				</div>	
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4  text-right">
 				<?php  if($this->Access->isLoggedIn()):?>

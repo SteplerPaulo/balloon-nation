@@ -15,7 +15,7 @@
 						<option ng-repeat="d in customers" address="{{d.Customer.address}}">{{d.Customer.name}}</option>
 					</select>
 				</div>
-				<div class="col-lg-5">
+				<div class="col-lg-7">
 					<label>Address</label>
 					<input ng-model="customer_address" class="form-control input-sm" readonly="readonly"></input>
 				</div>

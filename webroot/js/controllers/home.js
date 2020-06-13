@@ -3,8 +3,8 @@ App.controller('HomeController',function($scope,$rootScope,$http,$filter){
 		$scope.currentPage = 1; 
 		$scope.bannerLimit = false;
 		$scope.categoryLimit = false;
-		$scope.productLimit = 5;
-		$scope.imageLimit = 5;
+		$scope.productLimit = 6;
+		$scope.imageLimit = 6;
 			
 		$http.get(BASE_URL+"categories/main_children").success(function(response) {
 			$scope.categories = response;

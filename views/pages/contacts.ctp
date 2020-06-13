@@ -8,7 +8,7 @@
 			<image src="http://placehold.it/600x250" class="img-responsive" />
 		</a>
 		<address>
-			<h2 style="color: #a62424;">Balloon Nation</h2>
+			<h2 style="color: #6920b0;">Balloon Nation</h2>
 			Quezon Avenue <br>
 			Quezon City, Philippines
 		</address>
@@ -26,9 +26,9 @@
 		</address>
 
 	</div>
-	<div class="col-lg-4 alert alert-danger box-shadow" id="FORM">
+	<div class="col-lg-4 alert alert-default" id="FORM">
 		<?php echo $this->Form->create('Inquiry',array('enctype' => 'multipart/form-data','action'=>'send_via_contactus'));?>
-		<h4 class="alert alert-danger">Send Us A Message</h4>
+		<h4>Send Us A Message</h4>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="input text">
@@ -47,7 +47,7 @@
 		</div><br/>
 		<div class="row">
 			<div class="col-md-12 text-right">
-				<button class="btn btn-danger" id="SendButton"><i class="fa fa-paper-plane-o"></i> Send</button>
+				<button class="btn btn-success" id="SendButton"><i class="fa fa-paper-plane-o"></i> Send</button>
 			</div>
 		</div>
 		<?php echo $this->Form->end();?>

@@ -16,14 +16,13 @@
 			<table class="table table-striped table-hovered">
 				<thead>
 					<tr>
-						<th colspan="4">CUSTOMERS</th>
+						<th colspan="3">CUSTOMERS</th>
 						<th colspan="1"><a href = "<?php echo $this->base;?>/admin/customers/add" class="btn btn-sm btn-warning pull-right">Add New Customer</a></th>
 					</tr>
 					<tr>
 						<th>Compcode</th>
 						<th>Name</th>
 						<th>Address</th>
-						<th>Slug</th>
 						<th class="actions text-center">Action</th>
 					</tr>
 				</thead>
@@ -32,7 +31,6 @@
 						<td>{{d.Customer.compcode}}</td>
 						<td>{{d.Customer.name}}</td>
 						<td>{{d.Customer.address}}</td>
-						<td>{{d.Customer.slug}}</td>
 						<td class="actions text-center">
 							<a href="<?php echo $this->base;?>/admin/customers/edit/{{d.Customer.slug}}" data-toggle="tooltip" title="Edit Customer Details"><i class="fa fa-edit"></i></a>
 							<a href="<?php echo $this->base;?>/admin/customers/clone/{{d.Customer.slug}}" data-toggle="tooltip" title="Clone New Products">
@@ -41,14 +39,14 @@
 						</td>
 					</tr>
 					<tr ng-show="loading">
-						<td colspan="5">
+						<td colspan="4">
 							<center>
 								<img class="loading"src="/balloon-nation/img/loading2.gif"></img>
 							</center>
 						</td>
 					</tr>
 					<tr ng-show="(customers | filter:q).length == 0 && !loading" pagination-id="CustomerListTable" >
-						<td colspan="5">
+						<td colspan="4">
 							<center><img class="loading" src="{{src}}"></img></center>
 						</td>
 					</tr>

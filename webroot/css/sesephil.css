@@ -2,6 +2,7 @@
 html,
 body {
 	height: 100%;
+	font-family: josefin sans bold;	
 	/* The html and body elements cannot have any padding or margin. */
 }
 
@@ -34,7 +35,7 @@ body {
 	border-bottom: 1px dotted #000;
 }
 
-/*!
+/*
  * Start Bootstrap - Shop Homepage HTML Template (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
@@ -98,9 +99,13 @@ footer {
 }
 /**MY STYLE**/
 .navbar a{
-	color: #ffff00 !important;
+	color: #ffffff !important;
 	
 }
+.navbar-brand {
+    padding: 0px 0px; 
+}
+
 .navbar .dropdown .dropdown-menu a{
 	color:black !important;
 	
@@ -142,23 +147,23 @@ pre{
 }
 */
 .navbar-inverse {
-    background-color: #cf041c; /*#009ef0;*/
-    border-color: #cf041c;
+    background-color:  #fa41cc /*#cf041c*/; /*#009ef0;*/
+    border-color: #c3209b;
 	box-shadow: 10px 10px 5px #888888;
 }
 
-body  {
-    background: url("/balloon-nation/img/background/bg6.jpg") no-repeat fixed;
+/* body  {
+    background: url("/balloon-nation/img/logo2.png") no-repeat fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
     background-size: auto 100%;
 }
-
+ */
 
 .categories-table td  a:hover{
-	color: #f60;
+	color: #fa41cc; /*#f60*/;
 	text-decoration: none;
 }
 .categories-table th  a{
@@ -166,7 +171,7 @@ body  {
 	text-decoration: none;
 }
 .categories-table th  a:hover{
-	color: #f60;
+	color: #fa41cc;
 }
 
 .call-us-now{
@@ -255,4 +260,9 @@ textarea{
 @keyframes realistic-balloon {
     0%   {left:0px; top:550px;}
     100% {left:0px; top:-200px;}
+}
+
+a {
+    color: #6920b0;
+    text-decoration: none;
 }
