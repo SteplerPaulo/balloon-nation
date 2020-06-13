@@ -14,7 +14,7 @@
 					echo $this->Form->input('username',array('placeholder'=>'Username','required'=>'required'));
 					echo $this->Form->input('password',array('placeholder'=>'Password','required'=>'required','onkeypress'=>'PasswordCapsLock(event)'));
 				?>
-				<?php echo $this->Form->submit(__('Login', true), array('class'=>'btn btn-lg btn-danger btn-block' ));?>
+				<?php echo $this->Form->submit(__('Login', true), array('class'=>'btn btn-lg btn-success btn-block' ));?>
 				<?php echo $this->Form->end();?>
 			</div>
 		</div>
