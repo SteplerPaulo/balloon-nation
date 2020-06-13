@@ -3,8 +3,8 @@
 <?php echo $this->Html->addCrumb('Send Inquiry'); ?>
 <div class="row">
 	<?php echo $this->Form->create('Inquiry',array('enctype' => 'multipart/form-data'));?>
-	<div class="col-md-8 col-md-offset-2">
-		<h4>SEND INQUIRY</h4>
+	<div class="col-md-6 col-md-offset-3">
+		<h4 class="text-shadow">SEND INQUIRY</h4>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="input text">
@@ -41,8 +41,11 @@
 				<li>Max. total size: 3MB</li>
 			</ul>
 		</div>
-		<div class="text-right row">
-			<button class="btn btn-danger" type="submit"><i class="fa fa-paper-plane-o"></i> Send Inquiry</button>
+	
+	<div class="row">
+			<div class="col-md-12 text-right">
+				<button class="btn btn-success  box-shadow" type="submit"><i class="fa fa-envelope"></i> Send Inquiry</button>
+			</div>
 		</div>
 	</div>
 	<?php echo $this->Form->end();?>

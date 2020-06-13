@@ -4,18 +4,18 @@
 	<div class="row">
 		<section class="col-xs-12 col-lg-9 col-lg-push-3">
 			<div class="row">
-				<div class="col-lg-8 col-md-12 col-xs-12">
+				<div class="col-lg-8 col-md-12 col-xs-12 ">
 					<label for="search">Search</label>
-					<input ng-model="productFilter" id="search" class="form-control input-sm" placeholder="Filter text">
+					<input ng-model="productFilter" id="search" class="box-shadow form-control input-sm" placeholder="Filter text">
 				</div>
 				<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
 					<label for="search">Items per page</label>
-					<input type="number" min="1" max="100" class="form-control input-sm ng-pristine ng-valid ng-valid-number ng-valid-max ng-valid-min" ng-model="pageSize">
+					<input type="number" min="1" max="100" class="box-shadow form-control input-sm ng-pristine ng-valid ng-valid-number ng-valid-max ng-valid-min" ng-model="pageSize">
 				</div>
 			</div><br/>
-			<div class="row">
+			<div class="row ng-cloak">
 				<div class="col-sm-4 col-lg-4 col-md-4" pagination-id="ProductList" dir-paginate="d in (filteredProducts = (products | filter: productFilter )) | itemsPerPage: pageSize">
-					<div class="thumbnail">
+					<div class="thumbnail box-shadow">
 						<div class="row carousel-holder" style="margin-bottom: 0px;" ng-if="d.ProductImage.length">
 							<div class="col-md-12">
 								<div id="{{d.Product.slug}}" class="carousel slide" data-ride="carousel">
@@ -52,7 +52,7 @@
 					</div>
 				</div>
 				<div class="col-sm-12 col-lg-12 col-md-12" ng-if="filteredProducts.length == 0">
-					<div class="alert alert-danger">No results found...</div>
+					<div class="alert alert-danger box-shadow">No results found...</div>
 				</div>
 			
 				<div class="text-center col-sm-12 col-lg-12 col-md-12">
@@ -66,7 +66,7 @@
 					<th><a href="<?php echo $this->base;?>/products">CATEGORIES</a></th>
 				</thead>
 				<tbody>
-					<tr  pagination-id="CategoryList" dir-paginate="d in categories | filter:q | itemsPerPage: categoryLimit">
+					<tr class="ng-cloak" pagination-id="CategoryList" dir-paginate="d in categories | filter:q | itemsPerPage: categoryLimit">
 						<td>
 							<a href="<?php echo $this->base;?>/product-category/{{d.Category.slug}}"  >{{d.Category.name}}</a>
 						</td>

@@ -2,7 +2,6 @@
 <?php echo $this->Html->addCrumb('Contacts'); ?>
 
 <div class="row">
-	
 	<div class="col-lg-6 col-lg-offset-1">
 		<a href="javascript:void(0)" title="View Location" data-toggle="tooltip" class="red-tooltip">
 			<image src="http://placehold.it/600x250" class="img-responsive" />
@@ -26,28 +25,30 @@
 		</address>
 
 	</div>
-	<div class="col-lg-4 alert alert-default" id="FORM">
+	<div class="col-lg-4 alert alert-default box-shadow" id="FORM">
 		<?php echo $this->Form->create('Inquiry',array('enctype' => 'multipart/form-data','action'=>'send_via_contactus'));?>
 		<h4>Send Us A Message</h4>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="input text">
-					<label for="InquiryFrom">From</label>
-					<input name="data[Inquiry][from]" type="email" class="form-control" placeholder="Enter your email address" required="required" id="InquiryFrom">
+					<input name="data[Inquiry][from]" type="email" class="form-control" placeholder="Your email address" required="required" id="InquiryFrom">
 				</div>
-				<label>To</label>
-				<div class="like-input-box">
+				<label class="hide" >To</label>
+				<div class="like-input-box hide">
 					Balloon Nation
 				</div>
 				<?php
-					echo $this->Form->input('subject',array('class'=>'form-control','required'=>'required'));
-					echo $this->Form->input('content',array('type'=>'textarea','class'=>'form-control','required'=>'required'));
+					echo $this->Form->input('subject',array('value'=>'From Balloon Republic Website','class'=>'hide form-control','required'=>'required','label'=>false));
+				?>
+				<br/>
+				<?php
+					echo $this->Form->input('content',array('placeholder'=>'Your message','type'=>'textarea','class'=>'form-control','required'=>'required','label'=>false));
 				?>
 			</div>
 		</div><br/>
 		<div class="row">
 			<div class="col-md-12 text-right">
-				<button class="btn btn-success" id="SendButton"><i class="fa fa-paper-plane-o"></i> Send</button>
+				<button class="btn btn-success" id="SendButton">Send Mail <i class="fa fa-envelope"></i></button>
 			</div>
 		</div>
 		<?php echo $this->Form->end();?>

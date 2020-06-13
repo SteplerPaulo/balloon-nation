@@ -34,9 +34,10 @@ class ProductImage extends AppModel {
 				'allowed_ext' => array('.jpg', '.jpeg', '.png'),
 				'zoomCrop' => true,
 				'thumbsizes' => array(
-					'normal' => array('width' => 400, 'height' => 300),
-					'small' => array('width' => 80, 'height' => 80,'maxDimension' => '', 'thumbnailQuality' => 100, 'zoomCrop' => true),
-					'large' => array('width' => 680, 'height' => 350,'maxDimension' => '', 'thumbnailQuality' => 100, 'zoomCrop' => true),
+					'normal' => array('width' => 1080, 'height' => 720),
+					'large' => array('width' => 720, 'height' => 480,'maxDimension' => '', 'thumbnailQuality' => 100, 'zoomCrop' => false),
+					'small' => array('width' => 187, 'height' => 234,'maxDimension' => '', 'thumbnailQuality' => 100, 'zoomCrop' => false),
+					'xsmall' => array('width' => 40, 'height' => 50,'maxDimension' => '', 'thumbnailQuality' => 100, 'zoomCrop' => false),
 				),
 				'default' => 'default.jpg'
 			)

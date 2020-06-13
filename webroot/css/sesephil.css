@@ -5,6 +5,9 @@ body {
 	font-family: josefin sans bold;	
 	/* The html and body elements cannot have any padding or margin. */
 }
+.ng-cloak{
+  display: none !important;
+}
 
 #wrap {
   min-height: 100%;

@@ -21,7 +21,7 @@
 	<div class="row">
 		<section class="col-md-9">
 			<h4 ng-if="banners.length"></h4>
-			<div class="row carousel-holder" ng-if="banners.length">
+			<div class="row carousel-holder ng-cloak" ng-if="banners.length">
 				<div class="col-sm-12 col-md-12 col-lg-12">
 					<div id="carousel-example-generic" class="carousel slide box-shadow" data-ride="carousel">
 						<ol class="carousel-indicators">
@@ -42,9 +42,9 @@
 				</div>
 			</div>
 			<h4>Featured Products</h4>
-			<div class="row">
+			<div class="row ng-cloak">
 				<div class="col-sm-4 col-lg-4 col-md-4" pagination-id="FeaturedProductList" dir-paginate="d in products | filter:q | itemsPerPage: productLimit">
-					<div class="thumbnail">
+					<div class="thumbnail box-shadow">
 						<div class="row carousel-holder" style="margin-bottom: 0px;" ng-if="d.ProductImage.length">
 							<div class="col-md-12">
 								<div id="{{d.Product.slug}}" class="carousel slide" data-ride="carousel">
@@ -90,7 +90,7 @@
 					<th>CATEGORIES</th>
 				</thead>
 				<tbody>
-					<tr pagination-id="CategoryList" dir-paginate="d in categories | filter:q | itemsPerPage: categoryLimit">
+					<tr class="ng-cloak" pagination-id="CategoryList" dir-paginate="d in categories | filter:q | itemsPerPage: categoryLimit">
 						<td>
 							<a href="<?php echo $this->base;?>/product-category/{{d.Category.slug}}"  >{{d.Category.name}}</a>
 						</td>
