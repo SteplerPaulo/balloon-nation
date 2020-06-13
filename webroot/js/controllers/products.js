@@ -1,8 +1,12 @@
 App.controller('ProductsController',function($scope,$rootScope,$http,$filter){
 
 	$scope.initializeController = function(){
-		$scope.currentPage = 1; 
-		$scope.pageSize =12;
+		$scope.currentPage = 1;
+		$scope.categoryLimit = false;
+		$scope.showLoadBtn = false;
+		$scope.endResult = false;
+		$scope.limit = 15;
+		
 		$http.get(BASE_URL+"categories/main_children").success(function(response) {
 			$scope.categories = response;
 		});
@@ -20,7 +24,32 @@ App.controller('ProductsController',function($scope,$rootScope,$http,$filter){
 					$scope.productFilter = window.location.pathname.split('/')[2];
 				}
 			}
-		
+			$scope.showLoadBtn = true;
 		});
 	}
+	
+	$scope.loadMore = function() {
+		$scope.limit += 15;
+		
+		//console.log($scope.filteredProducts.length);
+		//console.log($scope.limit);
+		
+		if($scope.limit < $scope.filteredProducts.length){
+			$scope.showLoadBtn = true;
+		}else{
+			$scope.showLoadBtn = false;
+			$scope.endResult = true;
+		}
+	};
+});
+App.directive("directiveWhenScrolled", function() {
+  return function(scope, elm, attr) {
+    var raw = elm[0];
+
+    elm.bind('scroll', function() {
+      if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+        scope.$apply(attr.directiveWhenScrolled);
+      }
+    });
+  };
 });

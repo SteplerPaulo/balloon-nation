@@ -83,6 +83,13 @@
 					</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-lg-4 col-lg-offset-4 ng-cloak">
+					<a class="btn btn-default btn-block" href="<?php echo $this->base;?>/products" style="text-decoration: none;">
+					See More...
+					</a>
+				</div>
+			</div>
 		</section>
 		<section class="col-md-3 box-shadow">
 			<table class="table table-hover categories-table">

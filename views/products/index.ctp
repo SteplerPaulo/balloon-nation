@@ -4,17 +4,15 @@
 	<div class="row">
 		<section class="col-xs-12 col-lg-9 col-lg-push-3">
 			<div class="row">
-				<div class="col-lg-8 col-md-12 col-xs-12 ">
-					<label for="search">Search</label>
-					<input ng-model="productFilter" id="search" class="box-shadow form-control input-sm" placeholder="Filter text">
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
-					<label for="search">Items per page</label>
-					<input type="number" min="1" max="100" class="box-shadow form-control input-sm ng-pristine ng-valid ng-valid-number ng-valid-max ng-valid-min" ng-model="pageSize">
+				<div class="col-lg-7 col-md-12 col-xs-12">
+					<div class="input-group">
+						<span class="input-group-addon box-shadow"><i class="fa fa-search"></i></span>
+						<input ng-model="productFilter" id="search" class="box-shadow form-control input-sm" placeholder="Search item">
+					</div>
 				</div>
 			</div><br/>
-			<div class="row ng-cloak">
-				<div class="col-sm-4 col-lg-4 col-md-4" pagination-id="ProductList" dir-paginate="d in (filteredProducts = (products | filter: productFilter )) | itemsPerPage: pageSize">
+			<div class="row ng-cloak" directive-when-scrolled="loadMore()">
+				<div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="d in (filteredProducts = (products | filter: productFilter )) | limitTo: limit">
 					<div class="thumbnail box-shadow">
 						<div class="row carousel-holder" style="margin-bottom: 0px;" ng-if="d.ProductImage.length">
 							<div class="col-md-12">
@@ -54,9 +52,13 @@
 				<div class="col-sm-12 col-lg-12 col-md-12" ng-if="filteredProducts.length == 0">
 					<div class="alert alert-danger box-shadow">No results found...</div>
 				</div>
-			
-				<div class="text-center col-sm-12 col-lg-12 col-md-12">
-					<dir-pagination-controls pagination-id="ProductList"></dir-pagination-controls>
+				<div class="col-sm-12 col-lg-12 col-md-12" ng-if="endResult">
+					<center>**End Result**</center>
+				</div>
+				<div class="col-lg-12 ng-cloak text-center" >
+					<button ng-show="showLoadBtn" class="btn btn-default" ng-click="loadMore()">
+						Load More...
+					</button>
 				</div>
 			</div>
 		</section>
