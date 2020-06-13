@@ -9,7 +9,7 @@
 			<div class="col-md-12">
 				<div class="input text">
 					<label for="InquiryFrom">From</label>
-					<input name="data[Inquiry][from]" type="email" class="form-control" placeholder="Enter your email address" required="required" id="InquiryFrom">
+					<input name="data[Inquiry][from]" type="email" class="form-control" placeholder="Your email address" required="required" id="InquiryFrom">
 				</div>
 				<label>To</label>
 				<div class="like-input-box">
@@ -27,8 +27,8 @@
 					<?php endif;?>
 				</div>
 				<?php
-					echo $this->Form->input('subject',array('class'=>'form-control','value'=>'Inquiry about '.$product['Product']['name'],'required'=>'required'));
-					echo $this->Form->input('content',array('class'=>'form-control','required'=>'required'));
+					echo $this->Form->input('subject',array('placeholder'=>'Inquire about','class'=>'form-control','value'=>'Inquiry about '.$product['Product']['name'],'required'=>'required'));
+					echo $this->Form->input('content',array('placeholder'=>'Your inquiry details','class'=>'form-control','required'=>'required'));
 				?>
 			</div>
 		</div><br/>

@@ -31,7 +31,7 @@ class InquiriesController extends AppController {
 		if (!empty($this->data)) {
 			$this->Inquiry->create();
 			if ($this->Inquiry->save($this->data)) {
-				$this->Session->setFlash(__('The inquiry has been saved', true));
+				$this->Session->setFlash(__('Your message has been sent to our email. Will be replying to you soon.', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The inquiry could not be saved. Please, try again.', true));
@@ -107,10 +107,10 @@ class InquiriesController extends AppController {
 											$attachement);
 										
 										
-				$this->Session->setFlash(__('The inquiry has been sent', true));
+				$this->Session->setFlash(__('Your message has been sent to our email. Will be replying to you soon.', true));
 				$this->redirect(array('controller'=>'products','action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The inquiry could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('Your inquiry could not sent. Please check your email address & try again.', true));
 			}
 		}
 		$product = $this->Product->findBySlug($slug);

@@ -269,3 +269,25 @@ a {
     color: #6920b0;
     text-decoration: none;
 }
+
+#flashMessage{
+	position: fixed;
+    top: 7%;
+    left: 62%;
+    z-index: 99999;
+    box-shadow: 10px 10px 5px #888888;
+    color: #f1f1f1;
+    background-color: #884fc1;
+    border-color: #7629b9;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    #flashMessage{
+		top: 18%;
+		left: 0%;
+    }
+}

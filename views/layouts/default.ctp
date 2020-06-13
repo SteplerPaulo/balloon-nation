@@ -110,6 +110,9 @@
         <div id="ContentForLayoutContainer" class="container">
 			<?php echo $this->Session->flash(); ?>
 			<?php echo $this->Session->flash('email'); ?>
+			<!--
+			<div id="flashMessage" class="message">Your message has been sent to our email. Will be replying to you soon.</div>
+			-->
 			<div class="breadcrumb">
 				<?php echo $this->Html->getCrumbs(' <i class="fa fa-chevron-circle-right" aria-hidden="true"></i> '); ?>
 			</div>
@@ -170,7 +173,14 @@
 	<script type="text/javascript">(function(){window.App = angular.module('App',['angularUtils.directives.dirPagination','ngSanitize'])})();</script>
 	<script>
 		$(function () {
-		  $('[data-toggle="tooltip"]').tooltip()
+			$('[data-toggle="tooltip"]').tooltip();
+			$("#flashMessage").click(function(){
+				$("#flashMessage").html('').hide(400);
+			});
+			setTimeout(function(){
+				$("#flashMessage").html('').hide(400);
+			}, 4000);
+
 		});
 	</script>
 	
