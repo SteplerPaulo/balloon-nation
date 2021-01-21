@@ -488,8 +488,15 @@ class SalesController extends AppController {
 		
 	}
 	
-	function beda_reportcard(){
-		//$this->set(compact('data'));
+	function yearly_report(){
+		$year = 2020;
+		$customer = 34;
+		$data = $this->Sale->find('all',array(
+									'recursive'=>2,
+									'order'=>array('Sale.from_date'=>'DESC'),
+									'conditions'=>array('Sale.from_date LIKE'=>'%'.$year.'%','Sale.customer_id'=>$customer)
+									));
+		$this->set(compact('data'));
 		$this->layout='pdf';
 		$this->render();
 	}

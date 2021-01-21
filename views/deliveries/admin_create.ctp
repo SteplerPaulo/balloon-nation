@@ -1,6 +1,3 @@
-<style>
-	i{cursor:pointer}
-</style>
 <?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
 <?php echo $this->Html->addCrumb('Deliveries','/admin/deliveries'); ?>
 <?php echo $this->Html->addCrumb('Create Delivery',''); ?>
@@ -23,15 +20,15 @@
 			<div class="row">
 				<div class="col-lg-2">
 					<label>DR No.</label>
-					<input ng-disabled="!customer" ng-model="dr_no" ng-required="true" class="form-control input-sm" ng-change='checkDuplicate(dr_no)' ng-class="(existingDRNo?'alert-danger':'')"></input>
+					<input ng-model="dr_no" ng-required="true" class="form-control input-sm" ng-change='checkDuplicate(dr_no)' ng-class="(existingDRNo?'alert-danger':'')"></input>
 				</div>
 				<div class="col-lg-3">
 					<label>Stock Clerk</label>
-					<input ng-disabled="!customer || !dr_no" ng-model="stock_clerk" ng-required="true" class="form-control input-sm"></input>
+					<input  ng-model="stock_clerk" ng-required="true" class="form-control input-sm"></input>
 				</div>
 				<div class="col-lg-3">
 					<label>Date</label>
-					<input ng-disabled="!customer || !dr_no || !stock_clerk" ng-model="dateNow" ng-required="true" type="datetime-local" class="form-control input-sm" ></input>
+					<input  ng-model="dateNow" ng-required="true" type="datetime-local" class="form-control input-sm" ></input>
 				</div>
 			</div><br/>
 			<div class="row">
@@ -40,7 +37,7 @@
 						<thead>
 							<tr >
 								<th colspan="3">
-									<div class="btn-group pull-right">
+									<div class="btn-group pull-right ng-cloak">
 									  <button type="button" ng-class="(view_all_items?'active':'')" class="btn btn-sm btn-default" ng-model="view_all_items" ng-click="btnGrp(true,false)">View All Items</button>
 									  <button type="button" ng-class="(selected_item_only?'active':'')" class="btn btn-sm btn-default" ng-model="selected_item_only" ng-click="btnGrp(false,true)">Selected Item ({{selected_item_count}})</button>
 									</div>
@@ -63,7 +60,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-hide="products[i].is_disabled && selected_item_only" ng-if="products.length" ng-repeat="(i, o) in products">
+							<tr class="ng-cloak" ng-hide="products[i].is_disabled && selected_item_only" ng-if="products.length && !loading" ng-repeat="(i, o) in products">
 								<td class="text-center"><input type="checkbox" ng-model="products[i].checkbox" ng-change="check(i,products[i].checkbox)"></td>
 								<td class="capitalize">{{o.Product.name}} <sup>SKU - {{o.Product.item_code}}</sup></td>
 								<td class="text-center">{{o.Product.min}}</td>
@@ -74,7 +71,14 @@
 									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].bad_item" type="number" min="0" class="form-control input-sm"></input>
 								</td>
 							</tr>
-							<tr ng-if="!products.length">
+							<tr  class="ng-cloak" ng-show="loading">
+								<td colspan="5">
+									<center>
+										<img class="loading"src="<?php echo $this->webroot;?>/img/loading2.gif"></img>
+									</center>
+								</td>
+							</tr>
+							<tr  class="ng-cloak" ng-if="!products.length && !loading">
 								<td colspan="5">
 									No data available. Please select customer
 								</td>
@@ -87,7 +91,7 @@
 		<div class="panel-footer">
 			<div class="text-right">
 				<a href="<?php echo $this->base;?>/admin/deliveries" class="btn btn-default" type="cancel">Cancel</a>
-				<button ng-click="save()" class="btn btn-danger" ng-disabled="!DeliveryForm.$valid || preventDoubleClick || existingDRNo">Save</button>
+				<button ng-click="save()" class="btn btn-danger" ng-disabled="!DeliveryForm.$valid || preventDoubleClick || existingDRNo">Submit</button>
 			</div>
 		</div>
 	</div>

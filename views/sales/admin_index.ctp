@@ -1,5 +1,6 @@
 <?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
-<?php echo $this->Html->addCrumb('Sales Report'); ?>
+<?php echo $this->Html->addCrumb('Sales Report','/admin/sales/customer'); ?>
+<?php echo $this->Html->addCrumb('Customer'); ?>
 <div ng-controller="AdminSalesController" ng-init="initializeController()">	
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

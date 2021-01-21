@@ -9,7 +9,7 @@ App.controller('AdminCustomersController',function($scope,$rootScope,$http,$filt
 		$http.get(BASE_URL+"customers/all").success(function(response) {
 			$scope.customers = response;
 			$scope.loading = false
-			if(!$scope.loading) $scope.src = '/balloon-nation/img/no-record-found.png';
+			if(!$scope.loading) $scope.src = BASE_URL+'img/no-record-found.png';
 			
 		});
 	}

@@ -5,7 +5,7 @@
 	<div class="panel panel-success" ng-form="SalesReportForm">
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-lg-3">
+				<div class="col-lg-4">
 					<label for="customer">Customer</label>
 					<select ng-model="customer" ng-options="d.Customer.name for d in customers" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,month_of)">
 						<option value="">-- Select --</option>
@@ -13,9 +13,9 @@
 				</div>
 				<div class="col-lg-3">
 					<label>Month </label>
-					<input ng-disabled="!customer" type="month" ng-model="month_of" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,month_of)">
+					<input type="month" ng-model="month_of" class="form-control input-sm" ng-required="true" ng-change="changeFilter(customer,month_of)">
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-5">
 					<label>Import XML Sales Report</label>
 					<div class="input-group">
 						<input ng-disabled="!customer || !month_of" type="file" fileread="vm.uploadme" multiple="multiple" class="form-control input-sm" ng-model="file">
@@ -25,7 +25,7 @@
 					</div><!--{{vm.uploadme}}-->
 				</div>
 			</div><br/>
-			<div class="row">
+			<div class="row ng-cloak">
 				<div class="col-lg-12">
 					<label>Imported Document Info:</label>
 					<span ng-if="!vm.uploadme.length"></span>
@@ -42,7 +42,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row" ng-if="is_posted == false">
+			<div class="row ng-cloak" ng-if="is_posted == false">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<table class="table table-bordered table-condensed" >
 						<thead>
@@ -75,7 +75,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-hide="data[i].is_readonly && selected_item_only" ng-if="data.length" ng-repeat="(i,d) in data">
+							<tr ng-hide="data[i].is_readonly && selected_item_only" ng-if="data.length && !loading" ng-repeat="(i,d) in data">
 								<td class="text-center"><input type="checkbox" ng-model="data[i].checkbox" ng-change="check(i,data[i].checkbox)"></td>	
 								<td class="capitalize">{{d.Product.name}} <!--<sup>SKU - {{d.Product.item_code}}</sup>--></td>
 								<td class="text-center">{{d.Product.beginning_inventory}}</td>
@@ -92,8 +92,14 @@
 									<div>{{d.over_sold}}</div>
 								</td>
 							</tr>
-
-							<tr ng-if="!data.length">
+							<tr  class="ng-cloak" ng-show="loading">
+								<td colspan="9">
+									<center>
+										<img class="loading" src="<?php echo $this->webroot;?>/img/loading2.gif"></img>
+									</center>
+								</td>
+							</tr>
+							<tr ng-if="!data.length && !loading">
 								<td colspan="9">No Data Available</td>
 							</tr>
 						</tbody>
@@ -101,7 +107,7 @@
 				</div>
 			</div>
 			
-			<div class="row" ng-if="is_posted == true">
+			<div class="row ng-cloak" ng-if="is_posted == true">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<table class="table table-striped table-bordered table-condensed" >
 						<thead>

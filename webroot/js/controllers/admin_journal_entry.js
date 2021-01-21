@@ -7,6 +7,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 		$scope.selected_item_count = 0;
 		$scope.fileData = {};
 		$scope.preventDoubleClick = false;
+		$scope.loading = false;
 		
 		
 		$http.get(BASE_URL+"sales/initial_data").success(function(response) {
@@ -18,10 +19,11 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 	}
 	
 	$scope.changeFilter = function (customer, month) {
-		
 		if(	customer != undefined && month != undefined && customer != '' && month != ''){
 			var lastDay = new Date($filter('date')(month, "yyyy"), parseInt($filter('date')(month, "MM")), 0);
 			console.log(lastDay);
+			
+			$scope.loading = true;
 			
 			var data = {
 				'customer_id':customer.Customer.id,
@@ -40,6 +42,7 @@ App.controller('AdminSemiMonthlyReportController',function($scope,$rootScope,$ht
 				$scope.data = response.data.Result;
 				$scope.is_posted = response.data.is_posted;
 				$scope.selected_item_count = response.data.selected_items;
+				$scope.loading = false;
 			});
 		}
 	

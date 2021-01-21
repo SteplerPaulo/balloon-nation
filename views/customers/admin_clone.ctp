@@ -4,7 +4,7 @@
 <div ng-controller="CloneProductController" ng-init="initializeController()">	
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-xs-4">
-			<h1>{{customer}}</h1>
+			<h1 class="ng-cloak">{{customer}}</h1>
 		</div><!--
 		<div class="col-lg-2 col-md-2 col-xs-2 col-lg-offset-6 col-md-offset-6 col-xs-offset-6">
 			<label>Items per page</label>

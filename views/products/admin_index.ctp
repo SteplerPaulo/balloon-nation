@@ -1,39 +1,31 @@
-<style>
-	i{cursor:pointer}
-</style>
 <?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
 <?php echo $this->Html->addCrumb('Products',''); ?>
 <div ng-controller="AdminProductsController" ng-init="initializeController()">	
 	<div class="row">
-		<div class="col-lg-3 col-md-3 col-xs-3">
+		<div class="col-lg-4 col-md-4 col-xs-4">
 			<label for="customer">Customer</label>
-			<select class='form-control input-sm' ng-model='customer' ng-change="changeCustomer()">
+			<select class='form-control input-sm ng-cloak' ng-model='customer' ng-change="changeCustomer()">
 				<option ng-repeat="d in customers">{{d.Customer.name}}</option>
 			</select>
 		</div>
 		<div class="col-lg-3 col-md-3 col-xs-3">
 			<label for="search">Search</label>
-			<input ng-model="q" class="form-control input-sm" placeholder="Filter text">
+			<input ng-model="q" class="form-control input-sm" placeholder="Enter text">
 		</div>
-		<div class="col-lg-2 col-md-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-xs-offset-4">
+		<div class="col-lg-2 col-md-2 col-xs-2 col-lg-offset-3 col-md-offset-3 col-xs-offset-3">
 			<label for="search">Items per page</label>
 			<input type="number" min="1" max="100" class="form-control input-sm ng-pristine ng-valid ng-valid-number ng-valid-max ng-valid-min" ng-model="pageSize">
 		</div>
-	</div><br/>
+	</div>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<table class="table table-condensed table-striped table-hovered">
 				<thead>
 					<tr>
-						<th colspan="6">PRODUCTS</th>
-						<th colspan="1">
-							<div class="btn-group pull-right" role="group" >
-							  <a href="<?php echo $this->base;?>/admin/products/add" title="Add New Product" class="btn btn-sm btn-warning"><i class="fa fa-plus"></i></a>
-							</div>
-						</th>
+						<th colspan="5">PRODUCTS</th>
+						<th colspan="1"><a href="<?php echo $this->base;?>/admin/products/add" class="btn btn-sm btn-success pull-right">New Product</a></th>
 					</tr>
 					<tr>
-						<th>Customer</th>
 						<th>SKU</th>
 						<th>Description</th>
 						<th>Category</th>
@@ -45,8 +37,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-if="products.length" pagination-id="ProductListTable" dir-paginate="d in products | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
-						<td><span class="small">{{d.Customer.name}}</span></td>
+					<tr class="ng-cloak" ng-if="products.length" pagination-id="ProductListTable" dir-paginate="d in products | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
 						<td>{{d.Product.item_code}}</td>
 						<td class="capitalize">{{d.Product.name}}</td>
 						<td>{{d.Category.name}}</td>
@@ -63,21 +54,21 @@
 						</td>
 					</tr>
 					<tr ng-show="loading">
-						<td colspan="7">
+						<td colspan="6">
 							<center>
 								<img class="loading"src="/balloon-nation/img/loading2.gif"></img>
 							</center>
 						</td>
 					</tr>
 					<tr ng-show="(products | filter:q | filter:customer).length == 0 && !loading" pagination-id="ProductListTable" >
-						<td colspan="7">
+						<td colspan="6">
 							<center><img class="loading" src="{{src}}"></img></center>
 						</td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="7" class="text-center" >
+						<td colspan="6" class="text-center" >
 							<dir-pagination-controls pagination-id="ProductListTable"></dir-pagination-controls>
 						</td>
 					</tr>

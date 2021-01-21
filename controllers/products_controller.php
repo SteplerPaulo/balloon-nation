@@ -221,7 +221,7 @@ class ProductsController extends AppController {
 	/**CREATED FUNCTION FOR SLOW RENDERING PRODUCT LIST**/
 	function admin_init($customer = 'Balloon Nation'){
 		$data = array();
-		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
+		$this->Product->unbindModel( array('hasMany' => array('ProductImage','DeliveryDetail')));
 		$data = $this->Product->find('all', array(
 			'contain' => array(
 				'Category',

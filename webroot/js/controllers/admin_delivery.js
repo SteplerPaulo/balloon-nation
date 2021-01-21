@@ -8,6 +8,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		$scope.selected_item_count = 0;
 		$scope.preventDoubleClick = false;
 		$scope.existingDRNo = false;
+		$scope.loading = false;
 		
 		$http.get(BASE_URL+"deliveries/customers").success(function(response) {
 			$scope.customers = response;
@@ -19,10 +20,15 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 	
 	
 	$scope.changeCustomer = function (customer) {
+		
+		$scope.loading = true;
+			
+			
 		$http.get(BASE_URL+"deliveries/customer_product/"+customer).success(function(response) {
 			$scope.products = response.Products;
 			$scope.customer_address = response.Customer.address;
 			$scope.customer_id = response.Customer.id;
+			$scope.loading = false;
 		});		
 	};
 	

@@ -129,6 +129,7 @@ class CustomersController extends AppController {
 	}
 	
 	function all(){
+		$this->Customer->unbindModel(array('hasMany' => array('Product')));
 		$customers = $this->Customer->find('all',array('order' =>array('Customer.modified'=>'DESC')));
 		echo json_encode($customers);
 		exit;

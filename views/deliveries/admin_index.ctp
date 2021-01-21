@@ -3,7 +3,7 @@
 <div ng-controller="AdminDeliveriesController" ng-init="initializeController()">	
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-xs-3">
-			<label for="customer">Customer</label>
+			<label for="customer">Filter by Customer</label>
 			<select class='form-control' ng-model='customer'>
 				<option value="">All</option>
 				<option ng-repeat="d in customers">{{d.Customer.name}}</option>
@@ -35,7 +35,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr pagination-id="DeliveriesListTable" dir-paginate="d in deliveries | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
+					<tr class="ng-cloak" pagination-id="DeliveriesListTable" dir-paginate="d in deliveries | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
 						<td>{{d.Delivery.delivery_receipt_no}}</td>
 						<td class="">{{d.Customer.name}}</td>
 						<td class="text-center">{{d.Delivery.stock_clerk}}</td>

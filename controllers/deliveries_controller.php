@@ -152,7 +152,11 @@ class DeliveriesController extends AppController {
 	function customer_product($customer = null){
 		
 		$data =  array();
-		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
+		$this->Product->unbindModel(array(
+			'hasMany' => array('ProductImage','DeliveryDetail'),
+			'belongsTo' => array('Category'),
+			
+		));
 		$products = $this->Product->find('all', array(
 			'conditions' => array(
 					'Customer.name' => $customer
@@ -202,6 +206,7 @@ class DeliveriesController extends AppController {
 	}
 	
 	function customers(){
+		$this->Customer->unbindModel(array('hasMany' => array('Product')));
 		$customers = $this->Customer->find('all',array('order' =>array('Customer.name'=>'ASC')));
 		echo json_encode($customers);
 		exit;

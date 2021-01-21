@@ -18,8 +18,7 @@
 					</div>
 				</div>
 				<div class="panel-footer text-right">
-					<a ng-if="selected != null" href="<?php echo $this->base;?>/admin/sales/index/{{selected.Customer.id}}/{{selected.Customer.name}}" target="_blank" class="btn btn-primary">Open Report(s)</a>
-					<a ng-if="selected == null" href="javascript:void(0)" class="btn btn-primary disabled">Open Report(s)</a>
+					<a ng-disabled="selected == null" href="<?php echo $this->base;?>/admin/sales/index/{{selected.Customer.id}}/{{selected.Customer.name}}" class="btn btn-primary">Open Report(s)</a>
 				</div>
 			</div>
 		</div>

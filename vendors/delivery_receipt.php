@@ -53,6 +53,7 @@ class DeliveryReceipt extends Formsheet{
 		$this->leftText(20.2,8.7,'******','','');
 		//pr($data);exit;
 		$y=10.8;
+		$this->GRID['font_size']=6.2;
 		foreach($data['DeliveryDetail'] as $k => $items){
 			if($k < 14){
 				
