@@ -5,7 +5,7 @@
 	<div class="login-panel panel panel-success" ng-form="DeliveryForm">
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-lg-3">
+				<div class="col-lg-4">
 					<label for="customer">To</label>/Customer
 					<select class='form-control input-sm' ng-model='customer' ng-required="true" ng-change="changeCustomer(customer)">
 						<option value="">-- Select --</option>
