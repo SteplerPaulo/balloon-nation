@@ -47,13 +47,13 @@
 					<tr ng-show="loading">
 						<td colspan="5">
 							<center>
-								<img class="loading"src="/balloon-nation/img/loading2.gif"></img>
+								<img class="loading" ng-src="<?php echo $this->base;?>/img/loading2.gif"></img>
 							</center>
 						</td>
 					</tr>
 					<tr ng-show="(deliveries | filter:q | filter:customer).length == 0" pagination-id="DeliveriesListTable" >
 						<td colspan="5">
-							<center><img class="loading" src="{{src}}"></img></center>
+							<center><img class="loading" ng-src="{{src}}"></img></center>
 						</td>
 					</tr>
 				</tbody>

@@ -33,13 +33,13 @@
 					<tr ng-show="loading">
 						<td colspan="2">
 							<center>
-								<img class="loading"src="/balloon-nation/img/loading2.gif"></img>
+								<img class="loading" ng-src="<?php echo $this->base;?>/img/loading2.gif"></img>
 							</center>
 						</td>
 					</tr>
 					<tr class="ng-cloak" ng-show="(categories | filter:q).length == 0" pagination-id="CategoryListTable" >
 						<td colspan="2">
-							<center><img class="loading" src="{{src}}"></img></center>
+							<center><img class="loading" ng-src="{{src}}"></img></center>
 						</td>
 					</tr>
 				</tbody>

@@ -40,6 +40,18 @@
 							<a href="<?php echo $this->base;?>/admin/banners/delete/{{d.Banner.id}}" onclick="return confirm('Are you sure you want to delete this banner?');" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a>
 						</td>
 					</tr>
+					<tr ng-show="loading">
+						<td colspan="3">
+							<center>
+								<img class="loading" ng-src="<?php echo $this->base;?>/img/loading2.gif"></img>
+							</center>
+						</td>
+					</tr>
+					<tr class="ng-cloak" ng-show="(banners | filter:q).length == 0 && !loading" pagination-id="BannerListTable" >
+						<td colspan="3">
+							<center><img class="loading" ng-src="{{src}}"></img></center>
+						</td>
+					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
