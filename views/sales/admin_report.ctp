@@ -2,7 +2,7 @@
 App::import('Vendor','sales_report');
 //pr($data);exit;
 
-$chunk_data = array_chunk($data['SaleDetail'],41,true);
+$chunk_data = array_chunk($data['SaleDetail'],42,true);
 $i = 1;
 $report= new SalesReport();
 foreach($chunk_data as $dt){

@@ -109,29 +109,32 @@ class SalesReport extends Formsheet{
 		$total_cost = 0;
 		$total_profit = 0;
 		foreach($data as $itm){
-			//($itm['']!=0)?$itm['']:'--'
-			$this->leftText(0.2,$y,$itm['Product']['name'],'','');
-			$this->centerText(13,$y,$itm['beginning_inventory'],2,'');
-			$this->centerText(15,$y,($itm['delivered']!=0)?$itm['delivered']:'--',2,'');
-			$this->centerText(17,$y,($itm['returned']!=0)?$itm['returned']:'--',2,'');
-			$this->centerText(19,$y,($itm['sold']!=0)?$itm['sold']:'--',2,'');
-			$this->centerText(21,$y,$itm['ending_inventory'],3,'');
-			//$this->centerText(24,$y,$itm['Product']['beginning_inventory'],3,'');
-			$this->centerText(24,$y,$itm['actual_inventory'],3,'');
-			$this->centerText(27,$y,($itm['over_sold']!=0)?$itm['over_sold']:'--',2,'');
-			$this->centerText(29,$y,($itm['missing_qty']!=0)?$itm['missing_qty']:'--',2,'');
-	
-			
-			$cost = $itm['Product']['purchase_price']*$itm['sold'];
-			$profit = ($itm['Product']['selling_price']*$itm['sold'])-$cost;
-			$total_cost+=$cost;
-			$total_profit+=$profit;
-			$this->rightText(30.9,$y,$itm['Product']['purchase_price'],3,'');
-			$this->rightText(33.9,$y,$itm['Product']['selling_price'],3,'');
-			$this->rightText(39.9,$y,number_format($cost,2),'','');
-			$this->rightText(42.9,$y,number_format($profit,2),'','');
-			
-			$y++;
+			//pr($itm);
+			if(!empty($itm['Product'])){
+				//($itm['']!=0)?$itm['']:'--'
+				$this->leftText(0.2,$y,$itm['Product']['name'],'','');
+				$this->centerText(13,$y,$itm['beginning_inventory'],2,'');
+				$this->centerText(15,$y,($itm['delivered']!=0)?$itm['delivered']:'--',2,'');
+				$this->centerText(17,$y,($itm['returned']!=0)?$itm['returned']:'--',2,'');
+				$this->centerText(19,$y,($itm['sold']!=0)?$itm['sold']:'--',2,'');
+				$this->centerText(21,$y,$itm['ending_inventory'],3,'');
+				//$this->centerText(24,$y,$itm['Product']['beginning_inventory'],3,'');
+				$this->centerText(24,$y,$itm['actual_inventory'],3,'');
+				$this->centerText(27,$y,($itm['over_sold']!=0)?$itm['over_sold']:'--',2,'');
+				$this->centerText(29,$y,($itm['missing_qty']!=0)?$itm['missing_qty']:'--',2,'');
+		
+				
+				$cost = $itm['Product']['purchase_price']*$itm['sold'];
+				$profit = ($itm['Product']['selling_price']*$itm['sold'])-$cost;
+				$total_cost+=$cost;
+				$total_profit+=$profit;
+				$this->rightText(30.9,$y,$itm['Product']['purchase_price'],3,'');
+				$this->rightText(33.9,$y,$itm['Product']['selling_price'],3,'');
+				$this->rightText(39.9,$y,number_format($cost,2),'','');
+				$this->rightText(42.9,$y,number_format($profit,2),'','');
+				
+				$y++;
+			}
 		}
 		//$y++;
 		$this->GRID['font_size']=12;

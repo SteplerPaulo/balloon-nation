@@ -163,7 +163,7 @@ class SalesController extends AppController {
 	}
 
 	function admin_report($id = null){
-		
+		$this->Customer->unbindModel( array('hasMany' => array('Product')));
 		$data = $this->Sale->find('first',array(
 								'recursive'=>2,
 								'conditions'=> array(
