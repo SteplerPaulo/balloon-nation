@@ -7,7 +7,7 @@
 			<table class="table table-striped table-condensed table-bordered">
 				<thead>
 					<tr>
-						<th class="ng-cloak" colspan="2">MONTHLY SALES REPORTS ({{customer_name}})</th>
+						<th colspan="2">MONTHLY SALES REPORTS <span class="ng-cloak">({{customer_name}})</span></th>
 					</tr>
 					<tr>
 						<th class="">Date</th>
