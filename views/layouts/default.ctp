@@ -71,9 +71,8 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a href="/balloon-nation/pages" class="navbar-brand company-name">
+					<a href="<?php echo $this->base;?>/pages" class="navbar-brand company-name">
 						<img height="50px" class="" ng-src="<?php echo $this->base;?>/img/name.png"></img>
-		
 					</a>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->

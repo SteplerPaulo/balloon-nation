@@ -3,7 +3,6 @@ App.controller('AdminDeliveriesController',function($scope,$rootScope,$http,$fil
 		$scope.currentPage = 1; 
 		$scope.pageSize = 12;
 		$scope.loading = true;
-		$scope.src = '';
 		
 		$http.get(BASE_URL+"deliveries/customers").success(function(response) {
 			$rootScope.customers = response;
@@ -15,7 +14,6 @@ App.controller('AdminDeliveriesController',function($scope,$rootScope,$http,$fil
 		$http.get(BASE_URL+"deliveries/all").success(function(response) {
 			$scope.deliveries = response;
 			$scope.loading = false;
-			if(!$scope.loading) $scope.src = '/balloon-nation/img/no-record-found.png';
 		});		
 	}
 });

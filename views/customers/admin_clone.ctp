@@ -48,15 +48,15 @@
 						<td class="text-center">{{data[i].Product.status}}</td>
 						<td class="hide"><input class="form-control input-sm" ng-model='data[i].Product.initial_inventory'></td>
 					</tr>
-					<tr ng-if="!data.length">
+					<tr ng-if="!data.length" class="ng-cloak">
 						<td colspan="7">
 							No New Product
 						</td>
 					</tr>
-					<tr ng-show="loading">
+					<tr ng-show="loading" class="ng-cloak">
 						<td colspan="7">
 							<center>
-								<img class="loading"src="/balloon-nation/img/loading2.gif"></img>
+								<img class="loading"src="<?php echo $this->base;?>/img/loading2.gif"></img>
 							</center>
 						</td>
 					</tr>

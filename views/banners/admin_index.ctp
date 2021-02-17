@@ -41,14 +41,14 @@
 						</td>
 					</tr>
 					<tr ng-show="loading">
-						<td colspan="5">
+						<td colspan="6">
 							<center>
 								<img class="loading" ng-src="<?php echo $this->base;?>/img/loading2.gif"></img>
 							</center>
 						</td>
 					</tr>
 					<tr class="ng-cloak" ng-show="(banners | filter:q).length == 0 && !loading" pagination-id="BannerListTable" >
-						<td colspan="5">
+						<td colspan="6">
 							<center><img class="loading" ng-src="<?php echo $this->base;?>/img/no-record-found.png"></img></center>
 						</td>
 					</tr>

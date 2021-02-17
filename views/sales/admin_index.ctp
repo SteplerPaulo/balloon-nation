@@ -25,13 +25,13 @@
 					<tr ng-show="loading">
 						<td colspan="2">
 							<center>
-								<img class="loading"src="/balloon-nation/img/loading2.gif"></img>
+								<img class="loading"src="<?php echo $this->base;?>/img/loading2.gif"></img>
 							</center>
 						</td>
 					</tr>
 					<tr ng-if="!sales.length" >
 						<td colspan="2">
-							<center><img class="loading" src="{{src}}"></img></center>
+							<center><img class="loading" ng-src="<?php echo $this->base;?>/img/no-record-found.png"></img></center>
 						</td>
 					</tr>
 				</tbody>

@@ -18,7 +18,7 @@
 					</div>
 				</div>
 				<div class="panel-footer text-right">
-					<a ng-disabled="selected == null" href="<?php echo $this->base;?>/admin/sales/index/{{selected.Customer.id}}/{{selected.Customer.name}}" class="btn btn-primary">Open Report(s)</a>
+					<a ng-disabled="selected == null" href="<?php echo $this->base;?>/admin/sales/index/?{{selected.Customer.id}}&{{selected.Customer.name}}" class="btn btn-primary">Open Report(s)</a>
 				</div>
 			</div>
 		</div>
