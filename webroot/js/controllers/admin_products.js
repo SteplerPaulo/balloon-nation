@@ -23,9 +23,6 @@ App.controller('AdminProductsController',function($scope,$rootScope,$http,$filte
 		$http.get(BASE_URL+"/admin/products/init").success(function(response) {
 			$scope.products = response;
 			$scope.loading = false;
-			if(!$scope.loading){
-				$scope.src = '/balloon-nation/img/no-record-found.png';
-			}
 		});
 
 	}
