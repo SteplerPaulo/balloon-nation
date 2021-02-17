@@ -48,7 +48,7 @@
 					</tr>
 					<tr class="ng-cloak" ng-show="(customers | filter:q).length == 0 && !loading" pagination-id="CustomerListTable" >
 						<td colspan="3">
-							<center><img class="loading" ng-src="{{src}}"></img></center>
+							<center><img class="loading" ng-src="<?php echo $this->base;?>/img/no-record-found.png"></img></center>
 						</td>
 					</tr>
 				</tbody>

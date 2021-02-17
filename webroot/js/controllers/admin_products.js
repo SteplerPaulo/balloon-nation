@@ -3,7 +3,6 @@ App.controller('AdminProductsController',function($scope,$rootScope,$http,$filte
 		$scope.currentPage = 1; 
 		$scope.pageSize = 17;
 		$scope.loading = true;
-		$scope.src = '';
 			
 		/*DONT KNOW WHAT THE USE OF THIS CODE
 		if (document.location.hostname == "localhost"){if(window.location.pathname.split('/')[5]){$rootScope.customer = decodeURI(window.location.pathname.split('/')[5]);}
@@ -32,8 +31,6 @@ App.controller('AdminProductsController',function($scope,$rootScope,$http,$filte
 		$http.get(BASE_URL+"/admin/products/init/"+$scope.customer).success(function(response) {
 			$scope.products = response;
 			$scope.loading = false;
-			if(!$scope.loading) $scope.src = '/balloon-nation/img/no-record-found.png';
-			
 		});
 	} 
 });
