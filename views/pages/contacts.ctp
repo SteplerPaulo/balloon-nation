@@ -12,9 +12,9 @@
 		</address>
 		<address>
 			<strong>Email Address</strong><br>
-			<a href="mailto:getinfo@balloonrep.com">getinfo@balloonrep.com</a>
-			<a href="mailto:balloonation187@gmail.com">balloonation187@gmail.com</a>
-			<a href="mailto:balloonation187@yahoo.com">balloonation187@yahoo.com</a>
+			<a href="mailto:getinfo@balloonrep.com">getinfo@balloonrep.com</a> |
+			<a href="mailto:balloonation187@gmail.com">balloonation187@gmail.com</a> |
+			<a href="mailto:balloonation187@yahoo.com">balloonation187@yahoo.com</a> 
 		</address>
 		<address>
 			<strong>Telephone No.</strong><br>
