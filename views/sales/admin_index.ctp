@@ -29,7 +29,7 @@
 							</center>
 						</td>
 					</tr>
-					<tr ng-if="!sales.length">
+					<tr ng-if="!sales.length && !loading">
 						<td colspan="2">
 							<center><img class="loading" ng-src="<?php echo $this->base;?>/img/no-record-found.png"></img></center>
 						</td>
