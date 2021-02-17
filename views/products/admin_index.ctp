@@ -62,7 +62,7 @@
 					</tr>
 					<tr ng-show="(products | filter:q | filter:customer).length == 0 && !loading" pagination-id="ProductListTable" >
 						<td colspan="6">
-							<center><img class="loading" ng-src="{{src}}"></img></center>
+							<center><img class="loading" ng-src="<?php echo $this->base;?>/img/no-record-found.png"></img></center>
 						</td>
 					</tr>
 				</tbody>
