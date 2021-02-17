@@ -13,9 +13,7 @@ App.controller('ProductsController',function($scope,$rootScope,$http,$filter){
 			
 		$http.get(BASE_URL+"products/main_products").success(function(response) {
 			$scope.products = response;
-			console.log($scope.products);
-			
-			if (document.location.hostname == "localhost" || document.location.hostname == "192.168.1.10"){
+			if (document.location.hostname == "localhost"){
 				if(window.location.pathname.split('/')[3]){
 					$scope.productFilter = window.location.pathname.split('/')[3];
 				}
@@ -30,10 +28,6 @@ App.controller('ProductsController',function($scope,$rootScope,$http,$filter){
 	
 	$scope.loadMore = function() {
 		$scope.limit += 15;
-		
-		//console.log($scope.filteredProducts.length);
-		//console.log($scope.limit);
-		
 		if($scope.limit < $scope.filteredProducts.length){
 			$scope.showLoadBtn = true;
 		}else{

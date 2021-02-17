@@ -22,7 +22,7 @@
 									</ol>
 									<div class="carousel-inner">
 										<div class="item" dir-paginate="(key,images) in d.ProductImage | filter:q | itemsPerPage: productLimit" ng-class="{active: key==0}">
-											<img src="<?php echo $this->base;?>/img/product images/{{images.img_file}}" alt="{{d.Product.name}}" style="height:150px;">
+											<img ng-src="<?php echo $this->base;?>/img/product images/{{images.img_file}}" alt="{{d.Product.name}}" style="height:150px;">
 										</div>
 									</div>
 									<a class="left carousel-control" href="#{{d.Product.slug}}" data-slide="prev" ng-if="d.ProductImage.length > 1" >
@@ -34,7 +34,7 @@
 								</div>
 							</div>
 						</div>
-						<img src="http://placehold.it/320x150" ng-if="!d.ProductImage.length" style="height:150px;">
+						<img ng-src="http://placehold.it/320x150" ng-if="!d.ProductImage.length" style="height:150px;">
 						<div class="caption">
 							<h4>
 								<a href="<?php echo $this->base;?>/product/{{d.Product.slug}}">{{d.Product.name}}</a>

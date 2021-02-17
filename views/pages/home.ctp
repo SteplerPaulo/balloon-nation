@@ -1,5 +1,5 @@
 <!--
-<a style="cursor:pointer" title="Disabled " data-toggle="tooltip"><image class="circling-balloon" src="<?php echo $this->base;?>/img/gif/circling-balloon.gif"></image></a>
+<a style="cursor:pointer" title="Disabled " data-toggle="tooltip"><image class="circling-balloon" ng-src="<?php echo $this->base;?>/img/gif/circling-balloon.gif"></image></a>
 	-->
 <?php echo $this->Html->addCrumb('Home Page'); ?>
 <style>

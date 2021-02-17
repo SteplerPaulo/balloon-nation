@@ -72,13 +72,13 @@
 						<span class="icon-bar"></span>
 					</button>
 					<a href="/balloon-nation/pages" class="navbar-brand company-name">
-						<img height="50px" class="" src="<?php echo $this->base;?>/img/name.png"></img>
+						<img height="50px" class="" ng-src="<?php echo $this->base;?>/img/name.png"></img>
 		
 					</a>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
+					<ul class="nav navbar-nav ng-cloak">
 							<li>
 								<?php  echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-cubes')).' '.
 									$this->Html->tag('span', 'Products'),

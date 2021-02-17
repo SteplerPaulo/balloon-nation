@@ -17,7 +17,6 @@ App.controller('HomeController',function($scope,$rootScope,$http,$filter){
 		
 		$http.get(BASE_URL+"banners/active").success(function(response) {
 			$scope.banners = response;
-			console.log($scope.banners);
 		});
 	}
 });
