@@ -3,5 +3,5 @@ if (document.location.hostname == "localhost" || document.location.hostname == "
 }else if(document.location.hostname == "http://www.balloonrep.tssi-erb.com/"){
 	var	BASE_URL = 'http://www.balloonrep.tssi-erb.com/';
 }else{
-	var	BASE_URL = 'http://balloonrep.tssi-erb.com/';
+	var	BASE_URL = 'https://balloonrep.com/';
 }
