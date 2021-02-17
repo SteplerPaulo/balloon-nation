@@ -2,9 +2,9 @@
 <?php echo $this->Html->addCrumb('Deliveries',''); ?>
 <div ng-controller="AdminDeliveriesController" ng-init="initializeController()">	
 	<div class="row">
-		<div class="col-lg-3 col-md-3 col-xs-3">
+		<div class="col-lg-4 col-md-4 col-xs-4">
 			<label for="customer">Filter by Customer</label>
-			<select class='form-control' ng-model='customer'>
+			<select class='form-control ng-cloak input-sm' ng-model='customer'>
 				<option value="">All</option>
 				<option ng-repeat="d in customers">{{d.Customer.name}}</option>
 			</select>
@@ -13,11 +13,11 @@
 			<label for="search">Search</label>
 			<input ng-model="q" class="form-control input-sm" placeholder="Filter text">
 		</div>
-		<div class="col-lg-2 col-md-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-xs-offset-4">
+		<div class="col-lg-2 col-md-2 col-xs-2 col-lg-offset-3 col-md-offset-3 col-xs-offset-3">
 			<label for="search">Items per page</label>
 			<input type="number" min="1" max="100" class="form-control input-sm ng-pristine ng-valid ng-valid-number ng-valid-max ng-valid-min" ng-model="pageSize">
 		</div>
-	</div><br/>
+	</div>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<table class="table table-striped table-hovered">
