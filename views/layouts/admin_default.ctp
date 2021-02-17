@@ -66,6 +66,13 @@
 									array('escape' => false,'class'=>'navbar-brand company-name')
 									);  ?>
 				</li>
+				<li>
+					<?php  echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-truck')).' '.
+						$this->Html->tag('span', 'Fast Delivery'),
+						array('admin' => true,'controller'=>'deliveries','action'=>'create'),
+						array('escape' => false));						
+					?>
+				</li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
