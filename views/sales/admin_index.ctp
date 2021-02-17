@@ -7,14 +7,14 @@
 			<table class="table table-striped table-condensed table-bordered">
 				<thead>
 					<tr>
-						<th colspan="2">MONTHLY SALES REPORTS ({{customer_name}})</th>
+						<th class="ng-cloak" colspan="2">MONTHLY SALES REPORTS ({{customer_name}})</th>
 					</tr>
 					<tr>
 						<th class="">Date</th>
 						<th class="text-center w10">Action</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="ng-cloak">
 					<tr ng-if="sales.length" ng-repeat="d in sales">
 						<td class="">{{d.Sale.from_date | date: "MMMM yyyy"}}</td>
 						<td class="actions text-center">
@@ -29,7 +29,7 @@
 							</center>
 						</td>
 					</tr>
-					<tr ng-if="!sales.length" >
+					<tr ng-if="!sales.length">
 						<td colspan="2">
 							<center><img class="loading" ng-src="<?php echo $this->base;?>/img/no-record-found.png"></img></center>
 						</td>
