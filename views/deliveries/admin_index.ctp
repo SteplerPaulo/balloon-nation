@@ -59,7 +59,7 @@
 				<tfoot>
 					<tr>
 						<td class="text-center" colspan="2">
-							<dir-pagination-controls pagination-id="DeliveriesListTable"></dir-pagination-controls>
+							<dir-pagination-controls max-size="7" pagination-id="DeliveriesListTable"></dir-pagination-controls>
 						</td>
 					</tr>
 				</tfoot>
