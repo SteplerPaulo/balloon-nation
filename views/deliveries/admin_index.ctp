@@ -3,18 +3,18 @@
 <div ng-controller="AdminDeliveriesController" ng-init="initializeController()">	
 	<div class="row">
 		<div class="col-lg-4 col-md-12 col-xs-12">
-			<label for="customer">Filter by Customer</label>
-			<select class='form-control ng-cloak input-sm' ng-model='customer'>
+			<label class="hidden-lg">Filter by Customer</label>
+			<select class='form-control input-sm' ng-model='customer'>
 				<option value="">All</option>
-				<option ng-repeat="d in customers">{{d.Customer.name}}</option>
+				<option class="ng-cloak" ng-repeat="d in customers">{{d.Customer.name}}</option>
 			</select>
 		</div>
 		<div class="col-lg-3 col-md-12 col-xs-12">
-			<label for="search">Search</label>
+			<label class="hidden-lg">Search</label>
 			<input ng-model="q" class="form-control input-sm" placeholder="Filter text">
 		</div>
 		<div class="col-lg-2 col-md-12 col-xs-12 col-lg-offset-3">
-			<label for="search">Items per page</label>
+			<label class="hidden-lg">Items per page</label>
 			<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
 		</div>
 	</div><br/>
@@ -39,8 +39,8 @@
 								</small>
 							</div>
 						</td>
-						<td class="text-center">
-							<a href="<?php echo $this->base;?>/admin/deliveries/report/{{d.Delivery.id}}" title="Print" target="_blank"><i class="fa fa-print"></i></a>
+						<td class="text-right">
+							<a href="<?php echo $this->base;?>/admin/deliveries/report/{{d.Delivery.id}}" title="Print" target="_blank"><i class="fa fa-print fa-2x"></i></a>
 						</td>
 					</tr>
 					<tr ng-show="loading">
@@ -58,7 +58,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="text-center">
+						<td class="text-center" colspan="2">
 							<dir-pagination-controls pagination-id="DeliveriesListTable"></dir-pagination-controls>
 						</td>
 					</tr>
