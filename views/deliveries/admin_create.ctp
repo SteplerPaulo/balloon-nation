@@ -9,7 +9,7 @@
 					<label for="customer">To</label>/Customer
 					<select class='form-control input-sm' ng-model='customer' ng-required="true" ng-change="changeCustomer(customer)">
 						<option value="">-- Select --</option>
-						<option ng-repeat="d in customers" address="{{d.Customer.address}}">{{d.Customer.name}}</option>
+						<option class="ng-cloak" ng-repeat="d in customers" address="{{d.Customer.address}}">{{d.Customer.name}}</option>
 					</select>
 				</div>
 				<div class="col-lg-8">
@@ -44,18 +44,15 @@
 					</div>
 				</div>
 			</div>
-			
 			<table class="table table-responsive table-bordered table-condensed">
 				<thead>
 					<tr>
-						<th rowspan="2" class="text-center w5">
+						<th class="text-center w5">
 							<input type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
 						</th>
-						<th rowspan="2">Items</th>
-					</tr>
-					<tr>
-						<th class="text-center">To Deliver</th>
-						<th class="text-center">Bad Item(s)</th>
+						<th>Items</th>
+						<th class="text-center w8">To Deliver</th>
+						<th class="text-center w8">Bad Item(s)</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -80,14 +77,14 @@
 						</td>
 					</tr>
 					<tr  class="ng-cloak" ng-show="loading">
-						<td colspan="5">
+						<td colspan="4">
 							<center>
 								<img class="loading" ng-src="<?php echo $this->base;?>/img/loading2.gif"></img>
 							</center>
 						</td>
 					</tr>
 					<tr  class="ng-cloak" ng-if="!products.length && !loading">
-						<td colspan="5">
+						<td colspan="4">
 							No data available. Please select customer
 						</td>
 					</tr>
