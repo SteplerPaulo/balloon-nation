@@ -1,6 +1,6 @@
 <?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
 <?php echo $this->Html->addCrumb('Deliveries','/admin/deliveries'); ?>
-<?php echo $this->Html->addCrumb('Create Delivery',''); ?>
+<?php echo $this->Html->addCrumb('Create',''); ?>
 <div ng-controller="AdminForDeliveryController" ng-init="initializeController()">
 	<div class="login-panel panel panel-success" ng-form="DeliveryForm">
 		<div class="panel-body">
@@ -30,45 +30,55 @@
 					<label>Date</label>
 					<input  ng-model="dateNow" ng-required="true" type="datetime-local" class="form-control input-sm" ></input>
 				</div>
-			</div><br/>
+			</div><hr/>
+			<div class="row">
+				<div class="col-lg-9">
+					<input id="ItemCode" ng-model="item_code" ng-change="checkItem(item_code)" placeholder="Enter SKU here to automatically select item..." class="form-control input-sm"></input>			
+				</div>
+				<div class="col-lg-3">
+					<div class="checkbox">
+					  <label>
+						<input ng-click="showSelected()" ng-model="selected_item_only" type="checkbox" value="">
+						Show selected items only
+					  </label>
+					</div>
+				</div>
+			</div>
+			
 			<div class="row">
 				<div class="col-lg-12">
-					<table class="table table-bordered table-condensed">
+					<table class="table table-responsive table-bordered table-condensed">
 						<thead>
-							<tr >
-								<th colspan="3">
-									<div class="btn-group pull-right ng-cloak">
-									  <button type="button" ng-class="(view_all_items?'active':'')" class="btn btn-sm btn-default" ng-model="view_all_items" ng-click="btnGrp(true,false)">View All Items</button>
-									  <button type="button" ng-class="(selected_item_only?'active':'')" class="btn btn-sm btn-default" ng-model="selected_item_only" ng-click="btnGrp(false,true)">Selected Item ({{selected_item_count}})</button>
-									</div>
-								</td>
-								<td colspan="2">
-									<input id="ItemCode" ng-model="item_code" ng-change="checkItem(item_code)" placeholder="Item Code" class="form-control input-sm"></input>
-								</td>
-							</tr>
 							<tr>
 								<th rowspan="2" class="text-center w5">
 									<input type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
 								</th>
 								<th rowspan="2">Items</th>
-								<th rowspan="2" class="text-center w8">MOQ</th>
-								<th colspan="2" class="text-center">Quantity</th>
 							</tr>
 							<tr>
-								<th class="text-center w8">Deliver</th>
-								<th class="text-center w8">Bad Item</th>
+								<th class="text-center w8">To Deliver</th>
+								<th class="text-center w8">Bad Item(s)</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr class="ng-cloak" ng-hide="products[i].is_disabled && selected_item_only" ng-if="products.length && !loading" ng-repeat="(i, o) in products">
 								<td class="text-center"><input type="checkbox" ng-model="products[i].checkbox" ng-change="check(i,products[i].checkbox)"></td>
-								<td class="capitalize">{{o.Product.name}} <sup>SKU - {{o.Product.item_code}}</sup></td>
-								<td class="text-center">{{o.Product.min}}</td>
+								<td class="capitalize">
+									{{o.Product.name}} 
+									<div>
+										<small class="text-muted">
+											MOQ: {{o.Product.min}} |
+											SKU: {{o.Product.item_code}}
+										</small>
+									</div>
+								
+								</td>
+							
 								<td class="text-center">
-									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].deliver" type="number" min="0" class="form-control input-sm"></input>
+									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].deliver" type="number" min="0" class="form-control input-sm" placeholder="0"></input>
 								</td>
 								<td class="text-center">
-									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].bad_item" type="number" min="0" class="form-control input-sm"></input>
+									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].bad_item" type="number" min="0" class="form-control input-sm" placeholder="0"></input>
 								</td>
 							</tr>
 							<tr  class="ng-cloak" ng-show="loading">

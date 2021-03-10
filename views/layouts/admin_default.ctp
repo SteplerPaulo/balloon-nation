@@ -67,8 +67,7 @@
 									);  ?>
 				</li>
 				<li>
-					<?php  echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-truck')).' '.
-						$this->Html->tag('span', 'Fast Delivery'),
+					<?php  echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-truck')),
 						array('admin' => true,'controller'=>'deliveries','action'=>'create'),
 						array('escape' => false));						
 					?>

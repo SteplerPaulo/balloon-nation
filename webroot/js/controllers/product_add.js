@@ -1,6 +1,5 @@
 App.controller('ProductAddController',function($scope,$rootScope,$http,$filter,$uibModal, $log, $document){
 	
-	
 	$scope.initializeController = function(){
 		
 		
