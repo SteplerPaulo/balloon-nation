@@ -45,58 +45,54 @@
 				</div>
 			</div>
 			
-			<div class="row">
-				<div class="col-lg-12">
-					<table class="table table-responsive table-bordered table-condensed">
-						<thead>
-							<tr>
-								<th rowspan="2" class="text-center w5">
-									<input type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
-								</th>
-								<th rowspan="2">Items</th>
-							</tr>
-							<tr>
-								<th class="text-center w8">To Deliver</th>
-								<th class="text-center w8">Bad Item(s)</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="ng-cloak" ng-hide="products[i].is_disabled && selected_item_only" ng-if="products.length && !loading" ng-repeat="(i, o) in products">
-								<td class="text-center"><input type="checkbox" ng-model="products[i].checkbox" ng-change="check(i,products[i].checkbox)"></td>
-								<td class="capitalize">
-									{{o.Product.name}} 
-									<div>
-										<small class="text-muted">
-											MOQ: {{o.Product.min}} |
-											SKU: {{o.Product.item_code}}
-										</small>
-									</div>
-								
-								</td>
-							
-								<td class="text-center">
-									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].deliver" type="number" min="0" class="form-control input-sm" placeholder="0"></input>
-								</td>
-								<td class="text-center">
-									<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].bad_item" type="number" min="0" class="form-control input-sm" placeholder="0"></input>
-								</td>
-							</tr>
-							<tr  class="ng-cloak" ng-show="loading">
-								<td colspan="5">
-									<center>
-										<img class="loading" ng-src="<?php echo $this->base;?>/img/loading2.gif"></img>
-									</center>
-								</td>
-							</tr>
-							<tr  class="ng-cloak" ng-if="!products.length && !loading">
-								<td colspan="5">
-									No data available. Please select customer
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<table class="table table-responsive table-bordered table-condensed">
+				<thead>
+					<tr>
+						<th rowspan="2" class="text-center w5">
+							<input type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
+						</th>
+						<th rowspan="2">Items</th>
+					</tr>
+					<tr>
+						<th class="text-center w8">To Deliver</th>
+						<th class="text-center w8">Bad Item(s)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="ng-cloak" ng-hide="products[i].is_disabled && selected_item_only" ng-if="products.length && !loading" ng-repeat="(i, o) in products">
+						<td class="text-center"><input type="checkbox" ng-model="products[i].checkbox" ng-change="check(i,products[i].checkbox)"></td>
+						<td class="capitalize">
+							{{o.Product.name}} 
+							<div>
+								<small class="text-muted">
+									MOQ: {{o.Product.min}} |
+									SKU: {{o.Product.item_code}}
+								</small>
+							</div>
+						
+						</td>
+					
+						<td class="text-center">
+							<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].deliver" type="number" min="0" class="form-control input-sm" placeholder="0"></input>
+						</td>
+						<td class="text-center">
+							<input ng-required="!products[i].is_disabled" ng-disabled="products[i].is_disabled" ng-model="products[i].bad_item" type="number" min="0" class="form-control input-sm" placeholder="0"></input>
+						</td>
+					</tr>
+					<tr  class="ng-cloak" ng-show="loading">
+						<td colspan="5">
+							<center>
+								<img class="loading" ng-src="<?php echo $this->base;?>/img/loading2.gif"></img>
+							</center>
+						</td>
+					</tr>
+					<tr  class="ng-cloak" ng-if="!products.length && !loading">
+						<td colspan="5">
+							No data available. Please select customer
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 		<div class="panel-footer">
 			<div class="text-right">
@@ -105,6 +101,5 @@
 			</div>
 		</div>
 	</div>
-
 </div>
 <?php echo $this->Html->script('controllers/admin_delivery',array('inline'=>false));?>
