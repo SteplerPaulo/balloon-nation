@@ -60,7 +60,7 @@ class ProductsController extends AppController {
 		}
 		
 		$categories = $this->Product->Category->find('list',array('conditions' =>array('Category.parent_id' => 1),'order'=>'Category.name'));
-		$customers = $this->Product->Customer->find('list',array('conditions'=>array('Customer.id'=>1)));
+		$customers = $this->Product->Customer->find('list');
 		$this->set(compact('categories','customers'));
 	}
 
@@ -241,9 +241,4 @@ class ProductsController extends AppController {
 		exit;
 	}
 	/**END**/
-	
-	function report_card(){
-		$this->layout='pdf';
-		$this->render();
-	}
 }
