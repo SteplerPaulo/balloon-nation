@@ -54,8 +54,8 @@
 						<th rowspan="2">Items</th>
 					</tr>
 					<tr>
-						<th class="text-center w8">To Deliver</th>
-						<th class="text-center w8">Bad Item(s)</th>
+						<th class="text-center">To Deliver</th>
+						<th class="text-center">Bad Item(s)</th>
 					</tr>
 				</thead>
 				<tbody>
