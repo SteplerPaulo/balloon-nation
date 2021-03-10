@@ -3,7 +3,7 @@ class DeliveriesController extends AppController {
 
 	var $name = 'Deliveries';
 	var $helpers = array('Access');
-	var $uses = array('Delivery','Customer','Product','DeliveryDetail');
+	var $uses = array('Delivery','Customer','Product','DeliveryDetail','Year');
 
 	function index() {
 		$this->Delivery->recursive = 0;
