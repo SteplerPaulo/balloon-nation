@@ -135,7 +135,7 @@ class DeliveriesController extends AppController {
 	function all(){
 		$data = array();
 		$this->Delivery->unbindModel( array('hasMany' => array('DeliveryDetail')));
-		$data = $this->Delivery->find('all',array('order'=>'date DESC'));
+		$data = $this->Delivery->find('all',array('conditions'=>array('Delivery.date LIKE'=>'%2021%'),'order'=>'date DESC'));
 		
 		foreach ($data as $key => $value) {
 		   $data[$key]['Delivery']['formated_date'] = date('F d, Y h:i:s A',strtotime($value['Delivery']['date']));
