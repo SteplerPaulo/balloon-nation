@@ -16,13 +16,19 @@ class ApiController extends AppController {
 	/**API for ReactJs**/
 	function data(){
 		
-		if($this->RequestHandler->ext == 'json' && isset($_GET['model'])?in_array($_GET['model'], $this->uses):''){
+		if(isset($_GET['model']) && !in_array($_GET['model'], $this->uses)){
+			die('Bad Request: Check Correct Params');
+		}
+		
+		if($this->RequestHandler->ext == 'json'){
 			$this->layout = false;
 			header("Access-Control-Allow-Origin: *");
 			$model= isset($_GET['model'])?$_GET['model']:'Product';
 			$fields = array();
 			$conditions=array();
-
+			$page = 1-1;
+			$limit = 50;
+			$offset =  $page*$limit;
 			
 			if(isset($_GET['fields'])){
 				$fields = explode(',',$_GET['fields']);
@@ -35,11 +41,10 @@ class ApiController extends AppController {
 			}
 			
 			
-			$page = 1-1;
-			$limit = 50;
-			$offset =  $page*$limit;
 			$this->Product->unbindModel(array('hasMany' => array('ProductImage','DeliveryDetail')));
 			$this->Product->unbindModel(array('belongsTo' => array('Customer','Category')));
+	
+			
 			
 			
 			$data = $this->$model->find('all', array(
@@ -51,8 +56,6 @@ class ApiController extends AppController {
 			));
 		
 			$this->set(compact('data'));
-		}else{
-			die('Bad Request: Check Correct Params');
 		}
 		
 	}
