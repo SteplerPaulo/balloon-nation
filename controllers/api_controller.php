@@ -3,7 +3,8 @@ class ApiController extends AppController {
 
 	var $name = 'Api';
 	var $helpers = array('Access');
-	var $uses = array('Product','Category');
+	var $uses = array('Product','Category','Delivery','Inquiry','Sale');
+
 	
 	function beforeFilter(){ 
 		parent::beforeFilter();
@@ -14,7 +15,8 @@ class ApiController extends AppController {
 	
 	/**API for ReactJs**/
 	function data(){
-		if($this->RequestHandler->ext == 'json'){
+		
+		if($this->RequestHandler->ext == 'json' && isset($_GET['model'])?in_array($_GET['model'], $this->uses):''){
 			$this->layout = false;
 			header("Access-Control-Allow-Origin: *");
 			$model= isset($_GET['model'])?$_GET['model']:'Product';
@@ -29,7 +31,6 @@ class ApiController extends AppController {
 				$conditions['OR']= array();
 				foreach($fields as $d){
 					$conditions['OR'][$model.'.'.$d.' LIKE']='%'.$_GET['filter'].'%';
-					
 				}
 			}
 			
@@ -41,24 +42,19 @@ class ApiController extends AppController {
 			$this->Product->unbindModel(array('belongsTo' => array('Customer','Category')));
 			
 			
-			$result = $this->$model->find('all', array(
+			$data = $this->$model->find('all', array(
 				'conditions'=>$conditions,
 				'order'=>'name ASC',
 				'fields' => $fields,
 				'offset' => $offset,
 				'limit' => $limit
 			));
-			
-			$data = array();
-			/* foreach($result as $k => $d ){
-				$data['tableHeaderColor'] = 'primary';
-				$data['tableHead'] = array_keys(array_change_key_case($d[$model], CASE_UPPER));
-				$data['tableData'][$k] = array_values ($d[$model]);
-			} */
-			$data =  $result;
 		
 			$this->set(compact('data'));
+		}else{
+			die('Bad Request: Check Correct Params');
 		}
+		
 	}
 	
 }
