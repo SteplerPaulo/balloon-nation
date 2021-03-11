@@ -18,7 +18,7 @@ class ApiController extends AppController {
 			$this->layout = false;
 			header("Access-Control-Allow-Origin: *");
 			$model= isset($_GET['model'])?$_GET['model']:'Product';
-			$fields = array('id','name');
+			$fields = array();
 			$conditions=array();
 
 			
@@ -35,7 +35,7 @@ class ApiController extends AppController {
 			
 			
 			$page = 1-1;
-			$limit = 10;
+			$limit = 50;
 			$offset =  $page*$limit;
 			$this->Product->unbindModel(array('hasMany' => array('ProductImage','DeliveryDetail')));
 			$this->Product->unbindModel(array('belongsTo' => array('Customer','Category')));
