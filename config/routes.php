@@ -48,8 +48,12 @@
 
 	
 	
-/**
- * ...and connect the rest of 'Pages' controller's urls.
- */
- 
+	/**
+	 * ...and connect the rest of 'Pages' controller's urls.
+	*/
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+	
+	
+	//Experimental API
+	Router::parseExtensions();
+	Router::connect('/api', array('controller' => 'api', 'action' => 'data'));
