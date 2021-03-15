@@ -88,7 +88,7 @@
 							No data available. Please select customer
 						</td>
 					</tr>
-					<tr  class="ng-cloak" ng-if="!selected_item_count && products.length ">
+					<tr  class="ng-cloak" ng-if="!selected_item_count && selected_item_only">
 						<td colspan="4">
 							No selected item.
 						</td>
