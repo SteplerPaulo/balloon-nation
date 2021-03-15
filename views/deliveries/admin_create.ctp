@@ -32,14 +32,14 @@
 				</div>
 			</div><hr/>
 			<div class="row">
-				<div class="col-lg-9">
+				<div class="col-lg-7">
 					<input id="ItemCode" ng-model="item_code" ng-change="checkItem(item_code)" placeholder="Enter SKU here to automatically select item..." class="form-control input-sm"></input>			
 				</div>
 				<div class="col-lg-3">
 					<div class="checkbox">
 					  <label>
 						<input ng-click="showSelected()" ng-model="selected_item_only" type="checkbox" value="">
-						Show selected items only
+						Show selected items only ({{selected_item_count}})
 					  </label>
 					</div>
 				</div>
@@ -48,7 +48,7 @@
 				<thead>
 					<tr>
 						<th class="text-center w5">
-							<input type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
+							<input ng-disabled="!products.length" type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
 						</th>
 						<th>Items</th>
 						<th class="text-center w8">To Deliver</th>
@@ -86,6 +86,11 @@
 					<tr  class="ng-cloak" ng-if="!products.length && !loading">
 						<td colspan="4">
 							No data available. Please select customer
+						</td>
+					</tr>
+					<tr  class="ng-cloak" ng-if="!selected_item_count && products.length ">
+						<td colspan="4">
+							No selected item.
 						</td>
 					</tr>
 				</tbody>
