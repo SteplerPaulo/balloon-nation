@@ -214,7 +214,7 @@
 												);  ?>
 					</li>
 					<li>		
-						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-user-plus')).' '.
+						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-users')).' '.
 												$this->Html->tag('span', 'Customers'),
 												array('admin' => true,'controller'=>'customers','action'=>'/'),
 												array('escape' => false)
