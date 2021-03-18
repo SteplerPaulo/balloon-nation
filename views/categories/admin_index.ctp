@@ -35,7 +35,6 @@
 						<td>{{d.Category.name}}</td>
 						<td class="actions text-right">
 							<a href="<?php echo $this->base;?>/admin/categories/edit/{{d.Category.slug}}" data-toggle="tooltip" title="Edit"><i class="fa fa-edit fa-2x"></i></a>
-							<a href="<?php echo $this->base;?>/admin/categories/delete/{{d.Category.id}}" onclick="return confirm('Are you sure you want to delete this category?');" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a>
 						</td>
 					</tr>
 					<tr ng-show="loading">
