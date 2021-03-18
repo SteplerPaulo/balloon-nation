@@ -18,7 +18,7 @@
 						</th>
 					</tr>
 					<tr>
-						<th>
+						<th class="text-center">
 							<input ng-disabled="!data.length" type="checkbox" ng-model="check_all" ng-change="checkAll(check_all)">
 						</th>
 						<th>SKU</th>
