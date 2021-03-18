@@ -205,11 +205,12 @@ class CustomersController extends AppController {
 														'conditions'=>array(
 																		'Product.customer_id' => 1),
 														'order'=>array('Product.name'),
-														/* 'fields'=>array('name','item_code','purchase_price',
+														'fields'=>array('name','item_code','purchase_price',
 																		'selling_price','min','beginning_inventory',
 																		'category_id','description','initial_inventory',
 																		'customer_id'
-																		) */
+																		)//never try to add id on the list of fields,
+																		//it will have affect on product cloning
 													));
 		
 
