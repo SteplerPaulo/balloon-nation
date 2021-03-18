@@ -34,7 +34,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		}
 	}
 	
-	/*L                                                                                                                                                         egacy Code 
+	/*Legacy code                                                                                                                                                        egacy Code 
 	$scope.changeCustomer = function (customer) {
 		
 		$scope.loading = true;

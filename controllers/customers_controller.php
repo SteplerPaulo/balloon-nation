@@ -205,19 +205,21 @@ class CustomersController extends AppController {
 														'conditions'=>array(
 																		'Product.customer_id' => 1),
 														'order'=>array('Product.name'),
-														'fields'=>array('name','item_code','purchase_price',
+														/* 'fields'=>array('name','item_code','purchase_price',
 																		'selling_price','min','beginning_inventory',
 																		'category_id','description','initial_inventory',
 																		'customer_id'
-																		)
+																		) */
 													));
-		//pr($data['Customer']['Product']);exit;
+		
 
 													
 		//SET PRODUCTS' CUSTOMER ID	AND SLUGS & REMOVE EXISTING CUSTOMER PRODUCT ON THE LIST									
 		foreach($data['BalloonationProducts'] as $k => $d){
 			$data['BalloonationProducts'][$k]['Product']['status'] = 'new';
-			
+			$data['BalloonationProducts'][$k]['Product']['is_disabled'] = true;
+			$data['BalloonationProducts'][$k]['Product']['checkbox'] = false;
+		
 			if(!empty($data['Customer']['Product'])){
 				foreach($data['Customer']['Product'] as $ck => $cp){
 					if($d['Product']['name'] == $cp['name']){//filtered customer existing product & remove it on the list
@@ -237,6 +239,8 @@ class CustomersController extends AppController {
 				//slug
 				$string = str_replace(' ', '-', strtolower(trim($d['Product']['name']))).'-'.$data['Customer']['Customer']['id']; 
 				$data['BalloonationProducts'][$k]['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
+		
+
 		
 			}
 			

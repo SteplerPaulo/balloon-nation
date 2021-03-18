@@ -6,6 +6,7 @@ App.controller('CloneProductController',function($scope,$rootScope,$http,$filter
 		$scope.loading = true;
 		$scope.customer = null;
 		$scope.preventDoubleClick = false;
+		$scope.check_all = false;
 			
 		//console.log(decodeURI(window.location.pathname.split('/')[5]));	
 			
@@ -19,14 +20,12 @@ App.controller('CloneProductController',function($scope,$rootScope,$http,$filter
 				//console.log(decodeURI(window.location.pathname.split('/')[4]);
 			}
 		}
-		console.log($scope.customer_slug);
 	 	
 		$http.get(BASE_URL+"customers/test/"+$scope.customer_slug).success(function(response) {
-			console.log(response);
+		
 			$scope.customer_id = response.Customer.Customer.id;
 			$scope.customer = response.Customer.Customer.name;
 			$scope.data = response.BalloonationProducts;
-			console.log($scope.data);
 			$scope.loading = false;
 		});
 	}
@@ -35,15 +34,68 @@ App.controller('CloneProductController',function($scope,$rootScope,$http,$filter
 		$scope.data[i].Product.initial_inventory = $scope.data[i].Product.beginning_inventory;
 	}
 	
+	
+	$scope.checkAll = function (is_checked) {
+		if(is_checked){
+			$scope.selected_item_count = 0;
+			for (var i = 0; i < $scope.data.length; i++) {
+				$scope.data[i].Product.is_disabled = false;
+				$scope.data[i].Product.checkbox = true;
+				$scope.selected_item_count++;
+			}
+		}else{
+			for (var i = 0; i < $scope.data.length; i++) {
+				$scope.data[i].Product.is_disabled = true;
+				$scope.data[i].Product.checkbox = false;
+				$scope.selected_item_count--;
+			}
+		}
+	};
+	
+	
+	$scope.check = function (i,is_checked) {
+		if(is_checked){
+			$scope.data[i].Product.is_disabled = false;
+			$scope.selected_item_count++;
+		}else{
+			$scope.data[i].Product.is_disabled = true;
+			$scope.check_all = false;
+			$scope.selected_item_count--;
+		}
+	};
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	$scope.save = function(){
 		$scope.preventDoubleClick = true;
-		//console.log($scope.data);
-		//return;
+		let postData = [];
+		angular.forEach($scope.data, function(value, key) {
+			if(!value.Product.is_disabled){
+				postData.push(value)
+			}
+		});
+		
 		$http({
 			method: 'POST',
 			url: BASE_URL+'/customers/save_clone_data',
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: $.param({data:$scope.data})
+			data: $.param({data:postData})
 		}).then(function(response){
 			//console.log(response);
 			
