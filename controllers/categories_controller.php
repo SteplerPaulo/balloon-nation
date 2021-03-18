@@ -72,20 +72,6 @@ class CategoriesController extends AppController {
 		$this->set(compact('categories'));
 	}
 
-	function admin_delete($id = null) {
-		if(!$this->Access->check('User','admin')) die ("HTTP ERROR 401 (UNAUTHORIZED) <br/><br/>Call system administrator for your account verification");
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for category', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Category->delete($id)) {
-			$this->Session->setFlash(__('Category deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Category was not deleted', true));
-		$this->redirect(array('action' => 'index'));
-	}
-	
 	function main_children(){
 		//$this->data = $this->Category->generatetreelist(null, null, null, '&nbsp;&nbsp;&nbsp;');
 		//debug ($this->data); die;

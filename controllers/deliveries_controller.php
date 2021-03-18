@@ -52,19 +52,6 @@ class DeliveriesController extends AppController {
 		$this->set(compact('customers'));
 	}
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for delivery', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Delivery->delete($id)) {
-			$this->Session->setFlash(__('Delivery deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Delivery was not deleted', true));
-		$this->redirect(array('action' => 'index'));
-	}
-	
 	function admin_index() {
 		$this->layout = 'admin_default';
 	}
@@ -117,19 +104,6 @@ class DeliveriesController extends AppController {
 		}
 		$customers = $this->Delivery->Customer->find('list');
 		$this->set(compact('customers'));
-	}
-
-	function admin_delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for delivery', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Delivery->delete($id)) {
-			$this->Session->setFlash(__('Delivery deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Delivery was not deleted', true));
-		$this->redirect(array('action' => 'index'));
 	}
 
 	function all(){

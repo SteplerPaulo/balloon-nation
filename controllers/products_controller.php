@@ -94,24 +94,10 @@ class ProductsController extends AppController {
 		$this->set(compact('categories','customers'));
 	}
 
-	function admin_delete($id = null) {
-		if(!$this->Access->check('User','admin')) die ("HTTP ERROR 401 (UNAUTHORIZED) <br/><br/>Call system administrator for your account verification");
-		
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for product', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Product->delete($id)) {
-			$this->Session->setFlash(__('Product deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Product was not deleted', true));
-		$this->redirect(array('action' => 'index'));
-	}
 	
 	function all(){//Obsolete on admin product index, created a new function for faster rendering
 		$data = array();
-		$this->Product->unbindModel( array('hasMany' => array('ProductImage')));
+		$this->Product->unbindModel( array('hasMany' => array('ProductImage','DeliveryDetail')));
 		$products = $this->Product->find('all', array(
 			'contain' => array(
 				'Category',
@@ -127,6 +113,7 @@ class ProductsController extends AppController {
 	}
 	
 	function main_products(){
+		$this->Product->unbindModel( array('hasMany' => array('ProductImage','DeliveryDetail')));
 		$data = $this->Product->find('all',array(
 			'conditions' => array(
 				'Product.customer_id'=>1,
@@ -241,4 +228,28 @@ class ProductsController extends AppController {
 		exit;
 	}
 	/**END**/
+
+	
+	function clean(){
+		$this->Product->unbindModel( array('hasMany' => array('ProductImage','DeliveryDetail')));
+		$this->Product->unbindModel( array('belongsTo' => array('Category')));
+		$data = $this->Product->find('all',array(
+					'conditions'=>array('Product.name NOT LIKE'=>'%FM%','Customer.name LIKE'=>'%Fisher%'),
+					'fields'=>array('Product.name','Customer.name'),
+					'group'=>'Customer.name'
+					));
+		//pr($data);exit;			
+					
+		$result = $this->Product->deleteAll(
+			[
+				'Product.name NOT LIKE' => '%FM%', 
+				'Customer.name LIKE' => '%Fisher%'
+			]
+		);			
+		pr($result);
+		exit;
+	}
 }
+
+
+

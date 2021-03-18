@@ -48,18 +48,6 @@ class SalesController extends AppController {
 		}
 	}
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for sale', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Sale->delete($id)) {
-			$this->Session->setFlash(__('Sale deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Sale was not deleted', true));
-		$this->redirect(array('action' => 'index'));
-	}
 	
 	function admin_index() {
 		$this->layout = 'admin_default';
@@ -116,20 +104,6 @@ class SalesController extends AppController {
 			$this->data = $this->Sale->read(null, $id);
 		}
 	}
-
-	function admin_delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for sale', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Sale->delete($id)) {
-			$this->Session->setFlash(__('Sale deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Sale was not deleted', true));
-		$this->redirect(array('action' => 'index'));
-	}
-
 	
 	function admin_journal_entry() {
 		$this->layout = 'admin_default';
