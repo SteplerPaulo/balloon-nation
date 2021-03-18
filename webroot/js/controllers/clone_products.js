@@ -37,7 +37,8 @@ App.controller('CloneProductController',function($scope,$rootScope,$http,$filter
 	
 	$scope.save = function(){
 		$scope.preventDoubleClick = true;
-		
+		//console.log($scope.data);
+		//return;
 		$http({
 			method: 'POST',
 			url: BASE_URL+'/customers/save_clone_data',

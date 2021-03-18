@@ -124,8 +124,8 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 				'Main':dtls['Main'],
 				'AssociatedProduct':dtls['AssociatedProduct'],
 		};
-		console.log(data);
-		return;
+		//console.log(data);
+		//return;
 
 		
 		$http({
