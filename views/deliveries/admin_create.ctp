@@ -5,6 +5,20 @@
 	<div class="login-panel panel panel-success" ng-form="DeliveryForm">
 		<div class="panel-body">
 			<div class="row">
+				<div class="col-lg-12">
+					<label>Customer</label>
+					<input class="form-control"	placeholder="Search customer..." ng-required="true"				
+						typeahead-on-select="onSelect($item, $model, $label)" 
+						ng-model="customer" typeahead-show-hint="true"
+						ng-blur="checkCustomerInput()"
+						typeahead-min-length="3" typeahead-select-on-blur="true"
+						uib-typeahead="d as d.Customer.name for d in customers | filter:$viewValue | limitTo:15">	
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<!--LEGACY CODE
 				<div class="col-lg-4">
 					<label for="customer">To</label>/Customer
 					<select class='form-control input-sm' ng-model='customer' ng-required="true" ng-change="changeCustomer(customer)">
@@ -12,23 +26,24 @@
 						<option class="ng-cloak" ng-repeat="d in customers" address="{{d.Customer.address}}">{{d.Customer.name}}</option>
 					</select>
 				</div>
-				<div class="col-lg-8">
+				-->
+				<div class="col-lg-12">
 					<label>Address</label>
 					<input ng-model="customer_address" class="form-control input-sm" readonly="readonly"></input>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-2">
-					<label>DR No.</label>
+					<label>D.R. No.</label>
 					<input ng-model="dr_no" ng-required="true" class="form-control input-sm" ng-change='checkDuplicate(dr_no)' ng-class="(existingDRNo?'alert-danger':'')"></input>
-				</div>
-				<div class="col-lg-3">
-					<label>Stock Clerk</label>
-					<input  ng-model="stock_clerk" ng-required="true" class="form-control input-sm"></input>
 				</div>
 				<div class="col-lg-3">
 					<label>Date</label>
 					<input  ng-model="dateNow" ng-required="true" type="datetime-local" class="form-control input-sm" ></input>
+				</div>
+				<div class="col-lg-7">
+					<label>Stock Clerk</label>
+					<input  ng-model="stock_clerk" ng-required="true" class="form-control input-sm"></input>
 				</div>
 			</div><hr/>
 			<div class="row">
@@ -39,7 +54,7 @@
 					<div class="checkbox">
 					  <label>
 						<input ng-click="showSelected()" ng-model="selected_item_only" type="checkbox" value="">
-						Show selected items only ({{selected_item_count}})
+						Show selected items only <span class="ng-cloak">({{selected_item_count}})</span>
 					  </label>
 					</div>
 				</div>
@@ -85,7 +100,7 @@
 					</tr>
 					<tr  class="ng-cloak" ng-if="!products.length && !loading">
 						<td colspan="4">
-							No data available. Please select customer
+							No data available.
 						</td>
 					</tr>
 					<tr  class="ng-cloak" ng-if="!selected_item_count && selected_item_only">

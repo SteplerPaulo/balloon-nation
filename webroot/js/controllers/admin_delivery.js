@@ -18,11 +18,27 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 		});
 	}
 	
+	$scope.onSelect = function(item,model,label) {//on typeahead
+		$scope.loading = true;
+		$http.get(BASE_URL+"deliveries/customer_product/"+item.Customer.name).success(function(response) {
+			$scope.products = response.Products;
+			$scope.customer_address = response.Customer.address;
+			$scope.customer_id = response.Customer.id;
+			$scope.loading = false;
+		});	
+	}
 	
+	$scope.checkCustomerInput = function(){
+		if(!$scope.customer){
+			$scope.products = [];
+		}
+	}
+	
+	/*L                                                                                                                                                         egacy Code 
 	$scope.changeCustomer = function (customer) {
 		
 		$scope.loading = true;
-			
+		console.log(customer);
 			
 		$http.get(BASE_URL+"deliveries/customer_product/"+customer).success(function(response) {
 			$scope.products = response.Products;
@@ -30,7 +46,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			$scope.customer_id = response.Customer.id;
 			$scope.loading = false;
 		});		
-	};
+	}; */
 	
 	$scope.check = function (i,is_checked) {
 		if(is_checked){
@@ -108,8 +124,8 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 				'Main':dtls['Main'],
 				'AssociatedProduct':dtls['AssociatedProduct'],
 		};
-		//	console.log(data);
-		//return;
+		console.log(data);
+		return;
 
 		
 		$http({
