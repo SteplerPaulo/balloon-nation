@@ -163,25 +163,47 @@
 												);  ?>
                     </li>
 					<li class="">
-						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-file-zip-o')).' '.
-												$this->Html->tag('span', 'Sales Report'),
-												array('admin' => true,'controller'=>'sales','action'=>'customer'),
-												array('escape' => false)
-												);  ?>
-                    </li>
-					<li class="">
-						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-file-excel-o')).' '.
-												$this->Html->tag('span', 'Sales Entry'),
-												array('admin' => true,'controller'=>'sales','action'=>'journal_entry'),
-												array('escape' => false)
-												);  ?>
-                    </li>
-					<li class="">
-						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-truck')).' '.
-												$this->Html->tag('span', 'Deliveries'),
+						<a><i class="fa fa-truck"></i> <span>Delivery</span></a>
+						<ul>
+							<li>
+								<?php  echo $this->Html->link($this->Html->tag('i', '', 
+										array('class' => 'fa fa-plus-circle')).' '.
+										$this->Html->tag('span', 'Create'),
+										array('admin' => true,'controller'=>'deliveries','action'=>'create'),
+										array('escape' => false));						
+								?>	
+							</li>
+							<li>
+								<?php echo $this->Html->link( 	$this->Html->tag('i', '', 
+												array('class' => 'fa fa-fw fa-list-ul')).' '.
+												$this->Html->tag('span', 'List'),
 												array('admin' => true,'controller'=>'deliveries','action'=>'/'),
 												array('escape' => false)
-												);  ?>
+											);  ?>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a><i class="fa fa-credit-card"></i> <span>Sales</span></a>
+						<ul>
+							<li>
+								<?php echo $this->Html->link( 	$this->Html->tag('i', '',
+									array('class' => 'fa fa-fw fa-book')).' '.
+									$this->Html->tag('span', 'Sales J.Entry'),
+									array('admin' => true,'controller'=>'sales','action'=>'journal_entry'),
+									array('escape' => false)
+									);  
+								?>
+							</li>
+							
+							<li>
+								<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-file-zip-o')).' '.
+														$this->Html->tag('span', 'Sales Report'),
+														array('admin' => true,'controller'=>'sales','action'=>'customer'),
+														array('escape' => false)
+														);  ?>
+							</li>
+						</ul>
                     </li>
 					
 					 <li>		
@@ -192,16 +214,16 @@
 												);  ?>
 					</li>
 					<li>		
-						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-tags')).' '.
-												$this->Html->tag('span', 'Categories'),
-												array('admin' => true,'controller'=>'categories','action'=>'/'),
+						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-user-plus')).' '.
+												$this->Html->tag('span', 'Customers'),
+												array('admin' => true,'controller'=>'customers','action'=>'/'),
 												array('escape' => false)
 												);  ?>
 					</li>
 					<li>		
-						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-user-plus')).' '.
-												$this->Html->tag('span', 'Customers'),
-												array('admin' => true,'controller'=>'customers','action'=>'/'),
+						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-tags')).' '.
+												$this->Html->tag('span', 'Categories'),
+												array('admin' => true,'controller'=>'categories','action'=>'/'),
 												array('escape' => false)
 												);  ?>
 					</li>

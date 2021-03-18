@@ -1,6 +1,7 @@
 <?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
 <?php echo $this->Html->addCrumb('Deliveries','/admin/deliveries'); ?>
 <?php echo $this->Html->addCrumb('Create',''); ?>
+
 <div ng-controller="AdminForDeliveryController" ng-init="initializeController()">
 	<div class="login-panel panel panel-success" ng-form="DeliveryForm">
 		<div class="panel-body">
@@ -11,7 +12,7 @@
 						typeahead-on-select="onSelect($item, $model, $label)" 
 						ng-model="customer" typeahead-show-hint="true"
 						ng-blur="checkCustomerInput()"
-						typeahead-min-length="3" typeahead-select-on-blur="true"
+						typeahead-min-length="2" typeahead-select-on-blur="true"
 						uib-typeahead="d as d.Customer.name for d in customers | filter:$viewValue | limitTo:15">	
 				</div>
 			</div>

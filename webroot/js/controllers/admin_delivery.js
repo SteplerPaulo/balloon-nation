@@ -134,7 +134,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: $.param({data:data})
 		}).then(function(response){
-			window.location.href = BASE_URL+"admin/deliveries";
+			window.location.href = BASE_URL+"admin/deliveries/";
 		});
 		
 	}
