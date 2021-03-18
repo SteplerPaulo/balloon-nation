@@ -171,7 +171,7 @@
                     </li>
 					<li class="">
 						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-file-excel-o')).' '.
-												$this->Html->tag('span', 'S. Journal Entry'),
+												$this->Html->tag('span', 'Sales Entry'),
 												array('admin' => true,'controller'=>'sales','action'=>'journal_entry'),
 												array('escape' => false)
 												);  ?>

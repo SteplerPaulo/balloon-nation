@@ -474,15 +474,17 @@ class SalesController extends AppController {
 	
 	//UNPOSTING
 	function admin_unposting(){
+		die("Under construction. Unfinish algo");//As of now only is_posting field is udpdating// it should also re compute the product inventory qty  
+		
 		$this->layout = 'admin_default';
 	}
 	
 	function unpost_customer_sales(){
-		//pr();exit;
+		die("Under construction. Unfinish algo");//As of now only is_posting field is udpdating// it should also re compute the product inventory qty  
 		if(!empty($this->data)){
 			
-			$result =  $this->Sale->unpost($this->data['Customer']['id']);
-			echo json_encode($result);
+			//$result =  $this->Sale->unpost($this->data['Customer']['id']);
+			//echo json_encode($result);
 		}
 		
 		
