@@ -1,14 +1,104 @@
 <?php echo $this->Html->addCrumb('Dashboard'); ?>
 
-<div class="row">
-	<div class="col-lg-8 col-lg-offset-2">
-		<image src="<?php echo $this->base;?>/img/underconstruction.jpg" class="img-responsive" />
-	</div>
-</div>
 
-
-<!--<div ng-controller="DashboardController" ng-init="initializeController()">
+<div ng-controller="DashboardController" ng-init="initializeController()">
 	<div class="row">
+		<div class="col-lg-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Deliveries from</h3>
+				</div>
+				<div class="panel-body">
+					<div class="list-group">
+						<a href="#" class="list-group-item ng-cloak" ng-repeat="d in years">
+							<i class="fa fa-fw fa-truck"></i> Year {{d.Year.name}}
+						</a>
+						
+					</div>
+					<div class="text-right">
+						<a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Customer's Products</h3>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-bordered table-hover table-striped">
+							<thead>
+								<tr>
+									<th>Order #</th>
+									<th>Order Date</th>
+									<th>Order Time</th>
+									<th>Amount (USD)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>3326</td>
+									<td>10/21/2013</td>
+									<td>3:29 PM</td>
+									<td>$321.33</td>
+								</tr>
+								<tr>
+									<td>3325</td>
+									<td>10/21/2013</td>
+									<td>3:20 PM</td>
+									<td>$234.34</td>
+								</tr>
+								<tr>
+									<td>3324</td>
+									<td>10/21/2013</td>
+									<td>3:03 PM</td>
+									<td>$724.17</td>
+								</tr>
+								<tr>
+									<td>3323</td>
+									<td>10/21/2013</td>
+									<td>3:00 PM</td>
+									<td>$23.71</td>
+								</tr>
+								<tr>
+									<td>3322</td>
+									<td>10/21/2013</td>
+									<td>2:49 PM</td>
+									<td>$8345.23</td>
+								</tr>
+								<tr>
+									<td>3321</td>
+									<td>10/21/2013</td>
+									<td>2:23 PM</td>
+									<td>$245.12</td>
+								</tr>
+								<tr>
+									<td>3320</td>
+									<td>10/21/2013</td>
+									<td>2:15 PM</td>
+									<td>$5663.54</td>
+								</tr>
+								<tr>
+									<td>3319</td>
+									<td>10/21/2013</td>
+									<td>2:13 PM</td>
+									<td>$943.45</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="text-right">
+						<a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!--<div class="row">
 		<div class="col-lg-3 col-md-6">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -16,7 +106,7 @@
 						<div class="col-xs-3">
 							<i class="fa fa-truck fa-5x"></i>
 						</div>
-						<div class="col-xs-9 text-right">
+						<div class="col-xs-9 text-right ng-cloak">
 							<div class="huge">{{forDelivery.length}} </div>
 							<div>for delivery today</div>
 						</div>
@@ -38,7 +128,7 @@
 						<div class="col-xs-3">
 							<i class="fa fa-gavel fa-5x"></i>
 						</div>
-						<div class="col-xs-9 text-right">
+						<div class="col-xs-9 text-right ng-cloak">
 							<div class="huge">{{forPosting.length}}</div>
 							<div>for posting</div>
 						</div>
@@ -98,7 +188,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
@@ -277,11 +367,12 @@
 			</div>
 		</div>
 	</div>
+	-->
 </div>
--->
+
 <?php 
-	//echo $this->Html->script('controllers/admin_dashboard',array('inline'=>false));
-	//echo $this->Html->script('plugins/morris/raphael.min',array('inline'=>false));
-	//echo $this->Html->script('plugins/morris/morris.min',array('inline'=>false));
-	//echo $this->Html->script('plugins/morris/morris-data',array('inline'=>false));
+	echo $this->Html->script('controllers/admin_dashboard',array('inline'=>false));
+	echo $this->Html->script('plugins/morris/raphael.min',array('inline'=>false));
+	echo $this->Html->script('plugins/morris/morris.min',array('inline'=>false));
+	echo $this->Html->script('plugins/morris/morris-data',array('inline'=>false));
 ?>
