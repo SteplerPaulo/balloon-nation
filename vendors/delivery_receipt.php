@@ -71,7 +71,7 @@ class DeliveryReceipt extends Formsheet{
 				}
 				
 				$this->centerText(5,$y,'Pcs.',2,'');
-				$this->leftText(7.2,$y++,$items['Product']['name'],2,'');
+				$this->leftText(7.2,$y++,isset($items['Product']['name'])?$items['Product']['name']:'',2,'');
 			}else{
 				if($k == 14) $y=10.8;
 				
@@ -89,7 +89,7 @@ class DeliveryReceipt extends Formsheet{
 					$this->SetTextColor(0,0,0);
 				}
 				$this->centerText(17,$y,'Pcs.',2,'');
-				$this->leftText(19.2,$y++,$items['Product']['name'],2,'');
+				$this->leftText(7.2,$y++,isset($items['Product']['name'])?$items['Product']['name']:'',2,'');
 			}
 		}
 	}
