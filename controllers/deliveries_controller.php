@@ -110,11 +110,6 @@ class DeliveriesController extends AppController {
 		$data = array();
 		$this->Delivery->unbindModel( array('hasMany' => array('DeliveryDetail')));
 		$data = $this->Delivery->find('all',array('conditions'=>array('Delivery.date LIKE'=>'%2021%'),'order'=>'date DESC'));
-		
-		foreach ($data as $key => $value) {
-		   $data[$key]['Delivery']['formated_date'] = date('F d, Y h:i:s A',strtotime($value['Delivery']['date']));
-		}
-		
 		echo json_encode($data);
 		exit;
 	}

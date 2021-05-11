@@ -1,6 +1,11 @@
 <?php
 class Delivery extends AppModel {
 	var $name = 'Delivery';
+	var $virtualFields = array(
+		'formated_date' => 'DATE_FORMAT(Delivery.date,"%M %d,%Y %h:%i:%s %p")',
+	);
+	
+	
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
