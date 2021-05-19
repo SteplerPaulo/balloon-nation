@@ -4,11 +4,9 @@
 <div ng-controller="AdminSalesController" ng-init="initializeController()">	
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<table class="table table-striped table-condensed table-bordered">
+			<h3 class="ng-cloak">{{customer_name | uppercase}} - MONTHLY SALES REPORTS</h3>
+			<table class="table table-striped table-condensed ">
 				<thead>
-					<tr>
-						<th colspan="2">MONTHLY SALES REPORTS <span class="ng-cloak">({{customer_name}})</span></th>
-					</tr>
 					<tr>
 						<th class="">Date</th>
 						<th class="text-center w10">Action</th>
