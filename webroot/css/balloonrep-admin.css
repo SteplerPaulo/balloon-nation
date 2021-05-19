@@ -297,3 +297,11 @@ ul.alert-dropdown {
 .loading{
 	height: 200px;
 }
+
+a, a .fa{
+	cursor:pointer;
+}
+.btn-bottom-wrapper{
+	position: absolute;
+    bottom: 30px;
+}
