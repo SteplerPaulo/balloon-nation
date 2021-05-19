@@ -2,11 +2,11 @@
 <?php echo $this->Html->addCrumb('Categories','/admin/categories/'); ?>
 <?php echo $this->Html->addCrumb('Add'); ?>
 <div class="row">
-	<div class="col-md-6 col-md-offset-3">
-		<div class="login-panel panel panel-success">
+	<div class="col-md-6">
+		<div class="login-panel panel panel-warning">
 			<div class="panel-heading">
 				<h3 class="panel-title">	
-					<h4>ADD CATEGORY</h4>
+					<h4>NEW CATEGORY</h4>
 				</h3>
 			</div>
 			<?php echo $this->Form->create('Category');?>
