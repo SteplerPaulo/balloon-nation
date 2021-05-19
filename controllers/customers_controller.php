@@ -72,13 +72,6 @@ class CustomersController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 	
-	function all(){
-		$this->Customer->unbindModel(array('hasMany' => array('Product')));
-		$customers = $this->Customer->find('all',array('order' =>array('Customer.order'=>'ASC','Customer.name'=>'ASC')));
-		echo json_encode($customers);
-		exit;
-	}
-	
 	function admin_clone(){
 		$this->layout ="admin_default";	
 	}
@@ -192,7 +185,6 @@ class CustomersController extends AppController {
 		$data['BalloonationProducts'] = array_values($data['BalloonationProducts']);
 		echo json_encode($data);
 		exit;
-		
 	}
 	
 	function complete_list_of_double_entry(){
@@ -200,7 +192,6 @@ class CustomersController extends AppController {
 		$this->set(compact('data'));
 		$this->layout='pdf';
 		$this->render();
-		
 	}
 	
 	function double_entry_list(){
@@ -209,7 +200,6 @@ class CustomersController extends AppController {
 		$this->set(compact('data'));
 		$this->layout='pdf';
 		$this->render();
-		
 	}
 	
 	function deleted_deliveries(){
@@ -218,10 +208,15 @@ class CustomersController extends AppController {
 		$this->set(compact('data'));
 		$this->layout='pdf';
 		$this->render();
-		
 	}
 	
-
+	function all(){
+		$this->Customer->unbindModel(array('hasMany' => array('Product')));
+		$customers = $this->Customer->find('all',array('order' =>array('Customer.order'=>'ASC','Customer.modified'=>'DESC')));
+		echo json_encode($customers);
+		exit;
+	}
+	
 	function deliveries($customer_id = null){
 		//$this->Delivery->unbindModel( array('hasMany' => array('SaleDetail')));
 		
