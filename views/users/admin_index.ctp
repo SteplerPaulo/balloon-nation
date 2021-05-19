@@ -14,7 +14,7 @@
 
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-xs-12">
-			<table class="table table-striped table-hovered">
+			<table class="table table-striped table-hovered ng-cloak">
 				<thead>
 					<tr>
 						<th colspan="4">USERS</th>
