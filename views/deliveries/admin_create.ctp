@@ -1,14 +1,13 @@
-<?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
-<?php echo $this->Html->addCrumb('Deliveries','/admin/deliveries'); ?>
-<?php echo $this->Html->addCrumb('Create',''); ?>
-
 <div ng-controller="AdminForDeliveryController" ng-init="initializeController()">
-	<div class="login-panel panel panel-success" ng-form="DeliveryForm">
+	<div class="login-panel panel panel-warning" ng-form="DeliveryForm">
+		<div class="panel-heading">
+			<h3>Delivery Receipt</h3>
+		</div>
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-lg-12">
 					<label>Customer</label>
-					<input class="form-control"	placeholder="Search customer..." ng-required="true"				
+					<input class="form-control"	placeholder="Enter customer's name" ng-required="true"				
 						typeahead-on-select="onSelect($item, $model, $label)" 
 						ng-model="customer" typeahead-show-hint="true"
 						ng-blur="checkCustomerInput()"
@@ -16,18 +15,7 @@
 						uib-typeahead="d as d.Customer.name for d in customers | filter:$viewValue | limitTo:15">	
 				</div>
 			</div>
-			
-			
 			<div class="row">
-				<!--LEGACY CODE
-				<div class="col-lg-4">
-					<label for="customer">To</label>/Customer
-					<select class='form-control input-sm' ng-model='customer' ng-required="true" ng-change="changeCustomer(customer)">
-						<option value="">-- Select --</option>
-						<option class="ng-cloak" ng-repeat="d in customers" address="{{d.Customer.address}}">{{d.Customer.name}}</option>
-					</select>
-				</div>
-				-->
 				<div class="col-lg-12">
 					<label>Address</label>
 					<input ng-model="customer_address" class="form-control input-sm" readonly="readonly"></input>

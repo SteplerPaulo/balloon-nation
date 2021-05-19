@@ -1,8 +1,8 @@
-<?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
-<?php echo $this->Html->addCrumb('Sales','/admin/sales'); ?>
-<?php echo $this->Html->addCrumb('Journal Entry'); ?>
 <div ng-controller="AdminSemiMonthlyReportController" ng-init="initializeController()">	
-	<div class="panel panel-success" ng-form="SalesReportForm">
+	<div class="panel panel-warning" ng-form="SalesReportForm">
+		<div class="panel-heading">
+			<h3>Sales Report</h3>
+		</div>
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-lg-4">

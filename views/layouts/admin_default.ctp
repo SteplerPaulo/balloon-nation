@@ -162,24 +162,20 @@
 												array('escape' => false)
 												);  ?>
                     </li>
-					<li class="">
-						<a><i class="fa fa-truck"></i> <span>Delivery</span></a>
-						<ul>
-							<li>
-								<?php  echo $this->Html->link($this->Html->tag('i', '', 
-										array('class' => 'fa fa-plus-circle')).' '.
-										$this->Html->tag('span', 'Create'),
-										array('admin' => true,'controller'=>'deliveries','action'=>'create'),
-										array('escape' => false));						
-								?>	
-							</li>
-						</ul>
+						
+					<li>
+						<?php  echo $this->Html->link($this->Html->tag('i', '', 
+								array('class' => 'fa fa-truck')).' '.
+								$this->Html->tag('span', 'Delivery Receipt'),
+								array('admin' => true,'controller'=>'deliveries','action'=>'create'),
+								array('escape' => false));						
+						?>	
 					</li>
 					<li>		
 						<li>
 								<?php echo $this->Html->link( 	$this->Html->tag('i', '',
 									array('class' => 'fa fa-fw fa-credit-card')).' '.
-									$this->Html->tag('span', 'Sales Entry'),
+									$this->Html->tag('span', 'Sales Report'),
 									array('admin' => true,'controller'=>'sales','action'=>'journal_entry'),
 									array('escape' => false)
 									);  
