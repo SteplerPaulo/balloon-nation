@@ -173,38 +173,19 @@
 										array('escape' => false));						
 								?>	
 							</li>
-							<li>
-								<?php echo $this->Html->link( 	$this->Html->tag('i', '', 
-												array('class' => 'fa fa-fw fa-list-ul')).' '.
-												$this->Html->tag('span', 'List'),
-												array('admin' => true,'controller'=>'deliveries','action'=>'/'),
-												array('escape' => false)
-											);  ?>
-							</li>
 						</ul>
 					</li>
-					<li>
-						<a><i class="fa fa-credit-card"></i> <span>Sales</span></a>
-						<ul>
-							<li>
+					<li>		
+						<li>
 								<?php echo $this->Html->link( 	$this->Html->tag('i', '',
-									array('class' => 'fa fa-fw fa-book')).' '.
-									$this->Html->tag('span', 'Sales J.Entry'),
+									array('class' => 'fa fa-fw fa-credit-card')).' '.
+									$this->Html->tag('span', 'Sales Entry'),
 									array('admin' => true,'controller'=>'sales','action'=>'journal_entry'),
 									array('escape' => false)
 									);  
 								?>
 							</li>
-							
-							<li>
-								<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-file-zip-o')).' '.
-														$this->Html->tag('span', 'Sales Report'),
-														array('admin' => true,'controller'=>'sales','action'=>'customer'),
-														array('escape' => false)
-														);  ?>
-							</li>
-						</ul>
-                    </li>
+					</li>
 					
 					 <li>		
 						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-cubes')).' '.
@@ -256,7 +237,6 @@
             <div class="container-fluid">
 				<?php echo $this->Session->flash(); ?>
 				<?php echo $this->Session->flash('email'); ?>
-				<div class="breadcrumb"><?php echo $this->Html->getCrumbs(' <i class="fa fa-chevron-circle-right" aria-hidden="true"></i> ','Home Page'); ?></div>
 				<?php echo $content_for_layout; ?>
             </div>
         </div>
