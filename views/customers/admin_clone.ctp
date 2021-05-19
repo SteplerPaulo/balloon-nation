@@ -1,12 +1,5 @@
-<?php echo $this->Html->addCrumb('Dashboard','/admin/'); ?>
-<?php echo $this->Html->addCrumb('Customer','/admin/customers'); ?>
-<?php echo $this->Html->addCrumb('Clone Products',''); ?>
 <div ng-controller="CloneProductController" ng-init="initializeController()">	
-	<div class="row">
-		<div class="col-lg-4 col-md-4 col-xs-4">
-			<h1 class="ng-cloak">{{customer}}</h1>
-		</div>
-	</div><br/>
+	<h3 class="ng-cloak">{{customer}}</h3>	
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<table class="table table-striped table-hovered">
