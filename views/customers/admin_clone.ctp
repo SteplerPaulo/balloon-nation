@@ -73,7 +73,7 @@
 					<tr ng-show="loading" class="ng-cloak">
 						<td colspan="8">
 							<center>
-								<img class="loading"src="<?php echo $this->base;?>/img/loading2.gif"></img>
+								<img class="loading"src="<?php echo $this->base;?>/img/loading.gif"></img>
 							</center>
 						</td>
 					</tr>

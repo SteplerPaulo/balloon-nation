@@ -23,7 +23,7 @@
 					<tr ng-show="loading">
 						<td colspan="2">
 							<center>
-								<img class="loading"src="<?php echo $this->base;?>/img/loading2.gif"></img>
+								<img class="loading"src="<?php echo $this->base;?>/img/loading.gif"></img>
 							</center>
 						</td>
 					</tr>
