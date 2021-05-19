@@ -43,8 +43,6 @@ class ProductsController extends AppController {
 		
 		$this->layout ="admin_default";	
 		if (!empty($this->data)) {
-			//pr($this->data);exit;
-			
 			$string = str_replace(' ', '-', strtolower(trim($this->data['Product']['name']))).'-'.$this->data['Product']['customer_id']; 
 			$this->data['Product']['slug'] = preg_replace('/[^A-Za-z0-9\-]/', '-', $string);//SLUG
 			
@@ -53,7 +51,7 @@ class ProductsController extends AppController {
 			$this->Product->create();
 			if ($this->Product->saveAll($this->data)) {
 				$this->Session->setFlash(__('The product has been saved', true));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('controller'=>'users','action' => 'dashboard'));
 			} else {
 				$this->Session->setFlash(__('The product could not be saved. Please, try again.', true));
 			}
@@ -70,7 +68,7 @@ class ProductsController extends AppController {
 		$this->layout ="admin_default";	
 		if (!$slug && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid product', true));
-			$this->redirect(array('action' => 'index'));
+			$this->redirect(array('controller'=>'users','action' => 'dashboard'));
 		}
 		
 		if (!empty($this->data)) {
@@ -81,7 +79,7 @@ class ProductsController extends AppController {
 			
 			if ($this->Product->save($this->data)) {
 				$this->Session->setFlash(__('The product has been saved', true));
-				$this->redirect(array('action' => 'index/'.$this->data['Customer']['name']));
+				$this->redirect(array('action' => 'index/?'.$this->data['Product']['customer_id'].'&'.$this->data['Customer']['name']));
 			} else {
 				$this->Session->setFlash(__('The product could not be saved. Please, try again.', true));
 			}
