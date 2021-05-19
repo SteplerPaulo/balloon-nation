@@ -13,7 +13,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<h3 class="ng-cloak">LIST PRODUCTS OF {{customer_name | uppercase}}</h3>
+			<h3 class="ng-cloak">PRODUCT LIST OF {{customer_name | uppercase}}</h3>
 			<table class="table table-condensed table-striped table-hovered">
 				<tbody>
 					<tr class="ng-cloak" ng-if="products.length" pagination-id="ProductListTable" dir-paginate="d in products | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">
