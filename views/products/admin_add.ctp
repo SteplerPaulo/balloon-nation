@@ -3,11 +3,9 @@
 <?php echo $this->Html->addCrumb('Add'); ?>
 <div ng-controller="ProductAddController" ng-init="initializeController()">	
 	<div class="col-md-12">
-		<div class="login-panel panel panel-default">
+		<div class="login-panel panel panel-warning">
 			<div class="panel-heading">
-				<h3 class="panel-title">	
-					<h4>ADD PRODUCT</h4>
-				</h3>
+				<h3>New Product</h3>
 			</div>
 			<?php echo $this->Form->create('Product');?>
 			<div class="panel-body">
