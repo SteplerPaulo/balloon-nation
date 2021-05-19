@@ -184,9 +184,9 @@
 					</li>
 					
 					 <li>		
-						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-cubes')).' '.
-												$this->Html->tag('span', 'Products'),
-												array('admin' => true,'controller'=>'products','action'=>'/'),
+						<?php echo $this->Html->link( 	$this->Html->tag('i', '', array('class' => 'fa fa-fw fa-plus-circle')).' '.
+												$this->Html->tag('span', 'New Product'),
+												array('admin' => true,'controller'=>'products','action'=>'/add'),
 												array('escape' => false)
 												);  ?>
 					</li>
