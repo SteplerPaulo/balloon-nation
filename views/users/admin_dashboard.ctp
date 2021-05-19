@@ -21,6 +21,9 @@
 				</div>
 				
 				<div class="btn-bottom-wrapper">
+				
+					<a href="<?php echo $this->base;?>/admin/products/index/?{{d.Customer.id}}&{{d.Customer.name}}">Products</a>
+					<br/>
 					<a href="<?php echo $this->base;?>/admin/sales/index/?{{d.Customer.id}}&{{d.Customer.name}}">Sales</a> 
 					<a href="<?php echo $this->base;?>/admin/deliveries/index/?{{d.Customer.id}}&{{d.Customer.name}}">Deliveries</a>
 					<br/>
