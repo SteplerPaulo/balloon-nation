@@ -15,7 +15,11 @@
 				<thead>
 					<tr>
 						<th colspan="5">BANNERS</th>
-						<th colspan="1"><a href = "<?php echo $this->base;?>/admin/banners/add" class="btn btn-sm btn-success pull-right">New Banner</a></th>
+						<th colspan="1">
+							<a href = "<?php echo $this->base;?>/admin/banners/add" class="btn btn-sm btn-success pull-right">
+								<i class="fa fa-plus-circle"></i> New Banner
+							</a>
+						</th>
 					</tr>
 					<tr>
 						<th>Name</th>
