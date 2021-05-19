@@ -2,17 +2,11 @@
 <?php echo $this->Html->addCrumb('Products',''); ?>
 <div ng-controller="AdminProductsController" ng-init="initializeController()">	
 	<div class="row">
-		<div class="col-lg-4 col-md-12 col-xs-12">
-			<label class="hidden-lg">Customer</label>
-			<select class='form-control input-sm ng-cloak' ng-model='customer' ng-change="changeCustomer()">
-				<option ng-repeat="d in customers">{{d.Customer.name}}</option>
-			</select>
-		</div>
 		<div class="col-lg-3 col-md-12 col-xs-12">
 			<label class="hidden-lg">Search</label>
 			<input ng-model="q" class="form-control input-sm" placeholder="Search...">
 		</div>
-		<div class="col-lg-2 col-md-12 col-xs-12 col-lg-offset-3">
+		<div class="col-lg-2 col-md-12 col-xs-12 col-lg-offset-7">
 			<label class="hidden-lg">Items per page</label>
 			<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
 		</div>
