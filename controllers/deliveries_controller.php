@@ -5,53 +5,6 @@ class DeliveriesController extends AppController {
 	var $helpers = array('Access');
 	var $uses = array('Delivery','Customer','Product','DeliveryDetail','Year');
 
-	function index() {
-		$this->Delivery->recursive = 0;
-		$this->set('deliveries', $this->paginate());
-	}
-
-	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid delivery', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('delivery', $this->Delivery->read(null, $id));
-	}
-
-	function add() {
-		if (!empty($this->data)) {
-			$this->Delivery->create();
-			if ($this->Delivery->save($this->data)) {
-				$this->Session->setFlash(__('The delivery has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The delivery could not be saved. Please, try again.', true));
-			}
-		}
-		$customers = $this->Delivery->Customer->find('list');
-		$this->set(compact('customers'));
-	}
-
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid delivery', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		if (!empty($this->data)) {
-			if ($this->Delivery->save($this->data)) {
-				$this->Session->setFlash(__('The delivery has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The delivery could not be saved. Please, try again.', true));
-			}
-		}
-		if (empty($this->data)) {
-			$this->data = $this->Delivery->read(null, $id);
-		}
-		$customers = $this->Delivery->Customer->find('list');
-		$this->set(compact('customers'));
-	}
-
 	function admin_index() {
 		$this->layout = 'admin_default';
 	}
@@ -176,7 +129,7 @@ class DeliveriesController extends AppController {
 	
 	function customers(){
 		$this->Customer->unbindModel(array('hasMany' => array('Product')));
-		$customers = $this->Customer->find('all',array('order' =>array('Customer.name'=>'ASC')));
+		$customers = $this->Customer->find('all',array('order' =>array('Customer.order'=>'ASC','Customer.name'=>'ASC')));
 		echo json_encode($customers);
 		exit;
 	}
