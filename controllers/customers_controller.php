@@ -3,7 +3,7 @@ class CustomersController extends AppController {
 
 	var $name = 'Customers';
 	var $helpers = array('Access');
-	var $uses = array('Customer','Product','Delivery');
+	var $uses = array('Customer','Product','Delivery','Sale');
 	
 	function admin_index() {
 		$this->layout ="admin_default";	
@@ -239,6 +239,18 @@ class CustomersController extends AppController {
 		$data = $this->Product->find('all',array(
 									'order'=>array('Product.name'=>'ASC'),
 									'conditions'=>array('Product.customer_id'=>$customer_id)
+									));
+		echo json_encode($data);
+		exit;
+	}
+	
+	function sales($customer_id = null){
+		$this->Sale->unbindModel( array('hasMany' => array('SaleDetail')));
+		
+		$data = $this->Sale->find('all',array(
+									'order'=>array('Sale.from_date'=>'DESC'),
+									'conditions'=>array('Sale.customer_id'=>$customer_id)
+									//'conditions'=>array('Sale.from_date LIKE'=>'%2017%')
 									));
 		echo json_encode($data);
 		exit;
