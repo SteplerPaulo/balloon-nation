@@ -10,19 +10,10 @@
 			<label class="hidden-lg">Items per page</label>
 			<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
 		</div>
-	</div><br/>
-	<div class="row">
-		<div class="hidden-sm hidden-xs col-lg-10">
-			<h4 class="ng-cloak">{{customer}}</h4>
-		</div>
-		<div class="col-lg-2 col-md-12 col-sm-12">
-			<a href="<?php echo $this->base;?>/admin/products/add" 
-			   class="btn btn-sm btn-success btn-block"><i class="fa fa-plus-circle"></i> New Product
-			</a>
-		</div>
-	</div><br class="hidden-lg"/>
+	</div>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<h3 class="ng-cloak">LIST PRODUCTS OF {{customer_name | uppercase}}</h3>
 			<table class="table table-condensed table-striped table-hovered">
 				<tbody>
 					<tr class="ng-cloak" ng-if="products.length" pagination-id="ProductListTable" dir-paginate="d in products | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">

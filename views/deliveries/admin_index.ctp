@@ -11,6 +11,7 @@
 	</div><br/>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<h3 class="ng-cloak">DELIVERY RECEIPTS FOR {{customer_name | uppercase}}</h3>
 			<table class="table table-responsive table-striped table-hovered">
 				<tbody>
 					<tr class="ng-cloak" pagination-id="ListTable" dir-paginate="d in deliveries | filter:q | filter:customer | itemsPerPage: pageSize" current-page="currentPage">

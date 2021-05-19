@@ -9,10 +9,11 @@
 			   class="btn btn-sm btn-warning btn-block"><i class="fa fa-plus-circle"></i> New Customer
 			</a>
 		</div>
-	</div><br/>
+	</div>
+	<h3 class="ng-cloak">OUR CUSTOMERS</h3>
 	<div class="row">
 		<div class="col-lg-2"  ng-repeat="d in customers | filter:q">
-			<div class="thumbnail  ng-cloak" style="height:17em">
+			<div class="thumbnail  ng-cloak" style="height:19em">
 				<img ng-if="!d.Customer.logo" ng-src="<?php echo $this->base;?>/img/customers/nologo.jpg" alt="...">
 				<img ng-if="d.Customer.logo" ng-src="<?php echo $this->base;?>/img/customers/{{d.Customer.logo}}" alt="...">
 				<div class="">
