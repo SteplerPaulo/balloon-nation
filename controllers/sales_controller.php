@@ -5,49 +5,6 @@ class SalesController extends AppController {
 	var $helpers = array('Access');
 	var $uses = array('Sale','Product','Customer','InclusiveDate');
 
-	function index() {
-		$this->Sale->recursive = 0;
-		$this->set('sales', $this->paginate());
-	}
-
-	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid sale', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('sale', $this->Sale->read(null, $id));
-	}
-
-	function add() {
-		if (!empty($this->data)) {
-			$this->Sale->create();
-			if ($this->Sale->save($this->data)) {
-				$this->Session->setFlash(__('The sale has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The sale could not be saved. Please, try again.', true));
-			}
-		}
-	}
-
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid sale', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		if (!empty($this->data)) {
-			if ($this->Sale->save($this->data)) {
-				$this->Session->setFlash(__('The sale has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The sale could not be saved. Please, try again.', true));
-			}
-		}
-		if (empty($this->data)) {
-			$this->data = $this->Sale->read(null, $id);
-		}
-	}
-
 	
 	function admin_index() {
 		$this->layout = 'admin_default';
@@ -132,10 +89,6 @@ class SalesController extends AppController {
 		exit;
 	}
 	
-	function admin_customer(){
-		$this->layout = 'admin_default';
-	}
-
 	function admin_report($id = null){
 		$this->Customer->unbindModel( array('hasMany' => array('Product')));
 		$data = $this->Sale->find('first',array(
