@@ -218,7 +218,7 @@ class CustomersController extends AppController {
 	}
 	
 	function deliveries($customer_id = null){
-		//$this->Delivery->unbindModel( array('hasMany' => array('SaleDetail')));
+		$this->Delivery->unbindModel( array('hasMany' => array('DeliveryDetail')));
 		
 		$data = $this->Delivery->find('all',array(
 									'order'=>array('Delivery.modified'=>'DESC'),
@@ -229,7 +229,7 @@ class CustomersController extends AppController {
 	}
 	
 	function products($customer_id = null){
-		//$this->Delivery->unbindModel( array('hasMany' => array('SaleDetail')));
+		$this->Product->unbindModel( array('hasMany' => array('DeliveryDetail','ProductImage')));
 		
 		$data = $this->Product->find('all',array(
 									'order'=>array('Product.name'=>'ASC'),
