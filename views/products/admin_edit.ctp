@@ -3,7 +3,7 @@
 <?php echo $this->Html->addCrumb('Edit'); ?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="login-panel panel panel-default">
+		<div class="login-panel panel panel-warning">
 			<div class="panel-heading">
 				<h3 class="panel-title">	
 					<h4>EDIT PRODUCT</h4>
