@@ -4,62 +4,6 @@ class CustomersController extends AppController {
 	var $name = 'Customers';
 	var $helpers = array('Access');
 	var $uses = array('Customer','Product','Delivery');
-
-	function index() {
-		$this->Customer->recursive = 0;
-		$this->set('customers', $this->paginate());
-	}
-
-	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid customer', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('customer', $this->Customer->read(null, $id));
-	}
-
-	function add() {
-		if (!empty($this->data)) {
-			$this->Customer->create();
-			if ($this->Customer->save($this->data)) {
-				$this->Session->setFlash(__('The customer has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The customer could not be saved. Please, try again.', true));
-			}
-		}
-	}
-
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid customer', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		if (!empty($this->data)) {
-			if ($this->Customer->save($this->data)) {
-				$this->Session->setFlash(__('The customer has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The customer could not be saved. Please, try again.', true));
-			}
-		}
-		if (empty($this->data)) {
-			$this->data = $this->Customer->read(null, $id);
-		}
-	}
-
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for customer', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Customer->delete($id)) {
-			$this->Session->setFlash(__('Customer deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Customer was not deleted', true));
-		$this->redirect(array('action' => 'index'));
-	}
 	
 	function admin_index() {
 		$this->layout ="admin_default";	
@@ -85,7 +29,7 @@ class CustomersController extends AppController {
 			$this->Customer->create();
 			if ($this->Customer->save($this->data)) {
 				$this->Session->setFlash(__('The customer has been saved', true));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('controller'=>'users','action' => 'dashboard'));
 			} else {
 				$this->Session->setFlash(__('The customer could not be saved. Please, try again.', true));
 			}
@@ -104,7 +48,7 @@ class CustomersController extends AppController {
 			
 			if ($this->Customer->save($this->data)) {
 				$this->Session->setFlash(__('The customer has been saved', true));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('controller'=>'users','action' => 'dashboard'));
 			} else {
 				$this->Session->setFlash(__('The customer could not be saved. Please, try again.', true));
 			}
@@ -130,7 +74,7 @@ class CustomersController extends AppController {
 	
 	function all(){
 		$this->Customer->unbindModel(array('hasMany' => array('Product')));
-		$customers = $this->Customer->find('all',array('order' =>array('Customer.modified'=>'DESC')));
+		$customers = $this->Customer->find('all',array('order' =>array('Customer.order'=>'ASC','Customer.name'=>'ASC')));
 		echo json_encode($customers);
 		exit;
 	}
@@ -196,9 +140,7 @@ class CustomersController extends AppController {
 		
 		$data['Customer'] = $this->Customer->findBySlug($slug);
 		
-		//pr($data['Customer']['Product']);
-		//exit;
-		
+
 		$this->Product->unbindModel( array('hasMany' => array('ProductImage','DeliveryDetail')));
 		$this->Product->unbindModel( array('belongsTo' => array('Customer','Category')));
 		$data['BalloonationProducts'] = $this->Product->find('all',array(
@@ -278,6 +220,28 @@ class CustomersController extends AppController {
 		$this->render();
 		
 	}
+	
 
-
+	function deliveries($customer_id = null){
+		//$this->Delivery->unbindModel( array('hasMany' => array('SaleDetail')));
+		
+		$data = $this->Delivery->find('all',array(
+									'order'=>array('Delivery.modified'=>'DESC'),
+									'conditions'=>array('Delivery.customer_id'=>$customer_id)
+									));
+		echo json_encode($data);
+		exit;
+	}
+	
+	function products($customer_id = null){
+		//$this->Delivery->unbindModel( array('hasMany' => array('SaleDetail')));
+		
+		$data = $this->Product->find('all',array(
+									'order'=>array('Product.name'=>'ASC'),
+									'conditions'=>array('Product.customer_id'=>$customer_id)
+									));
+		echo json_encode($data);
+		exit;
+	}
+	
 }
