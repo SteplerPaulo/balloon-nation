@@ -6,7 +6,7 @@
 		<div class="login-panel panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">	
-					<h4>ADD CUSTOMER</h4>
+					<h4>NEW CUSTOMER</h4>
 				</h3>
 			</div>
 			<?php echo $this->Form->create('Customer');?>
