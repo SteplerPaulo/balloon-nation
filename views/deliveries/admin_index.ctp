@@ -24,19 +24,20 @@
 							</small>
 						</td>
 						<td class="text-right">
-							<a href="<?php echo $this->base;?>/admin/deliveries/report/{{d.Delivery.id}}" title="Print" target="_blank"><i class="fa fa-print fa-2x"></i></a>
+							<a href="<?php echo $this->base;?>/admin/deliveries/report/{{d.Delivery.id}}/true" title="New Receipt" target="_blank"><i class="fa fa-print fa-2x"></i></a>
+							<a href="<?php echo $this->base;?>/admin/deliveries/report/{{d.Delivery.id}}" title="Old Receipt" target="_blank"><i class="fa fa-print"></i></a>
 						</td>
 					</tr>
 					<tr ng-show="loading">
 						<td>
 							<center>
-								<img class="loading" ng-src="<?php echo $this->base;?>/img/loading2.gif"></img>
+								<img class="loading" ng-src="<?php echo $this->base;?>/img/loading.gif"></img>
 							</center>
 						</td>
 					</tr>
 					<tr ng-show="(deliveries | filter:q | filter:customer).length == 0" pagination-id="ListTable" >
 						<td>
-							<center><img class="loading" ng-src="{{src}}"></img></center>
+							<center><img class="loading" ng-src="<?php echo $this->base;?>/img/no-record-found.jpg""></img></center>
 						</td>
 					</tr>
 				</tbody>

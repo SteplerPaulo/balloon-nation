@@ -24,6 +24,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			$scope.products = response.Products;
 			$scope.customer_address = response.Customer.address;
 			$scope.customer_id = response.Customer.id;
+			$scope.customer_name = response.Customer.name;
 			$scope.loading = false;
 		});	
 	}
@@ -33,20 +34,6 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			$scope.products = [];
 		}
 	}
-	
-	/*Legacy code                                                                                                                                                        egacy Code 
-	$scope.changeCustomer = function (customer) {
-		
-		$scope.loading = true;
-		console.log(customer);
-			
-		$http.get(BASE_URL+"deliveries/customer_product/"+customer).success(function(response) {
-			$scope.products = response.Products;
-			$scope.customer_address = response.Customer.address;
-			$scope.customer_id = response.Customer.id;
-			$scope.loading = false;
-		});		
-	}; */
 	
 	$scope.check = function (i,is_checked) {
 		if(is_checked){
@@ -79,8 +66,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			}
 		}
 	};
-	
-	
+		
 	$scope.checkItem = function(item_code){
 		for (var i = 0; i < $scope.products.length; i++) {
 			if(item_code == $scope.products[i].Product.item_code && $scope.products[i].checkbox == false){
@@ -96,11 +82,9 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 	
 	$scope.save = function(){
 		$scope.preventDoubleClick = true;
-		
 		var dtls = [];
 			dtls['Main'] = {};
 			dtls['AssociatedProduct'] = {};
-			
 			dtls['Main']['DeliveryDetail'] = {};
 			dtls['Main']['Delivery'] = {'customer_id':$scope.customer_id,
 										'delivery_receipt_no':$scope.dr_no,
@@ -134,7 +118,7 @@ App.controller('AdminForDeliveryController',function($scope,$rootScope,$http,$fi
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: $.param({data:data})
 		}).then(function(response){
-			window.location.href = BASE_URL+"admin/deliveries/";
+			window.location.href = BASE_URL+"admin/deliveries/index?"+$scope.customer_id+"&"+$scope.customer_name
 		});
 		
 	}

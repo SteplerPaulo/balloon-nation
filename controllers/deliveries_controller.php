@@ -107,18 +107,16 @@ class DeliveriesController extends AppController {
 		exit;
 	}
 	
-	function admin_report($id = null){
-		
+	function admin_report($id = null, $new=false){
 		$data = $this->Delivery->find('first',array(
 									'recursive'=>2,
 									'conditions'=>array(
 										'Delivery.id'=>$id
 								)));
 		
-		$this->set(compact('data'));
+		$this->set(compact('data','new'));
 		$this->layout='pdf';
 		$this->render();
-	
 	}
 
 	function check_duplicate(){
