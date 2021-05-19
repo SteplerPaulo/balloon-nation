@@ -1,13 +1,8 @@
 <div ng-controller="DashboardController" ng-init="initializeController()">	
 	<div class="row">
-		<div class="col-lg-3 col-md-12 col-xs-12">
+		<div class="col-lg-3 col-lg-offset-9 col-md-12 col-xs-12">
 			<label class="hidden-lg">Search</label>
-			<input ng-model="q" class="form-control input-sm" placeholder="Search...">
-		</div>
-		<div class="col-lg-2 col-lg-offset-7 col-md-12 col-sm-12">
-			<a href="<?php echo $this->base;?>/admin/customers/add" 
-			   class="btn btn-sm btn-warning btn-block"><i class="fa fa-plus-circle"></i> New Customer
-			</a>
+			<input ng-model="q" class="form-control input-sm" placeholder="Search customer...">
 		</div>
 	</div>
 	<h3 class="ng-cloak">OUR CUSTOMERS</h3>
