@@ -18,7 +18,7 @@
 				<img ng-if="d.Customer.logo" ng-src="<?php echo $this->base;?>/img/customers/{{d.Customer.logo}}" alt="...">
 				<div class="">
 					{{d.Customer.name}} 
-					<a data-toggle="tooltip" title="{{d.Customer.address}}"><i class="fa fa-location-arrow" aria-hidden="true"></i>
+					<a data-toggle="tooltip" title="{{d.Customer.address}}"><i class="fa fa-location-arrow" aria-hidden="true"></i></a>
 				</div>
 				
 				<div class="btn-bottom-wrapper">
@@ -30,13 +30,14 @@
 					<br/>
 					<a href="<?php echo $this->base;?>/admin/customers/edit/{{d.Customer.slug}}">Edit</a> 
 					<a href="<?php echo $this->base;?>/admin/customers/clone/{{d.Customer.slug}}">Clone</a>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row" ng-show="loading">
 		<div class="col-lg-12">
 			<center>
-				<img class="loading"src="<?php echo $this->base;?>/img/loading2.gif"></img>
+				<img class="loading"src="<?php echo $this->base;?>/img/loading.gif"/>
 			</center>
 		</div>
 	</div>
