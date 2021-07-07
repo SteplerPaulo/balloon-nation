@@ -132,4 +132,76 @@ class DeliveriesController extends AppController {
 		exit;
 	}
 	
-}
+	//FIX BUGS FROM 2021-03-17 Migration
+	//Corrected Product ID via Product Name & Customer ID
+	
+	function step_one(){
+		DIE('DONE STEP ONE');
+		
+		//use old table on product model = products_copy_03182021
+		
+		$this->DeliveryDetail->unbindModel( array('belongsTo' => array('Delivery')));
+		$data = $this->DeliveryDetail->find('all',array(
+					'conditions'=>array('DeliveryDetail.date'=>'2021-03-17')
+				));
+				
+		foreach($data as $k=>$d){
+			$data[$k]['DeliveryDetail']['product_name']=$d['Product']['name'];
+			$data[$k]['DeliveryDetail']['product_correct_id']=$d['Product']['id'];
+			unset($data[$k]['Product']);
+		}
+		pr($data);
+		exit;
+		
+		if ($this->DeliveryDetail->saveAll($data)) {
+			pr($data);
+			exit;
+		}
+		
+	}
+	
+	function step_two(){ 
+		DIE('DONE STEP TWO');
+		//use current table on product model = products
+		$this->DeliveryDetail->unbindModel( array('belongsTo' => array('Product')));
+		
+
+		$data = $this->DeliveryDetail->find('all',array(
+					'conditions'=>array('DeliveryDetail.date'=>'2021-03-17')
+				));
+		foreach($data as $k=>$d){
+			$correctProduct = $this->async($d);
+			
+			$data[$k]['DeliveryDetail']['product_wrong_id'] = $d['DeliveryDetail']['product_id'];
+			$data[$k]['DeliveryDetail']['product_id'] = $correctProduct['Product']['id'];
+			$data[$k]['DeliveryDetail']['customer_id'] = $correctProduct['Product']['customer_id'];
+			unset($data[$k]['Delivery']);
+		
+		}
+		
+		
+		if ($this->DeliveryDetail->saveAll($data)) {
+			die('YEy');
+			exit;
+		}
+		
+	}
+	
+	function async($d){
+		$this->Product->unbindModel( array('belongsTo' => array('Category','Customer')));
+		$this->Product->unbindModel( array('hasMany' => array('DeliveryDetail','ProductImage')));
+		$f = $this->Product->find('first',array(
+					'fields'=>array('id','name','customer_id'),
+					'conditions'=>array(
+						'customer_id'=>$d['Delivery']['customer_id'],
+						'Product.name'=>$d['DeliveryDetail']['product_name'],
+					)
+				));
+		return $f;
+	}
+
+	//END
+	
+}	
+	
+	
