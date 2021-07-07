@@ -29,7 +29,7 @@ class DeliveryReceipt extends Formsheet{
 	}
 	
 	function data($data){
-		//pr($data);
+		//pr($data['DeliveryDetail']);
 		$this->showLines = !true;
 		$metrics = array(
 			'base_x'=> 0,
