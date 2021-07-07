@@ -1,6 +1,7 @@
 <?php
 class Product extends AppModel {
 	var $name = 'Product';
+	//var $useTable = 'products_copy_03182021';
 	var $displayField = 'name';
 	//var $virtualFields = array('checkbox'=>0,'is_disabled'=>1);
 	
