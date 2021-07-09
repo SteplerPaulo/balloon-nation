@@ -55,21 +55,42 @@ class DeliveryReceipt extends Formsheet{
 		$y=11.2;
 		$this->GRID['font_size']=6.5;
 		foreach($data['DeliveryDetail'] as $k => $items){
-			if($items['deliver'] && $items['bad_item']){
-				$this->rightText(2.15,$y,$items['deliver'].' |','','');
-				$this->SetTextColor(255,0,0);
-				$this->leftText(2.15,$y,' -'.$items['bad_item'],'','');
-				$this->SetTextColor(0,0,0);
-			}else if($items['deliver']){
-				$this->centerText(1.4,$y,$items['deliver'],2,'');
-			}else if($items['bad_item']){
-				$this->SetTextColor(255,0,0);
-				$this->centerText(1.4,$y,'-'.$items['bad_item'],2,'');
-				$this->SetTextColor(0,0,0);
+			if($k < 25){
+				if($items['deliver'] && $items['bad_item']){
+					$this->rightText(2.15,$y,$items['deliver'].' |','','');
+					$this->SetTextColor(255,0,0);
+					$this->leftText(2.15,$y,' -'.$items['bad_item'],'','');
+					$this->SetTextColor(0,0,0);
+				}else if($items['deliver']){
+					$this->centerText(1.4,$y,$items['deliver'],2,'');
+				}else if($items['bad_item']){
+					$this->SetTextColor(255,0,0);
+					$this->centerText(1.4,$y,'-'.$items['bad_item'],2,'');
+					$this->SetTextColor(0,0,0);
+				}
+				$this->centerText(3,$y,'Pcs.',2,'');
+				$this->leftText(5.8,$y,isset($items['Product']['name'])?$items['Product']['name']:'',2,'');
+				$y+=0.9;
+			}else{
+				if($k == 25) $y=11.2;
+				
+				if($items['deliver'] && $items['bad_item']){
+					$this->rightText(14.75,$y,$items['deliver'].' |','','');
+					$this->SetTextColor(255,0,0);
+					$this->leftText(14.75,$y,' -'.$items['bad_item'],'','');
+					$this->SetTextColor(0,0,0);
+					
+				}else if($items['deliver']){
+					$this->centerText(15,$y,$items['deliver'],2,'');
+				}else if($items['bad_item']){
+					$this->SetTextColor(255,0,0);
+					$this->centerText(15,$y,'-'.$items['bad_item'],2,'');
+					$this->SetTextColor(0,0,0);
+				}
+				$this->centerText(17,$y,'Pcs.',2,'');
+				$this->leftText(19.2,$y++,isset($items['Product']['name'])?$items['Product']['name']:'',2,'');
 			}
-			$this->centerText(3,$y,'Pcs.',2,'');
-			$this->leftText(6.5,$y,isset($items['Product']['name'])?$items['Product']['name']:'',2,'');
-			$y+=0.9;
+			
 		}
 	}
 
