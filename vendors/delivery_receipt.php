@@ -25,10 +25,9 @@ class DeliveryReceipt extends Formsheet{
 		);	
 		$this->section($metrics);
 		//$this->DrawImage(0,0,8.5,6.375,'../webroot/img/dr.jpg');
-		
 	}
 	
-	function data($data){
+	function data($data,$dt){
 		//pr($data['DeliveryDetail']);
 		$this->showLines = !true;
 		$metrics = array(
@@ -40,8 +39,6 @@ class DeliveryReceipt extends Formsheet{
 			'rows'=> 28,	
 		);	
 		$this->section($metrics);
-	
-	
 		$this->GRID['font_size']=8;
 		$this->leftText(5.5,7.2, $data['Customer']['name'],'','');
 		$this->leftText(20.2,7.2,date('F d, Y h:i:s A',strtotime($data['Delivery']['date'])),'','');
@@ -54,9 +51,8 @@ class DeliveryReceipt extends Formsheet{
 		//pr($data);exit;
 		$y=10.4;
 		$this->GRID['font_size']=6.2;
-		foreach($data['DeliveryDetail'] as $k => $items){
+		foreach($dt as $k => $items){
 			if($k < 15){
-				
 				if($items['deliver'] && $items['bad_item']){
 					$this->rightText(3.75,$y,$items['deliver'].' |','','');
 					$this->SetTextColor(255,0,0);
@@ -97,7 +93,6 @@ class DeliveryReceipt extends Formsheet{
 			}
 		}
 	}
-
 }
 ?>
 	
