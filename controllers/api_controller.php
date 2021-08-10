@@ -40,13 +40,9 @@ class ApiController extends AppController {
 				}
 			}
 			
-			
 			$this->Product->unbindModel(array('hasMany' => array('ProductImage','DeliveryDetail')));
 			$this->Product->unbindModel(array('belongsTo' => array('Customer','Category')));
-	
-			
-			
-			
+
 			$data = $this->$model->find('all', array(
 				'conditions'=>$conditions,
 				'order'=>'name ASC',
