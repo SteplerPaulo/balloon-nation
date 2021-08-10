@@ -52,10 +52,10 @@ class DeliveryReceipt extends Formsheet{
 		$this->leftText(6,8.7,'****'.$data['Delivery']['delivery_receipt_no'],'','');
 		$this->leftText(20.2,8.7,'******','','');
 		//pr($data);exit;
-		$y=10.8;
+		$y=10.4;
 		$this->GRID['font_size']=6.2;
 		foreach($data['DeliveryDetail'] as $k => $items){
-			if($k < 14){
+			if($k < 15){
 				
 				if($items['deliver'] && $items['bad_item']){
 					$this->rightText(3.75,$y,$items['deliver'].' |','','');
@@ -71,9 +71,11 @@ class DeliveryReceipt extends Formsheet{
 				}
 				
 				$this->centerText(5,$y,'Pcs.',2,'');
-				$this->leftText(7.2,$y++,isset($items['Product']['name'])?$items['Product']['name']:'',2,'');
+				$this->leftText(7.2,$y,isset($items['Product']['name'])?$items['Product']['name']:'',2,'');
+				$this->leftText(7.2,$y+0.4,isset($items['Product']['item_code'])?$items['Product']['item_code']:'',2,'');
+				$y++;
 			}else{
-				if($k == 14) $y=10.8;
+				if($k == 15) $y=10.4;
 				
 				if($items['deliver'] && $items['bad_item']){
 					$this->rightText(14.75,$y,$items['deliver'].' |','','');
@@ -89,7 +91,9 @@ class DeliveryReceipt extends Formsheet{
 					$this->SetTextColor(0,0,0);
 				}
 				$this->centerText(17,$y,'Pcs.',2,'');
-				$this->leftText(19.2,$y++,isset($items['Product']['name'])?$items['Product']['name']:'',2,'');
+				$this->leftText(19.2,$y,isset($items['Product']['name'])?$items['Product']['name']:'',2,'');
+				$this->leftText(19.2,$y+0.4,isset($items['Product']['item_code'])?$items['Product']['item_code']:'',2,'');
+				$y++;
 			}
 		}
 	}
