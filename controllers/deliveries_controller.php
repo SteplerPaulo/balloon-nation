@@ -108,6 +108,7 @@ class DeliveriesController extends AppController {
 	}
 	
 	function admin_report($id = null, $new=false){
+		$this->Customer->unbindModel(array('hasMany' => array('Product')));
 		$data = $this->Delivery->find('first',array(
 									'recursive'=>2,
 									'conditions'=>array(
