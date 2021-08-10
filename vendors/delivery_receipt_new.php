@@ -27,7 +27,7 @@ class DeliveryReceipt extends Formsheet{
 		//$this->DrawImage(0,0,8.5,11,'../webroot/img/drnew.jpg');
 	}
 	
-	function data($data){
+	function data($data,$dt){
 		//pr($data);
 		$this->showLines = !true;
 		$metrics = array(
@@ -52,7 +52,7 @@ class DeliveryReceipt extends Formsheet{
 		//pr($data);exit;
 		$y=9.6;
 		$this->GRID['font_size']=6.5;
-		foreach($data['DeliveryDetail'] as $k => $items){
+		foreach($dt as $k => $items){
 			if($k < 36){
 				if($items['deliver'] && $items['bad_item']){
 					$this->rightText(2.15,$y,$items['deliver'].' |','','');
