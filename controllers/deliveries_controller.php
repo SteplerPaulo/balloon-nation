@@ -203,6 +203,18 @@ class DeliveriesController extends AppController {
 
 	//END
 	
+	
+	function report(){
+		$this->Customer->unbindModel(array('hasMany' => array('Product')));
+		$data = $this->Delivery->find('all',array(
+									'recursive'=>0,
+									'conditions'=>array('Delivery.created LIKE'=>'%2021%')
+								));
+		pr($data);exit;
+		//$this->set(compact('data','new'));
+		//$this->layout='pdf';
+		//$this->render();
+	}
 }	
 	
 	
