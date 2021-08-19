@@ -217,8 +217,8 @@ class DeliveriesController extends AppController {
 	}
 	
 	function admin_dashboard($year=2021){
-		$year = $_GET['year'];
-		
+		if(isset($_GET['year'])) $year = $_GET['year'];
+	
 		$data = $this->Delivery->dashboard($year);
 		//pr($data);exit;
 		$this->set(compact('data','year'));
