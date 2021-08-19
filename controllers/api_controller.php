@@ -3,7 +3,7 @@ class ApiController extends AppController {
 
 	var $name = 'Api';
 	var $helpers = array('Access');
-	var $uses = array('Product','Category','Delivery','Inquiry','Sale');
+	var $uses = array('Api','Product','Category','Delivery','Inquiry','Sale');
 
 	
 	function beforeFilter(){ 
@@ -12,10 +12,8 @@ class ApiController extends AppController {
 		$this->Auth->allow(array('data'));	
     } 
 	
-	
 	/**API for ReactJs**/
 	function data(){
-		
 		if(isset($_GET['model']) && !in_array($_GET['model'], $this->uses)){
 			die('Bad Request: Check Correct Params');
 		}
@@ -55,6 +53,58 @@ class ApiController extends AppController {
 		}
 		
 	}
+	
+	
+	/**DASHBOARD API**/
+	function projected_revenue($year=2021){
+		$year = $_GET['year'];
+		$data = $this->Api->projected_revenue($year);
+		pr($data);exit;
+		$this->set(compact('data','year'));
+		$this->layout='pdf';
+		$this->render();
+	}
+	
+	function customers_graph(){
+		$data = $this->Api->customers_graph();
+		pr($data);exit;
+		$this->set(compact('data','year'));
+		$this->layout='pdf';
+		$this->render();
+	}
+	
+	function most_sold_products(){
+		$data = $this->Api->most_sold_products();
+		pr($data);exit;
+		$this->set(compact('data','year'));
+		$this->layout='pdf';
+		$this->render();
+	}
+	
+	function most_profitable_products(){
+		$data = $this->Api->most_profitable_products();
+		pr($data);exit;
+		$this->set(compact('data','year'));
+		$this->layout='pdf';
+		$this->render();
+	}
+	
+	function most_sold_products_by_customer(){
+		$data = $this->Api->most_sold_products_by_customer();
+		pr($data);exit;
+		$this->set(compact('data','year'));
+		$this->layout='pdf';
+		$this->render();
+	}
+	
+	function most_profitable_products_by_customer(){
+		$data = $this->Api->most_profitable_products_by_customer();
+		pr($data);exit;
+		$this->set(compact('data','year'));
+		$this->layout='pdf';
+		$this->render();
+	}
+	
 	
 }
 
