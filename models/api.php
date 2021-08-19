@@ -8,7 +8,6 @@ class Api extends AppModel {
 			"SELECT 
 			  products.id,
 			  products.name,
-			  customers.name,
 			  SUM(delivery_details.deliver) AS total_qty_delivered,
 			  delivery_details.purchase_price,
 			  delivery_details.selling_price,
@@ -18,10 +17,6 @@ class Api extends AppModel {
 			  INNER JOIN `delivery_details` 
 				ON (
 				  `deliveries`.`id` = `delivery_details`.`delivery_id`
-				) 
-			  INNER JOIN `customers` 
-				ON (
-				  `deliveries`.`customer_id` = `customers`.`id`
 				) 
 			  INNER JOIN `products` 
 				ON (
