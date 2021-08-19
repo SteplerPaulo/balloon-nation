@@ -406,7 +406,7 @@ class SalesController extends AppController {
 	}
 	
 	function yearly_report(){
-		$year = 2020;
+		$year = 2018;
 		$customer = 34;
 		$data = $this->Sale->find('all',array(
 									'recursive'=>2,
