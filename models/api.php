@@ -35,4 +35,17 @@ class Api extends AppModel {
 			"
 		);
 	}
+
+	//ADDED CUSTOMER PER YER
+	function customers_graph(){
+		return $this->query(
+			"SELECT 
+			  YEAR(customers.created) AS `year`,
+			  COUNT(*) AS added_customers
+			FROM
+			  customers 
+			GROUP BY YEAR(customers.created)"
+		);
+	}
+	
 }
