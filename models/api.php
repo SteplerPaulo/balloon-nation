@@ -48,4 +48,26 @@ class Api extends AppModel {
 		);
 	}
 	
+	//MOST SOLD PRODUCTS based on delivered qty
+	function most_sold_products($year=2021, $limit=25){
+		return $this->query(
+			"SELECT 
+			  products.name,
+			  SUM(delivery_details.deliver) AS total_qty_delivered
+			FROM
+			  `deliveries` 
+			  INNER JOIN `delivery_details` 
+				ON (
+				  `deliveries`.`id` = `delivery_details`.`delivery_id`
+				) 
+			  INNER JOIN `products` 
+				ON (
+				  `delivery_details`.`product_id` = `products`.`id`
+				) 
+			WHERE deliveries.created LIKE '%$year%' 
+			GROUP BY products.name
+			ORDER BY total_qty_delivered DESC LIMIT $limit"
+		);
+	}
+	
 }
