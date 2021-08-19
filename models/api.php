@@ -70,4 +70,36 @@ class Api extends AppModel {
 		);
 	}
 	
+	//MOST PROFITABLE PRODUCTS based on delivered qty and markup price
+	function most_profitable_products($year=2021, $limit=25){ 
+		return $this->query(
+			"SELECT 
+			  products.name,
+			  SUM(delivery_details.deliver) AS total_qty_delivered,
+			  delivery_details.purchase_price,
+			  delivery_details.selling_price,
+			  (
+				delivery_details.selling_price - delivery_details.purchase_price
+			  ) AS markup,
+			  (
+				SUM(delivery_details.deliver) * (
+				  delivery_details.selling_price - delivery_details.purchase_price
+				)
+			  ) AS revenue 
+			FROM
+			  `deliveries` 
+			  INNER JOIN `delivery_details` 
+				ON (
+				  `deliveries`.`id` = `delivery_details`.`delivery_id`
+				) 
+			  INNER JOIN `products` 
+				ON (
+				  `delivery_details`.`product_id` = `products`.`id`
+				) 
+			WHERE deliveries.created LIKE '%$year%' 
+			GROUP BY products.name
+			ORDER BY revenue DESC  LIMIT $limit"
+		);
+	}
+	
 }
