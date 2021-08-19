@@ -138,4 +138,32 @@ class Api extends AppModel {
 			ORDER BY revenue DESC "
 		);
 	}
+
+	//MOST PROFITABLE PRODUCTS BY CUSTOMER  based on delivered
+	function most_profitable_products_by_customer($year=2021, $limit=25, $compcode=2333){//MOST SOLD PRODUCTS based on delivered qty
+		return $this->query(
+			"SELECT 
+			  products.name,
+			  SUM(delivery_details.deliver) AS total_qty_delivered 
+			FROM
+			  `deliveries` 
+			  INNER JOIN `delivery_details` 
+				ON (
+				  `deliveries`.`id` = `delivery_details`.`delivery_id`
+				) 
+			  INNER JOIN `products` 
+				ON (
+				  `delivery_details`.`product_id` = `products`.`id`
+				) 
+			  INNER JOIN `customers` 
+				ON (
+				  `deliveries`.`customer_id` = `customers`.`id`
+				) 
+			WHERE deliveries.created LIKE '%$year%' 
+			  AND customers.compcode = '$compcode' 
+			GROUP BY products.name 
+			ORDER BY total_qty_delivered DESC 
+			LIMIT $limit"
+		);
+	}
 }
