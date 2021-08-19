@@ -215,6 +215,17 @@ class DeliveriesController extends AppController {
 		//$this->layout='pdf';
 		//$this->render();
 	}
+	
+	function admin_dashboard($year=2021){
+		$year = $_GET['year'];
+		
+		$data = $this->Delivery->dashboard($year);
+		//pr($data);exit;
+		$this->set(compact('data','year'));
+		$this->layout='pdf';
+		$this->render();
+		
+	}
 }	
 	
 	
