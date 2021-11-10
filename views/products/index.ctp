@@ -34,7 +34,8 @@
 								</div>
 							</div>
 						</div>
-						<img ng-src="http://placehold.it/320x150" ng-if="!d.ProductImage.length" style="height:150px;">
+						<img ng-src="<?php echo $this->base;?>/img/lazyload.jpg" ng-if="!d.ProductImage.length">
+						
 						<div class="caption">
 							<h4>
 								<a href="<?php echo $this->base;?>/product/{{d.Product.slug}}">{{d.Product.name}}</a>
