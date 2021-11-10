@@ -1,27 +1,32 @@
 /*FIXED FOOTER*/
-html,
-body {
-	height: 100%;
-	font-family: josefin sans bold;	
-	/* The html and body elements cannot have any padding or margin. */
-}
-.ng-cloak{
-  display: none !important;
+
+html, body {
+    height: 100%;
+    font-family: josefin sans bold;
+    /* The html and body elements cannot have any padding or margin. */
 }
 
+.ng-cloak {
+    display: none !important;
+}
+
+
 #wrap {
-  min-height: 100%;
-  height: auto;
-  /* Negative indent footer by its height */
-  margin: 0 auto -40px;
-  /* Pad bottom by footer height */
-  padding: 0 0 60px;
+    min-height: 100%;
+    height: auto;
+    /* Negative indent footer by its height */
+    margin: 0 auto -40px;
+    /* Pad bottom by footer height */
+    padding: 0 0 60px;
 }
+
 /* Set the fixed height of the footer here */
+
 #footer {
-  height: 40px;
-  background-color: #f5f5f5;
+    height: 40px;
+    background-color: #f5f5f5;
 }
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     #footer {
@@ -29,13 +34,14 @@ body {
     }
 }
 
-#footer .container{
-	padding-top: 10px;
+#footer .container {
+    padding-top: 10px;
 }
-#footer a:hover{
-	color: #f60;
-	text-decoration: none;
-	border-bottom: 1px dotted #000;
+
+#footer a:hover {
+    color: #f60;
+    text-decoration: none;
+    border-bottom: 1px dotted #000;
 }
 
 /*
@@ -45,8 +51,8 @@ body {
  */
 
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-
+    padding-top: 70px;
+    /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
 .slide-image {
@@ -57,18 +63,18 @@ body {
     margin-bottom: 30px;
 }
 
-.carousel-control,
-.item {
+.carousel-control, .item {
     border-radius: 4px;
 }
 
 .caption {
-	height: 90px;/*130px;*/
+    height: 90px;
+    /*130px;*/
     overflow: hidden;
 }
 
-.contact-now{
-	text-align: right;
+.contact-now {
+    text-align: right;
     padding-right: 10px;
     padding-top: 10px;
 }
@@ -78,6 +84,7 @@ body {
    // white-space: nowrap;
 }
 */
+
 .thumbnail img {
     width: 100%;
 }
@@ -100,48 +107,54 @@ body {
 footer {
     margin: 50px 0;
 }
+
 /**MY STYLE**/
-.navbar a{
-	color: #ffffff !important;
-	
-}
-.navbar-brand {
-    padding: 0px 0px; 
+
+.navbar a {
+    color: #ffffff !important;
 }
 
-.navbar .dropdown .dropdown-menu a{
-	color:black !important;
-	
+.navbar-brand {
+    padding: 0px 0px;
 }
-.navbar a:hover{
-	color:#d9edf7 !important;
-	
+
+.navbar .dropdown .dropdown-menu a {
+    color: black !important;
 }
-.ellipsis{
-	text-overflow: ellipsis;
+
+.navbar a:hover {
+    color: #d9edf7 !important;
+}
+
+.ellipsis {
+    text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;	
+    overflow: hidden;
 }
-pre{
-	
-	background-color: transparent;
+
+pre {
+    background-color: transparent;
     border: none;
 }
 
-.caption dl{
-	font-size: 11px;
-	color:#888;
+.caption dl {
+    font-size: 11px;
+    color: #888;
 }
-.caption dt{
-	font-weight:normal;
-	clear:both 
+
+.caption dt {
+    font-weight: normal;
+    clear: both
 }
-.caption dd{
-	margin-left:0.5em;
-}	
-.caption dt,.caption  dd { 
-	float: left 
+
+.caption dd {
+    margin-left: 0.5em;
 }
+
+.caption dt, .caption dd {
+    float: left
+}
+
 /*
 .company-name{
     color: #fff !important;
@@ -149,10 +162,13 @@ pre{
     font: 35px 'ChunkFiveRegular';
 }
 */
+
 .navbar-inverse {
-    background-color:  #fa41cc /*#cf041c*/; /*#009ef0;*/
+    background-color: #fa41cc/*#cf041c*/
+    ;
+    /*#009ef0;*/
     border-color: #c3209b;
-	box-shadow: 10px 10px 5px #888888;
+    box-shadow: 10px 10px 5px #888888;
 }
 
 /* body  {
@@ -165,104 +181,134 @@ pre{
 }
  */
 
-.categories-table td  a:hover{
-	color: #fa41cc; /*#f60*/;
-	text-decoration: none;
-}
-.categories-table th  a{
-	color: #333;
-	text-decoration: none;
-}
-.categories-table th  a:hover{
-	color: #fa41cc;
+.categories-table td a:hover {
+    color: #fa41cc;
+    /*#f60*/
+    ;
+    text-decoration: none;
 }
 
-.call-us-now{
-	color: #d9534f;
+.categories-table th a {
+    color: #333;
+    text-decoration: none;
+}
+
+.categories-table th a:hover {
+    color: #fa41cc;
+}
+
+.call-us-now {
+    color: #d9534f;
     font-weight: bold;
     font-size: 30px;
-    font-family: serif;	
-	
+    font-family: serif;
 }
 
 /**INQUIRY FORM**/
-.like-input-box{
+
+.like-input-box {
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-	background-color: white;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    background-color: white;
     color: #555;
 }
-.like-input-box .image-box{
-	position: relative;
+
+.like-input-box .image-box {
+    position: relative;
     width: 50px;
     height: 50px;
     margin-right: 5px;
     border: 1px solid #eee;
 }
-.like-input-box ul li{
-	list-style:none;
-}
-textarea{
-	resize:none;
+
+.like-input-box ul li {
+    list-style: none;
 }
 
-.box-shadow{
-	box-shadow: 10px 10px 5px #888888;
-	
+textarea {
+    resize: none;
+}
+
+.box-shadow {
+    box-shadow: 10px 10px 5px #888888;
 }
 
 /*BALLOON*/
-.circling-balloon{
-	width: 200px;
-	height: 200px;
-	position: absolute;
-	z-index:2000;
-	-webkit-animation-name: circling-balloon; /* Safari 4.0 - 8.0 */
-	-webkit-animation-duration: 15s; /* Safari 4.0 - 8.0 */
-	animation-name: circling-balloon;
-	animation-duration: 15s;
-	animation-iteration-count: 1;
-	margin-top: -129px;
-	margin-left: -130px;
+
+.circling-balloon {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    z-index: 2000;
+    -webkit-animation-name: circling-balloon;
+    /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 15s;
+    /* Safari 4.0 - 8.0 */
+    animation-name: circling-balloon;
+    animation-duration: 15s;
+    animation-iteration-count: 1;
+    margin-top: -129px;
+    margin-left: -130px;
 }
-.gift-balloon{
-	width: 200px;
-	height: 200px;
-	position: absolute;
-	z-index:100;
-	-webkit-animation-name: gift-balloon; /* Safari 4.0 - 8.0 */
-	-webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
-	animation-name: gift-balloon;
-	animation-duration: 20s;
-	animation-iteration-count: infinite;
+
+.gift-balloon {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    z-index: 100;
+    -webkit-animation-name: gift-balloon;
+    /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s;
+    /* Safari 4.0 - 8.0 */
+    animation-name: gift-balloon;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
 }
-.realistic-balloon{
-	width: 200px;
-	height: 200px;
-	position: absolute;
-	z-index:2000;
-	-webkit-animation-name: realistic-balloon; /* Safari 4.0 - 8.0 */
-	-webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
-	animation-name: realistic-balloon;
-	animation-duration: 20s;
-	animation-iteration-count: infinite;
+
+.realistic-balloon {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    z-index: 2000;
+    -webkit-animation-name: realistic-balloon;
+    /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s;
+    /* Safari 4.0 - 8.0 */
+    animation-name: realistic-balloon;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
 }
 
 @keyframes gift-balloon {
-    0%   {left:0px; top:550px;}
-    50%   {left:50px; top:0px;}
-    100% {left:100px; top:0px;}
+    0% {
+        left: 0px;
+        top: 550px;
+    }
+    50% {
+        left: 50px;
+        top: 0px;
+    }
+    100% {
+        left: 100px;
+        top: 0px;
+    }
 }
 
 @keyframes realistic-balloon {
-    0%   {left:0px; top:550px;}
-    100% {left:0px; top:-200px;}
+    0% {
+        left: 0px;
+        top: 550px;
+    }
+    100% {
+        left: 0px;
+        top: -200px;
+    }
 }
 
 a {
@@ -270,8 +316,8 @@ a {
     text-decoration: none;
 }
 
-#flashMessage{
-	position: fixed;
+#flashMessage {
+    position: fixed;
     top: 7%;
     left: 62%;
     z-index: 99999;
@@ -284,10 +330,42 @@ a {
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
-    #flashMessage{
-		top: 18%;
-		left: 0%;
+    #flashMessage {
+        top: 18%;
+        left: 0%;
     }
+}
+
+
+
+/**Form Validation Style**/
+.autolabel{
+	color:#656565;
+	top: 10px;
+    border-radius: 4px;
+    margin: 0px 0px 6px 8px;
+    padding: 0px 5px 0px 5px;
+    position: relative;
+    background-color: white;
+	font-size:11px;
+	font-weight:normal;
+}
+.text-danger{
+	position: relative;
+    background-color: white;
+    font-size: 11px;
+    bottom: 7px;
+    right: 10px;
+    float: right;
+}
+.ng-touched.ng-invalid{
+	border-color: #a94442;
+}
+
+.vdivider{
+	border-left: 1px dotted #777;
+    height: 500px;
 }
