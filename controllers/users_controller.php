@@ -12,6 +12,7 @@ class UsersController extends AppController {
     } 
 	
 	function login() {
+		$this->layout = 'clean';
     }
 
     function logout() {
@@ -19,6 +20,7 @@ class UsersController extends AppController {
     }
 	
 	function register() {
+		$this->layout = 'clean';
 		if ($this->data) {
 			if ($this->data['User']['password'] ==$this->Auth->password($this->data['User']['confirm_password'])) {
 				$this->User->create();
